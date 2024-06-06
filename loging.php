@@ -1,3 +1,30 @@
+<?php
+session_start();
+$con = mysqli_connect('localhost','root','','ecommerce');
+if(isset($_POST['sub'])){
+	$user = $_POST['user'];
+	$pswd= $_POST['pswd'];
+	$qury = mysqli_query($con,"select * from admin where email='$user' and PASSWORD='$pswd'");
+	$qurys = mysqli_query($con,"select * from user_data where email='$user' and password='$pswd'");
+	if($qury || $qurys){
+		if($fetch = mysqli_fetch_array($qury)){
+			$_SESSION['name']= $fetch['name'];
+			header('location:admin.php');
+		}else if($fetchs = mysqli_fetch_array($qurys)){
+			$_SESSION['name']= $fetchs['name'];
+			header('location:index.php');
+		}
+		else{
+			echo "Error";
+		}
+	} 
+	else{
+		echo "Error";
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,19 +37,19 @@
 <div class="container">
 <div class="form-container">
 	<p class="title">Login</p>
-	<form class="form">
+	<form class="form" method="POST">
 		<div class="input-group">
 			<label for="username">Username</label>
-			<input type="text" name="username" id="username" placeholder="">
+			<input type="text" name="user" id="username" placeholder="">
 		</div>
 		<div class="input-group">
 			<label for="password">Password</label>
-			<input type="password" name="password" id="password" placeholder="">
+			<input type="password" name="pswd" id="password" placeholder="">
 			<div class="forgot">
 				<a rel="noopener noreferrer" href="#">Forgot Password ?</a>
 			</div>
 		</div>
-		<button class="sign">Sign in</button>
+		<button class="sign" name='sub'>Sign in</button>
 	</form>
 	<div class="social-message">
 		<div class="line"></div>
