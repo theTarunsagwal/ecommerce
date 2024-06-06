@@ -3,7 +3,7 @@ session_start();
 $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
 $data = mysqli_query($con, 'SELECT * FROM user_data');
 
-if (isset($_POST['del'])) {
+if(isset($_POST['del'])) {
     $email = $_POST['del'];
     $del = mysqli_query($con, "DELETE FROM user_data WHERE email='$email'");
 }
@@ -14,14 +14,15 @@ if (isset($_POST['del'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body>
-    <h1>name<?php echo $_SESSION['name']; ?></h1>
+    <h1 class="titel">Welcome Admin <span class="titel_admin" > <?php echo $_SESSION['name']; ?> </span></h1>
     <form method="POST">
         <input type="text" name="text" placeholder="enter name" />
         <input type="submit" name="sub" />
     </form>
-    <table border="1">
+    <table class="table">
         <tr>
             <td>Id</td>
             <td>Name</td>
@@ -42,13 +43,13 @@ if (isset($_POST['del'])) {
                     <td><?php echo $srch['password']; ?></td>
                     <td>
                         <form method="post">
-                            <button type="submit" value="<?php echo $srch['email']; ?>" name="del">delete</button>
+                            <button type="submit" class="btn" value="<?php echo $srch['email']; ?>" name="del">Delete</button>
                         </form>
                     </td>
                 </tr>
                 <?php
             }
-        } else {
+        }else {
             while ($comp = mysqli_fetch_array($data)) {
                 ?>
                 <tr>
@@ -58,7 +59,7 @@ if (isset($_POST['del'])) {
                     <td><?php echo $comp['password']; ?></td>
                     <td>
                         <form method="post">
-                            <button type="submit" value="<?php echo $comp['email']; ?>" name="del">delete</button>
+                            <button class="button" type="submit" value="<?php echo $comp['email']; ?>" name="del">Delete</button>
                         </form>
                     </td>
                 </tr>

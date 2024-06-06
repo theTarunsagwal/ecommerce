@@ -1,0 +1,68 @@
+*{
+  margin: 0%;
+  padding: 0%;
+
+}
+
+body{
+    background-color: #111827fa;
+    color: #fefefe;
+}
+
+h1{
+  text-align: center;
+  margin: 2rem 0rem;
+  font-size: 1.7rem;
+  font-weight: lighter;
+}
+
+.titel_admin{
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input{
+  padding: .5rem 1rem;
+  margin: 2rem 0rem;
+  /* border-radius: 5px; */
+  border: none;
+}
+
+input[type="text"]{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  outline:none;
+}
+
+input[type="submit"]{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+table{
+  width: 90vw;
+  margin-left: 5rem;
+}
+
+td{
+  padding: .5rem;
+}
+button{
+    color: #fefefe;
+    cursor: pointer;
+    padding: .8rem 1.2rem;
+  border-radius: 25px;
+  background-color: #101828fa;
+  border: none;
+}
+
+
+@media (max-width:600px) {
+  table{  margin-left: 2rem; }
+}
