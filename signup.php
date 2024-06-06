@@ -11,7 +11,7 @@
 	header("Location:loging.php");
 		}
 		else{
-			echo "<script>alret('Write UNIQUE Password and Email')</script>";
+			echo "<script>alret('Write UNIQUE Password and Email already insert ')</script>";
 			}
   }
 ?>
