@@ -1,4 +1,8 @@
 <?php
 session_start();
-echo $_SESSION['name'];
+if(isset($_SESSION['name'])){
+    echo $_SESSION['name'];
+    }else{
+        header("location:loging.php");
+    }
 ?>

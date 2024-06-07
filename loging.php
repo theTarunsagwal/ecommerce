@@ -8,7 +8,7 @@ if(isset($_POST['sub'])){
 	$qurys = mysqli_query($con,"select * from user_data where email='$user' and password='$pswd'");
 	if($qury || $qurys){
 		if($fetch = mysqli_fetch_array($qury)){
-			$_SESSION['name']= $fetch['name'];
+			$_SESSION['adminname']= $fetch['name'];
 			header('location:admin.php');
 		}else if($fetchs = mysqli_fetch_array($qurys)){
 			$_SESSION['name']= $fetchs['name'];

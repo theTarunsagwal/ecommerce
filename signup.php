@@ -7,11 +7,11 @@
 	$pass = $_POST['pswd'];
 	$query= mysqli_query($con,"insert into user_data (name,email,password) values ('$user','$email','$pass')");
 	if($query){
-		echo "<script>alret('thankyou for join')</script>";
+		echo "<script>alert('thankyou for join')</script>";
 	header("Location:loging.php");
 		}
 		else{
-			echo "<script>alret('Write UNIQUE Password and Email already insert ')</script>";
+			echo "<script>alert('Write UNIQUE Password and Email already insert ')</script>";
 			}
   }
 ?>
