@@ -1,0 +1,49 @@
+table{
+    width: 90vw;
+    margin-left: 5rem;
+    text-transform: capitalize;
+  }
+  
+  td{
+    padding: .5rem;
+  }
+  
+  @media (max-width:600px) {
+    table{  margin-left: 0rem; }
+    .titel_admin{ font-size: 1.7rem; }
+    .titel{ font-size: 1rem;}
+  }
+  
+  .button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px #0000002a;
+    cursor: pointer;
+    transition-duration: .3s;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .svgIcon {
+    width: 12px;
+    transition-duration: .3s;
+  }
+  
+  .svgIcon path {
+    fill: white;
+  }
+  
+  .button:hover{
+    background-color: rgb(244, 19, 19);
+  }
+  .button:hover .svgIcon{
+    width: 21px;
+  }
+  

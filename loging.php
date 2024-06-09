@@ -4,11 +4,11 @@ $con = mysqli_connect('localhost','root','','ecommerce');
 if(isset($_POST['sub'])){
 	$user = $_POST['user'];
 	$pswd= $_POST['pswd'];
-	$qury = mysqli_query($con,"select * from admin where email='$user' and PASSWORD='$pswd'");
+	$qury = mysqli_query($con,"select * from admin where email='$user' and password='$pswd'");
 	$qurys = mysqli_query($con,"select * from user_data where email='$user' and password='$pswd'");
 	if($qury || $qurys){
 		if($fetch = mysqli_fetch_array($qury)){
-			$_SESSION['adminname']= $fetch['name'];
+			$_SESSION['adminname']= $fetch['adminname'];
 			header('location:admin.php');
 		}else if($fetchs = mysqli_fetch_array($qurys)){
 			$_SESSION['name']= $fetchs['name'];
@@ -30,7 +30,7 @@ if(isset($_POST['sub'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>megumi shoplift</title>
     <link rel="stylesheet" href="./css/loging.css">
 </head>
 <body>
