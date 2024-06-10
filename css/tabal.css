@@ -2,17 +2,13 @@ table{
     width: 90vw;
     margin-left: 5rem;
     text-transform: capitalize;
+    margin-bottom: 2rem;
   }
   
   td{
     padding: .5rem;
   }
   
-  @media (max-width:600px) {
-    table{  margin-left: 0rem; }
-    .titel_admin{ font-size: 1.7rem; }
-    .titel{ font-size: 1rem;}
-  }
   
   .button {
     width: 50px;
@@ -29,7 +25,7 @@ table{
     transition-duration: .3s;
     overflow: hidden;
     position: relative;
-  }
+    }
   
   .svgIcon {
     width: 12px;
@@ -45,5 +41,22 @@ table{
   }
   .button:hover .svgIcon{
     width: 21px;
-  }
-  
+    }
+    
+    @media (max-width:700px) {
+      table{  margin-left: 0rem;
+        font-size: .5rem;
+      }
+
+      .svgIcon {
+        width: 7px;
+        transition-duration: .3s;
+      }
+      .button{
+        width: 25px;
+        height: 25px;
+      }
+
+      .titel_admin{ font-size: 1.7rem; }
+      .titel{ font-size: 1rem;}
+    }

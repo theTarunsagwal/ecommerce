@@ -3,6 +3,7 @@
  if(isset($_SESSION['adminname'])){
  $con =mysqli_connect('localhost','root','','ecommerce');   
 $data = mysqli_query($con, 'SELECT * FROM wood');
+$data_dining = mysqli_query($con, 'SELECT * FROM dining_room');
 $data_decor = mysqli_query($con, 'SELECT * FROM decor_art');
 if(isset($_POST['del'])){
     $delete=$_POST['del'];
@@ -12,6 +13,10 @@ if(isset($_POST['del_decor'])){
     $delete_decor=$_POST['del_decor'];
     $dstry= mysqli_query($con,"delete from decor_art where  id='$delete_decor' ");
 }
+if(isset($_POST['del_dining'])){
+    $delete_dining=$_POST['del_dining'];
+    $dstry_dining= mysqli_query($con,"delete from dining_room where  id='$delete_dining' ");
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +25,7 @@ if(isset($_POST['del_decor'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>megumi shoplift</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/form.css ">
     <link rel="stylesheet" href="./css/tabal.css ">
@@ -32,12 +38,12 @@ if(isset($_POST['del_decor'])){
         </div>
         <div class="menu">
             <ul>
-                <!-- <li><a href="index.php">Home</a></li> -->
                 <li><a href="admin.php">user</a></li>
                 <li><a href="wood.php" class="use">wood</a></li>
                 <li><a href="contect.php">contect</a></li>
             </ul>
         </div>
+        <i class='bx bx-menu' onclick="menu()"></i>
         <a href="logout.php">
             <button class="Btn">
                 <div class="sign"><svg viewBox="0 0 512 512">
@@ -49,6 +55,13 @@ if(isset($_POST['del_decor'])){
             </button>
         </a>
     </header>
+    <div class="menu_box">
+            <ul>
+                <li><a href="admin.php">user</a></li>
+                <li><a href="wood.php" class="use">wood</a></li>
+                <li><a href="contect.php">contect</a></li>
+            </ul>
+        </div>
     <section>
         <div class="Bar_Furniture">
             <h1>Bar Furniture</h1>
@@ -97,7 +110,7 @@ if(isset($_POST['del_decor'])){
                             <input type="file" name="upload" id="password" placeholder="">
                         </div>
                         <div class="form-btn">
-                            <button class="submit" name='sub'>Submit</button>
+                            <button class="submit"  name='sub'>Submit</button>
                         </div>
                     </form>
                 </div>
@@ -115,8 +128,8 @@ if(isset($_POST['del_decor'])){
                 <td>id</td>
                 <td>image_name</td>
                 <td>image</td>
-                <td>price</td>
                 <td>about</td>
+                <td>price</td>
                 <td>delete</td>
             </tr>
             <?php
@@ -257,8 +270,8 @@ if(isset($_POST['del_decor'])){
                 <td>id</td>
                 <td>decor_name</td>
                 <td>image</td>
-                <td>price</td>
                 <td>about</td>
+                <td>price</td>
                 <td>delete</td>
             </tr>
             <?php
@@ -333,10 +346,154 @@ if(isset($_POST['del_decor'])){
         ?>
         </table>
     </section>
+    <section>
+        <div class="Bar_Furniture">
+            <h1>Dining room</h1>
+            <div class="container">
+                <div class="form-container">
+                    <?php
+                        if(isset($_POST['sub_dining'])){
+                            $dining_name= $_POST['dining_name'];  
+                            $dining_price = $_POST['dining_price'];
+                            $dining_detale = $_POST['dining_detale'];
+                            if(isset($_FILES['dining'])){
+                                $dining_upload = $_FILES['dining']['name'];
+                                $tmp_upload_dining =$_FILES['dining']['tmp_name'];
+                                move_uploaded_file($tmp_upload_dining,'upload/'.$dining_upload);
+                            $qurry_dining = mysqli_query($con,"INSERT INTO dining_room (dining_name,dining_price,dining_image,dining_about) VALUES ('$dining_name','$dining_price','$dining_upload','$dining_detale');");
+                            if($qurry_dining){
+                                echo "<script>alert('upload scussefull')</script>";
+                            }
+                            else{
+                                echo "<script>alert('Error')</script>";
+                            }
+                                }
+                                else{
+                                    echo "Error";
+                                    }
+                                
+                        }
+                    
+                    ?>
+                    <!-- <p class="title"></p> -->
+                    <form class="form" method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="username">dining Name:-</label>
+                            <input type="text" name="dining_name" id="username" placeholder="enter image name">
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Price:-</label>
+                            <input type="number" name="dining_price" id="password" placeholder="enter price">
+                        </div>
+                        <div class="input-group">
+                            <label for="img">dining detaile:-</label>
+                            <textarea name="dining_detale" placeholder="enter image name" rows="1" id="username"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="img">dining Upload:-</label>
+                            <input type="file" name="dining" id="password" placeholder="">
+                        </div>
+                        <div class="form-btn">
+                            <button class="submit" name='sub_dining'>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <form method="POST" class="form_search">
+            <input type="text" name="search_dining" class="search_edit" placeholder="enter name" />
+            <input type="submit" value="search" class="search_btn_edit" name="submit_dining" />
+        </form>
+
+        <table class="table">
+            <tr>
+                <td>id</td>
+                <td>decor_name</td>
+                <td>image</td>
+                <td>about</td>
+                <td>price</td>
+                <td>delete</td>
+            </tr>
+            <?php
+        if (isset($_REQUEST['submit_dining'])) {
+            $search_dining = $_POST['search_dining'];
+            $qury_dining = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name LIKE '%$search_dining%'");
+            while ($row_dining = mysqli_fetch_array($qury_dining)) {
+                ?>
+            <tr>
+                <td>
+                    <?php echo $row_dining['id']; ?>
+                </td>
+                <td>
+                    <?php echo $row_dining['dining_name']; ?>
+                </td>
+                <td>
+                    <?php echo $row_dining['dining_image']; ?>
+                </td>
+                <td>
+                    <?php echo $row_dining['dining_about']; ?>
+                </td>
+                <td>
+                    <?php echo $row_dining['dining_price']; ?>
+                </td>
+                <td>
+                    <form method="post">
+                        <button class="button" type="submit" value="<?php echo $row_dining['id']; ?>" name="del_dining">
+                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+                <?php
+            }
+            }else {
+                while ($comp_dining = mysqli_fetch_array($data_dining)) {
+                ?>
+            <tr>
+                <td>
+                    <?php echo $comp_dining['id']; ?>
+                </td>   
+                <td>
+                    <?php echo $comp_dining['dining_name']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_dining['dining_image']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_dining['dining_about']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_dining['dining_price']; ?>
+                </td>
+                <td>
+                    <form method="post">
+                        <button class="button" type="submit" value="<?php echo $comp_dining['id']; ?>" name="del_dining">
+                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <?php
+            }
+        }
+        ?>
+        </table>
+    </section>
+    <!-- Living Room     -->
+     <script src="wood.js"></script>
 </body>
 </html>
 <?php
  }else{
-     echo "error";
+     header("location:loging.php");
  }
  ?>
