@@ -5,6 +5,7 @@
 $data = mysqli_query($con, 'SELECT * FROM wood');
 $data_dining = mysqli_query($con, 'SELECT * FROM dining_room');
 $data_decor = mysqli_query($con, 'SELECT * FROM decor_art');
+$data_product = mysqli_query($con, 'SELECT * FROM new_product');
 if(isset($_POST['del'])){
     $delete=$_POST['del'];
     $dstry= mysqli_query($con,"delete from wood where  id='$delete' ");
@@ -17,6 +18,10 @@ if(isset($_POST['del_dining'])){
     $delete_dining=$_POST['del_dining'];
     $dstry_dining= mysqli_query($con,"delete from dining_room where  id='$delete_dining' ");
 }
+if(isset($_POST['del_product'])){
+    $delete_product=$_POST['del_product'];
+    $dstry_product= mysqli_query($con,"delete from new_product where  id='$delete_product' ");
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,15 +31,15 @@ if(isset($_POST['del_dining'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>megumi shoplift</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/form.css ">
-    <link rel="stylesheet" href="./css/tabal.css ">
+    <link rel="stylesheet" href="./css_admin_page/header.css">
+    <link rel="stylesheet" href="./css_admin_page/form.css ">
+    <link rel="stylesheet" href="./css_admin_page/tabal.css ">
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="./img_ecommerce/logo.png" alt="">
+        <img src="./logo.png" alt="">
         </div>
         <div class="menu">
             <ul>
@@ -131,6 +136,7 @@ if(isset($_POST['del_dining'])){
                 <td>about</td>
                 <td>price</td>
                 <td>delete</td>
+                <td>Edit</td>
             </tr>
             <?php
         if (isset($_REQUEST['submit'])) {
@@ -153,6 +159,9 @@ if(isset($_POST['del_dining'])){
                 </td>
                 <td>
                     <?php echo $row['price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
                 </td>
                 <td>
                     <form method="post">
@@ -185,6 +194,9 @@ if(isset($_POST['del_dining'])){
                 </td>
                 <td>
                     <?php echo $comp['price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
                 </td>
                 <td>
                     <form method="post">
@@ -273,6 +285,7 @@ if(isset($_POST['del_dining'])){
                 <td>about</td>
                 <td>price</td>
                 <td>delete</td>
+                <td>Edit</td>
             </tr>
             <?php
         if (isset($_REQUEST['submit_decor'])) {
@@ -295,6 +308,9 @@ if(isset($_POST['del_dining'])){
                 </td>
                 <td>
                     <?php echo $row_decor['decor_price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
                 </td>
                 <td>
                     <form method="post">
@@ -327,6 +343,9 @@ if(isset($_POST['del_dining'])){
                 </td>
                 <td>
                     <?php echo $comp_decor['decor_price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
                 </td>
                 <td>
                     <form method="post">
@@ -415,6 +434,7 @@ if(isset($_POST['del_dining'])){
                 <td>about</td>
                 <td>price</td>
                 <td>delete</td>
+                <td>Edit</td>
             </tr>
             <?php
         if (isset($_REQUEST['submit_dining'])) {
@@ -437,6 +457,9 @@ if(isset($_POST['del_dining'])){
                 </td>
                 <td>
                     <?php echo $row_dining['dining_price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
                 </td>
                 <td>
                     <form method="post">
@@ -471,8 +494,148 @@ if(isset($_POST['del_dining'])){
                     <?php echo $comp_dining['dining_price']; ?>
                 </td>
                 <td>
+                    <button class="submit">Edit</button>
+                </td>
+                <td>
                     <form method="post">
                         <button class="button" type="submit" value="<?php echo $comp_dining['id']; ?>" name="del_dining">
+                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <?php
+            }
+        }
+        ?>
+        </table>
+    </section>
+    <section>
+        <div class="Bar_Furniture">
+            <h1>New product</h1>
+            <div class="container">
+                <div class="form-container">
+                    <?php
+                        if(isset($_POST['sub_product'])){
+                            $product_name= $_POST['product_name'];  
+                            $product_price = $_POST['product_price'];
+                            if(isset($_FILES['product'])){
+                                $upload_product = $_FILES['product']['name'];
+                                $tmp_product =$_FILES['product']['tmp_name'];
+                                move_uploaded_file($tmp_product,'upload/'.$upload_product);
+                            $qurry_product = mysqli_query($con,"INSERT INTO new_product (name,price,img) VALUES ('$product_name','$product_price','$upload_product');");
+                            if($qurry_product){
+                                echo "<script>alert('upload scussefull')</script>";
+                            }
+                            else{
+                                echo "<script>alert('Error')</script>";
+                            }
+                                }
+                                else{
+                                    echo "Error";
+                                    }
+                                
+                        }
+                    
+                    ?>
+                    <!-- <p class="title"></p> -->
+                    <form class="form" method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="username">product Name:-</label>
+                            <input type="text" name="product_name" id="username" placeholder="enter image name">
+                        </div>
+                        <div class="input-group">
+                            <label for="password">product Price:-</label>
+                            <input type="number" name="product_price" id="password" placeholder="enter price">
+                        </div>
+                        <div class="input-group">
+                            <label for="img">product Upload:-</label>
+                            <input type="file" name="product" id="password" placeholder="">
+                        </div>
+                        <div class="form-btn">
+                            <button class="submit"  name='sub_product'>Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <form method="POST" class="form_search">
+            <input type="text" name="product_search" class="search_edit" placeholder="enter name" />
+            <input type="submit" value="search" class="search_btn_edit" name="product_submit" />
+        </form>
+
+        <table class="table">
+            <tr>
+                <td>id</td>
+                <td>product_name</td>
+                <td>image</td>
+                <td>price</td>
+                <td>delete</td>
+                <td>Edit</td>
+            </tr>
+            <?php
+        if (isset($_REQUEST['product_submit'])) {
+            $product_search = $_POST['product_search'];
+            $qury_product = mysqli_query($con, "SELECT * FROM new_product WHERE name LIKE '%$product_search%'");
+            while ($row_product = mysqli_fetch_array($qury_product)) {
+                ?>
+            <tr>
+                <td>
+                    <?php echo $row_product['id']; ?>
+                </td>
+                <td>
+                    <?php echo $row_product['name']; ?>
+                </td>
+                <td>
+                    <?php echo $row_product['img']; ?>
+                </td>
+                <td>
+                    <?php echo $row_product['price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
+                </td>
+                <td>
+                    <form method="post">
+                        <button class="button" type="submit" value="<?php echo $row_product['id']; ?>" name="del_product">
+                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+                <?php
+            }
+            }else {
+                while ($comp_product = mysqli_fetch_array($data_product)) {
+                ?>
+            <tr>
+                <td>
+                    <?php echo $comp_product['id']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_product['name']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_product['img']; ?>
+                </td>
+                <td>
+                    <?php echo $comp_product['price']; ?>
+                </td>
+                <td>
+                    <button class="submit">Edit</button>
+                </td>
+                <td>
+                    <form method="post">
+                        <button class="button" type="submit" value="<?php echo $comp_product['id']; ?>" name="del_product">
                             <svg viewBox="0 0 448 512" class="svgIcon">
                                 <path
                                     d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">

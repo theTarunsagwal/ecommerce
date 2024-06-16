@@ -11,15 +11,15 @@ if(isset($_SESSION['adminname'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>megumi shoplift</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/tabal.css">
-    <link rel="stylesheet" href="./css/form.css">
+    <link rel="stylesheet" href="./css_admin_page/header.css">
+    <link rel="stylesheet" href="./css_admin_page/tabal.css">
+    <link rel="stylesheet" href="./css_admin_page/form.css">
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="./img_ecommerce/logo.png" alt="">
+        <img src="./logo.png" alt="">
         </div>
         <div class="menu">
             <ul>
