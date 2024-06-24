@@ -18,7 +18,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megumi shoplift</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css_admin_page/index.css">
 </head>
@@ -26,37 +27,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
 <body>
     <header>
         <div class="logo" onclick="change()">
-        <i id="x" class="bx bx-menu"></i>
+            <i id="x" class="bx bx-menu"></i>
             <img src="./logo_black.png" alt="">
-        </div>
-        <div class="menubar menubar_active">
-            <div class="menu_bar">
-                <ul class="menu_ul">
-                    <li onclick="drophomes()">home<i class='bx bx-right-arrow-alt'></i></li>
-                    <!-- <div class="dropdown">
-                        <div class="dropdown-item">
-                            <?php
-                            $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
-                            $count=0;
-                            while($count<7){
-                            ?>
-                            <a href="#">
-                                <?php echo $ab[$count];
-                            ?>
-                            </a>
-                            <?php
-                            $count++;
-                            }
-                            ?>
-                        </div>
-                    </div> -->
-                    <li>shops<i class='bx bx-right-arrow-alt'></i></li>
-                    <li>collections</li>
-                    <li>pages<i class='bx bx-right-arrow-alt'></i></li>
-                    <li>blogs<i class='bx bx-right-arrow-alt'></i></li>
-                    <li>contact us</li>
-                </ul>
-            </div>
         </div>
         <nav>
             <ul class="nav_ul">
@@ -251,8 +223,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             </ul>
         </nav>
         <div class="search_shop">
-            <i class="bx bx-search" onclick="search()"></i>
-            <div class="search_box">
+            <i class="bx bx-search" id="srch" onclick="search()"></i>
+            <div class="search_container search_box">
                 <input type="text" name="" placeholder="enter keywords to search...">
                 <i class="bx bx-search" id="icon"></i>
             </div>
@@ -263,53 +235,127 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             </div>
         </div>
     </header>
-
-
-    <div id="default-carousel" class="relative w-full" data-carousel="slide">
-    <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-         <!-- Item 1 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="../img_ecommerce/img_ecommerce09.jpg" class="absolute block w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+    <div class="menubar">
+        <div class="menu_bar">
+            <ul class="menu_ul">
+                <li onclick="drophomes()">home<i class='bx bx-right-arrow-alt'></i></li>
+                <li onclick="dropshops()">shops<i class='bx bx-right-arrow-alt'></i></li>
+                <li>collections</li>
+                <li onclick="droppages()">pages<i class='bx bx-right-arrow-alt'></i></li>
+                <li onclick="dropblog()">blogs<i class='bx bx-right-arrow-alt'></i></li>
+                <li>contact us</li>
+            </ul>
+            <div class="dropdown_reponsive">
+                <h1 onclick="gohome()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>home</h1>
+                <div class="dropdown-item-responsive">
+                    <?php
+            $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
+            $count=0;
+            while($count<7){
+            ?>
+                    <a href="#">
+                        <?php echo $ab[$count];
+            ?>
+                    </a>
+                    <?php
+            $count++;
+            }
+            ?>
+                </div>
+            </div>
+            <div class="dropdown_reponsive_shop">
+                <h1 onclick="goshop()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>shops</h1>
+                <div class="dropdown-item-responsive-shop">
+                    <?php
+            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
+            $count=0;
+            while($count<7){
+            ?>
+                    <a href="#">
+                        <?php echo $ab[$count];
+            ?>
+                    </a>
+                    <?php
+            $count++;
+            }
+            ?>
+                </div>
+            </div>
+            <div class="dropdown_reponsive_page">
+                <h1 onclick="gopage()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>pages</h1>
+                <div class="dropdown-item-responsive-page">
+                    <?php
+            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
+            $count=0;
+            while($count<7){
+            ?>
+                    <a href="#">
+                        <?php echo $ab[$count];
+            ?>
+                    </a>
+                    <?php
+            $count++;
+            }
+            ?>
+                </div>
+            </div>
+            <div class="dropdown_reponsive_blog">
+                <h1 onclick="goblog()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>blogs</h1>
+                <div class="dropdown-item-responsive-blog">
+                    <?php
+            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
+            $count=0;
+            while($count<7){
+            ?>
+                    <a href="#">
+                        <?php echo $ab[$count];
+            ?>
+                    </a>
+                    <?php
+            $count++;
+            }
+            ?>
+                </div>
+            </div>
         </div>
-        <!-- Item 2 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="../img_ecommerce/img_ecommerce10.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        <!-- Item 3 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <div class="text-red-700 absolute z-50">HGello</div>
-            <img src="../img_ecommerce/img_ecommerce11.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-        </div>
-        
     </div>
-    <!-- Slider indicators -->
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+
+
+
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class=" btn carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="btn carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <!-- Slider controls -->
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
-</div>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
 
 </body>

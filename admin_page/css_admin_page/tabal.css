@@ -41,7 +41,22 @@ table{
   }
   .button:hover .svgIcon{
     width: 21px;
-    }
+  }
+
+  .img_handl{
+    display: inline-flex;
+    align-items: center;
+  }
+  .img_view{
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .img_view img{
+    height: 100%;
+    width: 100%;
+  }
+
     
     @media (max-width:700px) {
       table{  margin-left: 0rem;

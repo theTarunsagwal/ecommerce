@@ -152,7 +152,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $row['image_name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $row['image']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $row['image']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $row['about']; ?>
@@ -187,7 +192,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $comp['image_name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $comp['image']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $comp['image']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $comp['about']; ?>
@@ -301,7 +311,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $row_decor['decor_name']; ?>
                 </td>
                 <td>
-                    <?php echo $row_decor['decor_img']; ?>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $row_decor['decor_img']; ?>" alt="" class="img_view_img">
+                    </div>
+                       <?php echo $row_decor['decor_img']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $row_decor['decor_about']; ?>
@@ -336,7 +351,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $comp_decor['decor_name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $comp['decor_img']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $comp_decor['decor_img']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $comp_decor['decor_about']; ?>
@@ -450,7 +470,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $row_dining['dining_name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $row_dining['dining_image']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $row_dining['dining_image']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $row_dining['dining_about']; ?>
@@ -485,7 +510,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $comp_dining['dining_name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $comp_dining['dining_image']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $comp_dining['dining_image']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $comp_dining['dining_about']; ?>
@@ -593,7 +623,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $row_product['name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $row_product['img']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $row_product['img']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $row_product['price']; ?>
@@ -625,7 +660,12 @@ if(isset($_POST['del_product'])){
                     <?php echo $comp_product['name']; ?>
                 </td>
                 <td>
+                <div class="img_handl">
+                <div class="img_view">
+                        <img src="upload/<?php echo $comp_product['img']; ?>" alt="" class="img_view_img">
+                    </div>
                     <?php echo $comp_product['img']; ?>
+                </div>
                 </td>
                 <td>
                     <?php echo $comp_product['price']; ?>
