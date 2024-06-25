@@ -210,14 +210,39 @@ header a{
     
 }
 
-.menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
-/* 
-.search_box{
-} */
 .main_box{
     width: 100vw !important;
     height: 100vh;
 }
+
+.scale_card{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5% 0%;
+}
+
+.scale_card_menu{
+    width: 30vw;
+    height: 30vh;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.scale_card_menu img{
+    height: 100%;
+    transition: .5s ease-in;
+    width: 100%;
+    
+}
+
+.scale_card_menu img:hover{
+    transform: scale(1.2);
+}
+
+/*------------------ display none ----------------*/
+.menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
+
 
 /*----------------------hover---------------------*/
 

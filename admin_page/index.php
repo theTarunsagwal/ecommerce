@@ -320,9 +320,6 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
         </div>
     </div>
 
-
-
-
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -353,6 +350,19 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
+
+    <div class="scale_card">
+        <?php
+        $rows=mysqli_query($con,"select * from wood where id in (4,5,6)");
+        while($row_woods=mysqli_fetch_assoc($rows)){
+        ?>
+        <div class="scale_card_menu">
+            <img src="./upload/<?php echo $row_woods['image']?>" alt="">
+        </div>
+        <?php
+        }
+        ?>
     </div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
