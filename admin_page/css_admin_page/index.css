@@ -327,6 +327,7 @@ header a{
     width: 0rem;
     border-radius: 2px;
     transition: .5s;
+    cursor: pointer;
     background-color: #000;
 }
 
