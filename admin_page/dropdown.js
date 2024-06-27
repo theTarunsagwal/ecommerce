@@ -72,9 +72,11 @@ let search=()=>{
 
 let change=()=>{
     let dwonshop=document.querySelector('#x');
-    // let menu =document.querySelector('.menubar')
+    let menu =document.querySelector('.menubar');
+    menu.classList.toggle("menublock")
     let menusilde =document.querySelector('.menu_bar')
     dwonshop.classList.toggle('bx-x');
     menusilde.classList.toggle('menubar_active');
     // menusilde.style.transform="translateX(0%)"
 }
+

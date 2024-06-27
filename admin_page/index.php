@@ -27,7 +27,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
 <body>
     <header>
         <div class="logo" onclick="change()">
-            <i id="x" class="bx bx-menu"></i>
+            <i id="x" class="bx bx-menu" onclick="chg()"></i>
             <img src="./logo_black.png" alt="">
         </div>
         <nav>
@@ -352,18 +352,185 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
         </button>
     </div>
 
-    <div class="scale_card">
-        <?php
+    <section>
+        <div class="scale_card">
+            <?php
         $rows=mysqli_query($con,"select * from wood where id in (4,5,6)");
         while($row_woods=mysqli_fetch_assoc($rows)){
         ?>
-        <div class="scale_card_menu">
-            <img src="./upload/<?php echo $row_woods['image']?>" alt="">
-        </div>
-        <?php
+            <div class="scale_card_menu">
+                <img src="./upload/<?php echo $row_woods['image']?>" alt="">
+            </div>
+            <?php
         }
         ?>
-    </div>
+        </div>
+
+        <div class="multi_card">
+            <div class="chair_card">
+                <?php
+            $img=mysqli_query($con,"select * from dining_room where id in (6)");
+            while ($row=mysqli_fetch_assoc($img)){
+            ?>
+                <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
+                <h3>
+                    <?php echo $row['dining_name'];}?>
+                </h3>
+            </div>
+            <div class="adjest">
+                <div class="clock_decor">
+                    <div class="decor">
+                        <?php
+            $img=mysqli_query($con,"select * from decor_art where id in (4)");
+            while ($row=mysqli_fetch_assoc($img)){
+            ?>
+                        <img src="./upload/<?php echo $row['decor_img'];?>" alt="">
+                        <h3>
+                            <?php echo $row['decor_name'];}?>
+                        </h3>
+                    </div>
+                    <div class="wall_clock">
+                        <?php
+            $img=mysqli_query($con,"select * from dining_room where id in (7)");
+            while ($row=mysqli_fetch_assoc($img)){
+            ?>
+                        <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
+                        <h3>
+                            <?php echo $row['dining_name'];}?>
+                        </h3>
+                    </div>
+                </div>
+                <div class="kitchen">
+                    <?php
+            $img=mysqli_query($con,"select * from dining_room where id in (8)");
+            while ($row=mysqli_fetch_assoc($img)){
+            ?>
+                    <img src="./upload/<?php echo $row['dining_image'];}?>" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="explore-new">
+            <nav class="nav-furniture">
+                <h1>explore new furniture</h1>
+                <ul>
+                        <li>
+                            <a href="#">sofas</a>
+                            <div class="line" id="line-im"></div>
+                        </li>
+                        <li>
+                            <a href="#">chair</a>
+                            <div class="line"></div>
+                        </li>
+                        <li>
+                            <a href="#">table</a>
+                            <div class="line"></div>
+                        </li>
+                        <li>
+                            <a href="#">lamps & lighting</a>
+                            <div class="line-big"></div>
+                        </li>
+                        <li>
+                            <a href="#">kitchen accessories</a>
+                            <div class="line-big"></div>
+                        </li>
+                    </ul>
+            </nav>
+
+                <div class="container mt-5">
+                    <div class="row">
+                        <!-- First row of cards -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 1</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 2</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 3</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 4</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Second row of cards -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 5</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 6</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 7</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title 8</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="new-furniture">
+            </div> -->
+        </div>
+    </section>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>

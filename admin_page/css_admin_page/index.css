@@ -49,7 +49,7 @@ ul,.dropdown-item-responsive{
 header a{
     color: #666b7f;
 }
-.search_shop{
+.search_shop,.nav-furniture ul{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,10 +215,15 @@ header a{
     height: 100vh;
 }
 
-.scale_card{
+.scale_card,.multi_card{
     display: flex;
     justify-content: space-evenly;
+    flex-direction: row;
     margin: 5% 0%;
+}
+.adjest{
+    display: flex;
+    gap: 1rem;
 }
 
 .scale_card_menu{
@@ -236,9 +241,103 @@ header a{
     
 }
 
-.scale_card_menu img:hover{
-    transform: scale(1.2);
+.chair_card{
+    width: 50vw;
+    height: 80vh;
+    overflow: hidden;
+    background-color: #fcb800;
+    cursor: pointer;
 }
+
+.clock_decor,.kitchen{
+    width: 20vw;
+    height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.decor,.wall_clock{
+    width: 20vw;
+    height: 40vh;
+    overflow: hidden;   
+    cursor: pointer;
+}
+
+.decor img,.wall_clock img,.chair_card img,.kitchen img{
+    height: 100%;
+    width: 100%;
+    transition: .5s ease-in;
+}
+
+.chair_card h3 ,.decor h3,.wall_clock h3{
+    transform: translate(10%,-140%);
+    color: black;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.5rem;
+    padding: .5rem 1.5rem;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: .5s ;
+}
+
+.chair_card h3:hover,.decor h3:hover,.wall_clock h3:hover{
+    background-color: #000;
+    color: #fff;
+}
+
+.nav-furniture{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-furniture h1{
+  font-weight: 600;
+  font-size: 1.5rem;
+    color: #000;
+    margin: 0% !important;
+}
+
+.nav-furniture ul{
+    gap: 3rem;
+    /* padding: 0% !important; */
+}
+.nav-furniture ul li a{
+    color: #666b7f;
+    font-size: 1.2rem;
+}
+
+#line-im{
+    height: .2rem;
+    width: 3rem;
+    background-color: #000;
+}
+
+.line,.line-big{
+    height: 3px;
+    width: 0rem;
+    border-radius: 2px;
+    transition: .5s;
+    background-color: #000;
+}
+
+.nav-furniture ul li:hover .line{
+    width: 2.8rem;
+}
+
+.nav-furniture ul li:hover .line-big{
+    width: 9rem;
+}
+
 
 /*------------------ display none ----------------*/
 .menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
@@ -249,6 +348,10 @@ header a{
 .shoping_bag a:first-child:hover{
     color: #fcb800;
     text-decoration: none;
+}
+
+.scale_card_menu img:hover,.chair_card img:hover,.decor img:hover,.wall_clock img:hover,.kitchen img:hover{
+    transform: scale(1.2);
 }
 
 .search_shop i:hover,.menu_ul li:hover,.dropdown-item-responsive a:hover,.dropdown-item-responsive-shop a:hover ,.dropdown-item-responsive-page a:hover ,.dropdown-item-responsive-blog a:hover {color: #fcb800;}
@@ -276,18 +379,14 @@ header a{
 
     }
 
-.bx-menu{display: block;}
-
+.bx-menu,.menublock{display: block;}
 
 .menubar{
-    display: block;
+    /* display: block; */
     position: fixed;
     top: 8.5%;
     left: 0%;
     z-index: 100;
-    background-color: #666b7f00;
-    width: 100vw;
-    height: 100vh;
 }
 
 
@@ -349,7 +448,39 @@ header a{
 
 }
 
+@media (max-width: 868px) {
+    .multi_card,.scale_card{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+    }
 
+    .chair_card h3, .decor h3, .wall_clock h3 {
+    transform: translate(10%, -117%);
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    }
+
+    .scale_card_menu,.chair_card{
+        width: 80vw;
+        height: 50vh;
+
+    }
+    .clock_decor,.kitchen,.decor,.wall_clock{
+        width: 40vw;
+        height: 90vh;
+    }
+}
+
+@media (max-width:545px) {
+    .scale_card_menu{
+        height: 30vh;
+    }
+    .decor,.wall_clock,.kitchen,.clock_decor{
+        height: 68vh;
+    }
+}
 @media (max-width:475px) {
     header{
         padding: 1rem 0.5rem .5rem 0.5rem;
@@ -385,6 +516,10 @@ header a{
     }
 
     .shoping_bag{font-size: .7rem;}
+
+    .decor,.wall_clock,.kitchen,.clock_decor{
+        height: 46vh;
+    }
 }
 
 
@@ -394,15 +529,3 @@ header a{
     border-radius: 50% !important;
     background-color: #666b7f !important;
 }
-
-/* @media (min-width: 768px) {
-    .carousel-item img {
-        height: 600px;
-    }
-}
-
-@media (min-width: 992px) {
-    .carousel-item img {
-        height: 700px;
-    }
-} */

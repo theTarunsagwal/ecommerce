@@ -353,7 +353,7 @@ if(isset($_POST['del_product'])){
                 <td>
                 <div class="img_handl">
                 <div class="img_view">
-                        <img src="upload/<?php echo $comp['decor_img']; ?>" alt="" class="img_view_img">
+                        <img src="upload/<?php echo $comp_decor['decor_img']; ?>" alt="" class="img_view_img">
                     </div>
                     <?php echo $comp_decor['decor_img']; ?>
                 </div>
