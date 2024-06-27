@@ -340,13 +340,56 @@ header a{
 }
 
 
+.card .change-img{
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+    /* background-color: #000; */
+}
+
+.change-img img{
+    transition: .3s;
+   height: 100%;
+   width: 100%; 
+   cursor: pointer;
+}
+
+.card-title,.card-text{
+    cursor: pointer;
+}
+
+.img-set{
+    transform: translateY(-100%);
+    opacity: 1;
+}
+
+.img-setoff{
+    opacity: 0;
+}
+
+.change-img:hover .img-set{
+    /* transform: translateY(0%); */
+    opacity: 0;
+}
+
+.change-img:hover .img-setoff{
+    opacity: 1;
+}
+
+.card-title{
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.card-price{color: red;}
+
 /*------------------ display none ----------------*/
 .menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
 
 
 /*----------------------hover---------------------*/
 
-.shoping_bag a:first-child:hover{
+.shoping_bag a:first-child:hover,.card-title:hover,.card-text:hover{
     color: #fcb800;
     text-decoration: none;
 }

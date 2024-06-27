@@ -444,41 +444,52 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         <!-- First row of cards -->
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce20.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce19.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 1</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Arctander Chair</h5>
+                                    <p class="card-text">LIGHTING</p>
+                                    <p class="card-price">$49.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                <img src="../img_ecommerce/img_ecommerce21.jpg" class="img-setoff" alt="Card image">
+                                <img src="../img_ecommerce/img_ecommerce22.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 2</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">beoplay a1</h5>
+                                    <p class="card-text">LIGHTING</p>
+                                    <p class="card-price">$39.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce23.jpg" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 3</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">hanging egg chair</h5>
+                                    <p class="card-text">LIGHTING</p>
+                                    <p class="card-price">$99.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce25.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce24.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 4</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">hubert pendant lamp</h5>
+                                    <p class="card-text">LIGHTING</p>
+                                    <p class="card-price">$149.00</p>
                                 </div>
                             </div>
                         </div>
@@ -487,41 +498,53 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         <!-- Second row of cards -->
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce27.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce26.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 5</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">iconic rocking horse</h5>
+                                    <p class="card-text">CHAIRS</p>
+                                    <p class="card-price">$169.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce29.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce28.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 6</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">langue stack chair</h5>
+                                    <p class="card-text">CHAIRS</p>
+                                    <p class="card-price">$299.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce31.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce30.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 7</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">laundry baskets</h5>
+                                    <p class="card-text">CHAIRS</p>
+                                    <p class="card-price">$45.00</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="card">
-                                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card image">
+                                <div class="change-img card-img-top">
+                                    <img src="../img_ecommerce/img_ecommerce33.jpg" class="img-setoff" alt="Card image">
+                                    <img src="../img_ecommerce/img_ecommerce32.jpg" class="img-set" alt="Card image">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title 8</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">mini table lamp</h5>
+                                    <p class="card-text">CHAIRS</p>
+                                    <p class="card-price">$49.00</p>
                                 </div>
                             </div>
                         </div>
