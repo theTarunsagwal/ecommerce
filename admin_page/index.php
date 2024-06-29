@@ -355,12 +355,23 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <section>
         <div class="scale_card">
             <?php
-        $rows=mysqli_query($con,"select * from wood where id in (4,5,6)");
+        if(isset($_GET['id'])){
+            $idjump = $_GET['id'];
+            $rowsjump = mysqli_query($con, "SELECT * FROM wood WHERE id = $idjump");
+            $row_jump = mysqli_fetch_assoc($rowsjump);
+            echo "<h1>";
+            print_r($row_jump);
+            if($row_jump){
+                $_SESSION['id'] = $row_jump['image_name'];
+            }
+        }
+        
+        $rows = mysqli_query($con, "SELECT * FROM wood WHERE id IN (4, 5, 6)");
         while($row_woods=mysqli_fetch_assoc($rows)){
         ?>
-            <div class="scale_card_menu">
+            <a href="addtocart.php?id=<?php echo $row_woods['image_name']?>" class="scale_card_menu">
                 <img src="./upload/<?php echo $row_woods['image']?>" alt="">
-            </div>
+            </a>
             <?php
         }
         ?>
