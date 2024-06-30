@@ -3,28 +3,28 @@ session_start();
 if(isset($_SESSION['name'])){
     $con = mysqli_connect("localhost","root","","ecommerce");
     // $qurry=mysqli_query($con,"select * from new_product");
-$data_product = mysqli_query($con, 'SELECT * FROM new_product');
-$data_wood = mysqli_query($con, 'SELECT * FROM wood');
-$data_art = mysqli_query($con, 'SELECT * FROM decor_art');
-$data_room = mysqli_query($con, 'SELECT * FROM dining_room');
+    $data_product = mysqli_query($con, 'SELECT * FROM new_product');
+    $data_wood = mysqli_query($con, 'SELECT * FROM wood');
+    $data_art = mysqli_query($con, 'SELECT * FROM decor_art');
+    $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
+    
 
-
-?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Megumi shoplift</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="./css_admin_page/index.css">
-</head>
-
-<body>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Megumi shoplift</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="./css_admin_page/index.css">
+    </head>
+    
+    <body>
     <header>
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
@@ -40,15 +40,15 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
                         $count=0;
                         while($count<7){
-                        ?>
+                            ?>
                         <a href="#">
                             <?php echo $ab[$count];
                         ?>
                         </a>
                         <?php
                         $count++;
-                        }
-                        ?>
+                    }
+                    ?>
                     </div>
                 </div>
                 <li onclick="dropshop()"><span>shops</span><i class='bx bx-chevron-down'></i></li>
@@ -61,7 +61,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
                         $count=0;
                         while($count<7){
-                        ?>
+                            ?>
                             <a href="#">
                                 <?php echo $ab[$count];
                         ?>
@@ -359,17 +359,15 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             $idjump = $_GET['id'];
             $rowsjump = mysqli_query($con, "SELECT * FROM wood WHERE id = $idjump");
             $row_jump = mysqli_fetch_assoc($rowsjump);
-            echo "<h1>";
-            print_r($row_jump);
             if($row_jump){
-                $_SESSION['id'] = $row_jump['image_name'];
+                $_SESSION['id'] = $row_jump['id'];
             }
         }
         
         $rows = mysqli_query($con, "SELECT * FROM wood WHERE id IN (4, 5, 6)");
         while($row_woods=mysqli_fetch_assoc($rows)){
         ?>
-            <a href="addtocart.php?id=<?php echo $row_woods['image_name']?>" class="scale_card_menu">
+            <a href="addtocart.php?id=<?php echo $row_woods['id']?>" class="scale_card_menu">
                 <img src="./upload/<?php echo $row_woods['image']?>" alt="">
             </a>
             <?php
