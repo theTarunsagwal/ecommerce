@@ -1,0 +1,36 @@
+* {
+        margin: 0%;
+        padding: 0%;
+        list-style: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+
+}
+
+.search-item{
+    height: fit-content;
+    width: 60vw;
+    background-color: #f8f9fa;
+    position: absolute;
+    z-index: 10;
+    right: .5%;
+    top: 12%;
+}
+
+.item-inst{
+    display: flex;
+    gap: 1rem;
+}
+
+.search-item-img{
+    height: 20vh;
+    width: 15vw;
+    background-color: aqua;
+}
+
+.search-item-img img{
+    height: 100%;
+    width: 100%;
+}
+

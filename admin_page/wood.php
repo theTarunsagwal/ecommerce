@@ -325,7 +325,7 @@ if(isset($_POST['del_product'])){
                     <?php echo $row_decor['decor_price']; ?>
                 </td>
                 <td>
-                    <button class="submit">Edit</button>
+                    <button class="submit" value="<?php echo $row_decor['id']; ?>" >Edit</button>
                 </td>
                 <td>
                     <form method="post">

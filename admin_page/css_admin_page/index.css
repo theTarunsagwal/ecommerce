@@ -184,6 +184,11 @@ header a{
     z-index: 100;
     right: 5%;
 }
+
+.search_box_active button{
+    border: none;
+}
+
 .search_box{
     display: none;
     position: absolute;
@@ -314,31 +319,20 @@ header a{
 .nav-furniture ul li a{
     color: #666b7f;
     font-size: 1.2rem;
+    position: relative;
+    display: inline-block;
 }
 
-#line-im{
-    height: .2rem;
-    width: 3rem;
+.nav-furniture ul li a::after{
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0%;
+    height: .5vh;
+    width: 0vw;
     background-color: #000;
+    transition: .3s ease-in-out;
 }
-
-.line,.line-big{
-    height: 3px;
-    width: 0rem;
-    border-radius: 2px;
-    transition: .5s;
-    cursor: pointer;
-    background-color: #000;
-}
-
-.nav-furniture ul li:hover .line{
-    width: 2.8rem;
-}
-
-.nav-furniture ul li:hover .line-big{
-    width: 9rem;
-}
-
 
 .card .change-img{
     height: 50vh;
@@ -405,6 +399,10 @@ header a{
 }
 .nav_ul li span:hover {
     border-bottom: 2px solid #666b7f;
+}
+
+.nav-furniture ul li a:hover::after{
+    width: 100%;
 }
 
 /*--------------------responsive-------------------*/
