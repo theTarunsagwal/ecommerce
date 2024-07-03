@@ -100,7 +100,7 @@
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce25.jpg" class="img-set" alt="Card image">
+                                <img src="../img_ecommerce/img_ecommerce24.jpg" class="img-set" alt="Card image">
                             </div>
                         </a>
                         <div class="card-body">

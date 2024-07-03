@@ -22,7 +22,6 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css_admin_page/index.css">
-    <link rel="stylesheet" href="./css_admin_page/search.css">
 </head>
 
 <body>
@@ -227,10 +226,15 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
         </nav>
         <div class="search_shop">
             <i class="bx bx-search" id="srch" onclick="search()"></i>
-            <form action="" method="POST">
+          <?php
+            if (isset($_POST["sub"])) {
+    $search = $_POST['search'];
+}
+?>
+            <form action="search.php" method="POST">
                 <div class="search_container search_box">
                     <input type="text" name="search" placeholder="Enter keywords to search...">
-                    <button name="sub_search">
+                    <button name="sub">
                         <i class="bx bx-search" id="icon"></i>
                     </button>
                 </div>
@@ -327,126 +331,6 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
         </div>
     </div>
 
-    <?php
-if (isset($_REQUEST['sub_search'])) {
-    $search_text = $_POST['search'];
-    $con = mysqli_connect("localhost", "root", "", "ecommerce");
-
-    $sql_search_wood = mysqli_query($con,"SELECT * FROM wood WHERE image_name LIKE '%$search_text%'");
-    $sql_search_new = mysqli_query($con,"SELECT * FROM new_product WHERE name LIKE '%$search_text%'");
-     $sql_search_decor = mysqli_query($con,"SELECT * FROM decor_art WHERE decor_name LIKE '%$search_text%'");
-     $sql_search_dining = mysqli_query($con,"SELECT * FROM dining_room WHERE dining_name LIKE '%$search_text%'");
-
-    $connect_srch= mysqli_fetch_assoc($sql_search_wood);
-    $connect_srchs= mysqli_fetch_assoc($sql_search_new);
-    $connect_srchd= mysqli_fetch_assoc($sql_search_decor);
-    $connect_srchdi= mysqli_fetch_assoc($sql_search_dining);
-    if($connect_srch){   
-        while($print= mysqli_fetch_assoc($sql_search_wood)){
-?>
-    <div class="search-item-box">
-        <div class="search-item">
-            <div class="item-inst">
-                <div class="search-item-img">
-                    <img src="./upload/<?php echo $connect_srch['image'];?>" alt="">
-                </div>
-                <div class="price-name">
-                    <h1 class="fs-3 fw-bolder text-black ">
-                        <?php echo $connect_srch['image_name']; ?>
-                    </h1>
-                    <h1 class="fs-5 fw-lighter">price: $<span class="text-danger fw-bold">
-                            <?php echo $connect_srch['price'];?>
-                        </span></h1>
-                </div>
-                <i></i>
-            </div>
-        </div>
-    </div>
-
-    <?php
-        }
-    }else if($connect_srchs) {
-        // while($prints= mysqli_fetch_assoc($connect_srchs)){
-            ?>
-    <div class="search-item-box">
-        <div class="search-item">
-            <div class="item-inst">
-                <div class="search-item-img">
-                    <img src="./upload/<?php echo $connect_srchs['img'];?>" alt="">
-                </div>
-                <div class="price-name">
-                    <h1 class="fs-3 fw-bolder text-black ">
-                        <?php echo $connect_srchs['name']; ?>
-                    </h1>
-                    <h1 class="fs-5 fw-lighter">price: $<span class="text-danger fw-bold">
-                            <?php echo $connect_srchs['price'];?>
-                        </span></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php
-                    // }
-    }else if($connect_srchd) {
-        // while($printsd= mysqli_fetch_assoc($connect_srchd)){
-            ?>
-    <div class="search-item-box">
-        <div class="search-item">
-            <div class="item-inst">
-                <div class="search-item-img">
-                    <img src="./upload/<?php echo $connect_srchd['decor_img'];?>" alt="">
-                </div>
-                <div class="price-name">
-                    <h1 class="fs-3 fw-bolder text-black ">
-                        <?php echo $connect_srchd['decor_name']; ?>
-                    </h1>
-                    <h1 class="fs-5 fw-lighter">price: $<span class="text-danger fw-bold">
-                            <?php echo $connect_srchd['decor_price'];?>
-                        </span></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php               
-    }
-    // }
-    else if($connect_srchdi) {
-        // while($connect_srchdi= mysqli_fetch_assoc($connect_srchdi)){
-            ?>
-    <div class="search-item-box">
-        <div class="search-item">
-            <div class="item-inst">
-                <div class="search-item-img">
-                    <img src="./upload/<?php echo $connect_srchdi['dining_image'];?>" alt="">
-                </div>
-                <div class="price-name">
-                    <h1 class="fs-3 fw-bolder text-black ">
-                        <?php echo $connect_srchdi['dining_name']; ?>
-                    </h1>
-                    <h1 class="fs-5 fw-lighter">price: $<span class="text-danger fw-bold">
-                            <?php echo $connect_srchdi['dining_price'];?>
-                        </span></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php
-                    // }
-    }
-    else{
-        ?>
-    <div class="search-item-box">
-        <div class="search-item">
-            <h1>not item aviabale</h1>
-        </div>
-    </div>
-    <?php
-    }
-}
-    ?>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
 </body>
