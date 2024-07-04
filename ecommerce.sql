@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 02:21 PM
+-- Generation Time: Jul 04, 2024 at 04:28 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -72,8 +72,16 @@ CREATE TABLE `decor_art` (
 --
 
 INSERT INTO `decor_art` (`id`, `decor_name`, `decor_price`, `decor_img`, `decor_about`) VALUES
-(3, 'decor art', '200', 'img_ecommerce05.jpg', 'nan'),
-(4, 'decor', '200', 'img_ecommerce16.jpg', 'nan');
+(3, 'decor art', '200', 'img_ecommerce05.jpg', 'art'),
+(4, 'decor', '200', 'img_ecommerce16.jpg', 'art'),
+(5, 'Arctander Chair', '250', 'img_ecommerce20.jpg', 'lighiting'),
+(6, 'Beoplay A1', '199', 'img_ecommerce21.jpg', 'lighting'),
+(7, 'hanging egg chair', '159', 'img_ecommerce23.jpg', 'lighting'),
+(8, 'Hubert pendant lamp', '199', 'img_ecommerce25.jpg', 'lighting'),
+(9, 'Iconic Rocking Horse', '169', 'img_ecommerce27.jpg', 'chairs'),
+(10, 'Langue Stack Chair', '259', 'img_ecommerce28.jpg', 'chairs'),
+(11, 'Laundry Baskets', '45', 'img_ecommerce30.jpg', 'chairs'),
+(12, 'mini table lamp', '89', 'img_ecommerce32.jpg', 'chairs');
 
 -- --------------------------------------------------------
 
@@ -97,7 +105,7 @@ INSERT INTO `dining_room` (`id`, `dining_name`, `dining_price`, `dining_image`, 
 (3, 'dining room', '5200', 'img_ecommerce06.jpg', 'nan'),
 (4, 'living room', '250', 'img_ecommerce08.jpg', 'nan'),
 (5, 'headboard', '2000', 'img_ecommerce07.jpg', 'nan'),
-(6, 'chairs', '3000', 'img_ecommerce15.jpg', 'nan'),
+(6, 'chairs', '3000', 'img_ecommerce15.jpg', 'chair\r\n'),
 (7, 'clock', '150', 'img_ecommerce17.jpg', 'nan'),
 (8, 'hand clock', '140', 'img_ecommerce18.jpg', 'nan');
 
@@ -161,10 +169,10 @@ CREATE TABLE `wood` (
 --
 
 INSERT INTO `wood` (`id`, `image_name`, `price`, `image`, `about`) VALUES
-(3, 'bar furniture', '200', 'img_ecommerce04.jpg', 'nan'),
-(4, 'table', '99', 'img_ecommerce12.jpg', 'nan'),
-(5, 'sofa', '199', 'img_ecommerce13.jpg', 'nan'),
-(6, 'pilo', '299', 'img_ecommerce14.jpg', 'nan');
+(3, 'bar furniture', '200', 'img_ecommerce04.jpg', 'furniture'),
+(4, 'table', '99', 'img_ecommerce12.jpg', 'furniture'),
+(5, 'sofa', '199', 'img_ecommerce13.jpg', 'furniture'),
+(6, 'pilo', '299', 'img_ecommerce14.jpg', 'furniture');
 
 --
 -- Indexes for dumped tables
@@ -236,7 +244,7 @@ ALTER TABLE `contect`
 -- AUTO_INCREMENT for table `decor_art`
 --
 ALTER TABLE `decor_art`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `dining_room`
