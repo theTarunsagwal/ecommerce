@@ -9,7 +9,7 @@
 <body>
     <?php include "header.php" ?>
     <div class="serach-container">
-        <h2 class="text-black fs-3 fw-bold text-center" >Search results"<span class="fw-light fs-5"><?php echo $search?></span>"</h2>
+        <h2 class="text-black fs-3 fw-bold text-center" >Search results"<span class="fw-light fs-5"><?php ?></span>"</h2>
         <div class="search-result">
             <?php
             if(isset($_POST['sub'])){
@@ -20,9 +20,18 @@
                 $query3 = mysqli_query($con,"SELECT * FROM dining_room WHERE dining_name LIKE '%$search%'");
 
                 if($query || $query2 || $query3){
+                    if(isset($_GET['id_em'])){
+                     $id_jum = $_GET['id_em'];
+                     $data_id= mysqli_query($con, "SELECT * FROM decor_art WHERE id = $id_jum");
+                     $row_jump = mysqli_fetch_assoc($data_id);
+                    if($row_jump){
+                    $_SESSION['id'] = $row_jump['id'];
+                    }
+                    }
                     while($row = mysqli_fetch_array($query)){
             ?>
             <div class="result-tab">
+                <a href="addtocart.php?id=<?php echo $row['id']?>" value="<?php echo $row['id']?>" name="id_em">hello</a>
                 <div class="img-item">
                     <img src="./upload/<?php echo $row['image']?>" alt="loading....">
                 </div>

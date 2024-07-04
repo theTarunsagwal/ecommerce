@@ -35,7 +35,7 @@
                 $_SESSION['id'] = $row_jump['id'];
             }
         }
-        $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (5)");
+        $rows_decore_art =mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (5)");
         while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
                         <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
