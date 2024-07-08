@@ -27,18 +27,18 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="card">
                         <?php
-        if(isset($_GET['id'])){
-            $idjump = $_GET['id'];
-            $rowsjump = mysqli_query($con, "SELECT * FROM decor_art WHERE id = $idjump");
+        if(isset($_GET['decor_name'])){
+            $idjump = $_GET['decor_name'];
+            $rowsjump = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = $idjump");
             $row_jump = mysqli_fetch_assoc($rowsjump);
             if($row_jump){
-                $_SESSION['id'] = $row_jump['id'];
+                $_SESSION['id'] = $row_jump['decor_name'];
             }
         }
         $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (5)");
         while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -58,7 +58,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (6)");
         while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -78,7 +78,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (7)");
         while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" alt="Card image">
                             </div>
@@ -96,7 +96,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (8)");
         while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -119,7 +119,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (9)");
                             while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -139,7 +139,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (10)");
                             while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -159,7 +159,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (11)");
                             while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">
@@ -179,7 +179,7 @@
                             $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (12)");
                             while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['id'] ;?>">
+                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
                             <div class="change-img card-img-top">
                                 <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
                                     alt="Card image">

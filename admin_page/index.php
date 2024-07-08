@@ -65,9 +65,21 @@ if(isset($_SESSION['name'])){
         $rows = mysqli_query($con, "SELECT * FROM wood WHERE id IN (4, 5, 6)");
         while($row_woods=mysqli_fetch_assoc($rows)){
         ?>
+        <?php
+        if(isset($_GET['image_name'])){
+            $titel = $_GET['image_name'];
+            $head_titel = mysqli_query($con, "SELECT * FROM wood WHERE image_name = '$titel'");
+            $row_jump = mysqli_fetch_assoc($head_titel);
+            if($row_jump){
+                $_SESSION['id'] = $row_jump['image_name'];
+            }
+        }
+        ?>
+        <a href="product.php?id=<?php echo $row_woods['image_name'] ?>">
             <div class="scale_card_menu">
                 <img src="./upload/<?php echo $row_woods['image']?>" alt="">
             </div>
+        </a>
             <?php
         }
         ?>
@@ -79,10 +91,22 @@ if(isset($_SESSION['name'])){
             $img=mysqli_query($con,"select * from dining_room where id in (6)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
-                <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
-                <h3>
-                    <?php echo $row['dining_name'];}?>
-                </h3>
+             <?php
+        if(isset($_GET['image_name'])){
+            $titel = $_GET['image_name'];
+            $head_titel = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name = '$titel'");
+            $row_jump = mysqli_fetch_assoc($head_titel);
+            if($row_jump){
+                $_SESSION['id'] = $row_jump['image_name'];
+            }
+        }
+        ?>
+        <a href="product.php?id=<?php echo $row['dining_name'] ?>">
+            <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
+            <h3>
+                <?php echo $row['dining_name'];}?>
+            </h3>
+        </a> 
             </div>
             <div class="adjest">
                 <div class="clock_decor">
@@ -91,16 +115,39 @@ if(isset($_SESSION['name'])){
             $img=mysqli_query($con,"select * from decor_art where id in (4)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
+            <?php
+            if(isset($_GET['image_name'])){
+            $titel = $_GET['image_name'];
+            $head_titel = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = '$titel'");
+            $row_jump = mysqli_fetch_assoc($head_titel);
+            if($row_jump){
+                $_SESSION['id'] = $row_jump['image_name'];
+            }
+        }
+        ?>
+        <a href="product.php?id=<?php echo $row['decor_name'] ?>">
                         <img src="./upload/<?php echo $row['decor_img'];?>" alt="">
                         <h3>
                             <?php echo $row['decor_name'];}?>
                         </h3>
+                    </a>
                     </div>
                     <div class="wall_clock">
                         <?php
             $img=mysqli_query($con,"select * from dining_room where id in (7)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
+            <?php
+            if(isset($_GET['image_name'])){
+                $titel = $_GET['image_name'];
+                $head_titel = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name = '$titel'");
+                $row_jump = mysqli_fetch_assoc($head_titel);
+                if($row_jump){
+                    $_SESSION['id'] = $row_jump['image_name'];
+                }
+            }
+            ?>
+            <a href="product.php?id=<?php echo $row['dining_name'] ?>">
                         <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
                         <h3>
                             <?php echo $row['dining_name'];}?>
@@ -111,8 +158,9 @@ if(isset($_SESSION['name'])){
                     <?php
             $img=mysqli_query($con,"select * from dining_room where id in (8)");
             while ($row=mysqli_fetch_assoc($img)){
-            ?>
+                ?>
                     <img src="./upload/<?php echo $row['dining_image'];}?>" alt="">
+                </a>
                 </div>
             </div>
         </div>

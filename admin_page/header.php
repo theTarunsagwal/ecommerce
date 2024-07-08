@@ -41,7 +41,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         $count=0;
                         while($count<7){
                         ?>
-                        <a href="#">
+                        <a href="index.php">
                             <?php echo $ab[$count];
                         ?>
                         </a>
@@ -146,42 +146,65 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                 <div class="dropdown_coll">
                     <div class="dropdown_content_box">
                         <?php
-                             $row_wood_drop = mysqli_query($con, "SELECT * FROM wood WHERE id IN (2)");
+                             $row_wood_drop = mysqli_query($con, "SELECT * FROM wood WHERE id IN (3)");
                             while($row_wood= mysqli_fetch_array($row_wood_drop)){
                             ?>
+                        <a href="product.php?id=<?php echo $row_wood['image_name'] ?>">
                         <div class="dropdown_box_item">
-                            <div class="dropdown_box_img">
+                            <div class="dropdown_box_img"  >
                                 <img src="./upload/<?php echo $row_wood['image']?>" alt="">
                             </div>
                             <h1>
                                 <?php echo $row_wood['image_name']?>
                             </h1>
                         </div>
+                            </a>
+                        
                         <?php } ?>
                         <?php
-                            while($row_art= mysqli_fetch_array($data_art)){
+                        if(isset($_GET["decor_name"])){
+                            $new=$_GET["decor_name"];
+                            $new_art=mysqli_query($con,"select * from decor_art where decor_name like '$new'");
+                            if($new_art){
+                                $_SESSION['id']=$new_art['decor_name'];
+                            }
+                        }
+                            $row_arts = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (3)");
+                            while($row_art= mysqli_fetch_array($row_arts)){
                         ?>
-                        <div class="dropdown_box_item">
-                            <div class="dropdown_box_img">
-                                <img src="./upload/<?php echo $row_art['decor_img']?>" alt="">
+                        <a href="product.php?id=<?php echo $row_art['decor_name'] ?>">
+                            <div class="dropdown_box_item">
+                                <div class="dropdown_box_img">
+                                    <img src="./upload/<?php echo $row_art['decor_img']?>" alt="">
+                                </div>
+                                <h1>
+                                    <?php echo $row_art['decor_name']?>
+                                </h1>
                             </div>
-                            <h1>
-                                <?php echo $row_art['decor_name']?>
-                            </h1>
-                        </div>
+                        </a>
                         <?php }?>
                         <?php
+                         if(isset($_GET["dining_name"])){
+                            $new=$_GET["dining_name"];
+                            $new_art=mysqli_query($con,"select * from dining_room where dining_name like '$new'");
+                            if($new_art){
+                                $_SESSION['id']=$new_art['dining_name'];
+                            }
+                        }
                              $row_room_drop = mysqli_query($con, "SELECT * FROM dining_room WHERE id IN (3,4,5)");
                             while($row_room= mysqli_fetch_array($row_room_drop)){
                         ?>
-                        <div class="dropdown_box_item">
-                            <div class="dropdown_box_img">
-                                <img src="./upload/<?php echo $row_room['dining_image'];?>" alt="">
+                        <a href="product.php?id=<?php echo $row_room['dining_name'] ?>">
+
+                            <div class="dropdown_box_item">
+                                <div class="dropdown_box_img">
+                                    <img src="./upload/<?php echo $row_room['dining_image'];?>" alt="">
+                                </div>
+                                <h1>
+                                    <?php echo $row_room['dining_name'];?>
+                                </h1>
                             </div>
-                            <h1>
-                                <?php echo $row_room['dining_name'];?>
-                            </h1>
-                        </div>
+                        </a>
                         <?php }?>
                     </div>
                 </div>
@@ -228,8 +251,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             <i class="bx bx-search" id="srch" onclick="search()"></i>
           <?php
             if (isset($_POST["sub"])) {
-    $search = $_POST['search'];
-}
+               $search = $_POST['search'];
+            }
 ?>
             <form action="search.php" method="POST">
                 <div class="search_container search_box">
