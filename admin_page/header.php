@@ -122,7 +122,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         <div class="dropdown-item">
                             <h1>new product</h1>
                             <?php
-                            while($row_pro = mysqli_fetch_array($data_product)){
+                            $data_products=mysqli_query($con, "SELECT * FROM new_product where id in (1,2) ");
+                            while($row_pro = mysqli_fetch_array($data_products)){
                                 ?>
                             <div class="product_img_price">
                                 <div class="product_img">

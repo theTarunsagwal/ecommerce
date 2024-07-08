@@ -62,22 +62,22 @@ if(isset($_SESSION['name'])){
     <section>
         <div class="scale_card">
             <?php        
-        $rows = mysqli_query($con, "SELECT * FROM wood WHERE id IN (4, 5, 6)");
+        $rows = mysqli_query($con, "SELECT * FROM new_product WHERE id IN (4, 5, 6)");
         while($row_woods=mysqli_fetch_assoc($rows)){
         ?>
         <?php
-        if(isset($_GET['image_name'])){
-            $titel = $_GET['image_name'];
-            $head_titel = mysqli_query($con, "SELECT * FROM wood WHERE image_name = '$titel'");
+        if(isset($_GET['name'])){
+            $titel = $_GET['name'];
+            $head_titel = mysqli_query($con, "SELECT * FROM new_product WHERE name = '$titel'");
             $row_jump = mysqli_fetch_assoc($head_titel);
             if($row_jump){
-                $_SESSION['id'] = $row_jump['image_name'];
+                $_SESSION['id'] = $row_jump['name'];
             }
         }
         ?>
-        <a href="product.php?id=<?php echo $row_woods['image_name'] ?>">
+        <a href="product.php?id=<?php echo $row_woods['name'] ?>">
             <div class="scale_card_menu">
-                <img src="./upload/<?php echo $row_woods['image']?>" alt="">
+                <img src="./upload/<?php echo $row_woods['img']?>" alt="">
             </div>
         </a>
             <?php

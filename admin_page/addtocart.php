@@ -38,7 +38,9 @@ if(isset($_SESSION['name'])) {
         $result1 = mysqli_query($con, $query1);
         $query2 = "SELECT * FROM dining_room WHERE dining_name like '$id'";
         $result2 = mysqli_query($con, $query2);
-        if($result || $result1 || $result2) {
+        $result3 = mysqli_query($con, "select * from new_product where name like '$id'");
+
+        if($result || $result1 || $result2 || $result3) {
             while($row = mysqli_fetch_array($result)){
 ?>
                 <div class="item-img-box">
@@ -173,8 +175,53 @@ if(isset($_SESSION['name'])) {
                 </div>
                 </div>
                 <?php
-                  }
-                ?>
+            }
+                  while($row4= mysqli_fetch_array($result3)){
+                    ?>
+                <div class="item-img-box">
+                    <img src="./upload/<?php echo $row4['img']?>" alt="" srcset="">
+                </div>
+            </div>
+            <div class="item-info">
+                <h1>
+                    <?php echo $row4['name'];?>
+                </h1>
+                <p>Most of us are familiar with the iconic design of the egg shaped chair floating in the air. The
+                    Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the
+                    distinctive</p>
+                <div class="item-color">
+                    <h5>color :</h5>
+                    <div class="color-box">
+                        <div class="black">
+                            <img src="./upload/<?php echo $row4['img']?>" alt="">
+                        </div>
+                    </div>
+                </div>
+                <h3>
+                    $
+                    <?php echo $row4['price']?>.00
+                </h3>
+                <div class="add-to-cart">
+                    <div class="count-btn">
+                        <button class="minus" onclick="subtract()">-</button>
+                        <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
+                        <button class="plus" onclick="add()">+</button>
+                    </div>
+                    <button class="buy-btn">add to cart</button>
+                    <button class="buy-btn">buy it now</button>
+                </div>
+                <div class="availability-stock">
+                    <a class="text-black" href="">availability: <span class="text-success fw-bolder">in stock</span></a>
+                    <a class="text-black" href="">sku: <span>n/a</span></a>
+                    <a class="text-black" href="">vendor: <span>furniture</span></a>
+                    <a class="text-black" href="">categories:<span>wood</span> </a>
+                    <a class="text-black icon-btn" href="">share : <i class='bx bxl-instagram'></i> <i
+                            class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
+                </div>
+                </div>
+                <?php
+            }
+            ?>
         </div>
         <?php
                   }

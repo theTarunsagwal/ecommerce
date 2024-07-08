@@ -43,10 +43,6 @@ body{
     gap: 10px;
 }
 
-.checkbox-container label:hover{
-    color: black;
-}
-
 .line{
     width: 20vw;
     height: .2vh;
@@ -59,5 +55,166 @@ body{
 }
 
 .new-product h1{
-    color: #00000071;
+    color: #000000;
 }
+
+.product-inst{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.img-product{
+    height: 10vh;
+    width: 5vw;
+}
+
+.img-product img{
+    width: 100%;
+    height: 100%;
+}
+
+/*---------------------- hover ------------------------ */
+
+.checkbox-container label:hover{
+    color: black;
+}
+
+.product-about h1:hover{
+     color: #fcb800 !important;
+}
+
+
+/*----------------------- range button -------------------------------------*/
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+/*------------- dropdown ----------------- */
+
+.select {
+    width: fit-content;
+    cursor: pointer;
+    position: relative;
+    transition: 300ms;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .selected {
+    background-color: #f8f9fa;
+    padding: 5px;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 100000;
+    font-size: 15px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .arrow {
+    position: relative;
+    right: 0px;
+    height: 10px;
+    transform: rotate(-90deg);
+    width: 25px;
+    fill: white;
+    z-index: 100000;
+    transition: 300ms;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #f8f9fa;
+    position: relative;
+    cursor: pointer;
+    top: -100px;
+    opacity: 0;
+    transition: 300ms;
+  }
+  
+  .select:hover > .options {
+    opacity: 1;
+    top: 0;
+  }
+  
+  .select:hover > .selected .arrow {
+    transform: rotate(0deg);
+  }
+  
+  .option {
+    border-radius: 5px;
+    padding: 5px;
+    transition: 300ms;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    width: 150px;
+    font-size: 15px;
+  }
+  .option:hover {
+    background-color: #fdfdfd;
+  }
+  
+  .options input[type="radio"] {
+    display: none;
+  }
+  
+  .options label {
+    display: inline-block;
+  }
+  .options label::before {
+    content: attr(data-txt);
+  }
+  
+  .options input[type="radio"]:checked + label {
+    display: none;
+  }
+  
+  .options input[type="radio"]#all:checked + label {
+    display: none;
+  }
+  
+  .select:has(.options input[type="radio"]#all:checked) .selected::before {
+    content: attr(data-default);
+  }
+  .select:has(.options input[type="radio"]#option-1:checked) .selected::before {
+    content: attr(data-one);
+  }
+  .select:has(.options input[type="radio"]#option-2:checked) .selected::before {
+    content: attr(data-two);
+  }
+  .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
+    content: attr(data-three);
+  }
+  
