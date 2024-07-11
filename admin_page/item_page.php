@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +15,6 @@ session_start();
 </head>
 
 <body>
-    <?php include "header.php" ?>
     <h1>Your Shopping Cart</h1>
     <?php if (!empty($_SESSION['cart'])): ?>
         <table>
