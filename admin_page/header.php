@@ -263,7 +263,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                     </button>
                 </div>
             </form>
+            <a href="additem.php">
             <i class='bx bxs-shopping-bags'></i>
+            </a>
             <div class="shoping_bag">
                 <a href="">shoping cart</a>
                 <a href="">$0.00</a>
@@ -354,6 +356,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             </div>
         </div>
     </div>
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>

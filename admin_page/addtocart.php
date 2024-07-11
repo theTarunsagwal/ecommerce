@@ -41,6 +41,14 @@ if(isset($_SESSION['name'])) {
         $result3 = mysqli_query($con, "select * from new_product where name like '$id'");
 
         if($result || $result1 || $result2 || $result3) {
+            if(isset($_GET['decor_name'])){
+                $titel = $_GET['decor_name'];
+                $head_titel = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = '$titel'");
+                $row_jump = mysqli_fetch_assoc($head_titel);
+                if($row_jump){
+                    $_SESSION['id'] = $row_jump['decor_name'];
+                }
+            }
             while($row = mysqli_fetch_array($result)){
 ?>
                 <div class="item-img-box">
@@ -72,7 +80,8 @@ if(isset($_SESSION['name'])) {
                         <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
                         <button class="plus" onclick="add()">+</button>
                     </div>
-                    <button class="buy-btn">add to cart</button>
+                    <a href="additem.php?id=<?php echo $row['decor_name'] ?>"><button class="buy-btn" value="<?php echo $row['decor_name'] ?>">add to cart</button>
+            </a>
                     <button class="buy-btn">buy it now</button>
                 </div>
                 <div class="availability-stock">
@@ -117,7 +126,8 @@ if(isset($_SESSION['name'])) {
                         <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
                         <button class="plus" onclick="add()">+</button>
                     </div>
-                    <button class="buy-btn">add to cart</button>
+                    <a href="additem.php?id=<?php echo $row1['image_name'] ?>"><button class="buy-btn" value="<?php echo $row1['image_name'] ?>">add to cart</button>
+                  </a>
                     <button class="buy-btn">buy it now</button>
                 </div>
                 <div class="availability-stock">
@@ -162,7 +172,8 @@ if(isset($_SESSION['name'])) {
                         <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
                         <button class="plus" onclick="add()">+</button>
                     </div>
-                    <button class="buy-btn">add to cart</button>
+                    <a href="additem.php?id=<?php echo $row2['dining_name'] ?>"><button class="buy-btn" value="<?php echo $row2['dining_name'] ?>">add to cart</button>
+                  </a>
                     <button class="buy-btn">buy it now</button>
                 </div>
                 <div class="availability-stock">
@@ -207,7 +218,8 @@ if(isset($_SESSION['name'])) {
                         <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
                         <button class="plus" onclick="add()">+</button>
                     </div>
-                    <button class="buy-btn">add to cart</button>
+                    <a href="additem.php?id=<?php echo $row4['name'] ?>"><button class="buy-btn" value="<?php echo $row4['name'] ?>">add to cart</button>
+                  </a>
                     <button class="buy-btn">buy it now</button>
                 </div>
                 <div class="availability-stock">
