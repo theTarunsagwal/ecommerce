@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Initialize cart if not already set
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -46,6 +44,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             'id' => $id,
             'name' => $item['decor_name'] ?? $item['image_name'] ?? $item['dining_name'] ?? $item['name'],
             'price' => $item['decor_price'] ?? $item['price'] ?? $item['dining_price'] ?? $item['price'],
+            'img' => $item['decor_img'] ?? $item['image'] ?? $item['dining_image'] ?? $item['img'],
             'quantity' => 1
         ];
 

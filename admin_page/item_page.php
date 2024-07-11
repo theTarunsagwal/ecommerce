@@ -21,6 +21,7 @@ if (!isset($_SESSION['cart'])) {
             <tr>
                 <th>Item Name</th>
                 <th>Price</th>
+                <th>img</th>
                 <th>Quantity</th>
                 <th>Total</th>
             </tr>
@@ -28,6 +29,9 @@ if (!isset($_SESSION['cart'])) {
                 <tr>
                     <td><?php echo $item['name']; ?></td>
                     <td><?php echo $item['price']; ?></td>
+                    <td>
+                        <img src="./upload/<?php echo $item['img']; ?>" alt="loading..." />
+                    </td>
                     <td><?php echo $item['quantity']; ?></td>
                     <td><?php echo $item['price'] * $item['quantity']; ?></td>
                 </tr>

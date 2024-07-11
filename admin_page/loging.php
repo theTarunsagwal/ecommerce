@@ -15,7 +15,11 @@ if(isset($_POST['sub'])){
 			header('location: index.php');
 		}
 		else{
-			echo "Error";
+			echo "
+				<script>
+				alert('Please Enter a Valid Email & Password')
+	</script>
+			";
 		}
 	} 
 	else{
@@ -62,6 +66,7 @@ if(isset($_POST['sub'])){
 			</p>
 		</div>
 	</div>
+
 </body>
 
 </html>

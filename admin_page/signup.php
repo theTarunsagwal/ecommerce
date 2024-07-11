@@ -9,10 +9,14 @@ require "PHPMailer/src/PHPMailer.php";
 require "PHPMailer/src/Exception.php";
 require "PHPMailer/src/SMTP.php";
 
-  if(isset($_POST['sub'])){
-	$user=$_POST['user'];
-	$email = $_POST['email'];
-	$pass = $_POST['pswd'];
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_POST['sub'])) {
+    $user = $_POST['user'];
+    $email = $_POST['email'];
+    $pass = $_POST['pswd'];
 
 	$mail= new PHPMailer(true);
 	$mail->isSMTP();
@@ -27,17 +31,40 @@ require "PHPMailer/src/SMTP.php";
 	$mail->Subject="Welcome to Megumi shoplift";
 	$mail->Body="<h1>  $user  thankyou to join a shoplift <br> I give you better experience </h1>"; 
 	$mail->send();
-
 	
-	$query= mysqli_query($con,"insert into user_data (name,email,password) values ('$user','$email','$pass')");
-	if($query){
-		echo "<script>alert('thankyou for join')</script>";
-		header("Location:loging.php");
-	}
-	else{
-		echo "<script>alert('Write UNIQUE Password and Email already insert ')</script>";
-	}
-  }
+	$query = mysqli_query($con, "INSERT INTO user_data (name, email, password) VALUES ('$user', '$email', '$pass')");
+
+    if ($query) {
+        // Sanitize the email to create a valid table name
+        $table_name = 'user_name_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $email);
+
+        // Create a table for the user
+        $create_table_query = "
+            CREATE TABLE IF NOT EXISTS $table_name (
+                id INT UNIQUE AUTO_INCREMENT,
+                name VARCHAR(300) NOT NULL,
+                image TEXT NOT NULL,
+                price VARCHAR(30) NOT NULL,
+                PRIMARY KEY (id)
+            )
+        ";
+
+        if (mysqli_query($con, $create_table_query)) {
+            echo "User registered and table $table_name created successfully.";
+        } else {
+            echo "Error creating table: " . mysqli_error($con);
+        }
+
+        echo "<script>alert('Thank you for joining');</script>";
+        header("Location: loging.php");
+    } else {
+        echo "Error inserting user: " . mysqli_error($con);
+        echo "<script>alert('Write UNIQUE Password and Email already insert');</script>";
+    }
+
+    mysqli_close($con);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
