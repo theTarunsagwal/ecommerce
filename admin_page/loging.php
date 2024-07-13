@@ -5,14 +5,16 @@ if(isset($_POST['sub'])){
 	$user = $_POST['user'];
 	$pswd= $_POST['pswd'];
 	$qury = mysqli_query($con,"select * from admin where email='$user' and password='$pswd'");
-	$qurys = mysqli_query($con,"select * from user_data where email='$user' and password='$pswd'");
+	$qurys = mysqli_query($con,"select * from user_data where name='$user' and password='$pswd'");
 	if($qury || $qurys){
 		if($fetch = mysqli_fetch_array($qury)){
 			$_SESSION['adminname']= $fetch['name'];
 			header('location:admin.php');
-		}else if($fetchs = mysqli_fetch_array($qurys)){
-			$_SESSION['name']= $fetchs['name'];
-			header('location: index.php');
+		}else if($fetchs = mysqli_num_rows($qurys) > 0){
+			$_SESSION['name']= $user;
+			$table_name = 'user_name_' . $user ;
+			header('location: index.php?id='.$table_name);
+			exit();
 		}
 		else{
 			echo "

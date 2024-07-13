@@ -13,30 +13,33 @@ if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
 if (isset($_POST['sub'])) {
     $user = $_POST['user'];
     $email = $_POST['email'];
     $pass = $_POST['pswd'];
-
-	$mail= new PHPMailer(true);
-	$mail->isSMTP();
-	$mail->Host="smtp.gmail.com";
-	$mail->SMTPAuth=true;
-	$mail->Username="tarunsagwal38@gmail.com";
-	$mail->Password="nbzdfxjyeqydzwww";
-	$mail->SMTPSecure="ssl";
-	$mail->Port=465;
-	$mail->setFrom('tarunsagwal38@gmail.com','Megumi Shoplift');
-	$mail->addAddress($email);
-	$mail->Subject="Welcome to Megumi shoplift";
-	$mail->Body="<h1>  $user  thankyou to join a shoplift <br> I give you better experience </h1>"; 
-	$mail->send();
-	
-	$query = mysqli_query($con, "INSERT INTO user_data (name, email, password) VALUES ('$user', '$email', '$pass')");
+    
+    $mail= new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host="smtp.gmail.com";
+    $mail->SMTPAuth=true;
+    $mail->Username="tarunsagwal38@gmail.com";
+    $mail->Password="nbzdfxjyeqydzwww";
+    $mail->SMTPSecure="ssl";
+    $mail->Port=465;
+    $mail->setFrom('tarunsagwal38@gmail.com','Megumi Shoplift');
+    $mail->addAddress($email);
+    $mail->Subject="Welcome to Megumi shoplift";
+    $mail->Body="<h1>  $user  thankyou to join a shoplift <br> I give you better experience </h1>"; 
+    $mail->send();
+    $query = mysqli_query($con, "INSERT INTO user_data (name, email, password) VALUES ('$user', '$email', '$pass')");
 
     if ($query) {
         // Sanitize the email to create a valid table name
-        $table_name = 'user_name_' . preg_replace('/[^a-zA-Z0-9_]/', '_', $email);
+        $table_name = 'user_name_' . $user ;
 
         // Create a table for the user
         $create_table_query = "
@@ -64,6 +67,7 @@ if (isset($_POST['sub'])) {
 
     mysqli_close($con);
 }
+
 
 ?>
 <!DOCTYPE html>

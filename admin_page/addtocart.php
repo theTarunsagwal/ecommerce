@@ -1,7 +1,9 @@
 <?php
 session_start();
+ob_start();
 if(isset($_SESSION['name'])) {
-
+    $user = $_SESSION['name'];
+    include "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,237 +17,88 @@ if(isset($_SESSION['name'])) {
 </head>
 
 <body>
-    <?php
-    include "header.php"; 
+    <?php 
     ?>
 
-    <section>
+<section>
         <div class="item-container">
             <?php
-     if(isset($_GET['id']) && !empty($_GET['id'])) {
-        $id = $_GET['id'];
-        $con = mysqli_connect("localhost", "root", "", "ecommerce");
-        if(!$con) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        ?>
-            <div class="item-img">
-                <?php
-        
-        $query = "SELECT * FROM decor_art WHERE decor_name like '$id'";
-        $result = mysqli_query($con, $query);
-        $query1 = "SELECT * FROM wood WHERE image_name like '$id'";
-        $result1 = mysqli_query($con, $query1);
-        $query2 = "SELECT * FROM dining_room WHERE dining_name like '$id'";
-        $result2 = mysqli_query($con, $query2);
-        $result3 = mysqli_query($con, "select * from new_product where name like '$id'");
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $id = $_GET['id'];
 
-        if($result || $result1 || $result2 || $result3) {
-            if(isset($_GET['decor_name'])){
-                $titel = $_GET['decor_name'];
-                $head_titel = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = '$titel'");
-                $row_jump = mysqli_fetch_assoc($head_titel);
-                if($row_jump){
-                    $_SESSION['id'] = $row_jump['decor_name'];
+                $queries = [
+                    "SELECT * FROM decor_art WHERE decor_name LIKE '$id'",
+                    "SELECT * FROM wood WHERE image_name LIKE '$id'",
+                    "SELECT * FROM dining_room WHERE dining_name LIKE '$id'",
+                    "SELECT * FROM new_product WHERE name LIKE '$id'"
+                ];
+
+                if(isset($_POST['btn'])){
+                    $item_name = $_POST['item_name'];
+                    $item_img = $_POST['item_img'];
+                    $item_price = $_POST['item_price'];
+                    $table_name = 'user_name_' . $user ;
+                    $qury_user= mysqli_query($con, "insert into $table_name (name,image,price) values ('$item_name','$item_img','$item_price') ");
+                    if ($qury_user) {
+                        header("Location: additem.php");
+                        exit(); 
+                    } else {
+                        echo "Error: " . mysqli_error($con);
+                    }
+                    ob_end_flush();
                 }
-            }
-            while($row = mysqli_fetch_array($result)){
-?>
-                <div class="item-img-box">
-                    <img src="./upload/<?php echo $row['decor_img']?>" alt="" srcset="">
-                </div>
-            </div>
-            <div class="item-info">
-                <h1>
-                    <?php echo $row['decor_name'];?>
-                </h1>
-                <p>Most of us are familiar with the iconic design of the egg shaped chair floating in the air. The
-                    Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the
-                    distinctive</p>
-                <div class="item-color">
-                    <h5>color :</h5>
-                    <div class="color-box">
-                        <div class="black">
-                            <img src="./upload/<?php echo $row['decor_img']?>" alt="">
-                        </div>
-                    </div>
-                </div>
-                <h3>
-                    $
-                    <?php echo $row['decor_price']?>.00
-                </h3>
-                <div class="add-to-cart">
-                    <div class="count-btn">
-                        <button class="minus" onclick="subtract()">-</button>
-                        <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
-                        <button class="plus" onclick="add()">+</button>
-                    </div>
-                    <a href="additem.php?id=<?php echo $row['decor_name'] ?>"><button class="buy-btn" value="<?php echo $row['decor_name'] ?>">add to cart</button>
-            </a>
-                    <button class="buy-btn">buy it now</button>
-                </div>
-                <div class="availability-stock">
-                    <a class="text-black" href="">availability: <span class="text-success fw-bolder">in stock</span></a>
-                    <a class="text-black" href="">sku: <span>n/a</span></a>
-                    <a class="text-black" href="">vendor: <span><?php echo $row['decor_about'] ?></span></a>
-                    <a class="text-black" href="">categories:<span>bar furniture</span> </a>
-                    <a class="text-black icon-btn" href="">share : <i class='bx bxl-instagram'></i> <i
-                            class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
-                </div>
-                </div>
-                <?php
-            }
-                  while($row1= mysqli_fetch_array($result1)){
-                    ?>
-                <div class="item-img-box">
-                    <img src="./upload/<?php echo $row1['image']?>" alt="" srcset="">
-                </div>
-            </div>
-            <div class="item-info">
-                <h1>
-                    <?php echo $row1['image_name'];?>
-                </h1>
-                <p>Most of us are familiar with the iconic design of the egg shaped chair floating in the air. The
-                    Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the
-                    distinctive</p>
-                <div class="item-color">
-                    <h5>color :</h5>
-                    <div class="color-box">
-                        <div class="black">
-                            <img src="./upload/<?php echo $row1['image']?>" alt="">
-                        </div>
-                    </div>
-                </div>
-                <h3>
-                    $
-                    <?php echo $row1['price']?>.00
-                </h3>
-                <div class="add-to-cart">
-                    <div class="count-btn">
-                        <button class="minus" onclick="subtract()">-</button>
-                        <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
-                        <button class="plus" onclick="add()">+</button>
-                    </div>
-                    <a href="additem.php?id=<?php echo $row1['image_name'] ?>"><button class="buy-btn" value="<?php echo $row1['image_name'] ?>">add to cart</button>
-                  </a>
-                    <button class="buy-btn">buy it now</button>
-                </div>
-                <div class="availability-stock">
-                    <a class="text-black" href="">availability: <span class="text-success fw-bolder">in stock</span></a>
-                    <a class="text-black" href="">sku: <span>n/a</span></a>
-                    <a class="text-black" href="">vendor: <span><?php echo $row1['about'] ?></span></a>
-                    <a class="text-black" href="">categories:<span>bar furniture</span> </a>
-                    <a class="text-black icon-btn" href="">share : <i class='bx bxl-instagram'></i> <i
-                            class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
-                </div>
-                </div>
-                <?php
-            }
-                  while($row2= mysqli_fetch_array($result2)){
-                    ?>
-                <div class="item-img-box">
-                    <img src="./upload/<?php echo $row2['dining_image']?>" alt="" srcset="">
-                </div>
-            </div>
-            <div class="item-info">
-                <h1>
-                    <?php echo $row2['dining_name'];?>
-                </h1>
-                <p>Most of us are familiar with the iconic design of the egg shaped chair floating in the air. The
-                    Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the
-                    distinctive</p>
-                <div class="item-color">
-                    <h5>color :</h5>
-                    <div class="color-box">
-                        <div class="black">
-                            <img src="./upload/<?php echo $row2['dining_image']?>" alt="">
-                        </div>
-                    </div>
-                </div>
-                <h3>
-                    $
-                    <?php echo $row2['dining_price']?>.00
-                </h3>
-                <div class="add-to-cart">
-                    <div class="count-btn">
-                        <button class="minus" onclick="subtract()">-</button>
-                        <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
-                        <button class="plus" onclick="add()">+</button>
-                    </div>
-                    <a href="additem.php?id=<?php echo $row2['dining_name'] ?>"><button class="buy-btn" value="<?php echo $row2['dining_name'] ?>">add to cart</button>
-                  </a>
-                    <button class="buy-btn">buy it now</button>
-                </div>
-                <div class="availability-stock">
-                    <a class="text-black" href="">availability: <span class="text-success fw-bolder">in stock</span></a>
-                    <a class="text-black" href="">sku: <span>n/a</span></a>
-                    <a class="text-black" href="">vendor: <span><?php echo $row2['dining_about'] ?></span></a>
-                    <a class="text-black" href="">categories:<span>bar furniture</span> </a>
-                    <a class="text-black icon-btn" href="">share : <i class='bx bxl-instagram'></i> <i
-                            class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
-                </div>
-                </div>
-                <?php
-            }
-                  while($row4= mysqli_fetch_array($result3)){
-                    ?>
-                <div class="item-img-box">
-                    <img src="./upload/<?php echo $row4['img']?>" alt="" srcset="">
-                </div>
-            </div>
-            <div class="item-info">
-                <h1>
-                    <?php echo $row4['name'];?>
-                </h1>
-                <p>Most of us are familiar with the iconic design of the egg shaped chair floating in the air. The
-                    Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the
-                    distinctive</p>
-                <div class="item-color">
-                    <h5>color :</h5>
-                    <div class="color-box">
-                        <div class="black">
-                            <img src="./upload/<?php echo $row4['img']?>" alt="">
-                        </div>
-                    </div>
-                </div>
-                <h3>
-                    $
-                    <?php echo $row4['price']?>.00
-                </h3>
-                <div class="add-to-cart">
-                    <div class="count-btn">
-                        <button class="minus" onclick="subtract()">-</button>
-                        <input type="text" id="numberInput" class="form-control text-center" value="0" readonly>
-                        <button class="plus" onclick="add()">+</button>
-                    </div>
-                    <a href="additem.php?id=<?php echo $row4['name'] ?>"><button class="buy-btn" value="<?php echo $row4['name'] ?>">add to cart</button>
-                  </a>
-                    <button class="buy-btn">buy it now</button>
-                </div>
-                <div class="availability-stock">
-                    <a class="text-black" href="">availability: <span class="text-success fw-bolder">in stock</span></a>
-                    <a class="text-black" href="">sku: <span>n/a</span></a>
-                    <a class="text-black" href="">vendor: <span>furniture</span></a>
-                    <a class="text-black" href="">categories:<span>wood</span> </a>
-                    <a class="text-black icon-btn" href="">share : <i class='bx bxl-instagram'></i> <i
-                            class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
-                </div>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
-        <?php
-                  }
-                  else {
-                    echo "No product found with ID: $id";
+
+                foreach ($queries as $query) {
+                    $result = mysqli_query($con, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        ?>
+                        <form method="post">
+                            <input type="hidden" name="item_name" value="<?php echo $row['decor_name'] ?? $row['image_name'] ?? $row['dining_name'] ?? $row['name']; ?>">
+                            <input type="hidden" name="item_img" value="<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>">
+                            <input type="hidden" name="item_price" value="<?php echo $row['decor_price'] ?? $row['price'] ?? $row['dining_price'] ?? $row['price']; ?>">
+                            <div class="item-card">
+                                <div class="item-img-box">
+                                    <img src="./upload/<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h1><?php echo $row['decor_name'] ?? $row['image_name'] ?? $row['dining_name'] ?? $row['name']; ?></h1>
+                                    <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
+                                    <div class="item-color">
+                                        <h5>Color:</h5>
+                                        <div class="color-box">
+                                            <div class="black">
+                                                <img src="./upload/<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>$<?php echo $row['decor_price'] ?? $row['price'] ?? $row['dining_price'] ?? $row['price']; ?>.00</h3>
+                                    <div class="add-to-cart">
+                                        <div class="count-btn">
+                                            <button type="button" class="minus" onclick="changeQuantity(this, -1)">-</button>
+                                            <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
+                                            <button type="button" class="plus" onclick="changeQuantity(this, 1)">+</button>
+                                        </div>
+                                        <button class="buy-btn" name="btn">Add to Cart</button>
+                                        <button class="buy-btn">Buy it Now</button>
+                                    </div>
+                                    <div class="availability-stock">
+                                        <a class="text-black" href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
+                                        <a class="text-black" href="">SKU: <span>N/A</span></a>
+                                        <a class="text-black" href="">Vendor: <span><?php echo $row['decor_about'] ?? $row['about'] ?? $row['dining_about'] ?? ''; ?></span></a>
+                                        <a class="text-black" href="">Categories: <span>Bar Furniture</span></a>
+                                        <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                    }
                 }
-                
-                mysqli_close($con);
             } else {
                 echo "Product ID is not specified or invalid.";
             }
-                ?>
+            ?>
+        </div>
     </section>
 
     <section>
