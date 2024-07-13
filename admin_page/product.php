@@ -130,10 +130,18 @@ if(isset($_SESSION['name'])) {
                                 <span id="maxValue" class="text-lg text-gray-700">$1000</span>
                             </div>
                         </div>
-                        <input id="minMaxRange" type="range" min="100" max="1000" value="100" step="10" class="slider"
+                        <?php
+                        if(isset($_POST['value'])){
+                            
+                        }
+                        ?>
+                       <form method="post">
+                       <input id="minMaxRange" type="range" name="min" min="100" max="1000" value="100" step="10" class="slider"
                             oninput="updateRange(this.value, 'min')">
-                        <input id="minMaxRange2" type="range" min="100" max="1000" value="1000" step="10" class="slider"
+                        <input id="minMaxRange2" type="range" name="max" min="100" max="1000" value="1000" step="10" class="slider"
                             oninput="updateRange(this.value, 'max')">
+                            <input type="submit" name="value" value="Search">
+                       </form>
                     </div>
 
                     <div class="line mb-4"></div>
@@ -248,4 +256,6 @@ if(isset($_SESSION['name'])) {
 </body>
 
 </html>
-<?php } ?>
+<?php }else{
+    header('location:loging.php');
+}?>

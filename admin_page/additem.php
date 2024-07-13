@@ -126,6 +126,8 @@ if(isset($_SESSION['name'])) {
 </body>
 </html>
 <?php
+}else{
+  header('location:loging.php');
 }
 ?>
 

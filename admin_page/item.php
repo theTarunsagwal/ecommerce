@@ -22,178 +22,56 @@
         </nav>
 
         <div class="container mt-5">
-            <div class="row">
-                <!-- First row of cards -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
+    <div class="row">
+        <!-- First row of cards -->
+        <?php
         if(isset($_GET['decor_name'])){
             $idjump = $_GET['decor_name'];
-            $rowsjump = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = $idjump");
+            $rowsjump = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = '$idjump'");
             $row_jump = mysqli_fetch_assoc($rowsjump);
             if($row_jump){
                 $_SESSION['id'] = $row_jump['decor_name'];
             }
         }
-        $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (5)");
-        while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
+
+        $cardData = [
+            ['id' => 5, 'title' => 'Arctander Chair', 'price' => '$49.00', 'img' => '../img_ecommerce/img_ecommerce19.jpg', 'category' => 'LIGHTING'],
+            ['id' => 6, 'title' => 'beoplay a1', 'price' => '$39.00', 'img' => '../img_ecommerce/img_ecommerce22.jpg', 'category' => 'LIGHTING'],
+            ['id' => 7, 'title' => 'hanging egg chair', 'price' => '$99.00', 'img' => '../img_ecommerce/img_ecommerce23.jpg', 'category' => 'LIGHTING'],
+            ['id' => 8, 'title' => 'hubert pendant lamp', 'price' => '$149.00', 'img' => '../img_ecommerce/img_ecommerce24.jpg', 'category' => 'LIGHTING'],
+            ['id' => 9, 'title' => 'iconic rocking horse', 'price' => '$169.00', 'img' => '../img_ecommerce/img_ecommerce26.jpg', 'category' => 'CHAIRS'],
+            ['id' => 10, 'title' => 'langue stack chair', 'price' => '$299.00', 'img' => '../img_ecommerce/img_ecommerce29.jpg', 'category' => 'CHAIRS'],
+            ['id' => 11, 'title' => 'laundry baskets', 'price' => '$45.00', 'img' => '../img_ecommerce/img_ecommerce31.jpg', 'category' => 'CHAIRS'],
+            ['id' => 12, 'title' => 'mini table lamp', 'price' => '$49.00', 'img' => '../img_ecommerce/img_ecommerce33.jpg', 'category' => 'CHAIRS']
+        ];
+
+        foreach ($cardData as $card) {
+            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id = {$card['id']}");
+            while ($row_decore = mysqli_fetch_assoc($rows_decore_art)) {
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce19.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">Arctander Chair</h5>
-                            <p class="card-text">LIGHTING</p>
-                            <p class="card-price">$49.00</p>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                    <a href="addtocart.php?id=<?php echo $row_decore['decor_name']; ?>">
+                        <div class="change-img card-img-top">
+                            <img src="./upload/<?php echo $row_decore['decor_img']; ?>" class="img-setoff" alt="Card image">
+                            <?php if ($card['img']) { ?>
+                            <img src="<?php echo $card['img']; ?>" class="img-set" alt="Card image">
+                            <?php } ?>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (6)");
-        while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce22.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">beoplay a1</h5>
-                            <p class="card-text">LIGHTING</p>
-                            <p class="card-price">$39.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (7)");
-        while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">hanging egg chair</h5>
-                            <p class="card-text">LIGHTING</p>
-                            <p class="card-price">$99.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (8)");
-        while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce24.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">hubert pendant lamp</h5>
-                            <p class="card-text">LIGHTING</p>
-                            <p class="card-price">$149.00</p>
-                        </div>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $card['title']; ?></h5>
+                        <p class="card-text"><?php echo $card['category']; ?></p>
+                        <p class="card-price"><?php echo $card['price']; ?></p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <!-- Second row of cards -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (9)");
-                            while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
+        <?php
+            }
+        }
         ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce26.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">iconic rocking horse</h5>
-                            <p class="card-text">CHAIRS</p>
-                            <p class="card-price">$169.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (10)");
-                            while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce29.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">langue stack chair</h5>
-                            <p class="card-text">CHAIRS</p>
-                            <p class="card-price">$299.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (11)");
-                            while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce31.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">laundry baskets</h5>
-                            <p class="card-text">CHAIRS</p>
-                            <p class="card-price">$45.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card">
-                        <?php
-                            $rows_decore_art = mysqli_query($con, "SELECT * FROM decor_art WHERE id IN (12)");
-                            while($row_decore=mysqli_fetch_assoc($rows_decore_art)){
-        ?>
-                        <a href="addtocart.php?id=<?php echo $row_decore['decor_name'] ;?>">
-                            <div class="change-img card-img-top">
-                                <img src="./upload/<?php echo $row_decore['decor_img']; }?>" class="img-setoff"
-                                    alt="Card image">
-                                <img src="../img_ecommerce/img_ecommerce33.jpg" class="img-set" alt="Card image">
-                            </div>
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title">mini table lamp</h5>
-                            <p class="card-text">CHAIRS</p>
-                            <p class="card-price">$49.00</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+</div>
+
     </div>
 </section>
