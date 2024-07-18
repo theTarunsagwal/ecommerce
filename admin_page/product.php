@@ -1,6 +1,6 @@
 <?php
-session_start();
-if(isset($_SESSION['name'])) {
+// session_start();
+// if(isset($_SESSION['name'])) {
 
 ?>
 <!DOCTYPE html>
@@ -130,17 +130,16 @@ if(isset($_SESSION['name'])) {
                                 <span id="maxValue" class="text-lg text-gray-700">$1000</span>
                             </div>
                         </div>
-                        <?php
-                        if(isset($_POST['value'])){
-                            
-                        }
-                        ?>
                        <form method="post">
                        <input id="minMaxRange" type="range" name="min" min="100" max="1000" value="100" step="10" class="slider"
                             oninput="updateRange(this.value, 'min')">
                         <input id="minMaxRange2" type="range" name="max" min="100" max="1000" value="1000" step="10" class="slider"
                             oninput="updateRange(this.value, 'max')">
-                            <input type="submit" name="value" value="Search">
+                            <button type="submit" class="mt-2" name="value" >
+    <span class="box">
+        filter
+    </span>
+</button>
                        </form>
                     </div>
 
@@ -171,8 +170,6 @@ if(isset($_SESSION['name'])) {
         </div>
     </div>
 </div>
-
-
                     <div class="line"></div>
 
                     <div class="new-product mt-5">
@@ -223,39 +220,15 @@ if(isset($_SESSION['name'])) {
             });
         }
 
-        const minRange = document.getElementById('minMaxRange');
-        const maxRange = document.getElementById('minMaxRange2');
-        const minValue = document.getElementById('minValue');
-        const maxValue = document.getElementById('maxValue');
 
         function updateRange(value, type) {
-            let minVal = parseInt(minRange.value);
-            let maxVal = parseInt(maxRange.value);
-
             if (type === 'min') {
-                minVal = parseInt(value);
-                if (minVal >= maxVal) {
-                    minRange.value = maxVal - 10;
-                    minVal = maxVal - 10;
-                }
-            } else {
-                maxVal = parseInt(value);
-                if (maxVal <= minVal) {
-                    maxRange.value = minVal + 10;
-                    maxVal = minVal + 10;
-                }
+                document.getElementById('minValue').innerText = '$' + value;
+            } else if (type === 'max') {
+                document.getElementById('maxValue').innerText = '$' + value;
             }
-
-            minValue.textContent = '$' + minVal;
-            maxValue.textContent = '$' + maxVal;
         }
-
-        minValue.textContent = '$' + minRange.value;
-        maxValue.textContent = '$' + maxRange.value;
     </script>
 </body>
 
 </html>
-<?php }else{
-    header('location:loging.php');
-}?>

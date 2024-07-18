@@ -22,6 +22,95 @@ if(isset($_POST['del_product'])){
     $delete_product=$_POST['del_product'];
     $dstry_product= mysqli_query($con,"delete from new_product where  id='$delete_product' ");
 }
+
+if (isset($_POST['save'])) {
+    // Sanitize and retrieve form data
+    $id = $_POST['save'];
+    $name = isset($_POST['ed_name']) ? mysqli_real_escape_string($con, $_POST['ed_name']) : '';
+    $image = isset($_POST['ed_image']) ? mysqli_real_escape_string($con, $_POST['ed_image']) : '';
+    $about = isset($_POST['ed_about']) ? mysqli_real_escape_string($con, $_POST['ed_about']) : '';
+    $price = isset($_POST['ed_price']) ? mysqli_real_escape_string($con, $_POST['ed_price']) : '';
+
+    // Update query
+    $query = "UPDATE wood SET image_name='$name', image='$image', about='$about', price='$price' WHERE id='$id'";
+    
+    // Execute query
+    $result = mysqli_query($con, $query);
+    
+    // Check for errors
+    if (!$result) {
+        die('Error updating wood: ' . mysqli_error($con));
+    } else {
+        echo "Wood updated successfully.";
+    }
+}
+
+if (isset($_POST['save_de'])) {
+    // Sanitize and retrieve form data
+    $id = $_POST['save_de'];
+    $name = isset($_POST['ed_name_decor']) ? mysqli_real_escape_string($con, $_POST['ed_name_decor']) : '';
+    $image = isset($_POST['ed_image_decor']) ? mysqli_real_escape_string($con, $_POST['ed_image_decor']) : '';
+    $about = isset($_POST['ed_about_decor']) ? mysqli_real_escape_string($con, $_POST['ed_about_decor']) : '';
+    $price = isset($_POST['ed_price_decor']) ? mysqli_real_escape_string($con, $_POST['ed_price_decor']) : '';
+
+    // Update query
+    $query_de = "UPDATE decor_art SET decor_name='$name', decor_img='$image', decor_about='$about', decor_price='$price' WHERE id='$id'";
+    
+    // Execute query
+    $result_de = mysqli_query($con, $query_de);
+    
+    // Check for errors
+    if (!$result_de) {
+        die('Error updating decor: ' . mysqli_error($con));
+    } else {
+        echo "Decor updated successfully.";
+    }
+}
+
+if (isset($_POST['save_di'])) {
+    // Sanitize and retrieve form data
+    $id = $_POST['save_di'];
+    $name = isset($_POST['ed_name_dining']) ? mysqli_real_escape_string($con, $_POST['ed_name_dining']) : '';
+    $image = isset($_POST['ed_image_dining']) ? mysqli_real_escape_string($con, $_POST['ed_image_dining']) : '';
+    $about = isset($_POST['ed_about_dining']) ? mysqli_real_escape_string($con, $_POST['ed_about_dining']) : '';
+    $price = isset($_POST['ed_price_dining']) ? mysqli_real_escape_string($con, $_POST['ed_price_dining']) : '';
+
+    // Update query
+    $query_di = "UPDATE dining_room SET dining_name='$name', dining_image='$image', dining_about='$about', dining_price='$price' WHERE id='$id'";
+    
+    // Execute query
+    $result_di = mysqli_query($con, $query_di);
+    
+    // Check for errors
+    if (!$result_di) {
+        die('Error updating dining room item: ' . mysqli_error($con));
+    } else {
+        echo "Dining room item updated successfully.";
+    }
+}
+
+if (isset($_POST['save_new'])) {
+    // Sanitize and retrieve form data
+    $id = $_POST['save_new'];
+    $name = isset($_POST['ed_name_new']) ? mysqli_real_escape_string($con, $_POST['ed_name_new']) : '';
+    $image = isset($_POST['ed_image_new']) ? mysqli_real_escape_string($con, $_POST['ed_image_new']) : '';
+    $about = isset($_POST['ed_about_new']) ? mysqli_real_escape_string($con, $_POST['ed_about_new']) : '';
+    $price = isset($_POST['ed_price_new']) ? mysqli_real_escape_string($con, $_POST['ed_price_new']) : '';
+
+    // Update query
+    $query_new = "UPDATE new_product SET name='$name', img='$image', price='$price' WHERE id='$id'";
+    
+    // Execute query
+    $result_new = mysqli_query($con, $query_new);
+    
+    // Check for errors
+    if (!$result_new) {
+        die('Error updating product  item: ' . mysqli_error($con));
+    } else {
+        echo "product item updated successfully.";
+    }
+}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +128,7 @@ if(isset($_POST['del_product'])){
 <body>
     <header>
         <div class="logo">
-        <img src="./logo.png" alt="">
+        <img src="./img/logo.png" alt="">
         </div>
         <div class="menu">
             <ul>
@@ -123,109 +212,63 @@ if(isset($_POST['del_product'])){
         </div>
     </section>
     <section>
-        <form method="POST" class="form_search">
-            <input type="text" name="search" class="search_edit" placeholder="enter name" />
-            <input type="submit" value="search" class="search_btn_edit" name="submit" />
-        </form>
+    <form method="POST" class="form_search">
+        <input type="text" name="search" class="search_edit" placeholder="Enter name">
+        <input type="submit" value="Search" class="search_btn_edit" name="submit">
+    </form>
 
-        <table class="table">
-            <tr>
-                <td>id</td>
-                <td>image_name</td>
-                <td>image</td>
-                <td>about</td>
-                <td>price</td>
-                <td>delete</td>
-                <td>Edit</td>
-            </tr>
-            <?php
-        if (isset($_REQUEST['submit'])) {
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Image Name</td>
+            <td>Image</td>
+            <td>About</td>
+            <td>Price</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        <?php
+        if (isset($_POST['submit'])) {
             $search = $_POST['search'];
-            $qury = mysqli_query($con, "SELECT * FROM wood WHERE image_name LIKE '%$search%'");
-            while ($row = mysqli_fetch_array($qury)) {
-                ?>
+            $query = mysqli_query($con, "SELECT * FROM wood WHERE image_name LIKE '%$search%'");
+        } else {
+            $query = mysqli_query($con, "SELECT * FROM wood");
+        }
+
+        while ($row = mysqli_fetch_array($query)) {
+            ?>
             <tr>
-                <td>
-                    <?php echo $row['id']; ?>
-                </td>
-                <td>
-                    <?php echo $row['image_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $row['image']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $row['image']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $row['about']; ?>
-                </td>
-                <td>
-                    <?php echo $row['price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
+                <form method="POST" enctype="multipart/form-data">
+                    <td><input type="text" name="ed_id" value="<?php echo $row['id']; ?>" readonly></td>
+                    <td><input type="text" name="ed_name" value="<?php echo $row['image_name']; ?>" readonly></td>
+                    <td>
+                        <div class="img_handl">
+                            <div class="img_view">
+                                <img src="upload/<?php echo $row['image']; ?>" alt="" class="img_view_img">
+                            </div>
+                            <input type="text" name="ed_image" value="<?php echo $row['image']; ?>" readonly>
+                        </div>
+                    </td>
+                    <td><input type="text" name="ed_about" value="<?php echo $row['about']; ?>" readonly></td>
+                    <td><input type="number" name="ed_price" value="<?php echo $row['price']; ?>" readonly></td>
+                    <td>
+                        <button type="button" class="submit edit-btn">Edit</button>
+                        <button type="submit" class="submit save-btn" name="save" value="<?php echo $row['id']; ?>" style="display:none;">Save</button>
+                    </td>
+                    <td>
                         <button class="button" type="submit" value="<?php echo $row['id']; ?>" name="del">
                             <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
                             </svg>
                         </button>
-                    </form>
-                </td>
-                <?php
-            }
-            }else {
-                while ($comp = mysqli_fetch_array($data)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $comp['id']; ?>
-                </td>
-                <td>
-                    <?php echo $comp['image_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $comp['image']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $comp['image']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $comp['about']; ?>
-                </td>
-                <td>
-                    <?php echo $comp['price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $comp['id']; ?>" name="del">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
+                    </td>
+                </form>
             </tr>
             <?php
-            }
         }
         ?>
-        </table>
-    </section>
+    </table>
+  </section>
     <section>
         <div class="Bar_Furniture">
             <h1>Decor Art</h1>
@@ -282,109 +325,70 @@ if(isset($_POST['del_product'])){
         </div>
     </section>
     <section>
-        <form method="POST" class="form_search">
-            <input type="text" name="search_decor" class="search_edit" placeholder="enter name" />
-            <input type="submit" value="search" class="search_btn_edit" name="submit_decor" />
-        </form>
+    <form method="POST" class="form_search">
+    <input type="text" name="search_decor" class="search_edit" placeholder="Enter name">
+    <input type="submit" value="Search" class="search_btn_edit" name="submit_decor">
+</form>
 
-        <table class="table">
-            <tr>
-                <td>id</td>
-                <td>decor_name</td>
-                <td>image</td>
-                <td>about</td>
-                <td>price</td>
-                <td>delete</td>
-                <td>Edit</td>
-            </tr>
-            <?php
-        if (isset($_REQUEST['submit_decor'])) {
-            $search = $_POST['search_decor'];
-            $qury_decor = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name LIKE '%$search%'");
-            while ($row_decor = mysqli_fetch_array($qury_decor)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $row_decor['id']; ?>
-                </td>
-                <td>
-                    <?php echo $row_decor['decor_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $row_decor['decor_img']; ?>" alt="" class="img_view_img">
-                    </div>
-                       <?php echo $row_decor['decor_img']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $row_decor['decor_about']; ?>
-                </td>
-                <td>
-                    <?php echo $row_decor['decor_price']; ?>
-                </td>
-                <td>
-                    <button class="submit" value="<?php echo $row_decor['id']; ?>" >Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $row_decor['id']; ?>" name="del_decor">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-                <?php
-            }
-            }else {
-                while ($comp_decor = mysqli_fetch_array($data_decor)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $comp_decor['id']; ?>
-                </td>   
-                <td>
-                    <?php echo $comp_decor['decor_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $comp_decor['decor_img']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $comp_decor['decor_img']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $comp_decor['decor_about']; ?>
-                </td>
-                <td>
-                    <?php echo $comp_decor['decor_price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $comp_decor['id']; ?>" name="del_decor">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            <?php
-            }
-        }
+<!-- Table to display decor items -->
+<table class="table">
+    <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Image</td>
+        <td>About</td>
+        <td>Price</td>
+        <td>Actions</td>
+    </tr>
+    <?php
+    if (isset($_POST['submit_decor'])) {
+        $search = mysqli_real_escape_string($con, $_POST['search_decor']);
+        $query_decor = "SELECT * FROM decor_art WHERE decor_name LIKE '%$search%'";
+    } else {
+        $query_decor = "SELECT * FROM decor_art";
+    }
+    $result_decor = mysqli_query($con, $query_decor);
+    if (!$result_decor) {
+        die('Error fetching decor items: ' . mysqli_error($con));
+    }
+    while ($row_decor = mysqli_fetch_array($result_decor)) {
         ?>
-        </table>
-    </section>
+        <tr>
+            <form method="POST" enctype="multipart/form-data">
+                <td><input name="ed_id_decor" value="<?php echo $row_decor['id']; ?>" readonly></td>
+                <td><input type="text" name="ed_name_decor" value="<?php echo $row_decor['decor_name']; ?>" readonly></td>
+                <td>
+                    <div class="img_handl">
+                        <div class="img_view">
+                            <img src="upload/<?php echo $row_decor['decor_img']; ?>" alt="" class="img_view_img">
+                        </div>
+                        <input type="text" name="ed_image_decor" value="<?php echo $row_decor['decor_img']; ?>" readonly>
+                    </div>
+                </td>
+                <td><input type="text" name="ed_about_decor" value="<?php echo $row_decor['decor_about']; ?>" readonly></td>
+                <td><input type="text" name="ed_price_decor" value="<?php echo $row_decor['decor_price']; ?>" readonly></td>
+                <td>
+                <button type="button" class="submit edit-btn">Edit</button>
+                <button type="submit" class="submit save-btn" name="save_de" value="<?php echo $row_decor['id']; ?>" style="display:none;">Save</button>
+                </td>
+                <td>
+                    <form method="post">
+                        <button class="button" type="submit" value="<?php echo $row_decor['id']; ?>" name="del">
+                            <svg viewBox="0 0 448 512" class="svgIcon">
+                                <path
+                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </form>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+</section>
     <section>
         <div class="Bar_Furniture">
             <h1>Dining room</h1>
@@ -441,108 +445,70 @@ if(isset($_POST['del_product'])){
         </div>
     </section>
     <section>
-        <form method="POST" class="form_search">
-            <input type="text" name="search_dining" class="search_edit" placeholder="enter name" />
-            <input type="submit" value="search" class="search_btn_edit" name="submit_dining" />
-        </form>
+    <form method="POST" class="form_search">
+        <input type="text" name="search_dining" class="search_edit" placeholder="enter name" />
+        <input type="submit" value="search" class="search_btn_edit" name="submit_dining" />
+    </form>
 
-        <table class="table">
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>About</td>
+            <td>Price</td>
+            <td>Actions</td>
+        </tr>
+        <?php
+        // Fetch and display dining items
+        if (isset($_POST['submit_dining'])) {
+            $search = mysqli_real_escape_string($con, $_POST['search_dining']);
+            $query_dining = "SELECT * FROM dining_room WHERE dining_name LIKE '%$search%'";
+        } else {
+            $query_dining = "SELECT * FROM dining_room";
+        }
+        $result_dining = mysqli_query($con, $query_dining);
+        if (!$result_dining) {
+            die('Error fetching dining room items: ' . mysqli_error($con));
+        }
+        while ($row_dining = mysqli_fetch_array($result_dining)) {
+            ?>
             <tr>
-                <td>id</td>
-                <td>decor_name</td>
-                <td>image</td>
-                <td>about</td>
-                <td>price</td>
-                <td>delete</td>
-                <td>Edit</td>
+                <form method="POST" enctype="multipart/form-data">
+                    <td><input name="ed_id_dining" value="<?php echo $row_dining['id']; ?>" readonly></td>
+                    <td><input type="text" name="ed_name_dining" value="<?php echo $row_dining['dining_name']; ?>" readonly></td>
+                    <td>
+                        <div class="img_handl">
+                            <div class="img_view">
+                                <img src="upload/<?php echo $row_dining['dining_image']; ?>" alt="" class="img_view_img">
+                            </div>
+                            <input type="text" name="ed_image_dining" value="<?php echo $row_dining['dining_image']; ?>" readonly>
+                        </div>
+                    </td>
+                    <td><input type="text" name="ed_about_dining" value="<?php echo $row_dining['dining_about']; ?>" readonly></td>
+                    <td><input type="text" name="ed_price_dining" value="<?php echo $row_dining['dining_price']; ?>" readonly></td>
+                    <td>
+                        <button type="button" class="submit edit-btn" onclick="enableEditing(this)">Edit</button>
+                        <button type="submit" class="submit save-btn" name="save_di" value="<?php echo $row_dining['id']; ?>" style="display:none;">Save</button>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button class="button" type="submit" value="<?php echo $row_dining['id']; ?>" name="del">
+                                <svg viewBox="0 0 448 512" class="svgIcon">
+                                    <path
+                                        d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                </form>
             </tr>
             <?php
-        if (isset($_REQUEST['submit_dining'])) {
-            $search_dining = $_POST['search_dining'];
-            $qury_dining = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name LIKE '%$search_dining%'");
-            while ($row_dining = mysqli_fetch_array($qury_dining)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $row_dining['id']; ?>
-                </td>
-                <td>
-                    <?php echo $row_dining['dining_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $row_dining['dining_image']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $row_dining['dining_image']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $row_dining['dining_about']; ?>
-                </td>
-                <td>
-                    <?php echo $row_dining['dining_price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $row_dining['id']; ?>" name="del_dining">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-                <?php
-            }
-            }else {
-                while ($comp_dining = mysqli_fetch_array($data_dining)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $comp_dining['id']; ?>
-                </td>   
-                <td>
-                    <?php echo $comp_dining['dining_name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $comp_dining['dining_image']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $comp_dining['dining_image']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $comp_dining['dining_about']; ?>
-                </td>
-                <td>
-                    <?php echo $comp_dining['dining_price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $comp_dining['id']; ?>" name="del_dining">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            <?php
-            }
         }
         ?>
-        </table>
+    </table>
+</section>
     </section>
     <section>
         <div class="Bar_Furniture">
@@ -595,101 +561,67 @@ if(isset($_POST['del_product'])){
         </div>
     </section>
     <section>
-        <form method="POST" class="form_search">
-            <input type="text" name="product_search" class="search_edit" placeholder="enter name" />
-            <input type="submit" value="search" class="search_btn_edit" name="product_submit" />
-        </form>
+    <form method="POST" class="form_search">
+        <input type="text" name="search_new" class="search_edit" placeholder="enter name" />
+        <input type="submit" value="search" class="search_btn_edit" name="submit_new" />
+    </form>
 
-        <table class="table">
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>Price</td>
+            <td>Actions</td>
+        </tr>
+        <?php
+        // Fetch and display dining items
+        if (isset($_POST['submit_new'])) {
+            $search = mysqli_real_escape_string($con, $_POST['search_new']);
+            $query_new = "SELECT * FROM new_product WHERE name LIKE '%$search%'";
+        } else {
+            $query_new = "SELECT * FROM new_product";
+        }
+        $result_new = mysqli_query($con, $query_new);
+        if (!$result_new) {
+            die('Error fetching new room items: ' . mysqli_error($con));
+        }
+        while ($row_new = mysqli_fetch_array($result_new)) {
+            ?>
             <tr>
-                <td>id</td>
-                <td>product_name</td>
-                <td>image</td>
-                <td>price</td>
-                <td>delete</td>
-                <td>Edit</td>
+                <form method="POST" enctype="multipart/form-data">
+                    <td><input name="ed_id_new" value="<?php echo $row_new['id']; ?>" readonly></td>
+                    <td><input type="text" name="ed_name_new" value="<?php echo $row_new['name']; ?>" readonly></td>
+                    <td>
+                        <div class="img_handl">
+                            <div class="img_view">
+                                <img src="upload/<?php echo $row_new['img']; ?>" alt="" class="img_view_img">
+                            </div>
+                            <input type="text" name="ed_image_new" value="<?php echo $row_new['img']; ?>" readonly>
+                        </div>
+                    </td>
+                    <td><input type="text" name="ed_price_new" value="<?php echo $row_new['price']; ?>" readonly></td>
+                    <td>
+                        <button type="button" class="submit edit-btn" onclick="enableEditing(this)">Edit</button>
+                        <button type="submit" class="submit save-btn" name="save_new" value="<?php echo $row_new['id']; ?>" style="display:none;">Save</button>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button class="button" type="submit" value="<?php echo $row_new['id']; ?>" name="del">
+                                <svg viewBox="0 0 448 512" class="svgIcon">
+                                    <path
+                                        d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                </form>
             </tr>
             <?php
-        if (isset($_REQUEST['product_submit'])) {
-            $product_search = $_POST['product_search'];
-            $qury_product = mysqli_query($con, "SELECT * FROM new_product WHERE name LIKE '%$product_search%'");
-            while ($row_product = mysqli_fetch_array($qury_product)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $row_product['id']; ?>
-                </td>
-                <td>
-                    <?php echo $row_product['name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $row_product['img']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $row_product['img']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $row_product['price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $row_product['id']; ?>" name="del_product">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-                <?php
-            }
-            }else {
-                while ($comp_product = mysqli_fetch_array($data_product)) {
-                ?>
-            <tr>
-                <td>
-                    <?php echo $comp_product['id']; ?>
-                </td>
-                <td>
-                    <?php echo $comp_product['name']; ?>
-                </td>
-                <td>
-                <div class="img_handl">
-                <div class="img_view">
-                        <img src="upload/<?php echo $comp_product['img']; ?>" alt="" class="img_view_img">
-                    </div>
-                    <?php echo $comp_product['img']; ?>
-                </div>
-                </td>
-                <td>
-                    <?php echo $comp_product['price']; ?>
-                </td>
-                <td>
-                    <button class="submit">Edit</button>
-                </td>
-                <td>
-                    <form method="post">
-                        <button class="button" type="submit" value="<?php echo $comp_product['id']; ?>" name="del_product">
-                            <svg viewBox="0 0 448 512" class="svgIcon">
-                                <path
-                                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                </path>
-                            </svg>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            <?php
-            }
         }
         ?>
-        </table>
+    </table>
     </section>
     <!-- Living Room     -->
      <script src="wood.js"></script>

@@ -161,6 +161,12 @@ if(isset($_SESSION['name'])) {
 
 <?php
 } else {
-    header("location: index.php");
+    echo "
+				<script>
+				alert('Please loging first')
+	</script>
+			";
+            header("Location: loging.php");
+    exit();
 }
 ?>

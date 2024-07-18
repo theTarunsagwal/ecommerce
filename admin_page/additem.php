@@ -1,5 +1,6 @@
 <?php 
 session_start();
+ob_start();
 include "header.php";
 $con = mysqli_connect("localhost","root","","ecommerce");
 
@@ -40,7 +41,7 @@ if(isset($_SESSION['name'])) {
             </div>
             <div class="cart-info-item">
                 <h1 class="fs-3 fw-bolder"><?php echo $row['name'] ?></h1>
-                <h3 class="fs-5">Price: $<span id="price-value-<?php echo $item_id; ?>"><?php echo $row['price']; ?></span></h3>
+                <h3 class="fs-5">Price: $<span id="price-value-<?php echo $item_id; ?>"><?php echo $row['price']; ?>.00</span></h3>
             </div>
             <div class="count-btn">
                 <button type="button" onclick="changeQuantity(<?php echo $item_id; ?>, -1)">-</button>
@@ -129,5 +130,6 @@ if(isset($_SESSION['name'])) {
 }else{
   header('location:loging.php');
 }
+ob_end_flush();
 ?>
 

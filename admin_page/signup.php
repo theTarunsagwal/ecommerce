@@ -80,7 +80,7 @@ if (isset($_POST['sub'])) {
 </head>
 <body>
 <div class="logo">
-<img src="./img/logo.png" alt="">
+<img src="./img/logo_black.png" alt="">
 	</div>
 <div class="container">
 <div class="form-container">

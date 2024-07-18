@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['name'])){
+// if(isset($_SESSION['name'])){
     $con = mysqli_connect("localhost","root","","ecommerce");
     // $qurry=mysqli_query($con,"select * from new_product");
     $data_product = mysqli_query($con, 'SELECT * FROM new_product');
@@ -26,6 +26,8 @@ if(isset($_SESSION['name'])){
 
 <body>
     <?php include "header.php" ?>
+    <?php include "profile_user.php" ?>
+
 
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-indicators">
@@ -38,10 +40,10 @@ if(isset($_SESSION['name'])){
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
+                <img src="../img_ecommerce/img_ecommerce34.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
+                <img src="../img_ecommerce/img_ecommerce09.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
                 <img src="../img_ecommerce/img_ecommerce10.jpg" class="d-block w-100" alt="...">
@@ -175,8 +177,3 @@ if(isset($_SESSION['name'])){
 
 </html>
 
-<?php
-}else{
-    header("location:loging.php");
-}
-?>

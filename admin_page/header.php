@@ -28,7 +28,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <header>
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
-            <img src="./logo_black.png" alt="">
+            <img src="./img/logo_black.png" alt="">
         </div>
         <nav>
             <ul class="nav_ul">
