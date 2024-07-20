@@ -515,6 +515,12 @@ header a{
     }
 }
 
+@media (max-width: 701px) {
+    .nav-furniture ul{
+display: none;
+    }
+}
+
 @media (max-width:545px) {
     .scale_card_menu{
         height: 30vh;

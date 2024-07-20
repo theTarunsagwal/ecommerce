@@ -239,7 +239,7 @@ if (isset($_POST['save_new'])) {
             ?>
             <tr>
                 <form method="POST" enctype="multipart/form-data">
-                    <td><input type="text" name="ed_id" value="<?php echo $row['id']; ?>" readonly></td>
+                    <td><?php echo $row['id']; ?></td>
                     <td><input type="text" name="ed_name" value="<?php echo $row['image_name']; ?>" readonly></td>
                     <td>
                         <div class="img_handl">
@@ -355,7 +355,7 @@ if (isset($_POST['save_new'])) {
         ?>
         <tr>
             <form method="POST" enctype="multipart/form-data">
-                <td><input name="ed_id_decor" value="<?php echo $row_decor['id']; ?>" readonly></td>
+                <td><?php echo $row_decor['id']; ?></td>
                 <td><input type="text" name="ed_name_decor" value="<?php echo $row_decor['decor_name']; ?>" readonly></td>
                 <td>
                     <div class="img_handl">
@@ -475,7 +475,7 @@ if (isset($_POST['save_new'])) {
             ?>
             <tr>
                 <form method="POST" enctype="multipart/form-data">
-                    <td><input name="ed_id_dining" value="<?php echo $row_dining['id']; ?>" readonly></td>
+                    <td><?php echo $row_dining['id']; ?></td>
                     <td><input type="text" name="ed_name_dining" value="<?php echo $row_dining['dining_name']; ?>" readonly></td>
                     <td>
                         <div class="img_handl">
@@ -590,7 +590,7 @@ if (isset($_POST['save_new'])) {
             ?>
             <tr>
                 <form method="POST" enctype="multipart/form-data">
-                    <td><input name="ed_id_new" value="<?php echo $row_new['id']; ?>" readonly></td>
+                    <td><?php echo $row_new['id']; ?></td>
                     <td><input type="text" name="ed_name_new" value="<?php echo $row_new['name']; ?>" readonly></td>
                     <td>
                         <div class="img_handl">

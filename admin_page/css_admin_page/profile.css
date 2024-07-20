@@ -28,45 +28,95 @@
    display: inline-block;
    height: 2.5rem;
     width: 2.5rem;
+    cursor: pointer;
     border-radius: 50%;
-    background-color: #030303;
+    background-color: #f8f9fa;
     position: relative;
-    /* overflow: hidden; */
 }
 
 .profile_user::after{
     position: absolute;
     content: '';
     bottom: -5px;
+    display: flex;
     height: 2.5rem;
     right:  1%;
     top: 0%;
     opacity: 0;
     z-index: -1;
     border-radius: 25px;
-    background-color: #666b7f;
+    background-color: #f8f9fa;
     width: 0rem;
+    color: #000;
     transition: .2s;
 }
 
 .profile_user:hover::after{
     width: 8rem;
+    color: #000;
     opacity: 1;
-    background-color: #666b7f;
+    background-color: #f8f9fa;
 }
 
 .profile_data{
     height: 73vh;
     width:18rem;
     position: fixed;
+    overflow-y: scroll;
     z-index: 102;
     margin-top: 3%;
     right: 2%;
-    background-color: #030303;
+    background-color: #f8f9fa;
+}
+
+.profile_data::-webkit-scrollbar{
+    width: 0rem;
 }
 
 .profile_user img{
     width: 100%;
     height: 100%;
+    border-radius: 50%;
     object-fit: contain;
+}
+
+.profile_header{
+    display: flex;
+    align-items: center;
+    height: 12vh;
+    width: 100%;
+    padding: .5rem;
+    gap: 10px;
+    /* background-color: azure; */
+    border-bottom: 1px solid #000;
+    color: #fff;
+}
+
+.profile_img{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: bisque;
+}
+
+.profile_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.shop_listing{
+    cursor: pointer;
+    transition: .5s;
+  }
+
+.content_profile{
+    border-bottom: 1px solid #000;
+    padding: 1rem;
+}
+
+.shop_listing:hover .product_item{
+    transform: scale(1.1);
+    color: #dbbb9a;
 }

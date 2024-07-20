@@ -20,13 +20,33 @@
     </div>
 </div>
 <div class="profile_data">
-    <div class="profile_img">
+    <div class="profile_header">
+        <div class="profile_img">
             <img src="./upload/img_ecommerce17.jpg" alt="loading...">
         </div>
         <div class="profile_info">
-            <h1></h1>
-            <p></p>
+            <h1 class="fs-5 mt-3">hey, user</h1>
+            <p class="fs-7">user@gmail.com</p>
         </div>
+    </div>
+
+    <div class="content_profile d-flex flex-column mt-3 ">
+        <h1 class="fs-4 p-1 text-black">shop by department</h1>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">electronics</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">computers</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">smart home</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">arts & crafts</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2"><span class="product_item">see all</span><span class="fw-bolder fs-2 " ><i class='bx bx-chevron-down'></i></span></h3>
+    </div>
+        <div class="line"></div>
+    <div class="content_profile d-flex flex-column mt-3 ">
+        <h1 class="fs-4 p-1 text-black">programs & features</h1>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">gift cards</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">shop by interest</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">shoplift live</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2"><span class="product_item">international shopping</span><span class="fw-bolder fs-2" ><i class='bx bx-chevron-right'></i></span></h3>
+        <h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2"><span class="product_item">see all</span><span class="fw-bolder fs-2 " ><i class='bx bx-chevron-down'></i></span></h3>
+    </div>
     
 </div>
 <?php

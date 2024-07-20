@@ -26,7 +26,9 @@ session_start();
 
 <body>
     <?php include "header.php" ?>
-    <?php include "profile_user.php" ?>
+    <?php
+    //  include "profile_user.php"
+      ?>
 
 
     <div id="carouselExampleIndicators" class="carousel slide">
