@@ -17,6 +17,7 @@ if(isset($_SESSION['name'])) {
     <link rel="stylesheet" href="../admin_page/css_admin_page/additem.css">
 </head>
 <body>
+  <?php include "profile_user.php" ?>
     <div class="cart-card">
     <?php
     if(isset($_POST['del'])){

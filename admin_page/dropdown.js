@@ -1,8 +1,60 @@
 
-let drophome=()=>{
-    let dwon=document.querySelector('.dropdown');
-    dwon.classList.toggle('dropdown_active');
-}
+$(document).ready(function(){
+    $('.dropdown_active').slideUp()
+    $('.home').click(function(){
+        $('.dropdown_active').slideToggle(1000)
+        $('.dropdown_active_shop').slideUp()
+        $('.dropdown_coll_active').slideUp()
+        $('.dropdown_page_active').slideUp()
+        $('.dropdown_blog_active').slideUp()
+    })
+})
+
+$(document).ready(function(){
+    $('.dropdown_active_shop').slideUp()
+    $('.shops').click(function(){
+        $('.dropdown_active_shop').slideToggle(1000)
+        $('.dropdown_coll_active').slideUp()
+        $('.dropdown_active').slideUp()
+        $('.dropdown_page_active').slideUp()
+        $('.dropdown_blog_active').slideUp()
+    })
+})
+
+$(document).ready(function(){
+    $('.dropdown_coll_active').slideUp()
+    $('.collect').click(function(){
+        $('.dropdown_coll_active').slideToggle(1000)
+        $('.dropdown_active').slideUp()
+        $('.dropdown_active_shop').slideUp()
+        $('.dropdown_page_active').slideUp()
+        $('.dropdown_blog_active').slideUp()
+    })
+})
+
+$(document).ready(function(){
+    $('.dropdown_page_active').slideUp()
+    $('.pages').click(function(){
+        $('.dropdown_page_active').slideToggle(1000)
+        $('.dropdown_active').slideUp()
+        $('.dropdown_active_shop').slideUp()
+        $('.dropdown_coll_active').slideUp()
+        $('.dropdown_blog_active').slideUp()
+    })
+})
+
+$(document).ready(function(){
+    $('.dropdown_blog_active').slideUp()
+    $('.blogs').click(function(){
+        $('.dropdown_blog_active').slideToggle(1000)
+        $('.dropdown_page_active').slideUp()
+        $('.dropdown_active').slideUp()
+        $('.dropdown_active_shop').slideUp()
+        $('.dropdown_coll_active').slideUp()
+
+
+    })
+})
 
 let drophomes=()=>{
     let dwon=document.querySelector('.dropdown_reponsive');
@@ -44,25 +96,6 @@ let goblog=()=>{
     dwon.style.transform="translateX(100%)";
 }
 
-let dropshop=()=>{
-    let dwonshop=document.querySelector('.dropdown_shop');
-    dwonshop.classList.toggle('dropdown_active_shop');
-}
-
-let dropcollection=()=>{
-    let dwonshop=document.querySelector('.dropdown_coll');
-    dwonshop.classList.toggle('dropdown_coll_active');
-}
-
-let droppage=()=>{
-    let dwonshop=document.querySelector('.dropdown_page');
-    dwonshop.classList.toggle('dropdown_page_active');
-}
-
-let dropblogs=()=>{
-    let dwonshop=document.querySelector('.dropdown_blog');
-    dwonshop.classList.toggle('dropdown_blog_active');
-}
 
 let search=()=>{
     let dwonshop=document.querySelector('.search_container');

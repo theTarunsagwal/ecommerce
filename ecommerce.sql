@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2024 at 04:28 AM
+-- Generation Time: Jul 22, 2024 at 10:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -72,16 +72,16 @@ CREATE TABLE `decor_art` (
 --
 
 INSERT INTO `decor_art` (`id`, `decor_name`, `decor_price`, `decor_img`, `decor_about`) VALUES
-(3, 'decor art', '200', 'img_ecommerce05.jpg', 'art'),
+(3, 'decor art', '320', 'img_ecommerce05.jpg', 'art'),
 (4, 'decor', '200', 'img_ecommerce16.jpg', 'art'),
 (5, 'Arctander Chair', '250', 'img_ecommerce20.jpg', 'lighiting'),
 (6, 'Beoplay A1', '199', 'img_ecommerce21.jpg', 'lighting'),
 (7, 'hanging egg chair', '159', 'img_ecommerce23.jpg', 'lighting'),
 (8, 'Hubert pendant lamp', '199', 'img_ecommerce25.jpg', 'lighting'),
 (9, 'Iconic Rocking Horse', '169', 'img_ecommerce27.jpg', 'chairs'),
-(10, 'Langue Stack Chair', '259', 'img_ecommerce28.jpg', 'chairs'),
-(11, 'Laundry Baskets', '45', 'img_ecommerce30.jpg', 'chairs'),
-(12, 'mini table lamp', '89', 'img_ecommerce32.jpg', 'chairs');
+(10, 'Langue Stack Chair', '272', 'img_ecommerce28.jpg', 'chairs'),
+(11, 'Laundry Baskets', '452', 'img_ecommerce30.jpg', 'chairs'),
+(12, 'mini table lamp', '890', 'img_ecommerce32.jpg', 'chairs');
 
 -- --------------------------------------------------------
 
@@ -103,10 +103,10 @@ CREATE TABLE `dining_room` (
 
 INSERT INTO `dining_room` (`id`, `dining_name`, `dining_price`, `dining_image`, `dining_about`) VALUES
 (3, 'dining room', '5200', 'img_ecommerce06.jpg', 'nan'),
-(4, 'living room', '250', 'img_ecommerce08.jpg', 'nan'),
+(4, 'living room', '541', 'img_ecommerce08.jpg', 'nan'),
 (5, 'headboard', '2000', 'img_ecommerce07.jpg', 'nan'),
-(6, 'chairs', '3000', 'img_ecommerce15.jpg', 'chair\r\n'),
-(7, 'clock', '150', 'img_ecommerce17.jpg', 'nan'),
+(6, 'sofa', '3000', 'img_ecommerce15.jpg', 'chair\r\n'),
+(7, 'clock', '155', 'img_ecommerce17.jpg', 'nan'),
 (8, 'hand clock', '140', 'img_ecommerce18.jpg', 'nan');
 
 -- --------------------------------------------------------
@@ -128,7 +128,14 @@ CREATE TABLE `new_product` (
 
 INSERT INTO `new_product` (`id`, `name`, `price`, `img`) VALUES
 (1, 'sweeper and funnel', '280', 'img_ecommerce02.jpg'),
-(2, 'mini table lamp', '89', 'img_ecommerce03.jpg');
+(2, 'mini lamp', '156', 'img_ecommerce03.jpg'),
+(3, 'product', '201', 'img_ecommerce37.jpg'),
+(4, 'table', '399', 'img_ecommerce12.jpg'),
+(5, 'sofas', '869', 'img_ecommerce13.jpg'),
+(6, 'pilo', '745', 'img_ecommerce14.jpg'),
+(7, 'storm jug', '199', 'img_ecommerce39.jpg'),
+(8, 'storm small jug', '154', 'img_ecommerce38.jpg'),
+(9, 'victo pedant lamp', '321', 'img_ecommerce40.jpg');
 
 -- --------------------------------------------------------
 
@@ -140,15 +147,74 @@ CREATE TABLE `user_data` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `image` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_data`
 --
 
-INSERT INTO `user_data` (`id`, `name`, `email`, `password`) VALUES
-(1, 'tarun', 'tarunsagwal@gmail.com', '12345');
+INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`) VALUES
+(1, 'tarun', 'tarunsagwal@gmail.com', '12345', NULL),
+(22, 'sukuna', 'sukuna11@gmail.com', '124578', 'face.jpg'),
+(23, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg'),
+(26, 'gojo', 'gojo@gmail.com', '12369', 'face1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_gojo`
+--
+
+CREATE TABLE `user_name_gojo` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_megumi`
+--
+
+CREATE TABLE `user_name_megumi` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_megumi`
+--
+
+INSERT INTO `user_name_megumi` (`id`, `name`, `image`, `price`) VALUES
+(13, 'Hubert pendant lamp', 'img_ecommerce25.jpg', '199'),
+(14, 'Beoplay A1', 'img_ecommerce21.jpg', '199');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_sukuna`
+--
+
+CREATE TABLE `user_name_sukuna` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_sukuna`
+--
+
+INSERT INTO `user_name_sukuna` (`id`, `name`, `image`, `price`) VALUES
+(1, 'Arctander Chair', 'img_ecommerce20.jpg', '250'),
+(19, 'storm jug', 'img_ecommerce39.jpg', '199');
 
 -- --------------------------------------------------------
 
@@ -169,10 +235,8 @@ CREATE TABLE `wood` (
 --
 
 INSERT INTO `wood` (`id`, `image_name`, `price`, `image`, `about`) VALUES
-(3, 'bar furniture', '200', 'img_ecommerce04.jpg', 'furniture'),
-(4, 'table', '99', 'img_ecommerce12.jpg', 'furniture'),
-(5, 'sofa', '199', 'img_ecommerce13.jpg', 'furniture'),
-(6, 'pilo', '299', 'img_ecommerce14.jpg', 'furniture');
+(3, 'bar furniture', '500', 'img_ecommerce04.jpg', 'furniture'),
+(7, 'bar furnitures', '337', 'img_ecommerce36.jpg', 'Furniture');
 
 --
 -- Indexes for dumped tables
@@ -219,6 +283,27 @@ ALTER TABLE `user_data`
   ADD UNIQUE KEY `password` (`password`);
 
 --
+-- Indexes for table `user_name_gojo`
+--
+ALTER TABLE `user_name_gojo`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `user_name_megumi`
+--
+ALTER TABLE `user_name_megumi`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `user_name_sukuna`
+--
+ALTER TABLE `user_name_sukuna`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `wood`
 --
 ALTER TABLE `wood`
@@ -244,7 +329,7 @@ ALTER TABLE `contect`
 -- AUTO_INCREMENT for table `decor_art`
 --
 ALTER TABLE `decor_art`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `dining_room`
@@ -256,19 +341,37 @@ ALTER TABLE `dining_room`
 -- AUTO_INCREMENT for table `new_product`
 --
 ALTER TABLE `new_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `user_name_gojo`
+--
+ALTER TABLE `user_name_gojo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_name_megumi`
+--
+ALTER TABLE `user_name_megumi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `user_name_sukuna`
+--
+ALTER TABLE `user_name_sukuna`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `wood`
 --
 ALTER TABLE `wood`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

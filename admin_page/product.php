@@ -16,6 +16,8 @@
 
 <body>
     <?php include "header.php" ?>
+  <?php include "profile_user.php" ?>
+
     <section>
         <div class="main">
             <?php

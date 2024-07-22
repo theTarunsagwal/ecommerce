@@ -1,17 +1,11 @@
 <?php
-  $con = mysqli_connect('localhost','root','','ecommerce');
-//   $qury =mysqli_query($con,'select * from user_data');
+$con = mysqli_connect('localhost', 'root', '', 'ecommerce');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 
 require "PHPMailer/src/PHPMailer.php";
 require "PHPMailer/src/Exception.php";
 require "PHPMailer/src/SMTP.php";
-
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
@@ -22,94 +16,108 @@ if (isset($_POST['sub'])) {
     $email = $_POST['email'];
     $pass = $_POST['pswd'];
     
-    $mail= new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host="smtp.gmail.com";
-    $mail->SMTPAuth=true;
-    $mail->Username="tarunsagwal38@gmail.com";
-    $mail->Password="nbzdfxjyeqydzwww";
-    $mail->SMTPSecure="ssl";
-    $mail->Port=465;
-    $mail->setFrom('tarunsagwal38@gmail.com','Megumi Shoplift');
-    $mail->addAddress($email);
-    $mail->Subject="Welcome to Megumi shoplift";
-    $mail->Body="<h1>  $user  thankyou to join a shoplift <br> I give you better experience </h1>"; 
-    $mail->send();
-    $query = mysqli_query($con, "INSERT INTO user_data (name, email, password) VALUES ('$user', '$email', '$pass')");
+    if (isset($_FILES['pfile'])) {
+        $upload = $_FILES['pfile']['name'];
+        $tmp_upload = $_FILES['pfile']['tmp_name'];
+        $upload_dir = 'upload/' . $upload;
+        
+        if (move_uploaded_file($tmp_upload, $upload_dir)) {
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = "smtp.gmail.com";
+                $mail->SMTPAuth = true;
+                $mail->Username = "tarunsagwal38@gmail.com";
+                $mail->Password = "nbzdfxjyeqydzwww";
+                $mail->SMTPSecure = "ssl";
+                $mail->Port = 465;
+                $mail->setFrom('tarunsagwal38@gmail.com', 'Megumi Shoplift');
+                $mail->addAddress($email);
+                $mail->Subject = "Welcome to Megumi Shoplift";
+                $mail->Body = "<h1>$user, thank you for joining Shoplift. We hope you have a great experience!</h1>";
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
 
-    if ($query) {
-        // Sanitize the email to create a valid table name
-        $table_name = 'user_name_' . $user ;
+            $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image) VALUES ('$user', '$email', '$pass', '$upload')");
 
-        // Create a table for the user
-        $create_table_query = "
-            CREATE TABLE IF NOT EXISTS $table_name (
-                id INT UNIQUE AUTO_INCREMENT,
-                name VARCHAR(300) NOT NULL,
-                image TEXT NOT NULL,
-                price VARCHAR(30) NOT NULL,
-                PRIMARY KEY (id)
-            )
-        ";
+            if ($query) {
+                $table_name = 'user_name_' . mysqli_real_escape_string($con, $user);
+                $create_table_query = "
+                    CREATE TABLE IF NOT EXISTS $table_name (
+                        id INT UNIQUE AUTO_INCREMENT,
+                        name VARCHAR(300) NOT NULL,
+                        image TEXT NOT NULL,
+                        price VARCHAR(30) NOT NULL,
+                        PRIMARY KEY (id)
+                    )";
+                
+                if (mysqli_query($con, $create_table_query)) {
+                    echo "User registered and table $table_name created successfully.";
+                } else {
+                    echo "Error creating table: " . mysqli_error($con);
+                }
 
-        if (mysqli_query($con, $create_table_query)) {
-            echo "User registered and table $table_name created successfully.";
+                echo "<script>alert('Thank you for joining');</script>";
+                header("Location: loging.php");
+            } else {
+                echo "Error inserting user: " . mysqli_error($con);
+                echo "<script>alert('Write UNIQUE Password and Email already inserted');</script>";
+            }
         } else {
-            echo "Error creating table: " . mysqli_error($con);
+            echo "Error uploading file.";
         }
-
-        echo "<script>alert('Thank you for joining');</script>";
-        header("Location: loging.php");
     } else {
-        echo "Error inserting user: " . mysqli_error($con);
-        echo "<script>alert('Write UNIQUE Password and Email already insert');</script>";
+        echo "No file selected.";
     }
 
     mysqli_close($con);
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>megumi shoplift</title>
+    <title>Megumi Shoplift</title>
     <link rel="stylesheet" href="./css_admin_page/loging.css">
 </head>
 <body>
 <div class="logo">
-<img src="./img/logo_black.png" alt="">
-	</div>
+    <img src="./img/logo_black.png" alt="">
+</div>
 <div class="container">
-<div class="form-container">
-	<p class="title">Sign Up</p>
-	<form class="form" method="POST">
-		<div class="input-group">
-			<label for="username">Username</label>
-			<input type="text" name="user" id="username" placeholder="">
-		</div>
-        <div class="input-group">
-			<label for="username">Email</label>
-			<input type="email" name="email" id="username" placeholder="">
-		</div>
-		<div class="input-group">
-			<label for="password">Password</label>
-			<input type="password" name="pswd" id="password" placeholder="">
-			</div>
-		<div class="input-group">
-            <label for="password">Confirm Password</label>
-			<input type="password" name="cpswd" id="password" placeholder="">
-		</div>
-		<button class="sign" name="sub">submit</button>
-	</form>
-	
-	<p class="signup">Already have a account?
-		<a rel="noopener noreferrer" href="loging.php" class="">login</a>
-	</p>
+    <div class="form-container">
+        <p class="title">Sign Up</p>
+        <form class="form" method="POST" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" name="user" id="username" placeholder="" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" name="pswd" id="password" placeholder="" required>
+            </div>
+            <div class="input-group">
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" name="cpswd" id="cpassword" placeholder="" required>
+            </div>
+            <div class="input-group">
+                <label for="pfile">Upload Image</label>
+                <input type="file" name="pfile" id="pfile" required>
+            </div>
+            <button class="sign" name="sub">Submit</button>
+        </form>
+        <p class="signup">Already have an account?
+            <a rel="noopener noreferrer" href="loging.php">Login</a>
+        </p>
+    </div>
 </div>
-</div>
-
 </body>
 </html>

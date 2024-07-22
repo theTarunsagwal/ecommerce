@@ -17,8 +17,7 @@ if(isset($_SESSION['name'])) {
 </head>
 
 <body>
-    <?php 
-    ?>
+<?php include "profile_user.php" ?>
 
 <section>
         <div class="item-container">

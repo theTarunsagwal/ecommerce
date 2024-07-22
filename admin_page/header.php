@@ -18,6 +18,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megumi shoplift</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -28,13 +29,15 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <header>
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
+            <a href="index.php">
             <img src="./img/logo_black.png" alt="">
+            </a>
         </div>
         <nav>
             <ul class="nav_ul">
-                <li onclick="drophome()"><span>home</span><i class='bx bx-chevron-down'></i></li>
+                <li class="home"><span>home</span><i class='bx bx-chevron-down'></i></li>
                 <!-- home dropdown -->
-                <div class="dropdown">
+                <div class="dropdown_active">
                     <div class="dropdown-item">
                         <?php
                         $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
@@ -51,9 +54,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         ?>
                     </div>
                 </div>
-                <li onclick="dropshop()"><span>shops</span><i class='bx bx-chevron-down'></i></li>
+                <li class="shops"><span>shops</span><i class='bx bx-chevron-down'></i></li>
                 <!-- shops dropdown -->
-                <div class="dropdown_shop">
+                <div class="dropdown_active_shop">
                     <div class="dropdown-content-item">
                         <div class="dropdown-item">
                             <h1>collection</h1>
@@ -142,9 +145,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         </div>
                     </div>
                 </div>
-                <li onclick="dropcollection()"><span>collections</span><i class='bx bx-chevron-down'></i></li>
+                <li class="collect"><span>collections</span><i class='bx bx-chevron-down'></i></li>
                 <!-- collections dropdown -->
-                <div class="dropdown_coll">
+                <div class="dropdown_coll_active">
                     <div class="dropdown_content_box">
                         <?php
                              $row_wood_drop = mysqli_query($con, "SELECT * FROM wood WHERE id IN (3)");
@@ -209,9 +212,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         <?php }?>
                     </div>
                 </div>
-                <li onclick="droppage()"><span>pages</span><i class='bx bx-chevron-down'></i></li>
+                <li class="pages"><span>pages</span><i class='bx bx-chevron-down'></i></li>
                 <!-- pages dropdown -->
-                <div class="dropdown_page">
+                <div class="dropdown_page_active">
                     <div class="dropdown_page_item ">
                         <?php 
                         $abc=['about us','contact us','F&Qs','Coming soon'];
@@ -227,9 +230,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         ?>
                     </div>
                 </div>
-                <li onclick='dropblogs()'><span>blogs</span><i class='bx bx-chevron-down'></i></li>
+                <li class="blogs"><span>blogs</span><i class='bx bx-chevron-down'></i></li>
                 <!-- blogs dropdown -->
-                <div class="dropdown_blog">
+                <div class="dropdown_blog_active">
                     <div class="dropdown_blog_item ">
                         <?php 
                         $abc=['sidebar left','sidebar right','all product','list'];
