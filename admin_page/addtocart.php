@@ -1,6 +1,7 @@
 <?php
 session_start();
 ob_start();
+$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['name'];
     include "header.php";
@@ -37,12 +38,12 @@ if(isset($_SESSION['name'])) {
                     $item_img = $_POST['item_img'];
                     $item_price = $_POST['item_price'];
                     $table_name = 'user_name_' . $user ;
-                    $qury_user= mysqli_query($con, "insert into $table_name (name,image,price) values ('$item_name','$item_img','$item_price') ");
+                    $qury_user= mysqli_query($con_userside, "insert into $table_name (name,image,price) values ('$item_name','$item_img','$item_price') ");
                     if ($qury_user) {
                         header("Location: additem.php");
                         exit(); 
                     } else {
-                        echo "Error: " . mysqli_error($con);
+                        echo "Error: " . mysqli_error($con_userside);
                     }
                     ob_end_flush();
                 }

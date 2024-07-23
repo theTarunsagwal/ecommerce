@@ -1,6 +1,7 @@
 <?php
 // session_start();
 // if(isset($_SESSION['name'])){
+$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
     $con = mysqli_connect("localhost","root","","ecommerce");
     $data_wood = mysqli_query($con, 'SELECT * FROM wood');
     // $qurry=mysqli_query($con,"select * from new_product");
@@ -248,7 +249,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         ?>
                     </div>
                 </div>
-                <li><a href="">contact us</a></li>
+                <li><a href="contact_us.php">contact us</a></li>
             </ul>
         </nav>
         <div class="search_shop">
@@ -268,10 +269,10 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             </form>
             <a href="additem.php">
             <i class='bx bxs-shopping-bags'></i>
-            </a>
+        </a>
             <div class="shoping_bag">
-                <a href="">shoping cart</a>
-                <a href="">$0.00</a>
+                <a href="additem.php">shoping cart</a>
+                <a href="additem.php">$0.00</a>
             </div>
         </div>
     </header>

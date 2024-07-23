@@ -17,6 +17,9 @@ if(isset($_SESSION['name'])) {
 <div class="profile-data">
     <div class="profile_user">
         <img src="./upload/<?php echo $row['image']; ?>" alt="loading...">
+        <div class="profile_name">
+            <h1 class="fs-5 mt-3 text-black"><?php echo $row['name'];?></h1>
+        </div>
     </div>
 </div>
 <div class="profile_data">
@@ -59,9 +62,9 @@ if(isset($_SESSION['name'])) {
 </section>
 <script>
     $(document).ready(function(){
-        $('.profile_data').slideUp()
+        $('.profile_data').slideUp(10)
         $('.profile-data').click(function(){
-            $('.profile_data').slideToggle(1000)
+            $('.profile_data').slideToggle(500)
         })
     })
 </script>

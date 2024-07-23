@@ -288,4 +288,10 @@ body{
     border: none;
     background: transparent;
   }
-  
+
+  @media (max-width: 450px) {
+    .main-container{height: 20vh;}
+    .container-detail{transform: translateY(-150%);}
+    .container-detail h1{font-size: 1rem; margin-bottom: 0px !important;}
+    .container-detail a{font-size: .7rem;}
+  }

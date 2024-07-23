@@ -3,6 +3,7 @@ session_start();
 ob_start();
 include "header.php";
 $con = mysqli_connect("localhost","root","","ecommerce");
+$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['name'];
@@ -22,10 +23,10 @@ if(isset($_SESSION['name'])) {
     <?php
     if(isset($_POST['del'])){
         $delete=$_POST['del'];
-        $dstry= mysqli_query($con,"DELETE FROM $table_name WHERE id='$delete'");
+        $dstry= mysqli_query($con_userside,"DELETE FROM $table_name WHERE id='$delete'");
     }
     
-    $qury_user = mysqli_query($con, "SELECT * FROM $table_name");
+    $qury_user = mysqli_query($con_userside, "SELECT * FROM $table_name");
     if(mysqli_num_rows($qury_user) == 0) {
         echo "<div class='empty-set'>
         <img class='img_error' src='../img_ecommerce/img_ecommerce43.jpg'>

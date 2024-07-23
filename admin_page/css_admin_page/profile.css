@@ -53,11 +53,23 @@
 
 .profile_user:hover::after{
     width: 8rem;
-    color: #000;
+    color: #f70707;
     opacity: 1;
+    box-shadow: 0px 1px 5px #666b7f;
     background-color: #f8f9fa;
 }
 
+.profile_name {
+    display: none;
+    position: absolute;
+    top: -10px;
+    z-index: 200;
+    left: -69px;
+}
+
+.profile_user:hover .profile_name {
+    display: block;
+}
 
 .profile_data{
     height: 73vh;
@@ -98,7 +110,7 @@
     width: 4rem;
     border-radius: 50%;
     overflow: hidden;
-    background-color: bisque;
+    /* background-color: bisque; */
 }
 
 .profile_img img{

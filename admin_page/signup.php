@@ -1,5 +1,6 @@
 <?php
 $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -43,7 +44,7 @@ if (isset($_POST['sub'])) {
             $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image) VALUES ('$user', '$email', '$pass', '$upload')");
 
             if ($query) {
-                $table_name = 'user_name_' . mysqli_real_escape_string($con, $user);
+                $table_name = 'user_name_' . mysqli_real_escape_string($con_userside, $user);
                 $create_table_query = "
                     CREATE TABLE IF NOT EXISTS $table_name (
                         id INT UNIQUE AUTO_INCREMENT,
@@ -53,16 +54,16 @@ if (isset($_POST['sub'])) {
                         PRIMARY KEY (id)
                     )";
                 
-                if (mysqli_query($con, $create_table_query)) {
+                if (mysqli_query($con_userside, $create_table_query)) {
                     echo "User registered and table $table_name created successfully.";
                 } else {
-                    echo "Error creating table: " . mysqli_error($con);
+                    echo "Error creating table: " . mysqli_error($con_userside);
                 }
 
                 echo "<script>alert('Thank you for joining');</script>";
                 header("Location: loging.php");
             } else {
-                echo "Error inserting user: " . mysqli_error($con);
+                echo "Error inserting user: " . mysqli_error($con_userside);
                 echo "<script>alert('Write UNIQUE Password and Email already inserted');</script>";
             }
         } else {
