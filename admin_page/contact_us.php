@@ -8,6 +8,9 @@
 </head>
 <body>
     <?php include "header.php" ?>
+    <?php 
+    // include "loading.php"
+    ?>
     <div class="title_contect">
         <div class="main-container">
             <img src="./upload/img_ecommerce37.jpg">

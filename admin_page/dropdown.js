@@ -44,7 +44,7 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
-    $('.dropdown_blog_active').slideUp(10)
+    $('.dropdown_blog_active').slideUp(10);
     $('.blogs').click(function(){
         $('.dropdown_blog_active').slideToggle()
         $('.dropdown_page_active').slideUp(10)

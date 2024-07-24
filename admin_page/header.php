@@ -27,6 +27,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
 </head>
 
 <body>
+<?php include "loading.php"?>
     <header>
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2024 at 10:03 AM
+-- Generation Time: Jul 24, 2024 at 12:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -50,8 +50,17 @@ INSERT INTO `admin` (`id`, `name`, `email`, `password`) VALUES
 CREATE TABLE `contect` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `email` varchar(30) NOT NULL
+  `email` varchar(30) NOT NULL,
+  `message` varchar(600) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contect`
+--
+
+INSERT INTO `contect` (`id`, `name`, `email`, `message`) VALUES
+(1, 'tarun', 'tarunsagwal38@gmail.com', 'hii'),
+(2, 'tarun', 'tarunsagwal38@gmail.com', 'hii');
 
 -- --------------------------------------------------------
 
@@ -157,64 +166,9 @@ CREATE TABLE `user_data` (
 
 INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`) VALUES
 (1, 'tarun', 'tarunsagwal@gmail.com', '12345', NULL),
-(22, 'sukuna', 'sukuna11@gmail.com', '124578', 'face.jpg'),
-(23, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg'),
-(26, 'gojo', 'gojo@gmail.com', '12369', 'face1.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_name_gojo`
---
-
-CREATE TABLE `user_name_gojo` (
-  `id` int(11) NOT NULL,
-  `name` varchar(300) NOT NULL,
-  `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_name_megumi`
---
-
-CREATE TABLE `user_name_megumi` (
-  `id` int(11) NOT NULL,
-  `name` varchar(300) NOT NULL,
-  `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_name_megumi`
---
-
-INSERT INTO `user_name_megumi` (`id`, `name`, `image`, `price`) VALUES
-(13, 'Hubert pendant lamp', 'img_ecommerce25.jpg', '199'),
-(14, 'Beoplay A1', 'img_ecommerce21.jpg', '199');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_name_sukuna`
---
-
-CREATE TABLE `user_name_sukuna` (
-  `id` int(11) NOT NULL,
-  `name` varchar(300) NOT NULL,
-  `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_name_sukuna`
---
-
-INSERT INTO `user_name_sukuna` (`id`, `name`, `image`, `price`) VALUES
-(1, 'Arctander Chair', 'img_ecommerce20.jpg', '250'),
-(19, 'storm jug', 'img_ecommerce39.jpg', '199');
+(28, 'gojo', 'gojo@gmail.com', '12369', 'face1.jpg'),
+(29, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg'),
+(30, 'sukuna', 'sukuna11@gmail.com', '124578', 'face.jpg');
 
 -- --------------------------------------------------------
 
@@ -283,27 +237,6 @@ ALTER TABLE `user_data`
   ADD UNIQUE KEY `password` (`password`);
 
 --
--- Indexes for table `user_name_gojo`
---
-ALTER TABLE `user_name_gojo`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Indexes for table `user_name_megumi`
---
-ALTER TABLE `user_name_megumi`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Indexes for table `user_name_sukuna`
---
-ALTER TABLE `user_name_sukuna`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
-
---
 -- Indexes for table `wood`
 --
 ALTER TABLE `wood`
@@ -323,7 +256,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `contect`
 --
 ALTER TABLE `contect`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `decor_art`
@@ -347,25 +280,7 @@ ALTER TABLE `new_product`
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `user_name_gojo`
---
-ALTER TABLE `user_name_gojo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user_name_megumi`
---
-ALTER TABLE `user_name_megumi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `user_name_sukuna`
---
-ALTER TABLE `user_name_sukuna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `wood`
