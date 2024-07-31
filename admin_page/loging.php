@@ -45,7 +45,9 @@ if(isset($_POST['sub'])){
 
 <body>
 	<div class="logo">
+	<a href="index.php">
 	<img src="./img/logo_black.png" alt="">
+	</a>
 	</div>
 	<div class="container">
 		<div class="form-container">

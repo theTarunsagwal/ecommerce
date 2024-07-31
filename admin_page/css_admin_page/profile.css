@@ -93,6 +93,19 @@
     object-fit: contain;
 }
 
+#login{
+    position: fixed;
+    right: 2%;
+    bottom: 3%;
+    z-index: 105;
+    box-shadow: 1px 1px 10px #666b7f;
+    font-size: 1.5rem;
+    padding:.5rem;
+    border-radius: 50%;
+    color: #000;
+    background-color: #f8f9fa;
+}
+
 .profile_header{
     display: flex;
     align-items: center;
@@ -124,7 +137,7 @@
     transition: .5s;
   }
 
-.content_profile{
+.content_profile:nth-child(1){
     border-bottom: 1px solid #000;
     padding: 1rem;
 }
@@ -133,3 +146,81 @@
     transform: scale(1.1);
     color: #dbbb9a;
 }
+
+/* logout btn */
+
+
+
+.Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: #f8f9fa;
+  }
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: #cecbcb;
+  }
+  
+  /* text */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: #666b7f;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+  }
+  
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 10px;
+  }
+  
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  
+  .Btn:active {
+    transform: translate(2px, 2px);
+  }
+  
+  .bx-menu,.menu_box {
+    display: none;
+  }
