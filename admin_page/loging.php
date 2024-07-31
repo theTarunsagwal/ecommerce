@@ -59,7 +59,7 @@ if(isset($_POST['sub'])){
 					<label for="password">Password</label>
 					<input type="password" name="pswd" id="password" placeholder="">
 					<div class="forgot">
-						<a rel="noopener noreferrer" href="#">Forgot Password ?</a>
+						<a rel="noopener noreferrer" href="forgat.php">Forgot Password ?</a>
 					</div>
 				</div>
 				<button class="sign" name='sub'>Sign in</button>
