@@ -148,9 +148,6 @@
 }
 
 /* logout btn */
-
-
-
 .Btn {
     display: flex;
     align-items: center;
@@ -221,6 +218,3 @@
     transform: translate(2px, 2px);
   }
   
-  .bx-menu,.menu_box {
-    display: none;
-  }

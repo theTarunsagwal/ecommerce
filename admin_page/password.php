@@ -1,6 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<link rel="stylesheet" href="./css_admin_page/loging.css">
+</head>
+<body>
 <?php
  session_start();
  $con = mysqli_connect('localhost','root','','ecommerce');
+ if(isset($_SESSION['name'])) {
 //   echo $_SESSION['name'];
 if(isset($_POST['sub'])){
     $checkpswd=$_POST['pswd'];
@@ -25,15 +35,7 @@ if(isset($_POST['sub'])){
 }
    ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-	<link rel="stylesheet" href="./css_admin_page/loging.css">
-</head>
-<body>
+
 	<div class="logo">
 <a href="loging.php">
 	<img src="./img/logo_black.png" alt="">
@@ -56,6 +58,6 @@ if(isset($_POST['sub'])){
 			</form>
 		</div>
 	</div>
-
+<?php } ?>
 </body>
 </html>

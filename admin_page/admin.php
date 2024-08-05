@@ -2,16 +2,17 @@
 session_start();
 if(isset($_SESSION['adminname'])){
 $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 $data = mysqli_query($con, 'SELECT * FROM user_data');
 
 if(isset($_POST['del'])) {
-    $email = $_POST['del'];
-    $del = mysqli_query($con, "DELETE FROM user_data WHERE email='$email'");
+    $user_name = $_POST['del'];
+    $del = mysqli_query($con, "DELETE FROM user_data WHERE name='$user_name'");
+    $del = mysqli_query($con_userside, "Drop table user_name_$user_name ");
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +27,7 @@ if(isset($_POST['del'])) {
 <body>
     <header>
         <div class="logo">
-        <img src="./logo.png" alt="">
+        <img src="./img/logo.png" alt="">
         </div>
         <div class="menu">
             <ul>
@@ -91,7 +92,7 @@ if(isset($_POST['del'])) {
             </td>
             <td>
                 <form method="post">
-                    <button class="button" type="submit" value="<?php echo $srch['email']; ?>" name="del">
+                    <button class="button" type="submit" value="<?php echo $srch['name']; ?>" name="del">
                         <svg viewBox="0 0 448 512" class="svgIcon">
                             <path
                                 d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
@@ -121,7 +122,7 @@ if(isset($_POST['del'])) {
             </td>
             <td>
                 <form method="post">
-                    <button class="button" type="submit" value="<?php echo $comp['email']; ?>" name="del">
+                    <button class="button" type="submit" value="<?php echo $comp['name']; ?>" name="del">
                         <svg viewBox="0 0 448 512" class="svgIcon">
                             <path
                                 d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">

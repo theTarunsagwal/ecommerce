@@ -16,67 +16,70 @@ if (isset($_POST['sub'])) {
     $user = $_POST['user'];
     $email = $_POST['email'];
     $pass = $_POST['pswd'];
+    $c_pass = $_POST['cpswd'];
     
-    if (isset($_FILES['pfile'])) {
-        $upload = $_FILES['pfile']['name'];
-        $tmp_upload = $_FILES['pfile']['tmp_name'];
-        $upload_dir = 'upload/' . $upload;
-        
-        if (move_uploaded_file($tmp_upload, $upload_dir)) {
-            $mail = new PHPMailer(true);
-            try {
-                $mail->isSMTP();
-                $mail->Host = "smtp.gmail.com";
-                $mail->SMTPAuth = true;
-                $mail->Username = "tarunsagwal38@gmail.com";
-                $mail->Password = "nbzdfxjyeqydzwww";
-                $mail->SMTPSecure = "ssl";
-                $mail->Port = 465;
-                $mail->setFrom('tarunsagwal38@gmail.com', 'Megumi Shoplift');
-                $mail->addAddress($email);
-                $mail->Subject = "Welcome to Megumi Shoplift";
-                $mail->Body = "<h1>$user, thank you for joining Shoplift. We hope you have a great experience!</h1>";
-                $mail->send();
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-
-            $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image) VALUES ('$user', '$email', '$pass', '$upload')");
-
-            if ($query) {
-                $table_name = 'user_name_' . mysqli_real_escape_string($con_userside, $user);
-                $create_table_query = "
-                    CREATE TABLE IF NOT EXISTS $table_name (
-                        id INT UNIQUE AUTO_INCREMENT,
-                        name VARCHAR(300) NOT NULL,
-                        image TEXT NOT NULL,
-                        price VARCHAR(30) NOT NULL,
-                        PRIMARY KEY (id)
-                    )";
-                
-                if (mysqli_query($con_userside, $create_table_query)) {
-                    echo "User registered and table $table_name created successfully.";
-                } else {
-                    echo "Error creating table: " . mysqli_error($con_userside);
+    if($pass == $c_pass){
+        if (isset($_FILES['pfile'])) {
+            $upload = $_FILES['pfile']['name'];
+            $tmp_upload = $_FILES['pfile']['tmp_name'];
+            $upload_dir = 'upload/' . $upload;
+            
+            if (move_uploaded_file($tmp_upload, $upload_dir)) {
+                $mail = new PHPMailer(true);
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = "smtp.gmail.com";
+                    $mail->SMTPAuth = true;
+                    $mail->Username = "tarunsagwal38@gmail.com";
+                    $mail->Password = "nbzdfxjyeqydzwww";
+                    $mail->SMTPSecure = "ssl";
+                    $mail->Port = 465;
+                    $mail->setFrom('tarunsagwal38@gmail.com', 'Megumi Shoplift');
+                    $mail->addAddress($email);
+                    $mail->Subject = "Welcome to Megumi Shoplift";
+                    $mail->Body = "<h1>$user, thank you for joining Shoplift. We hope you have a great experience!</h1>";
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
-
-                echo "<script>alert('Thank you for joining');</script>";
-                header("Location: loging.php");
+    
+                $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image,created_at) VALUES ('$user', '$email', '$pass', '$upload', now())");
+    
+                if ($query) {
+                    $table_name = 'user_name_' . mysqli_real_escape_string($con_userside, $user);
+                    $create_table_query = "
+                        CREATE TABLE IF NOT EXISTS $table_name (
+                            id INT UNIQUE AUTO_INCREMENT,
+                            name VARCHAR(300) NOT NULL,
+                            image TEXT NOT NULL,
+                            price VARCHAR(30) NOT NULL,
+                            PRIMARY KEY (id)
+                        )";
+                    
+                    if (mysqli_query($con_userside, $create_table_query)) {
+                        echo "User registered and table $table_name created successfully.";
+                    } else {
+                        echo "Error creating table: " . mysqli_error($con_userside);
+                    }
+                    header("Location: verfication.php");
+    
+                    // echo "<script>alert('Thank you for joining');</script>";
+                } else {
+                    echo "<script>alert('Write UNIQUE Password and Email already inserted');</script>";
+                }
             } else {
-                echo "Error inserting user: " . mysqli_error($con_userside);
-                echo "<script>alert('Write UNIQUE Password and Email already inserted');</script>";
+                echo "<script>alert('Error uploading file.');</script>";
             }
         } else {
-            echo "Error uploading file.";
+            echo "<script>alert('No file selected.');</script>";
         }
     } else {
-        echo "No file selected.";
+        echo "<script>alert('password are not match');</script>";
     }
 
     mysqli_close($con);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

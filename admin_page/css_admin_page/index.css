@@ -13,8 +13,12 @@
     width:15rem;
 }
 
+header{
+    height: 12vh;
+}
+
 header,.nav_ul{
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
@@ -127,7 +131,7 @@ header a{
     padding: 1rem 0rem;
 }
 .dropdown-content,.dropdown-item{
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     padding: 1rem .7rem 1rem 1rem;
     gap: 1rem;
@@ -378,7 +382,7 @@ header a{
 .card-price{color: red;}
 
 /*------------------ display none ----------------*/
-.menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
+.filter,.menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
 
 
 /*----------------------hover---------------------*/
@@ -413,7 +417,7 @@ header a{
     }
 }
 @media (max-width:1000px) {
-    nav .nav_ul{display: none;}
+    nav .nav_ul{display: none !important;}
 
     .dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_page,.dropdown_reponsive_blog{
         transform: translateX(100%);

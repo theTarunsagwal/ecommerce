@@ -16,7 +16,7 @@
 
 <body>
     <?php include "header.php" ?>
-  <?php include "profile_user.php" ?>
+    <?php include "profile_user.php" ?>
 
     <section>
         <div class="main">
@@ -102,100 +102,10 @@
         ?>
         </div>
     </section>
+    
+    <?php include "item.php" ?>
 
-    <section>
-        <div class="product-item">
-            <div class="product">
-                <div class="product-box">
-                    <h5 class="text-black  fw-bolder">product categories</h5>
-                    <form method="post">
-                        <div class="checkbox-container pt-3">
-                            <label><input type="checkbox" name="option" value="1" onclick="onlyOne(this)"> bar
-                                furniture</label>
-                            <label><input type="checkbox" name="option" value="2" onclick="onlyOne(this)"> decor
-                                art</label>
-                            <label><input type="checkbox" name="option" value="3" onclick="onlyOne(this)"> dining
-                                room</label>
-                            <label><input type="checkbox" name="option" value="4" onclick="onlyOne(this)"> new
-                                product</label>
-                        </div>
-                    </form>
-
-                    <div class="line mb-4"></div>
-
-                    <div class="w-full max-w-xs p-4 bg-white shadow-md rounded-lg">
-                        <div class="flex justify-between items-center">
-                            <label for="minMaxRange" class="block text-gray-700 text-sm font-bold mb-2">Select
-                                Range:</label>
-                            <div>
-                                <span id="minValue" class="text-lg text-gray-700">$100</span> -
-                                <span id="maxValue" class="text-lg text-gray-700">$1000</span>
-                            </div>
-                        </div>
-                       <form method="post">
-                       <input id="minMaxRange" type="range" name="min" min="100" max="1000" value="100" step="10" class="slider"
-                            oninput="updateRange(this.value, 'min')">
-                        <input id="minMaxRange2" type="range" name="max" min="100" max="1000" value="1000" step="10" class="slider"
-                            oninput="updateRange(this.value, 'max')">
-                            <button type="submit" class="mt-2" name="value" >
-    <span class="box">
-        filter
-    </span>
-</button>
-                       </form>
-                    </div>
-
-                    <div class="line mb-4"></div>
-    <label class="select">
-  <select>
-    <option value="1">A-Z</option>
-    <option value="2">Z-A</option>
-    <option value="3">low to high</option>
-    <option value="3">high to low</option>
-  </select>
-</label>
-
-                    <div class="line"></div>
-
-                    <div class="new-product mt-5">
-                        <h1 class="fs-5 fw-bold">new product</h1>
-                        <?php
-                        if(isset($_GET['name'])){
-                            $name_inst=$_GET['name'];
-                            $name_query=mysqli_query($con,"SELECT * from new_prodcut WHERE name like '$name_inst'");
-                            if($name_query){
-                                $_SESSION['id']=$name_query['name'];
-                            }
-                        }
-                            $new_item=mysqli_query($con,"select * from new_product where id in (7,8,1,2,9)");
-                            while($row_inst = mysqli_fetch_assoc($new_item)){
-                                ?>
-                        <a href="addtocart.php?id=<?php echo $row_inst['name'] ?>">
-
-                            <div class="product-inst p-3">
-                                <div class="img-product">
-                                    <img src="./upload/<?php echo $row_inst['img'];?>" alt="loading...">
-                                </div>
-                                <div class="product-about">
-                                    <h1 class="fs-6 fw-bold text-black">
-                                        <?php echo $row_inst['name'] ?>
-                                    </h1>
-                                    <h2 class="fs-6 fw-bold text-danger">$
-                                        <?php echo $row_inst['price'] ?>.00
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                        <?php } ?>
-                    </div>
-
-                </div>
-            </div>
-            <div class="item-section">
-                <?php include "item.php" ?>
-            </div>
-        </div>
-    </section>
+    <?php include "footer.php" ?>
 
     <script>
         function onlyOne(checkbox) {
@@ -214,6 +124,98 @@
             }
         }
     </script>
+
+<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="./vendor/animsition/js/animsition.min.js"></script>
+	<script src="./vendor/bootstrap/js/popper.js"></script>
+	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="./vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function () {
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./vendor/slick/slick.min.js"></script>
+	<script src="./js/slick-custom.js"></script>
+	<script src="./vendor/parallax100/parallax100.js"></script>
+	<script>
+		$('.parallax100').parallax100();
+	</script>
+	<script src="./vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function () { // the containers for all your galleries
+			$(this).magnificPopup({
+				delegate: 'a', // the selector for gallery item
+				type: 'image',
+				gallery: {
+					enabled: true
+				},
+				mainClass: 'mfp-fade'
+			});
+		});
+	</script>
+	<script src="./vendor/isotope/isotope.pkgd.min.js"></script>
+	<script src="./vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function (e) {
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function () {
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function () {
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function () {
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function () {
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+
+	</script>
+	<!--===============================================================================================-->
+	<script src="./vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function () {
+			$(this).css('position', 'relative');
+			$(this).css('overflow', 'hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function () {
+				ps.update();
+			})
+		});
+	</script>
+	<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 </body>
 
 </html>

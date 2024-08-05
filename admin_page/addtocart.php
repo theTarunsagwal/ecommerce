@@ -99,7 +99,7 @@ if(isset($_SESSION['name'])) {
             }
             ?>
         </div>
-    </section>
+</section>
 
     <section>
         <div class="description-container">

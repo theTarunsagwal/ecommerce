@@ -17,6 +17,8 @@ if(isset($_SESSION['adminname'])){
 </head>
 
 <body>
+<?php include "profile_user.php" ?>
+
     <header>
         <div class="logo">
         <img src="./logo.png" alt="">

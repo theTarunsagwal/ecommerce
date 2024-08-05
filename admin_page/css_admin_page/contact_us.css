@@ -79,12 +79,18 @@ body{
     display: flex;
     flex-wrap: wrap;
     gap: 2rem !important;
+    padding: .5rem !important;  
     align-items: center;
     justify-content: center;
+}
+.contact-form{
+    margin-bottom: 10px;
 }
 
 .enter-detaile input{
     padding: .5rem 2rem;
+    border: 1px solid #000 !important;
+    border-radius: 10px;
     /* margin-left: 3rem; */
 }
 
@@ -92,6 +98,8 @@ body{
     width: 70%;
     height: 30vh;
     resize: none !important;
+    border: 1px solid #000 !important;
+    border-radius: 7px;
 }
 
 .btn-adjest{
@@ -107,7 +115,7 @@ body{
     align-items: center;
     gap: .75rem;
     background-color: var(--clr);
-    color: #fff;
+    color: #fff !important;
     border-radius: 10rem;
     font-weight: 600;
     padding: .75rem 1.5rem;
