@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2024 at 06:57 PM
+-- Generation Time: Aug 10, 2024 at 07:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -31,15 +31,17 @@ CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `department` int(11) DEFAULT 1,
+  `last_login` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `name`, `email`, `password`) VALUES
-(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123');
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `department`, `last_login`) VALUES
+(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-08-10 15:54:35');
 
 -- --------------------------------------------------------
 
@@ -111,6 +113,26 @@ INSERT INTO `decor_art` (`id`, `decor_name`, `decor_price`, `decor_img`, `decor_
 (10, 'Langue Stack Chair', '272', 'img_ecommerce28.jpg', 'chairs', NULL),
 (11, 'Laundry Baskets', '452', 'img_ecommerce30.jpg', 'chairs', NULL),
 (12, 'mini table lamp', '890', 'img_ecommerce32.jpg', 'chairs', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+  `dep_id` int(11) NOT NULL,
+  `dep_name` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`dep_id`, `dep_name`) VALUES
+(1, 'Admin'),
+(2, 'User'),
+(3, 'manger');
 
 -- --------------------------------------------------------
 
@@ -199,20 +221,21 @@ CREATE TABLE `user_data` (
   `password` varchar(30) NOT NULL,
   `image` varchar(300) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `roll` int(11) DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_data`
 --
 
-INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`) VALUES
-(1, 'tarun', 'tarunsagwal@gmail.com', '12345', NULL, '2024-08-05 16:36:44', '2024-08-05 16:36:44'),
-(29, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg', '2024-08-05 16:36:44', '2024-08-05 16:49:57'),
-(30, 'sukuna', 'sukuna11@gmail.com', '1236980', 'face.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44'),
-(37, 'Shahid', 'sahhid@gmail.com', '123045', 'img_ecommerce07.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44'),
-(41, 'gojo', 'gojo@gmail.com', '1236987', 'face1.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44'),
-(43, 'sahil', 'sahil@gmail.com', '147856', 'img_ecommerce06.jpg', '2024-08-05 16:48:36', '2024-08-05 16:49:19');
+INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`) VALUES
+(1, 'tarun', 'tarunsagwal@gmail.com', '12345', NULL, '2024-08-05 16:36:44', '2024-08-05 16:36:44', 2),
+(29, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg', '2024-08-05 16:36:44', '2024-08-10 14:06:42', 2),
+(30, 'sukuna', 'sukuna11@gmail.com', '1236980', 'face.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44', 2),
+(37, 'Shahid', 'sahhid@gmail.com', '123045', 'img_ecommerce07.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44', 2),
+(41, 'gojo', 'gojo@gmail.com', '1236987', 'face1.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44', 2),
+(43, 'sahil', 'sahil@gmail.com', '147856', 'img_ecommerce06.jpg', '2024-08-05 16:48:36', '2024-08-05 16:49:19', 2);
 
 -- --------------------------------------------------------
 
@@ -246,7 +269,8 @@ INSERT INTO `wood` (`id`, `image_name`, `price`, `image`, `about`) VALUES
 ALTER TABLE `admin`
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `password` (`password`);
+  ADD UNIQUE KEY `password` (`password`),
+  ADD KEY `fk_department` (`department`);
 
 --
 -- Indexes for table `art_item`
@@ -266,6 +290,12 @@ ALTER TABLE `contect`
 ALTER TABLE `decor_art`
   ADD PRIMARY KEY (`id`) USING BTREE,
   ADD KEY `decor_item` (`decor_item`);
+
+--
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`dep_id`) USING BTREE;
 
 --
 -- Indexes for table `dining_products`
@@ -293,7 +323,8 @@ ALTER TABLE `user_data`
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `password` (`password`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD UNIQUE KEY `name` (`name`),
+  ADD KEY `fk_roll` (`roll`);
 
 --
 -- Indexes for table `wood`
@@ -324,6 +355,12 @@ ALTER TABLE `decor_art`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `dep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `dining_room`
 --
 ALTER TABLE `dining_room`
@@ -352,6 +389,12 @@ ALTER TABLE `wood`
 --
 
 --
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `fk_department` FOREIGN KEY (`department`) REFERENCES `department` (`dep_id`);
+
+--
 -- Constraints for table `decor_art`
 --
 ALTER TABLE `decor_art`
@@ -362,6 +405,12 @@ ALTER TABLE `decor_art`
 --
 ALTER TABLE `dining_room`
   ADD CONSTRAINT `fk_dining_product` FOREIGN KEY (`dining_product`) REFERENCES `dining_products` (`product_id`);
+
+--
+-- Constraints for table `user_data`
+--
+ALTER TABLE `user_data`
+  ADD CONSTRAINT `fk_roll` FOREIGN KEY (`roll`) REFERENCES `department` (`dep_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
