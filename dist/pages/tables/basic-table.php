@@ -27,8 +27,7 @@
     session_start();
     if(isset($_SESSION['adminname'])){
        $con = mysqli_connect('localhost','root','','ecommerce');
-       $query_admin = mysqli_query($con, "SELECT * FROM 'admin' LEFT JOIN department ON admin.department = department.dep_id;");
-       $query_user = mysqli_query($con, "SELECT * FROM 'user_data' LEFT JOIN department ON user_data.roll = department.dep_id;");
+       $con_p = mysqli_connect('localhost','root','','product_data');
        ?>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
@@ -223,55 +222,58 @@
             <div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Table with contextual classes</h4>
-                  <p class="card-description"> Add class <code>.table-{color}</code>
+                  <h4 class="card-title">Product Details</h4>
                   </p>
                   <table class="table table-bordered">
                     <thead>
-                      <tr>
-                        <th> # </th>
-                        <th> First name </th>
-                        <th> Product </th>
+                      <tr class="table-info">
+                        <th> product name </th>
+                        <th> Product brand </th>
                         <th> Amount </th>
-                        <th> Deadline </th>
                       </tr>
                     </thead>
                     <tbody>
+                    <?php
+                  $qry_brand=mysqli_query($con_p,"SELECT * FROM `product` LEFT JOIN product_brand ON product.brand_name = product_brand.p_id;");
+                  while($brand_item=mysqli_fetch_array($qry_brand)){
+                   
+                    ?>
+                    <tr>
+                      <td> <?php echo $brand_item['name']; ?>  </td>
+                      <td> <?php echo $brand_item['p_name']; ?> </td>
+                      <td>  <?php echo $brand_item['price']; ?> </td>
+                    </tr>
+                    <?php
+                  }
+                  ?>
+                    </tbody>
+                  </table>
+                  <table class="table mt-5 table-bordered">
+                    <thead>
                       <tr class="table-info">
-                        <td> 1 </td>
-                        <td> Herman Beck </td>
-                        <td> Photoshop </td>
-                        <td> $ 77.99 </td>
-                        <td> May 15, 2015 </td>
+                        <th> product name </th>
+                        <th> Main Image </th>
+                        <th> front Image </th>
+                        <th> back Image </th>
+                        <th> side Image </th>
                       </tr>
-                      <tr class="table-warning">
-                        <td> 2 </td>
-                        <td> Messsy Adam </td>
-                        <td> Flash </td>
-                        <td> $245.30 </td>
-                        <td> July 1, 2015 </td>
-                      </tr>
-                      <tr class="table-danger">
-                        <td> 3 </td>
-                        <td> John Richards </td>
-                        <td> Premeire </td>
-                        <td> $138.00 </td>
-                        <td> Apr 12, 2015 </td>
-                      </tr>
-                      <tr class="table-success">
-                        <td> 4 </td>
-                        <td> Peter Meggik </td>
-                        <td> After effects </td>
-                        <td> $ 77.99 </td>
-                        <td> May 15, 2015 </td>
-                      </tr>
-                      <tr class="table-primary">
-                        <td> 5 </td>
-                        <td> Edward </td>
-                        <td> Illustrator </td>
-                        <td> $ 160.25 </td>
-                        <td> May 03, 2015 </td>
-                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                  $qry_img=mysqli_query($con_p,"SELECT * FROM `product` RIGHT JOIN relative_img ON product.id = relative_img.id_img;");
+                  while($img_item=mysqli_fetch_array($qry_img)){
+                   
+                    ?>
+                    <tr>
+                      <td> <?php echo $img_item['name']; ?>  </td>
+                      <td> <?php echo $img_item['img']; ?> </td>
+                      <td> <?php echo $img_item['img1']; ?> </td>
+                      <td> <?php echo $img_item['img2']; ?> </td>
+                      <td> <?php echo $img_item['img3']; ?> </td>
+                    </tr>
+                    <?php
+                  }
+                  ?>
                     </tbody>
                   </table>
                 </div>
@@ -312,7 +314,7 @@
   <!-- End custom js for this page -->
   <?php
     }else{
-      header('Location: login.php');
+      header('Location:../../loging.php');
     }
      ?>
 </body>
