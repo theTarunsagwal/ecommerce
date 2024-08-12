@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="../../assets/vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="../../assets/vendors/font-awesome/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="../../assets/vendors/select2/select2.min.css">
@@ -28,7 +31,8 @@
   <?php
   session_start();
   if(isset($_SESSION['adminname'])){
-    $con = mysqli_connect("localhost","root","","ecommerce")
+    $con = mysqli_connect("localhost","root","","ecommerce");
+    $con_p = mysqli_connect("localhost","root","","product_data");
   ?>
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
@@ -92,7 +96,9 @@
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2"><?php echo $_SESSION['adminname'] ?></span>
+                <span class="font-weight-bold mb-2">
+                  <?php echo $_SESSION['adminname'] ?>
+                </span>
                 <span class="text-secondary text-small">Project Manager</span>
               </div>
               <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -164,56 +170,60 @@
                   <h4 class="card-title">Product upload </h4>
 
                   <?php
-                  if(isset($_POST['sub'])){
-                  $pname=$_POST['pname'];
-                  $price=$_POST['price'];
-                  $about=$_POST['about'];
-                  $pname=$_POST['pname'];
-                  $brand = $_POST['brand'];
-                  $product=$_POST['product'];
+if(isset($_POST['sub'])){
+    $pname = $_POST['pname'];
+    $price = $_POST['price'];
+    $about = $_POST['about'];
+    $brand = $_POST['brand'];
+    // $product = $_POST['product'];
+    $filename = "";
 
-                  if(isset($_FILES['img'])){
-                    $filename = $_FILES['img']['name'];
-                    $tmpfile = $_FILES['img']['tmp_name'];
-                    move_uploaded_file($tmpfile, '../../../pages/upload/'.$filename);
-                  }
-                  switch($product){
-                    case 'Dining Room':
-                      $query_work="select * from dining_room";
-                      $query = "INSERT INTO `dining_room`(`dining_name`, `dining_price`, `dining_image`, `dining_about`, `brand_names`) VALUES ('$pname',$price,'$filename','$about','$brand')";
-                      break;
-                      case 'Decor Art':
-                      $query_work="select * from decor_art";
-                        $query = "INSERT INTO `decor_art`(`decor_name`, `decor_price`, `decor_img`, `decor_about`, `brand_name`) VALUES ('$pname',$price,'$filename','$about','$brand')";
-                      break;
-                      case 'Wood':
-                      $query_work="select * from wood";
-
-                        $query = "INSERT INTO `wood`(`image_name`, `price`, `image`, `about`, `brand_names_w`) VALUES ('$pname',$price,'$filename','$about','$brand')";
-                      break;
-                      case 'New Product':
-                      $query_work="select * from new_product";
-
-                        $query = "INSERT INTO `new_product`(`name`, `price`, `img`, `about`, `brand_name_n`) VALUES ('$pname',$price,'$filename','$about','$brand')";
-                      break;
-                      case '---select option---':
-                        echo "Please select a product category";
-                      break;
-                    
-                  }?>
-                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    // Validation checks
+    if(empty($pname) || empty($price) || empty($about) || empty($brand) || !isset($_FILES['img'])){
+        ?>
+                  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                  <script src="https://code.jquery.com/jquery-3.7.1.js"
+                    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
                   <script>
-                      $(document).ready(function(){
-                        swal('hello');
-                      });
-                    </script>
+                    $(document).ready(function () {
+                      swal("Error", "Please fill all fields and upload the product", "error");
+                    });
+                  </script>
                   <?php
-                }
-                  ?>
+    } else {
+        // Handling file upload
+        if(isset($_FILES['img'])){
+            $filename = $_FILES['img']['name'];
+            $tmpfile = $_FILES['img']['tmp_name'];
+            move_uploaded_file($tmpfile, '../../../pages/upload/'.$filename);
+        }
 
-                  <form class="form-sample" method="POST" enctype="multipart/form-data">
-                    <p class="card-description"> Product info </p>
+        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', $brand, '$about')");
+
+        if($query) {
+            ?>
+                  <script>
+                    $(document).ready(function () {
+                      swal("Success", "Product uploaded successfully", "success");
+                    });
+                  </script>
+                  
+                  <?php
+        } else {
+            ?>
+                  <script>
+                    $(document).ready(function () {
+                      swal("Error", "Failed to upload product", "error");
+                    });
+                  </script>
+                  <?php
+        }
+    }
+}
+?>
+
+                  <form class="form-sample" method="POST" id="form" enctype="multipart/form-data">
+                    <p class="card-description">Product info</p>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
@@ -238,37 +248,21 @@
                           <label class="col-sm-3 col-form-label">Item section</label>
                           <div class="col-sm-9">
                             <select class="form-select" name="brand">
-                              <option>---select option---</option>
-                              <option value="1">Nike</option>
-                              <option value="2">Adidas</option>
-                              <option value="3">Gucci</option>
-                              <option value="4">H&M</option>
-                              <option value="5">Louis Vuitton</option>
-                              <option value="6">Zara</option>
-                              <option value="7">Uniqlo</option>
-                              <option value="8">Levi's</option>
-                              <option value="9">chanel</option>
-                              <option value="10">ralph lauren</option>
+                              <option value="">---select option---</option>
+                              <option value="Nike">Nike</option>
+                              <option value="Adidas">Adidas</option>
+                              <option value="Gucci">Gucci</option>
+                              <option value="H&M">H&M</option>
+                              <option value="Louis Vuitton">Louis Vuitton</option>
+                              <option value="Zara">Zara</option>
+                              <option value="Uniqlo">Uniqlo</option>
+                              <option value="Levi's">Levi's</option>
+                              <option value="Chanel">Chanel</option>
+                              <option value="Ralph Lauren">Ralph Lauren</option>
                             </select>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Product</label>
-                          <div class="col-sm-9">
-                            <select class="form-select" name="product">
-                              <option>---select option---</option>
-                              <option>Dining Room</option>
-                              <option>Decor Art</option>
-                              <option>Wood</option>
-                              <option>New Product</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">File upload</label>
@@ -285,10 +279,26 @@
                           </div>
                         </div>
                       </div>
-
+                      <!-- <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Product</label>
+                          <div class="col-sm-9">
+                            <select class="form-select" name="product">
+                              <option value="">---select option---</option>
+                              <option>Dining Room</option>
+                              <option>Decor Art</option>
+                              <option>Wood</option>
+                              <option>New Product</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="row">
+                      
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label" for="exampleTextarea1">Detaile</label>
+                          <label class="col-sm-3 col-form-label" for="exampleTextarea1">Details</label>
                           <div class="col-sm-9">
                             <textarea class="form-control" id="exampleTextarea1" name="about" rows="4"></textarea>
                           </div>
@@ -300,19 +310,50 @@
                 </div>
               </div>
             </div>
+            <div class="col-12 grid-margin" id="show">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Product related image upload </h4>
+                  <?php
+if(isset($_POST['submit'])){
+    $img = $_POST['qty'];
+    $fileInputs = ['img1', 'img2', 'img3'];
+    $fileNames = [];
 
-            <div class="col-12 grid-margin">
-               <div class="card">
-                 <div class="card-body">
-                  <h4 class="card-title">Product related image  upload </h4>
+    // Loop through the file inputs and handle the uploads
+    foreach ($fileInputs as $inputName) {
+        if (isset($_FILES[$inputName])) {
+            $fileimg = $_FILES[$inputName]['name'];
+            $tmpfile = $_FILES[$inputName]['tmp_name'];
+            $uploadPath = '../../../pages/upload/' . $fileimg;
+
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($tmpfile, $uploadPath)) {
+                // Store the filename in the $fileNames array
+                $fileNames[$inputName] = $fileimg;
+            }
+        }
+    }
+
+    // Construct and execute the SQL query to insert the filenames into the database
+    $relative_img = mysqli_query($con_p, "INSERT INTO relative_img (id_img, img1, img2, img3) VALUES ('$img', '{$fileNames['img1']}', '{$fileNames['img2']}', '{$fileNames['img3']}')");
+
+    if ($relative_img) {
+        echo "Images uploaded and inserted successfully.";
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+?>
+
                   <form class="form-sample" method="POST" enctype="multipart/form-data">
                     <p class="card-description"> Product info </p>
                     <div class="row">
                       <div class="col-md-8">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Relative  image</label>
+                          <label class="col-sm-3 col-form-label">Relative image</label>
                           <div class="col-md-6">
-                            <input type="file" name="img" class="file-upload-default">
+                            <input type="file" name="img1" class="file-upload-default">
                             <div class="input-group col-xs-12">
                               <input type="text" class="form-control file-upload-info" disabled
                                 placeholder="Upload Image">
@@ -324,9 +365,9 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Relative  image</label>
+                          <label class="col-sm-3 col-form-label">Relative image</label>
                           <div class="col-md-6">
-                            <input type="file" name="img" class="file-upload-default">
+                            <input type="file" name="img2" class="file-upload-default">
                             <div class="input-group col-xs-12">
                               <input type="text" class="form-control file-upload-info" disabled
                                 placeholder="Upload Image">
@@ -338,9 +379,9 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Relative  image</label>
+                          <label class="col-sm-3 col-form-label">Relative image</label>
                           <div class="col-md-6">
-                            <input type="file" name="img" class="file-upload-default">
+                            <input type="file" name="img3" class="file-upload-default">
                             <div class="input-group col-xs-12">
                               <input type="text" class="form-control file-upload-info" disabled
                                 placeholder="Upload Image">
@@ -352,57 +393,31 @@
                           </div>
                         </div>
                       </div>
-                      <?php
-                         $query_s=mysqli_query($con,$query_work);
-                         while ($row=mysqli_fetch_array($query_s)){
-                         }
-                         
-                      ?>
+
                       <div class="row">
                         <div class="col-md-4">
-                        <div class="form-group row">
-                          <label class="col-sm-4 col-form-label">Item section</label>
-                          <div class="col-sm-9">
-                            <select class="form-select" name="brand">
-                              <option>---select option---</option>
-                              <option value="1">Nike</option>
-                              <option value="2">Adidas</option>
-                              <option value="3">Gucci</option>
-                              <option value="4">H&M</option>
-                              <option value="5">Louis Vuitton</option>
-                              <option value="6">Zara</option>
-                              <option value="7">Uniqlo</option>
-                              <option value="8">Levi's</option>
-                              <option value="9">chanel</option>
-                              <option value="10">ralph lauren</option>
-                            </select>
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Item section</label>
+                            <div class="col-sm-9">
+                              <select class="form-select" name="qty">
+                                <option>---select option---</option>
+                                <?php
+                                $qury_int = mysqli_query($con_p,"select * from product");
+                                while($rows= mysqli_fetch_array($qury_int)){
+                                ?>
+                                <option value="<?php echo $rows['id']; ?>"><?php echo $rows['name']; ?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
                           </div>
                         </div>
-                        </div>
-                        <div class="col-md-4">
-                        <div class="form-group row">
-                          <label class="col-sm-4 col-form-label">Item section</label>
-                          <div class="col-sm-9">
-                            <select class="form-select" name="product">
-                              <option>---select option---</option>
-                            <?php
-                         $query_s=mysqli_query($con,$query_work);
-                         while ($row=mysqli_fetch_array($query_s)){                         
-                      ?>
-                              <option><?php echo $row['dining_name'] ?></option>
-                              <?php
-                         }
-                         ?>
-                         </select>
-                          </div>
-                        </div>
-                        </div>
+
                       </div>
                     </div>
-                    <button type="submit" id="btn" class="btn btn-gradient-primary me-2" name="sub">Submit</button>
+                    <button type="submit" id="btn" class="btn btn-gradient-primary me-2" name="submit">Submit</button>
                   </form>
-                 </div>
                 </div>
+              </div>
             </div>
 
           </div>
@@ -425,7 +440,7 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../assets/vendors/js/vendor.bundle.base.js"></scrip>
+  <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="../../assets/vendors/select2/select2.min.js"></script>
@@ -448,9 +463,9 @@
     }
   </script>
   <!-- End custom js for this page -->
-   <?php
+  <?php
   }else{
-    header('Location:../pages/loging.php'); 
+    header('Location:../../loging.php'); 
   }
    ?>
 </body>
