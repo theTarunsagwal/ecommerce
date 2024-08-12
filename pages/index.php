@@ -3,11 +3,7 @@ session_start();
 // if(isset($_SESSION['name'])){
     $con = mysqli_connect("localhost","root","","ecommerce");
     $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-    // $qurry=mysqli_query($con,"select * from new_product");
-    $data_product = mysqli_query($con, 'SELECT * FROM new_product');
-    $data_wood = mysqli_query($con, 'SELECT * FROM wood');
-    $data_art = mysqli_query($con, 'SELECT * FROM decor_art');
-    $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
+
 
     ?>
 
@@ -47,7 +43,7 @@ session_start();
       ?>
 
 
-<section class="section-slide">
+    <section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
 				<div class="item-slick1" style="background-image: url(./img_ecommerce/img_ecommerce11.jpg);">

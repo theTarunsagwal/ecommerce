@@ -14,6 +14,7 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -198,27 +199,96 @@ if(isset( $_SESSION['adminname'])){
                 </div>
               </div>
             </div>
+        
+
             <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
+              <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                  <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-start">Visit And Sales Statistics</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <div class="doughnutjs-wrapper d-flex justify-content-center">
-                      <canvas id="traffic-chart"></canvas>
-                    </div>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
-                  </div>
+                <div class="card-body">
+        <div class="clearfix">
+            <h4 class="card-title float-start">Visit And Sales Statistics</h4>
+            <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+        </div>
+        <canvas id="visit-sale-chart" class="mt-4"></canvas>
+    </div>
+    <div class="data_date">
+      <?php
+        $date  = mysqli_query($con, "SELECT DATE(created_at) AS month, COUNT(*) AS total_users FROM user_data GROUP BY MONTH(created_at)");
+        while($r = mysqli_fetch_array($date)){
+      ?>
+      <input type="hidden" value="
+        <?php
+          $d = strtotime($r['month']);
+             echo date('M', $d);
+        ?>
+      " class="d_naam">
+      <input type="hidden" value="
+        <?php
+             echo $r['total_users']
+        ?>
+      " class="d_val">
+      <?php
+        }
+      ?>
+    </div>
+    <script>
+      const d_naam = document.querySelectorAll('.data_date .d_naam');
+      const d_val = document.querySelectorAll('.data_date .d_val');
+      const d_n = [];
+      const d_v = [];
+      d_naam.forEach((e)=>{
+        d_n.push(e.value);
+      });
+      d_val.forEach((e)=>{
+        d_v.push(e.value);
+      });
+    const labels = d_n;
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'My First Dataset',
+        data: d_v,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(153, 102, 255)',
+          'rgb(201, 203, 207)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // Config block
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+
+    // Render the chart
+    const ctx = document.getElementById('visit-sale-chart').getContext('2d');
+    new Chart(ctx, config);
+    </script>
+
+
                 </div>
               </div>
             </div>
@@ -325,7 +395,7 @@ if(isset( $_SESSION['adminname'])){
     <!-- End custom js for this page -->
      <?php 
     }else{
-      header('Location: login.php'); 
+      header('Location:../pages/loging.php'); 
     }
      ?>
   </body>
