@@ -3,7 +3,7 @@ session_start();
 // if(isset($_SESSION['name'])){
     $con = mysqli_connect("localhost","root","","ecommerce");
     $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-
+    $con_pro = mysqli_connect("localhost", "root", "", "product_data");
 
     ?>
 
@@ -130,13 +130,13 @@ session_start();
     <section>
         <div class="scale_card">
             <?php        
-        $rows = mysqli_query($con, "SELECT * FROM new_product WHERE id IN (4, 5, 6)");
-        while($row_woods=mysqli_fetch_assoc($rows)){
+        $rows = mysqli_query($con_pro, "SELECT * FROM product WHERE id IN (7, 5, 6)");
+        while($row_woods=mysqli_fetch_array($rows)){
         ?>
         <?php
         if(isset($_GET['name'])){
             $titel = $_GET['name'];
-            $head_titel = mysqli_query($con, "SELECT * FROM new_product WHERE name = '$titel'");
+            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
             $row_jump = mysqli_fetch_assoc($head_titel);
             if($row_jump){
                 $_SESSION['id'] = $row_jump['name'];
@@ -156,23 +156,23 @@ session_start();
         <div class="multi_card">
             <div class="chair_card">
                 <?php
-            $img=mysqli_query($con,"select * from dining_room where id in (6)");
+            $img=mysqli_query($con_pro,"select * from product where id in (3)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
              <?php
-        if(isset($_GET['image_name'])){
-            $titel = $_GET['image_name'];
-            $head_titel = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name = '$titel'");
+        if(isset($_GET['name'])){
+            $titel = $_GET['name'];
+            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
             $row_jump = mysqli_fetch_assoc($head_titel);
             if($row_jump){
-                $_SESSION['id'] = $row_jump['image_name'];
+                $_SESSION['id'] = $row_jump['name'];
             }
         }
         ?>
-        <a href="product.php?id=<?php echo $row['dining_name'] ?>">
-            <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
+        <a href="product.php?id=<?php echo $row['name'] ?>">
+            <img src="./upload/<?php echo $row['img'];?>" alt="">
             <h3>
-                <?php echo $row['dining_name'];}?>
+                <?php echo $row['name'];}?>
             </h3>
         </a> 
             </div>
@@ -335,4 +335,3 @@ session_start();
 </body>
 
 </html>
-

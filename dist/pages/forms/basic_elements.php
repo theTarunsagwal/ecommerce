@@ -168,60 +168,6 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Product upload </h4>
-
-                  <?php
-if(isset($_POST['sub'])){
-    $pname = $_POST['pname'];
-    $price = $_POST['price'];
-    $about = $_POST['about'];
-    $brand = $_POST['brand'];
-    // $product = $_POST['product'];
-    $filename = "";
-
-    // Validation checks
-    if(empty($pname) || empty($price) || empty($about) || empty($brand) || !isset($_FILES['img'])){
-        ?>
-                  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                  <script src="https://code.jquery.com/jquery-3.7.1.js"
-                    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-                  <script>
-                    $(document).ready(function () {
-                      swal("Error", "Please fill all fields and upload the product", "error");
-                    });
-                  </script>
-                  <?php
-    } else {
-        // Handling file upload
-        if(isset($_FILES['img'])){
-            $filename = $_FILES['img']['name'];
-            $tmpfile = $_FILES['img']['tmp_name'];
-            move_uploaded_file($tmpfile, '../../../pages/upload/'.$filename);
-        }
-
-        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', $brand, '$about')");
-
-        if($query) {
-            ?>
-                  <script>
-                    $(document).ready(function () {
-                      swal("Success", "Product uploaded successfully", "success");
-                    });
-                  </script>
-                  
-                  <?php
-        } else {
-            ?>
-                  <script>
-                    $(document).ready(function () {
-                      swal("Error", "Failed to upload product", "error");
-                    });
-                  </script>
-                  <?php
-        }
-    }
-}
-?>
-
                   <form class="form-sample" method="POST" id="form" enctype="multipart/form-data">
                     <p class="card-description">Product info</p>
                     <div class="row">
@@ -310,43 +256,83 @@ if(isset($_POST['sub'])){
                 </div>
               </div>
             </div>
+            
+            <?php
+if(isset($_POST['sub'])){
+    // Get form data
+    $pname = $_POST['pname'];
+    $price = $_POST['price'];
+    $about = $_POST['about'];
+    $brand = $_POST['brand'];
+    $filename = "";
+
+    // Validation checks
+    if(empty($pname) || empty($price) || empty($about) || empty($brand) || !isset($_FILES['img'])){
+        ?>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                swal("Error", "Please fill all fields and upload the product", "error");
+            });
+        </script>
+        <?php
+    } else {
+        // Handling file upload
+        if(isset($_FILES['img'])){
+            $filename = $_FILES['img']['name'];
+            $tmpfile = $_FILES['img']['tmp_name'];
+            move_uploaded_file($tmpfile, '../../../pages/upload/'.$filename);
+        }
+
+        // Execute the SQL query
+        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', '$brand', '$about')");
+
+        if($query) {
+            ?>
+            <script>
+                $(document).ready(function () {
+                    swal("Success", "Product uploaded successfully", "success");
+                });
+            </script>
             <div class="col-12 grid-margin" id="show">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Product related image upload </h4>
                   <?php
-if(isset($_POST['submit'])){
-    $img = $_POST['qty'];
-    $fileInputs = ['img1', 'img2', 'img3'];
-    $fileNames = [];
+                     if(isset($_POST['submit'])){
+                         $img = $_POST['qty'];
+                         $fileInputs = ['img1', 'img2', 'img3'];
+                         $fileNames = [];
+                     
+                         // Loop through the file inputs and handle the uploads
+                         foreach ($fileInputs as $inputName) {
+                             if (isset($_FILES[$inputName])) {
+                                 $fileimg = $_FILES[$inputName]['name'];
+                                 $tmpfile = $_FILES[$inputName]['tmp_name'];
+                                 $uploadPath = '../../../pages/upload/' . $fileimg;
+                     
+                                 // Move the uploaded file to the target directory
+                                 if (move_uploaded_file($tmpfile, $uploadPath)) {
+                                     // Store the filename in the $fileNames array
+                                     $fileNames[$inputName] = $fileimg;
+                                 }
+                             }
+                         }
+                     
+                         // Construct and execute the SQL query to insert the filenames into the database
+                         $relative_img = mysqli_query($con_p, "INSERT INTO relative_img (id_img, img1, img2, img3) VALUES ('$img', '{$fileNames['img1']}', '{$fileNames['img2']}', '{$fileNames['img3']}')");
+                     
+                         if ($relative_img) {
+                             echo "Images uploaded and inserted successfully.";
+                         } else {
+                             echo "Error: " . mysqli_error($con);
+                         }
+                     }
+                   ?>
 
-    // Loop through the file inputs and handle the uploads
-    foreach ($fileInputs as $inputName) {
-        if (isset($_FILES[$inputName])) {
-            $fileimg = $_FILES[$inputName]['name'];
-            $tmpfile = $_FILES[$inputName]['tmp_name'];
-            $uploadPath = '../../../pages/upload/' . $fileimg;
-
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($tmpfile, $uploadPath)) {
-                // Store the filename in the $fileNames array
-                $fileNames[$inputName] = $fileimg;
-            }
-        }
-    }
-
-    // Construct and execute the SQL query to insert the filenames into the database
-    $relative_img = mysqli_query($con_p, "INSERT INTO relative_img (id_img, img1, img2, img3) VALUES ('$img', '{$fileNames['img1']}', '{$fileNames['img2']}', '{$fileNames['img3']}')");
-
-    if ($relative_img) {
-        echo "Images uploaded and inserted successfully.";
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
-}
-?>
-
-                  <form class="form-sample" method="POST" enctype="multipart/form-data">
+                  <form class="form-sample mb-4" method="POST" enctype="multipart/form-data">
                     <p class="card-description"> Product info </p>
                     <div class="row">
                       <div class="col-md-8">
@@ -419,6 +405,19 @@ if(isset($_POST['submit'])){
                 </div>
               </div>
             </div>
+            <?php
+        } else {
+            ?>
+            <script>
+                $(document).ready(function () {
+                    swal("Error", "Failed to upload product", "error");
+                });
+            </script>
+            <?php
+        }
+    }
+}
+?>
 
           </div>
         </div>

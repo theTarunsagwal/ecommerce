@@ -314,7 +314,7 @@
   <!-- End custom js for this page -->
   <?php
     }else{
-      header('Location:../../loging.php');
+      header('Location: ../../loging.php');
     }
      ?>
 </body>
