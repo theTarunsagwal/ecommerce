@@ -194,10 +194,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     });
 });
  
-
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
 </body>
-
 </html>

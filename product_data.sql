@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2024 at 06:49 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Aug 14, 2024 at 06:31 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `cat_id` int(11) NOT NULL,
+  `cat_name` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
+(0, 'other'),
+(1, 'men'),
+(2, 'women'),
+(3, 'furniture'),
+(4, 'shoes'),
+(5, 'watch');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -33,23 +56,29 @@ CREATE TABLE `product` (
   `price` varchar(30) NOT NULL,
   `img` varchar(600) NOT NULL,
   `brand_name` int(11) DEFAULT 0,
-  `about` varchar(225) DEFAULT 'product'
+  `about` varchar(225) DEFAULT 'product',
+  `category` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`) VALUES
-(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product'),
-(3, 'mini lamp', '156', 'img_ecommerce03.jpg', 1, 'product'),
-(4, 'product', '201', 'img_ecommerce37.jpg', 5, 'product'),
-(5, 'table', '399', 'img_ecommerce12.jpg', 6, 'product'),
-(6, 'sofas', '869', 'img_ecommerce13.jpg', 9, 'product'),
-(7, 'pilo', '745', 'img_ecommerce14.jpg', 4, 'product'),
-(8, 'storm jug', '199', 'img_ecommerce39.jpg', 10, 'product'),
-(9, 'storm small jug', '154', 'img_ecommerce38.jpg', 7, 'product'),
-(10, 'victo pedant lamp', '321', 'img_ecommerce40.jpg', 2, 'product');
+INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `category`) VALUES
+(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product', 0),
+(3, 'mini lamp', '156', 'img_ecommerce03.jpg', 1, 'product', 0),
+(4, 'product', '201', 'img_ecommerce37.jpg', 5, 'product', 0),
+(5, 'table', '399', 'img_ecommerce12.jpg', 6, 'product', 0),
+(6, 'sofas', '869', 'img_ecommerce13.jpg', 9, 'product', 0),
+(7, 'pilo', '745', 'img_ecommerce14.jpg', 4, 'product', 0),
+(8, 'storm jug', '199', 'img_ecommerce39.jpg', 10, 'product', 0),
+(9, 'storm small jug', '154', 'img_ecommerce38.jpg', 7, 'product', 0),
+(10, 'victo pedant lamp', '321', 'img_ecommerce40.jpg', 2, 'product', 0),
+(19, 'sofa', '741', 'img_ecommerce15.jpg', 2, '441', 0),
+(20, 'cloth', '200', 'gallery-04.jpg', 5, 'product', 0),
+(21, 'watch', '102', 'img_ecommerce17.jpg', 2, 'product', 0),
+(22, 'women', '100', 'product-04.jpg', 9, 'product', 0),
+(23, 'shirt', '300', 'product-03.jpg', 6, 'product', 1);
 
 -- --------------------------------------------------------
 
@@ -104,11 +133,18 @@ INSERT INTO `relative_img` (`id_img`, `img1`, `img2`, `img3`) VALUES
 --
 
 --
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`cat_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`) USING BTREE,
-  ADD KEY `product_brand` (`brand_name`);
+  ADD KEY `product_brand` (`brand_name`),
+  ADD KEY `category` (`category`);
 
 --
 -- Indexes for table `product_brand`
@@ -130,7 +166,7 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -140,7 +176,8 @@ ALTER TABLE `product`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_brand` FOREIGN KEY (`brand_name`) REFERENCES `product_brand` (`p_id`);
+  ADD CONSTRAINT `product_brand` FOREIGN KEY (`brand_name`) REFERENCES `product_brand` (`p_id`),
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category`) REFERENCES `category` (`cat_id`);
 
 --
 -- Constraints for table `relative_img`

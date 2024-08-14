@@ -211,6 +211,24 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">category</label>
+                          <div class="col-sm-9">
+                            <select class="form-select" name="product">
+                              <option value="0">---select option---</option>
+                              <option value="1">Men</option>
+                              <option value="2">Women</option>
+                              <option value="3">furniture</option>
+                              <option value="4">shoes</option>
+                              <option value="5">watch</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="form-group row">
                           <label class="col-sm-3 col-form-label">File upload</label>
                           <div class="col-md-6">
                             <input type="file" name="img" class="file-upload-default">
@@ -225,23 +243,7 @@
                           </div>
                         </div>
                       </div>
-                      <!-- <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Product</label>
-                          <div class="col-sm-9">
-                            <select class="form-select" name="product">
-                              <option value="">---select option---</option>
-                              <option>Dining Room</option>
-                              <option>Decor Art</option>
-                              <option>Wood</option>
-                              <option>New Product</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div> -->
-                    </div>
-                    <div class="row">
-                      
+
                       <div class="col-md-6">
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label" for="exampleTextarea1">Details</label>
@@ -259,11 +261,12 @@
             
             <?php
 if(isset($_POST['sub'])){
-    // Get form data
+
     $pname = $_POST['pname'];
     $price = $_POST['price'];
     $about = $_POST['about'];
     $brand = $_POST['brand'];
+    $product = $_POST['product'];
     $filename = "";
 
     // Validation checks
@@ -287,8 +290,8 @@ if(isset($_POST['sub'])){
         }
 
         // Execute the SQL query
-        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', 
-        $brand, '$about')");
+        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about,category) VALUES ('$pname', $price, '$filename', 
+        $brand, '$about' ,'$product')");
 
         if($query) {
             ?>
