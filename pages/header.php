@@ -36,118 +36,9 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             </a>
         </div>
         <nav>
-            <ul class="nav_ul">
-                <li class="home"><span>home</span><i class='bx bx-chevron-down'></i></li>
-                <!-- home dropdown -->
-                <div class="dropdown_active">
-                    <div class="dropdown-item">
-                        <?php
-                        $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
-                        $count=0;
-                        while($count<7){
-                        ?>
-                        <a href="index.php">
-                            <?php echo $ab[$count];
-                        ?>
-                        </a>
-                        <?php
-                        $count++;
-                        }
-                        ?>
-                    </div>
-                </div>
-                <li class="shops"><span>shops</span><i class='bx bx-chevron-down'></i></li>
-                <!-- shops dropdown -->
-                <div class="dropdown_active_shop">
-                    <div class="dropdown-content-item">
-                        <div class="dropdown-item">
-                            <h1>collection</h1>
-                            <?php
-                        $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
-                        $count=0;
-                        while($count<7){
-                        ?>
-                            <a href="#">
-                                <?php echo $ab[$count];
-                        ?>
-                            </a>
-                            <?php
-                        $count++;
-                        }
-                        ?>
-                        </div>
-                        <div class="dropdown-item">
-                            <h1>shop pages</h1>
-                            <?php
-                        $ab=['sidebar left','sidebar right','full width','full width - no filter','filter top','lighting','living room'];
-                        $count=0;
-                        while($count<7){
-                        ?>
-                            <a href="#">
-                                <?php echo $ab[$count];
-                        ?>
-                            </a>
-                            <?php
-                        $count++;
-                        }
-                        ?>
-                        </div>
-                        <div class="dropdown-item">
-                            <h1>product pages</h1>
-                            <?php
-                        $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
-                        $count=0;
-                        while($count<7){
-                        ?>
-                            <a href="#">
-                                <?php echo $ab[$count];
-                        ?>
-                            </a>
-                            <?php
-                        $count++;
-                        }
-                        ?>
-                        </div>
-                        <div class="dropdown-item">
-                            <h1>new product</h1>
-                            <?php
-                        $ab=['sidebar left','sidebar right','full width','full width - no filter','filter top','lighting','living room'];
-                        $count=0;
-                        while($count<7){
-                        ?>
-                            <a href="#">
-                                <?php echo $ab[$count];
-                        ?>
-                            </a>
-                            <?php
-                        $count++;
-                        }
-                        ?>
-                        </div>
-                        <div class="dropdown-item">
-                            <h1>new product</h1>
-                            <?php
-                            $data_products=mysqli_query($con, "SELECT * FROM new_product where id in (1,2) ");
-                            while($row_pro = mysqli_fetch_array($data_products)){
-                                ?>
-                            <div class="product_img_price">
-                                <div class="product_img">
-                                    <img src="./upload/<?php echo $row_pro['img']?>" alt="">
-                                </div>
-                                <div class="product_price">
-                                    <h1>
-                                        <?php echo $row_pro['name'];?>
-                                    </h1>
-                                    <h4>$
-                                        <?php echo $row_pro['price'];?>.00
-                                    </h4>
-                                </div>
-                            </div>
-                            <?php }; ?>
-                        </div>
-                    </div>
-                </div>
-                <li class="collect"><span>collections</span><i class='bx bx-chevron-down'></i></li>
+            <ul class="nav_ul" style="gap: 1rem;">
+                <li class="home d-flex align-items-center g-2"><i class='bx bx-home-alt'></i><a href="./index.php"><span>home</span></a></li>
+                <li class="collect"><i class='bx bxs-collection'></i><span>collections</span></li>
                 <!-- collections dropdown -->
                 <div class="dropdown_coll_active">
                     <div class="dropdown_content_box">
@@ -214,7 +105,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         <?php }?>
                     </div>
                 </div>
-                <li class="pages"><span>pages</span><i class='bx bx-chevron-down'></i></li>
+                <li class="pages"><i class='bx bxs-file-blank'></i><span>pages</span></li>
                 <!-- pages dropdown -->
                 <div class="dropdown_page_active">
                     <div class="dropdown_page_item ">
@@ -232,25 +123,8 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
                         ?>
                     </div>
                 </div>
-                <li class="blogs"><span>blogs</span><i class='bx bx-chevron-down'></i></li>
-                <!-- blogs dropdown -->
-                <div class="dropdown_blog_active">
-                    <div class="dropdown_blog_item ">
-                        <?php 
-                        $abc=['sidebar left','sidebar right','all product','list'];
-                        $num=0;
-                        while($num<4){
-                        ?>
-                        <a href="#">
-                            <?php echo $abc[$num]?>
-                        </a>
-                        <?php
-                        $num ++;
-                        }
-                        ?>
-                    </div>
-                </div>
-                <li><a href="contact_us.php">contact us</a></li>
+               
+                <li><i class='bx bxs-contact'></i><a href="contact_us.php">contact us</a></li>
             </ul>
         </nav>
         <div class="search_shop">
@@ -280,49 +154,11 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <div class="menubar">
         <div class="menu_bar">
             <ul class="menu_ul">
-                <li onclick="drophomes()">home<i class='bx bx-right-arrow-alt'></i></li>
-                <li onclick="dropshops()">shops<i class='bx bx-right-arrow-alt'></i></li>
+                <li>home<i class='bx bx-right-arrow-alt'></i></li>
                 <li>collections</li>
                 <li onclick="droppages()">pages<i class='bx bx-right-arrow-alt'></i></li>
-                <li onclick="dropblog()">blogs<i class='bx bx-right-arrow-alt'></i></li>
                 <li>contact us</li>
             </ul>
-            <div class="dropdown_reponsive">
-                <h1 onclick="gohome()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>home</h1>
-                <div class="dropdown-item-responsive">
-                    <?php
-            $ab=['all products','bar furniture','decor art','dining room','headboards','lighting','living room'];
-            $count=0;
-            while($count<7){
-            ?>
-                    <a href="#">
-                        <?php echo $ab[$count];
-            ?>
-                    </a>
-                    <?php
-            $count++;
-            }
-            ?>
-                </div>
-            </div>
-            <div class="dropdown_reponsive_shop">
-                <h1 onclick="goshop()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>shops</h1>
-                <div class="dropdown-item-responsive-shop">
-                    <?php
-            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
-            $count=0;
-            while($count<7){
-            ?>
-                    <a href="#">
-                        <?php echo $ab[$count];
-            ?>
-                    </a>
-                    <?php
-            $count++;
-            }
-            ?>
-                </div>
-            </div>
             <div class="dropdown_reponsive_page">
                 <h1 onclick="gopage()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>pages</h1>
                 <div class="dropdown-item-responsive-page">
@@ -341,24 +177,7 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             ?>
                 </div>
             </div>
-            <div class="dropdown_reponsive_blog">
-                <h1 onclick="goblog()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>blogs</h1>
-                <div class="dropdown-item-responsive-blog">
-                    <?php
-            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
-            $count=0;
-            while($count<7){
-            ?>
-                    <a href="#">
-                        <?php echo $ab[$count];
-            ?>
-                    </a>
-                    <?php
-            $count++;
-            }
-            ?>
-                </div>
-            </div>
+            
         </div>
     </div>
 

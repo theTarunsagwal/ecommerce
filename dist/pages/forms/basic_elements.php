@@ -194,17 +194,17 @@
                           <label class="col-sm-3 col-form-label">Item section</label>
                           <div class="col-sm-9">
                             <select class="form-select" name="brand">
-                              <option value="">---select option---</option>
-                              <option value="Nike">Nike</option>
-                              <option value="Adidas">Adidas</option>
-                              <option value="Gucci">Gucci</option>
-                              <option value="H&M">H&M</option>
-                              <option value="Louis Vuitton">Louis Vuitton</option>
-                              <option value="Zara">Zara</option>
-                              <option value="Uniqlo">Uniqlo</option>
-                              <option value="Levi's">Levi's</option>
-                              <option value="Chanel">Chanel</option>
-                              <option value="Ralph Lauren">Ralph Lauren</option>
+                              <option value="0">---select option---</option>
+                              <option value="1">Nike</option>
+                              <option value="2">Adidas</option>
+                              <option value="3">Gucci</option>
+                              <option value="4">H&M</option>
+                              <option value="5">Louis Vuitton</option>
+                              <option value="6">Zara</option>
+                              <option value="7">Uniqlo</option>
+                              <option value="8">Levi's</option>
+                              <option value="9">Chanel</option>
+                              <option value="10">Ralph Lauren</option>
                             </select>
                           </div>
                         </div>
@@ -287,7 +287,8 @@ if(isset($_POST['sub'])){
         }
 
         // Execute the SQL query
-        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', '$brand', '$about')");
+        $query = mysqli_query($con_p, "INSERT INTO product (name, price, img, brand_name, about) VALUES ('$pname', $price, '$filename', 
+        $brand, '$about')");
 
         if($query) {
             ?>

@@ -156,7 +156,7 @@ session_start();
         <div class="multi_card">
             <div class="chair_card">
                 <?php
-            $img=mysqli_query($con_pro,"select * from product where id in (3)");
+            $img=mysqli_query($con_pro,"select * from product where id in (19)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
              <?php
@@ -180,54 +180,54 @@ session_start();
                 <div class="clock_decor">
                     <div class="decor">
                         <?php
-            $img=mysqli_query($con,"select * from decor_art where id in (4)");
+            $img=mysqli_query($con_pro,"select * from product where id in (20)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
             <?php
-            if(isset($_GET['image_name'])){
-            $titel = $_GET['image_name'];
-            $head_titel = mysqli_query($con, "SELECT * FROM decor_art WHERE decor_name = '$titel'");
+            if(isset($_GET['name'])){
+            $titel = $_GET['name'];
+            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
             $row_jump = mysqli_fetch_assoc($head_titel);
             if($row_jump){
-                $_SESSION['id'] = $row_jump['image_name'];
+                $_SESSION['id'] = $row_jump['name'];
             }
         }
         ?>
-        <a href="product.php?id=<?php echo $row['decor_name'] ?>">
-                        <img src="./upload/<?php echo $row['decor_img'];?>" alt="">
+        <a href="product.php?id=<?php echo $row['name'] ?>">
+                        <img src="./upload/<?php echo $row['img'];?>" alt="">
                         <h3>
-                            <?php echo $row['decor_name'];}?>
+                            <?php echo $row['name'];}?>
                         </h3>
                     </a>
                     </div>
                     <div class="wall_clock">
                         <?php
-            $img=mysqli_query($con,"select * from dining_room where id in (7)");
+            $img=mysqli_query($con_pro,"select * from product where id in (21)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
             <?php
-            if(isset($_GET['image_name'])){
-                $titel = $_GET['image_name'];
-                $head_titel = mysqli_query($con, "SELECT * FROM dining_room WHERE dining_name = '$titel'");
+            if(isset($_GET['name'])){
+                $titel = $_GET['name'];
+                $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
                 $row_jump = mysqli_fetch_assoc($head_titel);
                 if($row_jump){
-                    $_SESSION['id'] = $row_jump['image_name'];
+                    $_SESSION['id'] = $row_jump['name'];
                 }
             }
             ?>
-            <a href="product.php?id=<?php echo $row['dining_name'] ?>">
-                        <img src="./upload/<?php echo $row['dining_image'];?>" alt="">
+            <a href="product.php?id=<?php echo $row['name'] ?>">
+                        <img src="./upload/<?php echo $row['img'];?>" alt="">
                         <h3>
-                            <?php echo $row['dining_name'];}?>
+                            <?php echo $row['name'];}?>
                         </h3>
                     </div>
                 </div>
                 <div class="kitchen">
                     <?php
-            $img=mysqli_query($con,"select * from dining_room where id in (8)");
+            $img=mysqli_query($con_pro,"select * from product where id in (22)");
             while ($row=mysqli_fetch_assoc($img)){
                 ?>
-                    <img src="./upload/<?php echo $row['dining_image'];}?>" alt="">
+                    <img src="./upload/<?php echo $row['img'];}?>" alt="">
                 </a>
                 </div>
             </div>
