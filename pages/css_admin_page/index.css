@@ -24,7 +24,7 @@ header,.nav_ul{
     display: flex !important;
     justify-content: space-between;
     align-items: center;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     padding: 1rem 1rem .5rem 1rem;
     cursor: pointer;
 }

@@ -24,11 +24,13 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css_admin_page/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
 <?php include "loading.php"?>
-    <header>
+    <header id="header">
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
             <a href="index.php">
@@ -180,8 +182,20 @@ $data_room = mysqli_query($con, 'SELECT * FROM dining_room');
             
         </div>
     </div>
+    <script>
+    $(document).ready(function() {
+    $(window).scroll(function() {
+        var header = $("#header");
+        if ($(this).scrollTop() > 600) {
+            header.css("background-color", "#f8f9fa");
+        } else {
+            header.css("background-color", "transparent",);
+        }
+    });
+});
+ 
 
-
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
 </body>
