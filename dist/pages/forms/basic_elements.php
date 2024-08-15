@@ -392,7 +392,7 @@ if(isset($_POST['sub'])){
                               <select class="form-select" name="qty">
                                 <option>---select option---</option>
                                 <?php
-                                $qury_int = mysqli_query($con_p,"select * from product");
+                                $qury_int = mysqli_query($con_p,"SELECT * FROM `product` ORDER BY `product`.`id` DESC");
                                 while($rows= mysqli_fetch_array($qury_int)){
                                 ?>
                                 <option value="<?php echo $rows['id']; ?>"><?php echo $rows['name']; ?></option>
@@ -468,7 +468,7 @@ if(isset($_POST['sub'])){
   <!-- End custom js for this page -->
   <?php
   }else{
-    header('Location:../../loging.php'); 
+     header('Location: ../../loging.php');
   }
    ?>
 </body>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2024 at 06:31 PM
+-- Generation Time: Aug 15, 2024 at 12:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,11 +74,13 @@ INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `cat
 (8, 'storm jug', '199', 'img_ecommerce39.jpg', 10, 'product', 0),
 (9, 'storm small jug', '154', 'img_ecommerce38.jpg', 7, 'product', 0),
 (10, 'victo pedant lamp', '321', 'img_ecommerce40.jpg', 2, 'product', 0),
-(19, 'sofa', '741', 'img_ecommerce15.jpg', 2, '441', 0),
-(20, 'cloth', '200', 'gallery-04.jpg', 5, 'product', 0),
+(19, 'furniture', '741', 'img_ecommerce15.jpg', 2, '441', 3),
+(20, 'men', '200', 'gallery-04.jpg', 5, 'product', 1),
 (21, 'watch', '102', 'img_ecommerce17.jpg', 2, 'product', 0),
-(22, 'women', '100', 'product-04.jpg', 9, 'product', 0),
-(23, 'shirt', '300', 'product-03.jpg', 6, 'product', 1);
+(22, 'women', '100', 'product-04.jpg', 9, 'product', 2),
+(23, 'shirt', '300', 'product-03.jpg', 6, 'product', 1),
+(24, 'blue shrit', '302', 'product-03.jpg', 7, 'men choice', 1),
+(25, 'whit shirt', '520', 'product-01.jpg', 7, 'simple ', 2);
 
 -- --------------------------------------------------------
 
@@ -166,7 +168,7 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables

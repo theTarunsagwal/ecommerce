@@ -2,7 +2,7 @@
 			<div class="container">
 				<div class="p-b-10">
 					<h3 class="ltext-103 cl5">
-						Product Overview
+						New Product & Trending Category
 					</h3>
 				</div>
 
@@ -143,7 +143,7 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="image/product/" alt="IMG-PRODUCT">
+									<img src="product/product-01.jpg" alt="IMG-PRODUCT">
 
 									<a href="#"
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -158,7 +158,7 @@
 										</a>
 
 										<span class="stext-105 cl3">
-											$ 
+											$30.5
 										</span>
 									</div>
 
@@ -775,4 +775,4 @@
 					</div>
 				</div>
 			</div>
-		</section>
+</section>

@@ -21,7 +21,6 @@ session_start();
     <link rel="stylesheet" href="./css_admin_page/index.css">
 
     <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="./wood.php">
 	<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" type="text/css" href="./fonts/linearicons-v1.0.0/icon-font.min.css">
 	<link rel="stylesheet" type="text/css" href="./vendor/animate/animate.css">
@@ -180,55 +179,57 @@ session_start();
                 <div class="clock_decor">
                     <div class="decor">
                         <?php
-            $img=mysqli_query($con_pro,"select * from product where id in (20)");
-            while ($row=mysqli_fetch_assoc($img)){
-            ?>
-            <?php
-            if(isset($_GET['name'])){
-            $titel = $_GET['name'];
-            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
-            $row_jump = mysqli_fetch_assoc($head_titel);
-            if($row_jump){
-                $_SESSION['id'] = $row_jump['name'];
-            }
-        }
-        ?>
-        <a href="product.php?id=<?php echo $row['name'] ?>">
-                        <img src="./upload/<?php echo $row['img'];?>" alt="">
-                        <h3>
-                            <?php echo $row['name'];}?>
-                        </h3>
-                    </a>
+                            $img=mysqli_query($con_pro,"select * from product where id in (20)");
+                            while ($row=mysqli_fetch_assoc($img)){
+                            ?>
+                            <?php
+                            if(isset($_GET['name'])){
+                            $titel = $_GET['name'];
+                            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
+                            $row_jump = mysqli_fetch_assoc($head_titel);
+                            if($row_jump){
+                                $_SESSION['id'] = $row_jump['name'];
+                            }
+                        }
+                        ?>
+                        <a href="product.php?id=<?php echo $row['name'] ?>">
+                            <img src="./upload/<?php echo $row['img'];?>" alt="">
+                            <h3>
+                                <?php echo $row['name'];}?>
+                            </h3>
+                        </a>
                     </div>
                     <div class="wall_clock">
                         <?php
-            $img=mysqli_query($con_pro,"select * from product where id in (21)");
-            while ($row=mysqli_fetch_assoc($img)){
-            ?>
-            <?php
-            if(isset($_GET['name'])){
-                $titel = $_GET['name'];
-                $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
-                $row_jump = mysqli_fetch_assoc($head_titel);
-                if($row_jump){
-                    $_SESSION['id'] = $row_jump['name'];
-                }
-            }
-            ?>
-            <a href="product.php?id=<?php echo $row['name'] ?>">
-                        <img src="./upload/<?php echo $row['img'];?>" alt="">
-                        <h3>
-                            <?php echo $row['name'];}?>
-                        </h3>
+                        $img=mysqli_query($con_pro,"select * from product where id in (21)");
+                        while ($row=mysqli_fetch_assoc($img)){
+                        ?>
+                        <?php
+                        if(isset($_GET['name'])){
+                            $titel = $_GET['name'];
+                            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
+                            $row_jump = mysqli_fetch_assoc($head_titel);
+                            if($row_jump){
+                                $_SESSION['id'] = $row_jump['name'];
+                            }
+                        }
+                        ?>
+                        <a href="product.php?id=<?php echo $row['name'] ?>">
+                            <img src="./upload/<?php echo $row['img'];?>" alt="">
+                            <h3>
+                                <?php echo $row['name'];}?>
+                            </h3>
+					    </a>
                     </div>
                 </div>
-                <div class="kitchen">
-                    <?php
-            $img=mysqli_query($con_pro,"select * from product where id in (22)");
-            while ($row=mysqli_fetch_assoc($img)){
-                ?>
-                    <img src="./upload/<?php echo $row['img'];}?>" alt="">
-                </a>
+                <div class="kitchen" style="height: 60vh; margin-top: 8%;">
+                        <?php
+                         $img=mysqli_query($con_pro,"select * from product where id in (22)");
+                         while ($row=mysqli_fetch_assoc($img)){
+                         ?>
+					<a href="product.php?id=<?php echo $row['name'] ?>">
+                        <img src="./upload/<?php echo $row['img'];}?>" alt="">
+				    </a>
                 </div>
             </div>
         </div>
@@ -237,14 +238,22 @@ session_start();
     <?php include "item.php" ?>
     <?php include "footer.php" ?>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="./vendor/animsition/js/animsition.min.js"></script>
 	<script src="./vendor/bootstrap/js/popper.js"></script>
 	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="./vendor/select2/select2.min.js"></script>
+	<script src="./vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="./vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="./vendor/sweetalert/sweetalert.min.js"></script>
+<script src="./vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script src="./vendor/daterangepicker/moment.min.js"></script>
+	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="./vendor/slick/slick.min.js"></script>
+	<script src="./js/slick-custom.js"></script>
+	<script src="./vendor/parallax100/parallax100.js"></script>
 	<script>
 		$(".js-select2").each(function () {
 			$(this).select2({
@@ -253,15 +262,9 @@ session_start();
 			});
 		})
 	</script>
-	<script src="./vendor/daterangepicker/moment.min.js"></script>
-	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
-	<script src="./vendor/slick/slick.min.js"></script>
-	<script src="./js/slick-custom.js"></script>
-	<script src="./vendor/parallax100/parallax100.js"></script>
 	<script>
 		$('.parallax100').parallax100();
-	</script>
-	<script src="./vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+		</script>
 	<script>
 		$('.gallery-lb').each(function () { // the containers for all your galleries
 			$(this).magnificPopup({
@@ -273,9 +276,7 @@ session_start();
 				mainClass: 'mfp-fade'
 			});
 		});
-	</script>
-	<script src="./vendor/isotope/isotope.pkgd.min.js"></script>
-	<script src="./vendor/sweetalert/sweetalert.min.js"></script>
+		</script>
 	<script>
 		$('.js-addwish-b2').on('click', function (e) {
 			e.preventDefault();
@@ -313,7 +314,6 @@ session_start();
 
 	</script>
 	<!--===============================================================================================-->
-	<script src="./vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
 		$('.js-pscroll').each(function () {
 			$(this).css('position', 'relative');
