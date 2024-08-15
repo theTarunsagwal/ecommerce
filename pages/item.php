@@ -28,7 +28,7 @@
 							Shoes
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watch">
 							Watches
 						</button>
 					</div>
@@ -138,12 +138,15 @@
 				</div>
 
 				<div class="row isotope-grid">
-					
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<?php
+					$qury_product = mysqli_query($con_pro,"SELECT name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 35 ORDER BY product.id DESC  ");
+					while($row_product = mysqli_fetch_assoc($qury_product)){
+					?>
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="product/product-01.jpg" alt="IMG-PRODUCT">
+									<img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
 
 									<a href="#"
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -154,11 +157,11 @@
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
 										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									
+										<?php echo $row_product['name']; ?>
 										</a>
 
 										<span class="stext-105 cl3">
-											$30.5
+											$<?php echo $row_product['price']; ?>
 										</span>
 									</div>
 
@@ -176,9 +179,8 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					
-
+					</div>			
+					<?php } ?>
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 						<!-- Block2 -->
 						<div class="block2">
@@ -319,7 +321,7 @@
 						</div>
 					</div>
 
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watch">
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">
@@ -669,7 +671,7 @@
 						</div>
 					</div>
 
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watches">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watch">
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">

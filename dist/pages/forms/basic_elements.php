@@ -220,6 +220,7 @@
                               <option value="3">furniture</option>
                               <option value="4">shoes</option>
                               <option value="5">watch</option>
+                              <option value="6">light</option>
                             </select>
                           </div>
                         </div>

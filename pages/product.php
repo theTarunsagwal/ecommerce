@@ -35,27 +35,76 @@
     <?php include "header.php" ?>
     <?php include "profile_user.php" ?>
 
-    <?php
-    $con_pro = mysqli_connect("localhost", "root", "", "product_data");
-     if(isset($_GET['id']) && !empty($_GET['id'])){
-       $id = $_GET['id'];
-       $qury = mysqli_query($con_pro,"SELECT * FROM product LEFT JOIN category ON product.category = category.cat_id WHERE category.cat_name='$id'");
-       while ($row = mysqli_fetch_array($qury)){
-        // echo "<pre>";
-        // echo $row['price'];
-        // echo $row['img'];
-        // echo $row['name'];
-        // echo "</pre>";
-       }
-     } 
-     ?>
+	<?php
+     $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+      if(isset($_GET['id']) && !empty($_GET['id'])){
+	?>
+	<section class="bg0 p-t-23 ">
+			<div class="container mt-5 ">
+				<div class="p-b-10 mb-2">
+					<h3 class=" ltext-100 cl5">
+						New Product & Trending Category <span class=" text-secondary ltext-103 cl5 text-decoration-underline "><?php echo $_GET['id'];?></span>
+					</h3>
+				</div>
+	                <div class="row isotope-grid mt-3">
+                           <?php
+                              $id = $_GET['id'];
+                              $qury = mysqli_query($con_pro,"SELECT * FROM product LEFT JOIN category ON product.category = category.cat_id WHERE category.cat_name='$id' AND product.id between 23 and 500 order by product.id DESC");
+                              while ($row = mysqli_fetch_array($qury)){
+                             ?>
+
+					    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+							<!-- Block2 -->
+							<div class="block2">
+								<div class="block2-pic hov-img0">
+									<img style="height: 365px;" src="upload/<?php echo $row['img']; ?>" alt="IMG-PRODUCT">
+
+									<a href="#"
+										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+										Quick View
+									</a>
+								</div>
+
+								<div class="block2-txt flex-w flex-t p-t-14">
+									<div class="block2-txt-child1 flex-col-l ">
+										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<?php echo $row['name']; ?>
+										</a>
+
+										<span class="stext-105 cl3">
+											$<?php echo $row['price']; ?>
+										</span>
+									</div>
+
+									<div class="block2-txt-child2 flex-r p-t-3">
+										<form action="" method="POST">
+											<input type="hidden" value="" name="wish_product">
+											<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
+												value="" name="wish">
+												<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
+													alt="ICON">
+												<img class="icon-heart2 dis-block trans-04 ab-t-l"
+													src="img/icons/icon-heart-02.png" alt="ICON">
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+					    </div>
+					     <?php
+				               }
+                           } 
+                          ?>
+				    </div>
+			</div>
+	</section>
 
 
 <section class="bg0 p-t-23 p-b-140">
 			<div class="container mt-5">
 				<div class="p-b-10">
 					<h3 class="ltext-103 cl5">
-						New Product & Trending Category
+						Explorer Brand new Product 
 					</h3>
 				</div>
 
@@ -65,24 +114,24 @@
 							All Products
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-							Women
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Nke">
+							Nike
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-							Men
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Zara">
+							Zara
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".light">
-							Light
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".H&M">
+							H&M
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-							Shoes
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Louis Vuitton">
+							Louis Vuitton 
 						</button>
 
-						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-							Watches
+						<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Gucci">
+							Gucci
 						</button>
 					</div>
 
@@ -190,48 +239,7 @@
 					</div>
 				</div>
 
-				<div class="row isotope-grid">
-					
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-pic hov-img0">
-									<img src="product/product-01.jpg" alt="IMG-PRODUCT">
-
-									<a href="#"
-										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										Quick View
-									</a>
-								</div>
-
-								<div class="block2-txt flex-w flex-t p-t-14">
-									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									
-										</a>
-
-										<span class="stext-105 cl3">
-											$30.5
-										</span>
-									</div>
-
-									<div class="block2-txt-child2 flex-r p-t-3">
-										<form action="" method="POST">
-											<input type="hidden" value="" name="wish_product">
-											<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
-												value="" name="wish">
-												<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-													alt="ICON">
-												<img class="icon-heart2 dis-block trans-04 ab-t-l"
-													src="img/icons/icon-heart-02.png" alt="ICON">
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					
-
+				<div class="row isotope-grid">					
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 						<!-- Block2 -->
 						<div class="block2">

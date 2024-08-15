@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2024 at 12:12 PM
+-- Generation Time: Aug 15, 2024 at 07:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,8 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (2, 'women'),
 (3, 'furniture'),
 (4, 'shoes'),
-(5, 'watch');
+(5, 'watch'),
+(6, 'light');
 
 -- --------------------------------------------------------
 
@@ -78,9 +79,13 @@ INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `cat
 (20, 'men', '200', 'gallery-04.jpg', 5, 'product', 1),
 (21, 'watch', '102', 'img_ecommerce17.jpg', 2, 'product', 0),
 (22, 'women', '100', 'product-04.jpg', 9, 'product', 2),
-(23, 'shirt', '300', 'product-03.jpg', 6, 'product', 1),
+(23, 'Classic Trench Coat', '300', 'product-04.jpg', 6, 'product', 2),
 (24, 'blue shrit', '302', 'product-03.jpg', 7, 'men choice', 1),
-(25, 'whit shirt', '520', 'product-01.jpg', 7, 'simple ', 2);
+(25, 'whit shirt', '520', 'product-01.jpg', 7, 'simple ', 2),
+(26, 'Arctander light', '201', 'img_ecommerce19.jpg', 10, 'table  light', 6),
+(27, 'classic watch', '199', 'img_ecommerce18.jpg', 7, 'one fram watch ', 5),
+(28, 'adidas shoes', '456', 'shoes.jpg', 2, 'this iconic shoes', 4),
+(29, 'Herschel supply', '799', 'product-02.jpg', 4, 'best combination ', 2);
 
 -- --------------------------------------------------------
 
@@ -168,7 +173,7 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
