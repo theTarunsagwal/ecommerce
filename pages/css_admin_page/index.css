@@ -18,6 +18,7 @@ header{
     position: fixed;
     z-index: 102;
     width: 100%;
+    top: 0%;
 }
 
 header,.nav_ul{

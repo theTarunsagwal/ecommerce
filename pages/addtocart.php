@@ -2,9 +2,11 @@
 session_start();
 ob_start();
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+$con_pro = mysqli_connect('localhost', 'root','','product');
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['name'];
     include "header.php";
+    echo $user;
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +27,10 @@ if(isset($_SESSION['name'])) {
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $id = $_GET['id'];
+                echo $id;
 
                 $queries = [
-                    "SELECT * FROM decor_art WHERE decor_name LIKE '$id'",
-                    "SELECT * FROM wood WHERE image_name LIKE '$id'",
-                    "SELECT * FROM dining_room WHERE dining_name LIKE '$id'",
-                    "SELECT * FROM new_product WHERE name LIKE '$id'"
+                    "SELECT * FROM product WHERE name LIKE '$id'"
                 ];
 
                 if(isset($_POST['btn'])){
@@ -49,29 +49,29 @@ if(isset($_SESSION['name'])) {
                 }
 
                 foreach ($queries as $query) {
-                    $result = mysqli_query($con, $query);
+                    $result = mysqli_query($con_pro, $query);
                     while ($row = mysqli_fetch_assoc($result)) {
                         ?>
                         <form method="post">
-                            <input type="hidden" name="item_name" value="<?php echo $row['decor_name'] ?? $row['image_name'] ?? $row['dining_name'] ?? $row['name']; ?>">
-                            <input type="hidden" name="item_img" value="<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>">
-                            <input type="hidden" name="item_price" value="<?php echo $row['decor_price'] ?? $row['price'] ?? $row['dining_price'] ?? $row['price']; ?>">
+                            <input type="hidden" name="item_name" value="<?php echo  $row['name']; ?>">
+                            <input type="hidden" name="item_img" value="<?php echo $row['img']; ?>">
+                            <input type="hidden" name="item_price" value="<?php echo  $row['price']; ?>">
                             <div class="item-card">
                                 <div class="item-img-box">
-                                    <img src="./upload/<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>" alt="">
+                                    <img src="./upload/<?php echo $row['img']; ?>" alt="">
                                 </div>
                                 <div class="item-info">
-                                    <h1><?php echo $row['decor_name'] ?? $row['image_name'] ?? $row['dining_name'] ?? $row['name']; ?></h1>
+                                    <h1><?php echo  $row['name']; ?></h1>
                                     <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
                                     <div class="item-color">
                                         <h5>Color:</h5>
                                         <div class="color-box">
                                             <div class="black">
-                                                <img src="./upload/<?php echo $row['decor_img'] ?? $row['image'] ?? $row['dining_image'] ?? $row['img']; ?>" alt="">
+                                                <img src="./upload/<?php echo $row['img']; ?>" alt="">
                                             </div>
                                         </div>
                                     </div>
-                                    <h3>$<?php echo $row['decor_price'] ?? $row['price'] ?? $row['dining_price'] ?? $row['price']; ?>.00</h3>
+                                    <h3>$<?php echo $row['price']; ?>.00</h3>
                                     <div class="add-to-cart">
                                         <div class="count-btn">
                                             <button type="button" class="minus" onclick="changeQuantity(this, -1)">-</button>
@@ -84,7 +84,7 @@ if(isset($_SESSION['name'])) {
                                     <div class="availability-stock">
                                         <a class="text-black" href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
                                         <a class="text-black" href="">SKU: <span>N/A</span></a>
-                                        <a class="text-black" href="">Vendor: <span><?php echo $row['decor_about'] ?? $row['about'] ?? $row['dining_about'] ?? ''; ?></span></a>
+                                        <a class="text-black" href="">Vendor: <span><?php echo $row['about']; ?></span></a>
                                         <a class="text-black" href="">Categories: <span>Bar Furniture</span></a>
                                         <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
                                     </div>
@@ -155,6 +155,8 @@ if(isset($_SESSION['name'])) {
             }
         }
     </script>
+    <script src="./vendor/slick/slick.js"></script>
+    <script src="./vendor/slick/slick.min.js"></script>
 </body>
 
 </html>

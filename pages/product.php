@@ -37,6 +37,7 @@
 
 	<?php
      $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+	 
       if(isset($_GET['id']) && !empty($_GET['id'])){
 	?>
 	<section class="bg0 p-t-23 ">
@@ -53,13 +54,24 @@
                               while ($row = mysqli_fetch_array($qury)){
                              ?>
 
-					    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					        <?php
+                             if(isset($_GET['name'])){
+                                 $titel = $_GET['name'];
+                                 $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
+                                 $row_jump = mysqli_fetch_assoc($head_titel);
+                                 if($row_jump){
+                                     $_SESSION['id'] = $row_jump['name'];
+                                    }
+                                }
+                            ?>
 							<!-- Block2 -->
+					    <a href="addtocart.php?id=<?php echo $row['name']; ?>">
 							<div class="block2">
 								<div class="block2-pic hov-img0">
 									<img style="height: 365px;" src="upload/<?php echo $row['img']; ?>" alt="IMG-PRODUCT">
 
-									<a href="#"
+									<a href="addtocart.php"
 										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 										Quick View
 									</a>
@@ -90,7 +102,8 @@
 									</div>
 								</div>
 							</div>
-					    </div>
+						</a>
+					</div>
 					     <?php
 				               }
                            } 

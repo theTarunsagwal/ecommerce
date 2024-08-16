@@ -17,16 +17,20 @@
 }
 
 
-.item-img-box{
+.item-img-box {
     height: 90vh;
     width: 30vw;
+    display: flex;
+    /* overflow: hidden; */
     background-color: #fcb800;
 }
 
-.item-img-box img,.black img,.white img{
-    height: 100%;
-    width: 100%;
+.item-img-box img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
 }
+
 
 .item-info{
     padding-top: 2rem;
