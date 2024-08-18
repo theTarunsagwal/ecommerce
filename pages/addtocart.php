@@ -6,7 +6,6 @@ $con_pro = mysqli_connect('localhost', 'root','','product');
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['name'];
     include "header.php";
-    echo $user;
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +26,6 @@ if(isset($_SESSION['name'])) {
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $id = $_GET['id'];
-                echo $id;
-
                 $queries = [
                     "SELECT * FROM product WHERE name LIKE '$id'"
                 ];
@@ -64,7 +61,7 @@ if(isset($_SESSION['name'])) {
                                     <h1><?php echo  $row['name']; ?></h1>
                                     <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
                                     <div class="item-color">
-                                        <h5>Color:</h5>
+                                        <h5>relative:-</h5>
                                         <div class="color-box">
                                             <div class="black">
                                                 <img src="./upload/<?php echo $row['img']; ?>" alt="">
@@ -100,6 +97,7 @@ if(isset($_SESSION['name'])) {
             ?>
         </div>
 </section>
+
 
     <section>
         <div class="description-container">

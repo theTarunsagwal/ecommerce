@@ -28,7 +28,6 @@ body{
     display: block !important;
 }
 
-
   @media (max-width: 450px) {
     .main-container{height: 20vh;}
     .container-detail{transform: translateY(-150%);}

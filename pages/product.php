@@ -1,8 +1,3 @@
-<?php
-// session_start();
-// if(isset($_SESSION['name'])) {
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +27,11 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
 <body>
+<?php
+session_start();
+if(isset($_SESSION['name'])) {
+	// echo $_SESSION['name'];
+?>
     <?php include "header.php" ?>
     <?php include "profile_user.php" ?>
 
@@ -54,63 +54,121 @@
                               while ($row = mysqli_fetch_array($qury)){
                              ?>
 
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					        <?php
-                             if(isset($_GET['name'])){
-                                 $titel = $_GET['name'];
-                                 $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
-                                 $row_jump = mysqli_fetch_assoc($head_titel);
-                                 if($row_jump){
-                                     $_SESSION['id'] = $row_jump['name'];
+					    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					            <?php
+                                 if(isset($_GET['name'])){
+                                     $titel = $_GET['name'];
+                                     $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
+                                     $row_jump = mysqli_fetch_assoc($head_titel);
+                                     if($row_jump){
+                                         $_SESSION['id'] = $row_jump['name'];
+                                        }
                                     }
-                                }
-                            ?>
-							<!-- Block2 -->
-					    <a href="addtocart.php?id=<?php echo $row['name']; ?>">
-							<div class="block2">
-								<div class="block2-pic hov-img0">
-									<img style="height: 365px;" src="upload/<?php echo $row['img']; ?>" alt="IMG-PRODUCT">
-
-									<a href="addtocart.php"
-										class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-										Quick View
-									</a>
-								</div>
-
-								<div class="block2-txt flex-w flex-t p-t-14">
-									<div class="block2-txt-child1 flex-col-l ">
-										<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										<?php echo $row['name']; ?>
-										</a>
-
-										<span class="stext-105 cl3">
-											$<?php echo $row['price']; ?>
-										</span>
-									</div>
-
-									<div class="block2-txt-child2 flex-r p-t-3">
-										<form action="" method="POST">
-											<input type="hidden" value="" name="wish_product">
-											<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"
-												value="" name="wish">
-												<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-													alt="ICON">
-												<img class="icon-heart2 dis-block trans-04 ab-t-l"
-													src="img/icons/icon-heart-02.png" alt="ICON">
-											</button>
-										</form>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
+                                ?>
+					    		<!-- Block2 -->
+					        <a href="addtocart.php?id=<?php echo $row['name']; ?>">
+					    		<div class="block2">
+					    			<div class="block2-pic hov-img0">
+					    				<img style="height: 365px;" src="upload/<?php echo $row['img']; ?>" alt="IMG-PRODUCT">
+    
+					    				<a href="addtocart.php"
+					    					class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+					    					Quick View
+					    				</a>
+					    			</div>
+    
+					    			<div class="block2-txt flex-w flex-t p-t-14">
+					    				<div class="block2-txt-child1 flex-col-l ">
+					    					<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+					    					<?php echo $row['name']; ?>
+					    					</a>
+    
+					    					<span class="stext-105 cl3">
+					    						$<?php echo $row['price']; ?>
+					    					</span>
+					    				</div>
+    
+					    				<div class="block2-txt-child2 flex-r p-t-3">
+                                            <form action="" method="POST" class="wish_form">
+                                                <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id">
+                                                <input type="hidden" value="<?php echo $row['name']; ?>" name="wish_name">
+                                                <input type="hidden" value="<?php echo $row['img']; ?>" name="wish_img">
+												<?php
+												echo $wish_id_product= $row['id'];
+												$qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
+												if($is_in_wishlist = mysqli_num_rows($qry_match_product) > 0){
+												?>
+												<button type="submit" name="heart_del">
+													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+												</button>
+												<?php }else{
+													?>
+													<button type="submit" name="heart_submit">
+														<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+													</button>
+												<?php } ?>
+                                            </form>
+                                        </div>
+					    			</div>
+					    		</div>
+					    	</a>
+					    </div>
+					            <script>
+                                     	$(document).ready(function(){
+                                         $("#heart").click(function(){
+                                             if ($("#heart").hasClass("bx-heart")) {
+                                                 $("#heart").removeClass("bx-heart").addClass("bxs-heart");
+                                             } else {
+                                                 $("#heart").removeClass("bxs-heart").addClass("bx-heart");
+                                             }
+                                         });
+                                     });
+                                     
+                                </script>
 					     <?php
 				               }
-                           } 
+                           }
                           ?>
 				    </div>
 			</div>
 	</section>
+
+	<?php 
+        // Check if the form was submitted
+        if (isset($_POST['heart_submit'])) {
+            // Retrieve the form data
+            $wish_id = $_POST['wish_id'];
+            $wish_name = $_POST['wish_name'];
+            // $wish_img = $_POST['wish_img'];
+    
+            // Ensure to properly handle SQL queries
+            $qry_wish = "INSERT INTO wish_product (wish_id, wish_product) VALUES ($wish_id, '$wish_name')";
+    
+            // Run the query and check for success
+            if (mysqli_query($con_pro, $qry_wish)) {
+                echo "Wish added successfully!";
+            } else {
+                echo "Error: " . mysqli_error($con_pro);
+            }
+        } else {
+            echo "No form submission detected.";
+        } ?>
+		<?php
+		if (isset($_POST['heart_del'])) {
+            // Retrieve the form data
+            $wish_id = $_POST['wish_id'];
+			$delete_wish = "delete from wish_product where wish_id = $wish_id";
+    
+            // Run the query and check for success
+            if (mysqli_query($con_pro, $delete_wish)) {
+                echo "Wish delete successfully!";
+            } else {
+                echo "Error: " . mysqli_error($con_pro);
+            }
+		} else {
+            echo "No form submission delete.";
+        }
+    ?>
 
 
 <section class="bg0 p-t-23 p-b-140">
@@ -947,7 +1005,9 @@
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
-
+<?php
+}
+?>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+$con_wish = mysqli_connect('localhost', 'root', '', 'wishlist_user');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -58,6 +59,15 @@ if (isset($_POST['sub'])) {
                     
                     if (mysqli_query($con_userside, $create_table_query)) {
                         echo "User registered and table $table_name created successfully.";
+                    $table_wish = 'wish_name_' . mysqli_real_escape_string($con_userside, $user);
+                        $create_table_wish = "
+                        CREATE TABLE IF NOT EXISTS $table_wish (
+                            id INT UNIQUE AUTO_INCREMENT,
+                            name VARCHAR(300) NOT NULL,
+                            product_id int NOT NULL,
+                            price VARCHAR(30) NOT NULL
+                        )";
+                        mysqli_query($con_wish,$create_table_wish);
                     } else {
                         echo "Error creating table: " . mysqli_error($con_userside);
                     }

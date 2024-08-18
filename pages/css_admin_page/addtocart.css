@@ -13,22 +13,21 @@
     display: flex;
     justify-content: space-around;
     gap: 2rem;
-    padding: 2rem 2rem;
+    padding: 0rem 2rem;
+    padding-top: 6rem;
 }
 
 
 .item-img-box {
     height: 90vh;
     width: 30vw;
-    display: flex;
     /* overflow: hidden; */
     background-color: #fcb800;
 }
 
-.item-img-box img {
+.item-img-box img ,.black img {
     height: 100% !important;
     width: 100% !important;
-    object-fit: cover !important;
 }
 
 
@@ -41,11 +40,10 @@
     gap: 1rem;
 }
 
-.black,.white{
-    height: 5rem;
+.black{
+    height: 8rem;
     width: 5rem;
     overflow: hidden;
-    border-radius: 50%;
 }
 
 h3{
