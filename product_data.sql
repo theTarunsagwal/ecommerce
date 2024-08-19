@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 08:14 PM
+-- Generation Time: Aug 19, 2024 at 09:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `category`, `wish`) VALUES
-(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product', 0, 2),
+(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product', 0, NULL),
 (3, 'mini lamp', '156', 'img_ecommerce03.jpg', 1, 'product', 0, NULL),
 (4, 'product', '201', 'img_ecommerce37.jpg', 5, 'product', 0, NULL),
 (5, 'table', '399', 'img_ecommerce12.jpg', 6, 'product', 0, NULL),
@@ -152,9 +152,7 @@ CREATE TABLE `wish_product` (
 --
 
 INSERT INTO `wish_product` (`wish_id`, `wish_product`) VALUES
-(2, 'sweeper and funnel'),
-(23, 'Classic Trench Coat'),
-(29, 'Herschel supply');
+(25, 'whit shirt');
 
 --
 -- Indexes for dumped tables

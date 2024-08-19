@@ -35,6 +35,36 @@ if(isset($_SESSION['name'])) {
     <?php include "header.php" ?>
     <?php include "profile_user.php" ?>
 
+	<?php 
+      $con_wish = mysqli_connect("localhost","root","","wishlist_user");
+	  $wish_face = "wish_name_".$_SESSION['name'];
+        if (isset($_POST['heart_submit'])) {
+            $wish_id = $_POST['wish_id'];
+            $wish_name = $_POST['wish_name'];
+            $wish_img = $_POST['wish_img'];
+            $wish_price = $_POST['wish_price'];
+    
+            $qry_wish = "INSERT INTO wish_product (wish_id, wish_product) VALUES ($wish_id, '$wish_name')";
+            $qry_wish_user = "INSERT INTO  $wish_face (`id`, `name`, `product_img`, `price`) VALUES ($wish_id, '$wish_name','$wish_img','$wish_price')";
+			mysqli_query($con_wish,$qry_wish_user);
+            if (mysqli_query($con_pro, $qry_wish)){
+                echo "Wish added successfully!";
+            }
+        }
+
+		if (isset($_POST['heart_del'])) {
+            // Retrieve the form data
+            $wish_id = $_POST['wish_id'];
+			$delete_wish = "delete from wish_product where wish_id = $wish_id";
+			$delete_wish_user = "delete from $wish_face where id = $wish_id";
+
+            if (mysqli_query($con_pro, $delete_wish) && mysqli_query($con_wish,$delete_wish_user)) {
+                echo "Wish delete successfully!";
+            }
+		}
+		
+		?>
+
 	<?php
      $con_pro = mysqli_connect("localhost", "root", "", "product_data");
 	 
@@ -93,10 +123,12 @@ if(isset($_SESSION['name'])) {
                                                 <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id">
                                                 <input type="hidden" value="<?php echo $row['name']; ?>" name="wish_name">
                                                 <input type="hidden" value="<?php echo $row['img']; ?>" name="wish_img">
+												<input type="hidden" value="<?php echo $row['price']; ?>" name="wish_price">
 												<?php
 												echo $wish_id_product= $row['id'];
 												$qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
-												if($is_in_wishlist = mysqli_num_rows($qry_match_product) > 0){
+												$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+												if($is_in_wishlist = mysqli_num_rows($qry_match_product) > 0 && $is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
 												?>
 												<button type="submit" name="heart_del">
 													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
@@ -132,43 +164,6 @@ if(isset($_SESSION['name'])) {
 				    </div>
 			</div>
 	</section>
-
-	<?php 
-        // Check if the form was submitted
-        if (isset($_POST['heart_submit'])) {
-            // Retrieve the form data
-            $wish_id = $_POST['wish_id'];
-            $wish_name = $_POST['wish_name'];
-            // $wish_img = $_POST['wish_img'];
-    
-            // Ensure to properly handle SQL queries
-            $qry_wish = "INSERT INTO wish_product (wish_id, wish_product) VALUES ($wish_id, '$wish_name')";
-    
-            // Run the query and check for success
-            if (mysqli_query($con_pro, $qry_wish)) {
-                echo "Wish added successfully!";
-            } else {
-                echo "Error: " . mysqli_error($con_pro);
-            }
-        } else {
-            echo "No form submission detected.";
-        } ?>
-		<?php
-		if (isset($_POST['heart_del'])) {
-            // Retrieve the form data
-            $wish_id = $_POST['wish_id'];
-			$delete_wish = "delete from wish_product where wish_id = $wish_id";
-    
-            // Run the query and check for success
-            if (mysqli_query($con_pro, $delete_wish)) {
-                echo "Wish delete successfully!";
-            } else {
-                echo "Error: " . mysqli_error($con_pro);
-            }
-		} else {
-            echo "No form submission delete.";
-        }
-    ?>
 
 
 <section class="bg0 p-t-23 p-b-140">
@@ -1006,6 +1001,8 @@ if(isset($_SESSION['name'])) {
 	<script src="js/main.js"></script>
 
 <?php
+}else{
+	header("location: ./loging.php");
 }
 ?>
 </body>
