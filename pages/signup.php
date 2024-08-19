@@ -71,7 +71,7 @@ if (isset($_POST['sub'])) {
                     } else {
                         echo "Error creating table: " . mysqli_error($con_userside);
                     }
-                    header("Location: verfication.php");
+                    header("Location: loging.php");
     
                     // echo "<script>alert('Thank you for joining');</script>";
                 } else {

@@ -47,9 +47,7 @@ if(isset($_SESSION['name'])) {
             $qry_wish = "INSERT INTO wish_product (wish_id, wish_product) VALUES ($wish_id, '$wish_name')";
             $qry_wish_user = "INSERT INTO  $wish_face (`id`, `name`, `product_img`, `price`) VALUES ($wish_id, '$wish_name','$wish_img','$wish_price')";
 			mysqli_query($con_wish,$qry_wish_user);
-            if (mysqli_query($con_pro, $qry_wish)){
-                echo "Wish added successfully!";
-            }
+            mysqli_query($con_pro, $qry_wish);
         }
 
 		if (isset($_POST['heart_del'])) {
@@ -70,7 +68,7 @@ if(isset($_SESSION['name'])) {
 	 
       if(isset($_GET['id']) && !empty($_GET['id'])){
 	?>
-	<section class="bg0 p-t-23 ">
+	<section class="product-container bg0 p-t-23 ">
 			<div class="container mt-5 ">
 				<div class="p-b-10 mb-2">
 					<h3 class=" ltext-100 cl5">

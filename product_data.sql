@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2024 at 09:13 AM
+-- Generation Time: Aug 19, 2024 at 06:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -152,7 +152,10 @@ CREATE TABLE `wish_product` (
 --
 
 INSERT INTO `wish_product` (`wish_id`, `wish_product`) VALUES
-(25, 'whit shirt');
+(23, 'Classic Trench Coat'),
+(24, 'blue shrit'),
+(25, 'whit shirt'),
+(29, 'Herschel supply');
 
 --
 -- Indexes for dumped tables

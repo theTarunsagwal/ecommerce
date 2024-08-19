@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2024 at 06:58 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Aug 19, 2024 at 06:36 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `user_side`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_gaurav`
+--
+
+CREATE TABLE `user_name_gaurav` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -52,7 +65,22 @@ CREATE TABLE `user_name_megumi` (
 --
 
 INSERT INTO `user_name_megumi` (`id`, `name`, `image`, `price`) VALUES
-(1, 'Arctander Chair', 'img_ecommerce20.jpg', '250');
+(1, 'Arctander Chair', 'img_ecommerce20.jpg', '250'),
+(2, 'blue shrit', 'product-03.jpg', '302'),
+(3, 'classic watch', 'img_ecommerce18.jpg', '199');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_ritik`
+--
+
+CREATE TABLE `user_name_ritik` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -105,6 +133,13 @@ CREATE TABLE `user_name_sukuna` (
 --
 
 --
+-- Indexes for table `user_name_gaurav`
+--
+ALTER TABLE `user_name_gaurav`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `user_name_gojo`
 --
 ALTER TABLE `user_name_gojo`
@@ -115,6 +150,13 @@ ALTER TABLE `user_name_gojo`
 -- Indexes for table `user_name_megumi`
 --
 ALTER TABLE `user_name_megumi`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `user_name_ritik`
+--
+ALTER TABLE `user_name_ritik`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
@@ -144,6 +186,12 @@ ALTER TABLE `user_name_sukuna`
 --
 
 --
+-- AUTO_INCREMENT for table `user_name_gaurav`
+--
+ALTER TABLE `user_name_gaurav`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user_name_gojo`
 --
 ALTER TABLE `user_name_gojo`
@@ -153,7 +201,13 @@ ALTER TABLE `user_name_gojo`
 -- AUTO_INCREMENT for table `user_name_megumi`
 --
 ALTER TABLE `user_name_megumi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `user_name_ritik`
+--
+ALTER TABLE `user_name_ritik`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_name_sahil`

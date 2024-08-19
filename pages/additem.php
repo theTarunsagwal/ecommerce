@@ -29,7 +29,7 @@ if(isset($_SESSION['name'])) {
     $qury_user = mysqli_query($con_userside, "SELECT * FROM $table_name");
     if(mysqli_num_rows($qury_user) == 0) {
         echo "<div class='empty-set'>
-        <img class='img_error' src='../img_ecommerce/img_ecommerce43.jpg'>
+        <img class='img_error' src='./img_ecommerce/img_ecommerce43.jpg'>
         <p>Please add items to the cart</p>
         </div>
         ";

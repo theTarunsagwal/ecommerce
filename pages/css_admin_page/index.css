@@ -16,16 +16,16 @@
 header{
     height: 10vh;
     position: fixed;
-    z-index: 102;
+    z-index: 502;
     width: 100%;
     top: 0%;
+    background-color: #f8f9fa;
 }
 
 header,.nav_ul{
     display: flex !important;
     justify-content: space-between;
     align-items: center;
-    /* background-color: #f8f9fa; */
     padding: 1rem 1rem .5rem 1rem;
     cursor: pointer;
 }
@@ -126,7 +126,7 @@ header a{
     position: absolute;
     z-index: 103;
     display: block;
-    box-shadow: 1px 1px 10px #e1e2e3;
+    /* box-shadow: 1px 1px 10px #e1e2e3; */
     background-color: #f8f9fa;
     transition: 1s;
 }
@@ -383,9 +383,7 @@ header a{
 .card-price{color: red;}
 
 /*------------------ display none ----------------*/
-.filter,.menubar,.bx-menu,.dropdown_reponsive,.dropdown_reponsive_shop,.dropdown_reponsive_blog{display: none;}
-
-
+.filter,.menubar,.bx-menu,.dropdown_reponsive{display: none !important;}
 /*----------------------hover---------------------*/
 
 .shoping_bag a:first-child:hover,.card-title:hover,.card-text:hover,li .bx:hover{
@@ -420,7 +418,7 @@ header a{
 
     }
 
-.bx-menu,.menublock{display: block;}
+.bx-menu,.menublock{display: block !important;}
 
 .menubar{
     /* display: block; */
@@ -565,6 +563,12 @@ display: none;
 
     .decor,.wall_clock,.kitchen,.clock_decor{
         height: 46vh;
+    }
+}
+
+@media (max-width:401px) {
+    .shoping_bag{
+        display: none !important;
     }
 }
 

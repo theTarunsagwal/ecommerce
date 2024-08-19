@@ -24,7 +24,7 @@
 
 <body>
 <?php include "loading.php"?>
-    <header id="header">
+    <header id="header" >
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
             <a href="index.php">
@@ -54,36 +54,9 @@
                             </a>
                         
                         <?php } ?>
-                        <?php
-                        // if(isset($_GET["decor_name"])){
-                        //     $new=$_GET["decor_name"];
-                        //     $new_art=mysqli_query($con,"select * from product where decor_name like '$new'");
-                        //     if($new_art){
-                        //         $_SESSION['id']=$new_art['decor_name'];
-                        //     }
-                        // }
-                          ?>
+
                     </div>
-                </div>
-                <li class="pages"><i class='bx bxs-file-blank'></i><span>pages</span></li>
-                <!-- pages dropdown -->
-                <div class="dropdown_page_active">
-                    <div class="dropdown_page_item ">
-                        <?php 
-                        $abc=['about us','contact us','F&Qs','Coming soon'];
-                        $num=0;
-                        while($num<4){
-                        ?>
-                        <a href="#">
-                            <?php echo $abc[$num]?>
-                        </a>
-                        <?php
-                        $num ++;
-                        }
-                        ?>
-                    </div>
-                </div>
-               
+                </div>               
                 <li><i class='bx bxs-contact'></i><a href="contact_us.php">contact us</a></li>
             </ul>
         </nav>
@@ -94,6 +67,7 @@
                $search = $_POST['search'];
             }
 ?>
+                <i class='bx bxs-heart' id="fav"></i>
             <form action="search.php" method="POST">
                 <div class="search_container search_box">
                     <input type="text" name="search" placeholder="Enter keywords to search...">
@@ -103,8 +77,8 @@
                 </div>
             </form>
             <a href="additem.php">
-            <i class='bx bxs-shopping-bags'></i>
-        </a>
+              <i class='bx bxs-shopping-bags'></i>
+            </a>
             <div class="shoping_bag">
                 <a href="additem.php">shoping cart</a>
                 <a href="additem.php">$0.00</a>
@@ -116,44 +90,20 @@
             <ul class="menu_ul">
                 <li>home<i class='bx bx-right-arrow-alt'></i></li>
                 <li>collections</li>
-                <li onclick="droppages()">pages<i class='bx bx-right-arrow-alt'></i></li>
                 <li>contact us</li>
             </ul>
-            <div class="dropdown_reponsive_page">
-                <h1 onclick="gopage()"><i class="bx bx-left-arrow-alt" style="color: #f8f9fa;"></i>pages</h1>
-                <div class="dropdown-item-responsive-page">
-                    <?php
-            $ab=['thumbnail left','thumbnail right','thumbnail top','thumbnail bottom','product variants','variants dropdown','gallery stacked'];
-            $count=0;
-            while($count<7){
-            ?>
-                    <a href="#">
-                        <?php echo $ab[$count];
-            ?>
-                    </a>
-                    <?php
-            $count++;
-            }
-            ?>
-                </div>
-            </div>
-            
         </div>
     </div>
     <script>
     $(document).ready(function() {
-    $(window).scroll(function() {
-        var header = $("#header");
-        if ($(this).scrollTop() > 600) {
-            header.css("background-color", "#f8f9fa");
-        } else {
-            header.css("background-color", "transparent",);
-        }
+        $('#fav').click(function(){
+            $("#wishlist").toggleClass('wishlist-open wishlist-closed');
+        });
     });
-});
  
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
+    <?php include "wishlist.php"; ?>
 </body>
 </html>
