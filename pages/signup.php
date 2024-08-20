@@ -62,10 +62,10 @@ if (isset($_POST['sub'])) {
                     $table_wish = 'wish_name_' . mysqli_real_escape_string($con_userside, $user);
                         $create_table_wish = "
                         CREATE TABLE IF NOT EXISTS $table_wish (
-                            id INT UNIQUE AUTO_INCREMENT,
+                            id INT UNIQUE ,
                             name VARCHAR(300) NOT NULL,
-                            product_id int NOT NULL,
-                            price VARCHAR(30) NOT NULL
+                            product_img TEXT NOT NULL,
+                            price int NOT NULL
                         )";
                         mysqli_query($con_wish,$create_table_wish);
                     } else {

@@ -23,7 +23,9 @@
 </head>
 
 <body>
-<?php include "loading.php"?>
+<?php
+//  include "loading.php"
+?>
     <header id="header" >
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
@@ -104,6 +106,5 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
-    <?php include "wishlist.php"; ?>
 </body>
 </html>
