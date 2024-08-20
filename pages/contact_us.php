@@ -5,9 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css_admin_page/contact_us.css">
+	<link rel="stylesheet" href="./css_admin_page/wishlist.css">
+
 </head>
 <body>
-    <?php include "header.php" ?>
+    <?php
+     session_start();
+     include "header.php" ?>
+    <?php
+     if(isset($_SESSION['name'])){
+     ?>
+      <!-- wishlist -->
+	<div class="wishlist wishlist-closed" id="wishlist">
+        <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
+        <?php 
+	        $con_wish = mysqli_connect("localhost","root","","wishlist_user");
+	        $wish_face = "wish_name_".$_SESSION['name'];
+			if(isset($_POST['remove'])){
+				$remove = $_POST['remove'];
+				$qry_remove = mysqli_query($con_wish,"DELETE FROM $wish_face WHERE id=$remove");
+			}
+           
+            $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
+            ?>
+        <ul class="d-flex  gap-2" style="flex-direction: column;">
+            <?php
+            while($row_add = mysqli_fetch_array($qry_select)){
+	    		if(mysqli_num_rows($qry_select) == 0){
+	    			echo "<div>
+	    		<img class='img_fav' src='./img_ecommerce/fav.jpg'>
+	    		<p>Please add items to the wishlist</p>
+	    		</div>
+	    		";
+	    		}else{
+            ?>
+            <li class="mt-3">
+                <div class="product-details d-flex gap-3 align-items-center">
+                    <div class="img">
+                        <img src="product/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
+                    </div>
+                   <div class="wish-product ">
+                       <h3 style="font-size: 1rem; margin:0%;"><?php echo $row_add['name']; ?></h3>
+                       <span class="fw-semibold" style="font-size:.6rem;">price:-</span>
+                       <span class="text-success fw-light" style="font-size:1.1rem;">$<?php echo $row_add['price']; ?></span>
+                       <form action="" method="POST">
+                            <button name="remove" value="<?php echo $row_add['id']; ?>" class="remove-btn" style="border: none; background: transparent;">
+                                <i class='bx bx-x-circle'></i>
+                            </button>
+                       </form>
+                   </div>
+                </div>
+            </li>
+            <?php
+            }
+        }
+            ?>
+        </ul>
+    </div>
+    <?php
+     }
+    ?>
+
     <div class="title_contect">
         <div class="main-container">
             <img src="./upload/img_ecommerce37.jpg">

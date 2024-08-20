@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2024 at 06:36 PM
+-- Generation Time: Aug 20, 2024 at 06:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,6 +41,19 @@ CREATE TABLE `user_name_gaurav` (
 --
 
 CREATE TABLE `user_name_gojo` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_manoj`
+--
+
+CREATE TABLE `user_name_manoj` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
@@ -147,6 +160,13 @@ ALTER TABLE `user_name_gojo`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_manoj`
+--
+ALTER TABLE `user_name_manoj`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- Indexes for table `user_name_megumi`
 --
 ALTER TABLE `user_name_megumi`
@@ -195,6 +215,12 @@ ALTER TABLE `user_name_gaurav`
 -- AUTO_INCREMENT for table `user_name_gojo`
 --
 ALTER TABLE `user_name_gojo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_name_manoj`
+--
+ALTER TABLE `user_name_manoj`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

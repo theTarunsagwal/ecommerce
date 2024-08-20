@@ -4,7 +4,7 @@ session_start();
     $con = mysqli_connect("localhost","root","","ecommerce");
     $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
     $con_pro = mysqli_connect("localhost", "root", "", "product_data");
-
+	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
     ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./css_admin_page/index.css">
+    <link rel="stylesheet" href="./css_admin_page/wishlist.css">
 
     <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./fonts/iconic/css/material-design-iconic-font.min.css">
@@ -40,6 +41,69 @@ session_start();
     <?php
      include "profile_user.php"
       ?>
+    <!-- wishlist -->
+	<div class="wishlist wishlist-closed" id="wishlist">
+        <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
+        <?php 
+	        $wish_face = "wish_name_".$_SESSION['name'];
+			if (isset($_POST['heart_submit'])) {
+				$wish_id = $_POST['wish_id'];
+				$wish_name = $_POST['wish_name'];
+				$wish_img = $_POST['wish_img'];
+				$wish_price = $_POST['wish_price'];
+		 
+				$qry_wish_user = "INSERT INTO  $wish_face (`id`, `name`, `product_img`, `price`) VALUES ($wish_id, '$wish_name','$wish_img',$wish_price)";
+				mysqli_query($con_wish,$qry_wish_user);
+			}
+			if (isset($_POST['heart_del'])) {
+				$wish_id = $_POST['wish_id'];
+				$delete_wish_user = "delete from $wish_face where id = $wish_id";
+		 
+				if (mysqli_query($con_wish,$delete_wish_user)) {
+					echo "Wish delete successfully!";
+				}
+			}
+			if(isset($_POST['remove'])){
+				$remove = $_POST['remove'];
+				$qry_remove = mysqli_query($con_wish,"DELETE FROM $wish_face WHERE id=$remove");
+			}
+           
+            $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
+            ?>
+        <ul class="d-flex  gap-2" style="flex-direction: column;">
+            <?php
+            while($row_add = mysqli_fetch_array($qry_select)){
+	    		if(mysqli_num_rows($qry_select) == 0){
+	    			echo "<div>
+	    		<img class='img_fav' src='./img_ecommerce/fav.jpg'>
+	    		<p>Please add items to the wishlist</p>
+	    		</div>
+	    		";
+	    		}else{
+            ?>
+            <li class="mt-3">
+                <div class="product-details d-flex gap-3 align-items-center">
+                    <div class="img">
+                        <img src="upload/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
+                    </div>
+                   <div class="wish-product ">
+                       <h3 style="font-size: 1rem; margin:0%;"><?php echo $row_add['name']; ?></h3>
+                       <span class="fw-semibold" style="font-size:.6rem;">price:-</span>
+                       <span class="text-success fw-light" style="font-size:1.1rem;">$<?php echo $row_add['price']; ?></span>
+                       <form action="" method="POST">
+                            <button name="remove" value="<?php echo $row_add['id']; ?>" class="remove-btn" style="border: none; background: transparent;">
+                                <i class='bx bx-x-circle'></i>
+                            </button>
+                       </form>
+                   </div>
+                </div>
+            </li>
+            <?php
+            }
+        }
+            ?>
+        </ul>
+    </div>
 
 
     <section class="section-slide">

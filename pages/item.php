@@ -138,7 +138,7 @@
 
 		<div class="row isotope-grid">
 			<?php
-					$qury_product = mysqli_query($con_pro,"SELECT name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 35 ORDER BY product.id DESC  ");
+					$qury_product = mysqli_query($con_pro,"SELECT id , name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 35 ORDER BY product.id DESC;");
 					while($row_product = mysqli_fetch_assoc($qury_product)){
 					?>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
@@ -179,17 +179,28 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								<form action="" method="POST">
-									<input type="hidden" value="" name="wish_product">
-									<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" value=""
-										name="wish">
-										<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-											alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l"
-											src="img/icons/icon-heart-02.png" alt="ICON">
-									</button>
-								</form>
-							</div>
+                                            <form method="POST" class="wish_form">
+                                                <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
+                                                <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
+                                                <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
+												<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
+												<?php
+												$wish_id_product= $row_product['id'];
+												// $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
+												$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+												if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
+												?>
+												<button type="submit" name="heart_del">
+													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+												</button>
+												<?php }else{
+													?>
+													<button type="submit" name="heart_submit">
+														<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+													</button>
+												<?php } ?>
+                                            </form>
+                            </div>
 						</div>
 					</div>
 				</a>

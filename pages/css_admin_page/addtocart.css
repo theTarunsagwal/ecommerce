@@ -9,6 +9,22 @@
     color: #666b7f;
 }
 
+.fav-item{
+    position: absolute;
+    top: 13%;
+    z-index: 108;
+    left: 3%;
+}
+
+.fav-item button{
+    border: none;
+    background: transparent;
+}
+
+.fav-item button i{
+    color: red;
+}
+
 .item-card{
     display: flex;
     justify-content: space-around;
@@ -48,7 +64,6 @@
 
 h3{
     margin-top: 1rem !important;
-    color: red !important;
 }
 
 .add-to-cart{

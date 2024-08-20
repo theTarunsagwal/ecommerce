@@ -37,26 +37,33 @@ if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
 
                         <div class="content_profile d-flex flex-column mt-3 ">
                             
-                            <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            <a href=""><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">profile</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
-                            </h3>
-                            <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            </h3></a>
+                            <a href="additem.php"><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">cart item</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
-                            </h3>
-                            <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            </h3></a>
+                            <h3 id="favorate" class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">favorate</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
                             </h3>
-                            <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                              <script>
+                                 $(document).ready(function() {
+                                     $('#favorate').click(function(){
+                                         $("#wishlist").toggleClass('wishlist-open wishlist-closed');
+                                     });
+                                 });
+                                </script>
+                            <a href="forgat.php"><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">forgate password</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
-                            </h3>
-                            <h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2">
+                            </h3></a>
+                            <a href=""><h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2">
                                 <span class="product_item">contact</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-down'></i></span>
-                            </h3>
+                            </h3></a>
                         </div>
                         <a id="logout" href="logout.php">
                             <button class="Btn">
