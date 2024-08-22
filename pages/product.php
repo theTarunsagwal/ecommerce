@@ -138,15 +138,15 @@ if(isset($_SESSION['name'])) {
 					    			<div class="block2-pic hov-img0">
 					    				<img style="height: 365px;" src="upload/<?php echo $row['img']; ?>" alt="IMG-PRODUCT">
     
-					    				<a href="addtocart.php"
-					    					class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+					    				<a href="addtocart.php?id=<?php echo $row['name']; ?>"
+					    					class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
 					    					Quick View
 					    				</a>
 					    			</div>
     
 					    			<div class="block2-txt flex-w flex-t p-t-14">
 					    				<div class="block2-txt-child1 flex-col-l ">
-					    					<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+					    					<a href="addtocart.php?id=<?php echo $row['name']; ?>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 					    					<?php echo $row['name']; ?>
 					    					</a>
     
@@ -168,12 +168,12 @@ if(isset($_SESSION['name'])) {
 												if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
 												?>
 												<button type="submit" name="heart_del">
-													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+													<i class='bx bxs-heart heart'  style="font-size:1.5rem; cursor:pointer;"></i>
 												</button>
 												<?php }else{
 													?>
 													<button type="submit" name="heart_submit">
-														<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+														<i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
 													</button>
 												<?php } ?>
                                             </form>
@@ -189,8 +189,14 @@ if(isset($_SESSION['name'])) {
 				    </div>
 			</div>
 	</section>
+	<script>
+		$(document).ready(function(){
+    $(".heart").hover(function(){
+        $(this).toggleClass("bx-heart bxs-heart");
+    });
+});
 
-
+	</script>
 <section class="bg0 p-t-23 p-b-140">
 			<div class="container mt-5">
 				<div class="p-b-10">

@@ -38,8 +38,8 @@
         let load = () => {
             setTimeout(() => {
                 loading.style.display = "none";
-            }, 3000);
-        }
+            }, 900);
+        };
     </script>
 </body>
 </html>

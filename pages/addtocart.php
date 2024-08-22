@@ -50,7 +50,26 @@ if(isset($_SESSION['name'])) {
     <title>Document</title>
     <link rel="stylesheet" href="../pages/css_admin_page/addtocart.css">
 	<link rel="stylesheet" href="./css_admin_page/wishlist.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .carousel-indicators img{
+            width: 70px;
+            display:block;
+        }
 
+        .carousel-indicators button{
+            width: max-content !important;
+        }
+
+        .carousel-indicators{
+            position: unset;
+        }
+
+        .carousel-indicators button.active img{
+            border:2px solid #f9f8fe;
+        }
+    </style>
 </head>
 
 <body>
@@ -76,6 +95,7 @@ if(isset($_SESSION['name'])) {
         <li class="mt-3" style="cursor:pointer;">
            <a href="addtocart.php?id=<?php echo $row_add['name'] ?>">
 		        <div class="product-details d-flex gap-3 align-items-center">
+                
                      <div class="img">
                          <img src="upload/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
                      </div>
@@ -104,11 +124,7 @@ if(isset($_SESSION['name'])) {
         <div class="item-container" style="position: relative;">
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
-                $id = $_GET['id'];
-                $queries = [
-                    "SELECT * FROM product WHERE name LIKE '$id'"
-                ];
-
+    $id = $_GET['id'];
                 if(isset($_POST['btn'])){
                     $item_name = $_POST['item_name'];
                     $item_img = $_POST['item_img'];
@@ -123,33 +139,69 @@ if(isset($_SESSION['name'])) {
                     }
                     ob_end_flush();
                 }
+                // $queries = [];
 
-                foreach ($queries as $query) {
-                    $result = mysqli_query($con_pro, $query);
-                    while ($row = mysqli_fetch_assoc($result)) {
+
+
+    // Second query
+    $queries_re = [];
+    // echo $id;
+    $query_re = mysqli_query($con_pro, "SELECT id,name,price, about, img, img1,img2,img3 FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img WHERE product.name = '$id' ;");
+    while ($row_re = mysqli_fetch_assoc($query_re)) {
+        $queries_re[] = $row_re;
+    }
+
+    foreach ($queries_re as $query) {
                         ?>
                         <form method="post">
-                            <input type="hidden" name="item_name" value="<?php echo  $row['name']; ?>">
-                            <input type="hidden" name="item_img" value="<?php echo $row['img']; ?>">
-                            <input type="hidden" name="item_price" value="<?php echo  $row['price']; ?>">
-                            <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id">
+                            <input type="hidden" name="item_name" value="<?php echo  $query['name']; ?>">
+                            <input type="hidden" name="item_img" value="<?php echo $query['img']; ?>">
+                            <input type="hidden" name="item_price" value="<?php echo  $query['price']; ?>">
+                            <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
 
-                            <div class="item-card">
-                                <div class="item-img-box">
-                                    <img src="./upload/<?php echo $row['img']; ?>" alt="">
-                                </div>
-                                <div class="item-info">
-                                    <h1><?php echo  $row['name']; ?></h1>
-                                    <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
-                                    <div class="item-color">
-                                        <h5>relative:-</h5>
-                                        <div class="color-box">
-                                            <div class="black">
-                                                <img src="./upload/<?php echo $row['img']; ?>" alt="">
-                                            </div>
+                            <div class="item-card ">
+                                <div id="carouselDemo" class="carousel slide  w-100" style="height: 100vh" >
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active w-100 h-100" >
+                                            <img src="upload/<?php echo $query['img']; ?>" class="d-block h-100 w-100" alt="...">
                                         </div>
+                                        <div class="carousel-item w-100 h-100" >
+                                            <img src="upload/<?php echo $query['img1']; ?>" class="d-block h-100 w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item w-100 h-100">
+                                            <img src="upload/<?php echo $query['img2']; ?>" class="d-block h-100 w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item w-100 h-100">
+                                            <img src="upload/<?php echo $query['img3']; ?>" class="d-block h-auto w-100" alt="...">
+                                        </div>
+                                        
                                     </div>
-                                    <h3>$<?php echo $row['price']; ?>.00</h3>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
+                                            <img src="upload/<?php echo $query['img']; ?>" >
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="1" aria-label="Slide 2">
+                                            <img src="upload/<?php echo $query['img1']; ?>" >
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="2" aria-label="Slide 3">
+                                        <img src="upload/<?php echo $query['img2']; ?>" >
+                                        </button>
+                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="3" class="active" aria-current="true" aria-label="Slide 4">
+                                            <img src="upload/<?php echo $query['img3']; ?>" >
+                                        </button>
+                                    </div>
+                                </div>
+                                                           
+                                <div class="item-info">
+                                    <h1><?php echo  $query['name']; ?></h1>
+                                    <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
+                                    <h3>$<?php echo $query['price']; ?>.00</h3>
                                     <div class="add-to-cart">
                                         <div class="count-btn">
                                             <button type="button" class="minus" onclick="changeQuantity(this, -1)">-</button>
@@ -162,7 +214,7 @@ if(isset($_SESSION['name'])) {
                                     <div class="availability-stock">
                                         <a class="text-black" href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
                                         <a class="text-black" href="">SKU: <span>N/A</span></a>
-                                        <a class="text-black" href="">Vendor: <span><?php echo $row['about']; ?></span></a>
+                                        <a class="text-black" href="">Vendor: <span><?php echo $query['about']; ?></span></a>
                                         <a class="text-black" href="">Categories: <span>Bar Furniture</span></a>
                                         <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
                                     </div>
@@ -170,7 +222,7 @@ if(isset($_SESSION['name'])) {
                             </div>
                             <div class="fav-item block2-txt-child2 flex-r p-t-3">
                             		<?php
-                            		$wish_id_product= $row['id'];
+                            		$wish_id_product= $query['id'];
                             		// $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
                             		$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
                             		if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
@@ -188,7 +240,7 @@ if(isset($_SESSION['name'])) {
                         </form>
                         <?php
                     }
-                }
+                // }
             } else {
                 echo "Product ID is not specified or invalid.";
             }
@@ -254,7 +306,7 @@ if(isset($_SESSION['name'])) {
     <script src="./vendor/slick/slick.js"></script>
     <script src="./vendor/slick/slick.min.js"></script>
 </body>
-
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
 
 <?php

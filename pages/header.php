@@ -4,6 +4,8 @@
     $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
     $con_pro = mysqli_connect("localhost","root","","product_data");
     $con = mysqli_connect("localhost","root","","ecommerce");
+	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@
 
 <body>
 <?php
-//  include "loading.php"
+ include "loading.php"
 ?>
     <header id="header" >
         <div class="logo" onclick="change()">

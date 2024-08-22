@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2024 at 06:06 PM
+-- Generation Time: Aug 22, 2024 at 04:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `department`, `last_login`) VALUES
-(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-08-17 07:02:16');
+(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-08-22 14:02:05');
 
 -- --------------------------------------------------------
 
@@ -106,17 +106,9 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`) VALUES
-(1, 'tarun', 'tarunsagwal@gmail.com', '12345', NULL, '2024-07-09 16:36:44', '2024-08-01 03:01:27', 2),
-(29, 'megumi', 'megumi35guro@gmail.com', '123456', 'face2.jpg', '2024-08-05 16:36:44', '2024-08-19 15:14:09', 2),
-(30, 'sukuna', 'sukuna11@gmail.com', '1236980', 'face.jpg', '2024-07-31 16:36:44', '2024-08-11 03:03:11', 2),
-(37, 'Shahid', 'sahhid@gmail.com', '123045', 'img_ecommerce07.jpg', '2024-08-05 16:36:44', '2024-08-05 16:36:44', 2),
-(41, 'gojo', 'gojo@gmail.com', '1236987', 'face1.jpg', '2024-06-19 16:36:44', '2024-08-30 03:01:56', 2),
-(43, 'sahil', 'sahil@gmail.com', '147856', 'img_ecommerce06.jpg', '2024-07-26 16:48:36', '2024-08-11 03:03:33', 2),
-(44, 'sourav', 'sourav@gmail.com', '1236547', '01.jpg', '2024-03-20 02:50:00', '2024-08-11 03:02:31', 2),
-(45, 'souravjha', 'souravjha@gmail.com', '10230', '01.jpg', '2024-08-11 03:18:07', '2024-08-11 03:18:07', 2),
-(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-20 03:33:41', 2),
+(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-22 04:11:40', 2),
 (51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-08-20 04:22:26', 2),
-(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-20 15:53:12', 2);
+(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-20 17:54:42', 2);
 
 --
 -- Indexes for dumped tables

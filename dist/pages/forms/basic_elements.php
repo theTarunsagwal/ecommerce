@@ -205,6 +205,7 @@
                               <option value="8">Levi's</option>
                               <option value="9">Chanel</option>
                               <option value="10">Ralph Lauren</option>
+                              <option value="11">Apple</option>
                             </select>
                           </div>
                         </div>
@@ -221,6 +222,7 @@
                               <option value="4">shoes</option>
                               <option value="5">watch</option>
                               <option value="6">light</option>
+                              <option value="7">Phone</option>
                             </select>
                           </div>
                         </div>
@@ -306,14 +308,18 @@ if(isset($_POST['sub'])){
                 <div class="card-body">
                   <h4 class="card-title">Product related image upload </h4>
                   <?php
-                     if(isset($_POST['submit'])){
+                     ini_set('display_errors', 1);
+                     ini_set('display_startup_errors', 1);
+                     error_reporting(E_ALL);
+                     
+                     if (isset($_POST['submit'])) {
                          $img = $_POST['qty'];
                          $fileInputs = ['img1', 'img2', 'img3'];
                          $fileNames = [];
                      
                          // Loop through the file inputs and handle the uploads
                          foreach ($fileInputs as $inputName) {
-                             if (isset($_FILES[$inputName])) {
+                             if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] == UPLOAD_ERR_OK) {
                                  $fileimg = $_FILES[$inputName]['name'];
                                  $tmpfile = $_FILES[$inputName]['tmp_name'];
                                  $uploadPath = '../../../pages/upload/' . $fileimg;
@@ -322,6 +328,8 @@ if(isset($_POST['sub'])){
                                  if (move_uploaded_file($tmpfile, $uploadPath)) {
                                      // Store the filename in the $fileNames array
                                      $fileNames[$inputName] = $fileimg;
+                                 } else {
+                                     echo "Failed to upload file: $fileimg";
                                  }
                              }
                          }
@@ -332,10 +340,11 @@ if(isset($_POST['sub'])){
                          if ($relative_img) {
                              echo "Images uploaded and inserted successfully.";
                          } else {
-                             echo "Error: " . mysqli_error($con);
+                             echo "Error inserting data: " . mysqli_error($con_p);
                          }
                      }
-                   ?>
+                     ?>
+
 
                   <form class="form-sample mb-4" method="POST" enctype="multipart/form-data">
                     <p class="card-description"> Product info </p>
@@ -423,6 +432,118 @@ if(isset($_POST['sub'])){
     }
 }
 ?>
+            <div class="col-12 grid-margin" id="show">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Product related image upload </h4>
+                  <?php                     
+                     if (isset($_POST['submit'])) {
+                         $img = $_POST['qty'];
+                         $fileInputs = ['img1', 'img2', 'img3'];
+                         $fileNames = [];
+                     
+                         // Loop through the file inputs and handle the uploads
+                         foreach ($fileInputs as $inputName) {
+                             if (isset($_FILES[$inputName]) && $_FILES[$inputName]['error'] == UPLOAD_ERR_OK) {
+                                 $fileimg = $_FILES[$inputName]['name'];
+                                 $tmpfile = $_FILES[$inputName]['tmp_name'];
+                                 $uploadPath = '../../../pages/upload/' . $fileimg;
+                     
+                                 // Move the uploaded file to the target directory
+                                 if (move_uploaded_file($tmpfile, $uploadPath)) {
+                                     // Store the filename in the $fileNames array
+                                     $fileNames[$inputName] = $fileimg;
+                                 } else {
+                                     echo "Failed to upload file: $fileimg";
+                                 }
+                             }
+                         }
+                     
+                         // Construct and execute the SQL query to insert the filenames into the database
+                         $relative_img = mysqli_query($con_p, "INSERT INTO relative_img (id_img, img1, img2, img3) VALUES ('$img', '{$fileNames['img1']}', '{$fileNames['img2']}', '{$fileNames['img3']}')");
+                     
+                         if ($relative_img) {
+                             echo "Images uploaded and inserted successfully.";
+                         } else {
+                             echo "Error inserting data: " . mysqli_error($con_p);
+                         }
+                     }
+                     ?>
+
+
+                  <form class="form-sample mb-4" method="POST" enctype="multipart/form-data">
+                    <p class="card-description"> Product info </p>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Relative image</label>
+                          <div class="col-md-6">
+                            <input type="file" name="img1" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" disabled
+                                placeholder="Upload Image">
+                              <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary py-3"
+                                  type="button">Upload</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Relative image</label>
+                          <div class="col-md-6">
+                            <input type="file" name="img2" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" disabled
+                                placeholder="Upload Image">
+                              <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary py-3"
+                                  type="button">Upload</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Relative image</label>
+                          <div class="col-md-6">
+                            <input type="file" name="img3" class="file-upload-default">
+                            <div class="input-group col-xs-12">
+                              <input type="text" class="form-control file-upload-info" disabled
+                                placeholder="Upload Image">
+                              <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary py-3"
+                                  type="button">Upload</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Item section</label>
+                            <div class="col-sm-9">
+                              <select class="form-select" name="qty">
+                                <option>---select option---</option>
+                                <?php
+                                $qury_int = mysqli_query($con_p,"SELECT * FROM `product` ORDER BY `product`.`id` DESC");
+                                while($rows= mysqli_fetch_array($qury_int)){
+                                ?>
+                                <option value="<?php echo $rows['id']; ?>"><?php echo $rows['name']; ?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <button type="submit" id="btn" class="btn btn-gradient-primary me-2" name="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>

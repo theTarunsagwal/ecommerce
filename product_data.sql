@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2024 at 06:05 PM
+-- Generation Time: Aug 22, 2024 at 04:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,8 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (3, 'furniture'),
 (4, 'shoes'),
 (5, 'watch'),
-(6, 'light');
+(6, 'light'),
+(7, 'Phone');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `cat
 (26, 'Arctander light', '201', 'img_ecommerce19.jpg', 10, 'table  light', 6),
 (27, 'classic watch', '199', 'img_ecommerce18.jpg', 7, 'one fram watch ', 5),
 (28, 'adidas shoes', '456', 'shoes.jpg', 2, 'this iconic shoes', 4),
-(29, 'Herschel supply', '799', 'product-02.jpg', 4, 'best combination ', 2);
+(29, 'Herschel supply', '799', 'product-02.jpg', 4, 'best combination ', 2),
+(34, 'Apple IOS 16', '703', 'apple 2.jpg', 11, 'Vibrant 6.1-inch Super Retina XDR display with OLED technology. Action mode for smooth, steady, handheld videos.', 7);
 
 -- --------------------------------------------------------
 
@@ -113,7 +115,8 @@ INSERT INTO `product_brand` (`p_id`, `p_name`) VALUES
 (7, 'uniqlo'),
 (8, 'Levis'),
 (9, 'chanel'),
-(10, 'ralph lauren');
+(10, 'ralph lauren'),
+(11, 'Apple');
 
 -- --------------------------------------------------------
 
@@ -133,7 +136,9 @@ CREATE TABLE `relative_img` (
 --
 
 INSERT INTO `relative_img` (`id_img`, `img1`, `img2`, `img3`) VALUES
-(9, 'img_ecommerce02.jpg', 'img_ecommerce02.jpg', 'img_ecommerce07.jpg');
+(9, 'img_ecommerce02.jpg', 'img_ecommerce02.jpg', 'img_ecommerce07.jpg'),
+(10, 'img1', 'img2', 'img3'),
+(34, 'apple 1.jpg', 'apple 3.jpg', 'apple 4.jpg');
 
 --
 -- Indexes for dumped tables
@@ -173,7 +178,7 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables

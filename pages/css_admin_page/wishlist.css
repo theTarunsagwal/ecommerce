@@ -25,17 +25,20 @@
 
 
 .wishlist{
-    height: 100vh;
+    height: 90vh;
     width: 18rem;
     background-color: #f5f6f7 !important;
     transition: all .5s ease-in-out;
     padding: 1rem .5rem !important;
     position: fixed;
     overflow-y: scroll;
-    scrollbar-width: 0rem !important;
     z-index: 500;
     top: 10%;
     right: 0%;
+}
+
+.wishlist::-webkit-scrollbar{
+    visibility: hidden;
 }
 
 .product-details{

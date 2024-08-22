@@ -37,7 +37,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
 
                         <div class="content_profile d-flex flex-column mt-3 ">
                             
-                            <a href=""><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            <a href="profile.php"><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">profile</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
                             </h3></a>

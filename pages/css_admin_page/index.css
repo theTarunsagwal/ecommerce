@@ -9,6 +9,10 @@
     color: #666b7f;
 }
 
+body::-webkit-scrollbar{
+    display: none;
+}
+
 .logo img{
     width:15rem;
 }
@@ -185,7 +189,7 @@ header a{
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 9%;
+    top: 95%;
     z-index: 100;
     right: 5%;
 }
