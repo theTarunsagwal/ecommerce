@@ -74,7 +74,7 @@
 								</a>
 							</li>
 
-							
+
 						</ul>
 					</div>
 
@@ -83,48 +83,55 @@
 							Price
 						</div>
 						<form action="" method="post">
-						<ul>
-							<li class="p-b-6">
-								<button type="submit" value="all" name="price_range" class="filter-link stext-106 trans-04 filter-link-active">
-									All
-								</button>
-							</li>
+							<ul>
+								<li class="p-b-6">
+									<button type="submit" value="all" name="price_range"
+										class="filter-link stext-106 trans-04 filter-link-active">
+										All
+									</button>
+								</li>
 
-							<li class="p-b-6">
-								<button type="submit" value="0-250" name="price_range" class="filter-link stext-106 trans-04">
-									$0.00 - $250.00
-								</button>
-							</li>
+								<li class="p-b-6">
+									<button type="submit" value="0-250" name="price_range"
+										class="filter-link stext-106 trans-04">
+										$0.00 - $250.00
+									</button>
+								</li>
 
-							<li class="p-b-6">
-								<button type="submit" value="250-500" name="price_range" class="filter-link stext-106 trans-04">
-									$250.00 - $500.00
-								</button>
-							</li>
+								<li class="p-b-6">
+									<button type="submit" value="250-500" name="price_range"
+										class="filter-link stext-106 trans-04">
+										$250.00 - $500.00
+									</button>
+								</li>
 
-							<li class="p-b-6">
-								<button type="submit" value="500-650" name="price_range" class="filter-link stext-106 trans-04">
-									$500.00 - $650.00
-								</button>
-							</li>
+								<li class="p-b-6">
+									<button type="submit" value="500-650" name="price_range"
+										class="filter-link stext-106 trans-04">
+										$500.00 - $650.00
+									</button>
+								</li>
 
-							<li class="p-b-6">
-								<button type="submit" value="650" name="price_range" class="filter-link stext-106 trans-04">
-									$650.00+
-								</button>
-							</li>
-							<li class="p-b-6">
-								<button type="submit" value="Low to High" name="price_range" class="filter-link stext-106 trans-04">
-									Price: Low to High
-								</button>
-							</li>
+								<li class="p-b-6">
+									<button type="submit" value="650" name="price_range"
+										class="filter-link stext-106 trans-04">
+										$650.00+
+									</button>
+								</li>
+								<li class="p-b-6">
+									<button type="submit" value="Low to High" name="price_range"
+										class="filter-link stext-106 trans-04">
+										Price: Low to High
+									</button>
+								</li>
 
-							<li class="p-b-6">
-								<button type="submit" value="High to Low" name="price_range" class="filter-link stext-106 trans-04">
-									Price: High to Low
-								</button>
-							</li>
-						</ul>
+								<li class="p-b-6">
+									<button type="submit" value="High to Low" name="price_range"
+										class="filter-link stext-106 trans-04">
+										Price: High to Low
+									</button>
+								</li>
+							</ul>
 						</form>
 					</div>
 
@@ -133,7 +140,7 @@
 		</div>
 		<div class="row isotope-grid">
 
-		<?php
+			<?php
 					if(isset($_POST['price_range'])){
 						$price_select = $_POST['price_range'];
 						switch ($price_select) {
@@ -157,65 +164,68 @@
 								break;	
 							case"all":
 							?>
-						
-									  <?php
+
+			<?php
 										  $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
 										  while($row_product = mysqli_fetch_assoc($qury_product)){
 									  ?>
-									  <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
-										  <!-- Block2 -->
-										  <a href="addtocart.php?id=<?php echo $row_product['name']?>">
-								  
-											  <div class="block2">
-												  <div class="block2-pic hov-img0">
-													  <img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
-												  </div>
-								  
-												  <div class="block2-txt flex-w flex-t p-t-14">
-													  <div class="block2-txt-child1 flex-col-l ">
-														  <a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-															  <?php echo $row_product['name']; ?>
-														  </a>
-								  
-														  <span class="stext-105 cl3">
-															  $<?php echo $row_product['price']; ?>
-														  </span>
-													  </div>
-								  
-													  <div class="block2-txt-child2 flex-r p-t-3">
-														  <form method="POST" class="wish_form">
-															  <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
-															  <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
-															  <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
-															  <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
-															  <?php
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+				<!-- Block2 -->
+				<a href="addtocart.php?id=<?php echo $row_product['name']?>">
+
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>"
+								alt="IMG-PRODUCT">
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?php echo $row_product['name']; ?>
+								</a>
+
+								<span class="stext-105 cl3">
+									$
+									<?php echo $row_product['price']; ?>
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<form method="POST" class="wish_form">
+									<input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
+									<input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
+									<input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
+									<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
+									<?php
 															  if(isset($_SESSION['name'])){ 
 																  $wish_id_product= $row_product['id'];
 																  $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
 																  if(mysqli_num_rows($qry_user_product) > 0 ){
 															  ?>
-															  <button type="submit" name="heart_del">
-																  <i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </button>
-															  <?php } else { ?>
-															  <button type="submit" name="heart_submit">
-																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </button>
-															  <?php } ?>
-															  <?php } else { ?>
-															  <a href="loging.php">
-																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </a>
-															  <?php } ?>
-														  </form>
-													  </div>
-												  </div>
-											  </div>
-										  </a>
-									  </div>
-									  <?php } ?>
-								  
-							<?php
+									<button type="submit" name="heart_del">
+										<i class='bx bxs-heart' id="heart"
+											style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } else { ?>
+									<button type="submit" name="heart_submit">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } ?>
+									<?php } else { ?>
+									<a href="loging.php">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</a>
+									<?php } ?>
+								</form>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<?php } ?>
+
+			<?php
 								break;
 								default:
 								echo "no product found";
@@ -227,123 +237,129 @@
 						$qry_all_filter= mysqli_query($con_pro,$qry_merg);
 						while($row_filter = mysqli_fetch_array($qry_all_filter)){
 							?>
-							          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_filter['cat_name']?>">
-										  <!-- Block2 -->
-										  <a href="addtocart.php?id=<?php echo $row_filter['name']?>">
-								  
-											  <div class="block2">
-												  <div class="block2-pic hov-img0">
-													  <img style="height: 365px;" src="upload/<?php echo $row_filter['img']; ?>" alt="IMG-PRODUCT">
-												  </div>
-								  
-												  <div class="block2-txt flex-w flex-t p-t-14">
-													  <div class="block2-txt-child1 flex-col-l ">
-														  <a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-															  <?php echo $row_filter['name']; ?>
-														  </a>
-								  
-														  <span class="stext-105 cl3">
-															  $<?php echo $row_filter['price']; ?>
-														  </span>
-													  </div>
-								  
-													  <div class="block2-txt-child2 flex-r p-t-3">
-														  <form method="POST" class="wish_form">
-															  <input type="hidden" value="<?php echo $row_filter['id']; ?>" name="wish_id">
-															  <input type="hidden" value="<?php echo $row_filter['name']; ?>" name="wish_name">
-															  <input type="hidden" value="<?php echo $row_filter['img']; ?>" name="wish_img">
-															  <input type="hidden" value="<?php echo $row_filter['price']; ?>" name="wish_price">
-															  <?php
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_filter['cat_name']?>">
+				<!-- Block2 -->
+				<a href="addtocart.php?id=<?php echo $row_filter['name']?>">
+
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img style="height: 365px;" src="upload/<?php echo $row_filter['img']; ?>"
+								alt="IMG-PRODUCT">
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?php echo $row_filter['name']; ?>
+								</a>
+
+								<span class="stext-105 cl3">
+									$
+									<?php echo $row_filter['price']; ?>
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<form method="POST" class="wish_form">
+									<input type="hidden" value="<?php echo $row_filter['id']; ?>" name="wish_id">
+									<input type="hidden" value="<?php echo $row_filter['name']; ?>" name="wish_name">
+									<input type="hidden" value="<?php echo $row_filter['img']; ?>" name="wish_img">
+									<input type="hidden" value="<?php echo $row_filter['price']; ?>" name="wish_price">
+									<?php
 															  if(isset($_SESSION['name'])){ 
 																  $wish_id_product= $row_filter['id'];
 																  $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
 																  if(mysqli_num_rows($qry_user_product) > 0 ){
 															  ?>
-															  <button type="submit" name="heart_del">
-																  <i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </button>
-															  <?php } else { ?>
-															  <button type="submit" name="heart_submit">
-																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </button>
-															  <?php } ?>
-															  <?php } else { ?>
-															  <a href="loging.php">
-																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-															  </a>
-															  <?php } ?>
-														  </form>
-													  </div>
-												  </div>
-											  </div>
-										  </a>
-									  </div>
-								  
+									<button type="submit" name="heart_del">
+										<i class='bx bxs-heart' id="heart"
+											style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } else { ?>
+									<button type="submit" name="heart_submit">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } ?>
+									<?php } else { ?>
+									<a href="loging.php">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</a>
+									<?php } ?>
+								</form>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
 
-							<?php
+
+			<?php
 						}
 					}else{
 						echo "no product found";
 					?>
-						
-						<?php
+
+			<?php
 							$qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
 							while($row_product = mysqli_fetch_assoc($qury_product)){
 						?>
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
-							<!-- Block2 -->
-							<a href="addtocart.php?id=<?php echo $row_product['name']?>">
-					
-								<div class="block2">
-									<div class="block2-pic hov-img0">
-										<img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
-									</div>
-					
-									<div class="block2-txt flex-w flex-t p-t-14">
-										<div class="block2-txt-child1 flex-col-l ">
-											<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-												<?php echo $row_product['name']; ?>
-											</a>
-					
-											<span class="stext-105 cl3">
-												$<?php echo $row_product['price']; ?>
-											</span>
-										</div>
-					
-										<div class="block2-txt-child2 flex-r p-t-3">
-											<form method="POST" class="wish_form">
-												<input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
-												<input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
-												<input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
-												<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
-												<?php
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+				<!-- Block2 -->
+				<a href="addtocart.php?id=<?php echo $row_product['name']?>">
+
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>"
+								alt="IMG-PRODUCT">
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<?php echo $row_product['name']; ?>
+								</a>
+
+								<span class="stext-105 cl3">
+									$
+									<?php echo $row_product['price']; ?>
+								</span>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<form method="POST" class="wish_form">
+									<input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
+									<input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
+									<input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
+									<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
+									<?php
 												if(isset($_SESSION['name'])){ 
 													$wish_id_product= $row_product['id'];
 													$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
 													if(mysqli_num_rows($qry_user_product) > 0 ){
 												?>
-												<button type="submit" name="heart_del">
-													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-												</button>
-												<?php } else { ?>
-												<button type="submit" name="heart_submit">
-													<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-												</button>
-												<?php } ?>
-												<?php } else { ?>
-												<a href="loging.php">
-													<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-												</a>
-												<?php } ?>
-											</form>
-										</div>
-									</div>
-								</div>
-							</a>
+									<button type="submit" name="heart_del">
+										<i class='bx bxs-heart' id="heart"
+											style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } else { ?>
+									<button type="submit" name="heart_submit">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</button>
+									<?php } ?>
+									<?php } else { ?>
+									<a href="loging.php">
+										<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+									</a>
+									<?php } ?>
+								</form>
+							</div>
 						</div>
-						<?php } ?>
-					
-						<?php } ?>
-				    </div>
+					</div>
+				</a>
+			</div>
+			<?php } ?>
+
+			<?php } ?>
+		</div>
 	</div>
 </section>
