@@ -559,8 +559,8 @@ display: none;
         width: 10rem;
     }
 
-    .search_shop i{
-        font-size: 1rem;
+    .search_shop i,.bxs-shopping-bags{
+        font-size: 1rem !important;
     }
 
     .shoping_bag{font-size: .7rem;}

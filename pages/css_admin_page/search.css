@@ -42,6 +42,7 @@ body{
     gap: 1rem;
     overflow: scroll;
     width: 100vw;
+    margin-top: 4%;
 }
 .price-name{
     padding: 1rem;

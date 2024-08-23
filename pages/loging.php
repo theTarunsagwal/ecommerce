@@ -17,6 +17,7 @@ if(isset($_POST['sub'])){
 			header('location:../dist/index.php');
 		}else if($fetchs = mysqli_fetch_array($qurys)){
             $_SESSION['name'] = $fetchs['name'];
+            $_SESSION['id'] = $fetchs['id'];
             $_SESSION['email'] = $fetchs['email'];
 
 			$qury_time = mysqli_query($con,$qury_set);

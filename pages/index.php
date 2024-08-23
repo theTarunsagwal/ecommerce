@@ -335,9 +335,9 @@ if(isset($_SESSION['name'])) {
 	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="./vendor/select2/select2.min.js"></script>
 	<script src="./vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="./vendor/isotope/isotope.pkgd.min.js"></script>
-<script src="./vendor/sweetalert/sweetalert.min.js"></script>
-<script src="./vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script src="./vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="./vendor/sweetalert/sweetalert.min.js"></script>
+    <script src="./vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 	<script src="./vendor/daterangepicker/moment.min.js"></script>
 	<script src="./vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="./vendor/slick/slick.min.js"></script>

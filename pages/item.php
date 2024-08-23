@@ -74,17 +74,7 @@
 								</a>
 							</li>
 
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Price: Low to High
-								</a>
-							</li>
-
-							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									Price: High to Low
-								</a>
-							</li>
+							
 						</ul>
 					</div>
 
@@ -92,709 +82,268 @@
 						<div class="mtext-102 cl2 p-b-15">
 							Price
 						</div>
-
+						<form action="" method="post">
 						<ul>
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+								<button type="submit" value="all" name="price_range" class="filter-link stext-106 trans-04 filter-link-active">
 									All
-								</a>
+								</button>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$0.00 - $50.00
-								</a>
+								<button type="submit" value="0-250" name="price_range" class="filter-link stext-106 trans-04">
+									$0.00 - $250.00
+								</button>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$50.00 - $100.00
-								</a>
+								<button type="submit" value="250-500" name="price_range" class="filter-link stext-106 trans-04">
+									$250.00 - $500.00
+								</button>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$100.00 - $150.00
-								</a>
+								<button type="submit" value="500-650" name="price_range" class="filter-link stext-106 trans-04">
+									$500.00 - $650.00
+								</button>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$150.00 - $200.00
-								</a>
+								<button type="submit" value="650" name="price_range" class="filter-link stext-106 trans-04">
+									$650.00+
+								</button>
+							</li>
+							<li class="p-b-6">
+								<button type="submit" value="Low to High" name="price_range" class="filter-link stext-106 trans-04">
+									Price: Low to High
+								</button>
 							</li>
 
 							<li class="p-b-6">
-								<a href="#" class="filter-link stext-106 trans-04">
-									$200.00+
-								</a>
+								<button type="submit" value="High to Low" name="price_range" class="filter-link stext-106 trans-04">
+									Price: High to Low
+								</button>
 							</li>
 						</ul>
+						</form>
 					</div>
 
 				</div>
 			</div>
 		</div>
-
 		<div class="row isotope-grid">
 
-    <?php
-        $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 35 ORDER BY product.id DESC;");
-        while($row_product = mysqli_fetch_assoc($qury_product)){
-    ?>
-    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
-        <!-- Block2 -->
-        <a href="addtocart.php?id=<?php echo $row_product['name']?>">
+		<?php
+					if(isset($_POST['price_range'])){
+						$price_select = $_POST['price_range'];
+						switch ($price_select) {
+							case '0-250':
+								$qury = " where price between 0 AND 250";
+								break;
+							case '250-500':
+								$qury = " where price between 250 AND 500";
+								break;
+							case '500-650':
+								$qury = " where price between 500 AND 650";
+								break;
+							case '650':
+								$qury = " where price >= 650";
+								break;
+							case 'Low to High':
+								$qury = "ORDER BY price ASC";
+								break;
+							case 'High to Low':
+								$qury = "ORDER BY price DESC";
+								break;	
+							case"all":
+							?>
+						
+									  <?php
+										  $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
+										  while($row_product = mysqli_fetch_assoc($qury_product)){
+									  ?>
+									  <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+										  <!-- Block2 -->
+										  <a href="addtocart.php?id=<?php echo $row_product['name']?>">
+								  
+											  <div class="block2">
+												  <div class="block2-pic hov-img0">
+													  <img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
+												  </div>
+								  
+												  <div class="block2-txt flex-w flex-t p-t-14">
+													  <div class="block2-txt-child1 flex-col-l ">
+														  <a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+															  <?php echo $row_product['name']; ?>
+														  </a>
+								  
+														  <span class="stext-105 cl3">
+															  $<?php echo $row_product['price']; ?>
+														  </span>
+													  </div>
+								  
+													  <div class="block2-txt-child2 flex-r p-t-3">
+														  <form method="POST" class="wish_form">
+															  <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
+															  <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
+															  <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
+															  <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
+															  <?php
+															  if(isset($_SESSION['name'])){ 
+																  $wish_id_product= $row_product['id'];
+																  $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+																  if(mysqli_num_rows($qry_user_product) > 0 ){
+															  ?>
+															  <button type="submit" name="heart_del">
+																  <i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </button>
+															  <?php } else { ?>
+															  <button type="submit" name="heart_submit">
+																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </button>
+															  <?php } ?>
+															  <?php } else { ?>
+															  <a href="loging.php">
+																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </a>
+															  <?php } ?>
+														  </form>
+													  </div>
+												  </div>
+											  </div>
+										  </a>
+									  </div>
+									  <?php } ?>
+								  
+							<?php
+								break;
+								default:
+								echo "no product found";
+								break;
+						}
+						// echo $qury;
+						$qry_merg = "SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id $qury ";
+						// echo $qry_merg;
+						$qry_all_filter= mysqli_query($con_pro,$qry_merg);
+						while($row_filter = mysqli_fetch_array($qry_all_filter)){
+							?>
+							          <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_filter['cat_name']?>">
+										  <!-- Block2 -->
+										  <a href="addtocart.php?id=<?php echo $row_filter['name']?>">
+								  
+											  <div class="block2">
+												  <div class="block2-pic hov-img0">
+													  <img style="height: 365px;" src="upload/<?php echo $row_filter['img']; ?>" alt="IMG-PRODUCT">
+												  </div>
+								  
+												  <div class="block2-txt flex-w flex-t p-t-14">
+													  <div class="block2-txt-child1 flex-col-l ">
+														  <a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+															  <?php echo $row_filter['name']; ?>
+														  </a>
+								  
+														  <span class="stext-105 cl3">
+															  $<?php echo $row_filter['price']; ?>
+														  </span>
+													  </div>
+								  
+													  <div class="block2-txt-child2 flex-r p-t-3">
+														  <form method="POST" class="wish_form">
+															  <input type="hidden" value="<?php echo $row_filter['id']; ?>" name="wish_id">
+															  <input type="hidden" value="<?php echo $row_filter['name']; ?>" name="wish_name">
+															  <input type="hidden" value="<?php echo $row_filter['img']; ?>" name="wish_img">
+															  <input type="hidden" value="<?php echo $row_filter['price']; ?>" name="wish_price">
+															  <?php
+															  if(isset($_SESSION['name'])){ 
+																  $wish_id_product= $row_filter['id'];
+																  $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+																  if(mysqli_num_rows($qry_user_product) > 0 ){
+															  ?>
+															  <button type="submit" name="heart_del">
+																  <i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </button>
+															  <?php } else { ?>
+															  <button type="submit" name="heart_submit">
+																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </button>
+															  <?php } ?>
+															  <?php } else { ?>
+															  <a href="loging.php">
+																  <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+															  </a>
+															  <?php } ?>
+														  </form>
+													  </div>
+												  </div>
+											  </div>
+										  </a>
+									  </div>
+								  
 
-            <div class="block2">
-                <div class="block2-pic hov-img0">
-                    <img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
-
-                    <a href="#"
-                        class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                        Quick View
-                    </a>
-                </div>
-
-                <div class="block2-txt flex-w flex-t p-t-14">
-                    <div class="block2-txt-child1 flex-col-l ">
-                        <a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                            <?php echo $row_product['name']; ?>
-                        </a>
-
-                        <span class="stext-105 cl3">
-                            $<?php echo $row_product['price']; ?>
-                        </span>
-                    </div>
-
-                    <div class="block2-txt-child2 flex-r p-t-3">
-                        <form method="POST" class="wish_form">
-                            <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
-                            <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
-                            <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
-                            <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
-                            <?php
-                            if(isset($_SESSION['name'])){ 
-                                $wish_id_product= $row_product['id'];
-                                $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
-                                if(mysqli_num_rows($qry_user_product) > 0 ){
-                            ?>
-                            <button type="submit" name="heart_del">
-                                <i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            </button>
-                            <?php } else { ?>
-                            <button type="submit" name="heart_submit">
-                                <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            </button>
-                            <?php } ?>
-                            <?php } else { ?>
-                            <a href="loging.php">
-                                <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            </a>
-                            <?php } ?>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <?php } ?>
-
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-02.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Herschel supply
-							</a>
-
-							<span class="stext-105 cl3">
-								$35.31
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-03.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Only Check Trouser
-							</a>
-
-							<span class="stext-105 cl3">
-								$25.50
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-04.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Classic Trench Coat
-							</a>
-
-							<span class="stext-105 cl3">
-								$75.00
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-05.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Front Pocket Jumper
-							</a>
-
-							<span class="stext-105 cl3">
-								$34.75
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watch">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-06.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Vintage Inspired Classic
-							</a>
-
-							<span class="stext-105 cl3">
-								$93.20
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
+							<?php
+						}
+					}else{
+						echo "no product found";
+					?>
+						
+						<?php
+							$qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
+							while($row_product = mysqli_fetch_assoc($qury_product)){
+						?>
+						<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+							<!-- Block2 -->
+							<a href="addtocart.php?id=<?php echo $row_product['name']?>">
+					
+								<div class="block2">
+									<div class="block2-pic hov-img0">
+										<img style="height: 365px;" src="upload/<?php echo $row_product['img']; ?>" alt="IMG-PRODUCT">
+									</div>
+					
+									<div class="block2-txt flex-w flex-t p-t-14">
+										<div class="block2-txt-child1 flex-col-l ">
+											<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+												<?php echo $row_product['name']; ?>
+											</a>
+					
+											<span class="stext-105 cl3">
+												$<?php echo $row_product['price']; ?>
+											</span>
+										</div>
+					
+										<div class="block2-txt-child2 flex-r p-t-3">
+											<form method="POST" class="wish_form">
+												<input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id">
+												<input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name">
+												<input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img">
+												<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price">
+												<?php
+												if(isset($_SESSION['name'])){ 
+													$wish_id_product= $row_product['id'];
+													$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+													if(mysqli_num_rows($qry_user_product) > 0 ){
+												?>
+												<button type="submit" name="heart_del">
+													<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+												</button>
+												<?php } else { ?>
+												<button type="submit" name="heart_submit">
+													<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+												</button>
+												<?php } ?>
+												<?php } else { ?>
+												<a href="loging.php">
+													<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+												</a>
+												<?php } ?>
+											</form>
+										</div>
+									</div>
+								</div>
 							</a>
 						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-07.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Shirt in Stretch Cotton
-							</a>
-
-							<span class="stext-105 cl3">
-								$52.66
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-08.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Pieces Metallic Printed
-							</a>
-
-							<span class="stext-105 cl3">
-								$18.96
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item shoes">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-09.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Converse All Star Hi Plimsolls
-							</a>
-
-							<span class="stext-105 cl3">
-								$75.00
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-10.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Femme T-Shirt In Stripe
-							</a>
-
-							<span class="stext-105 cl3">
-								$25.85
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-11.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Herschel supply
-							</a>
-
-							<span class="stext-105 cl3">
-								$63.16
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item men">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-12.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Herschel supply
-							</a>
-
-							<span class="stext-105 cl3">
-								$63.15
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-13.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								T-Shirt with Sleeve
-							</a>
-
-							<span class="stext-105 cl3">
-								$18.49
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item light">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="upload/img_ecommerce22.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Square Neck Back
-							</a>
-
-							<span class="stext-105 cl3">
-								$29.64
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-14.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Pretty Little Thing
-							</a>
-
-							<span class="stext-105 cl3">
-								$54.79
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item watch">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-15.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Mini Silver Mesh Watch
-							</a>
-
-							<span class="stext-105 cl3">
-								$86.85
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="product/product-16.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Square Neck Back
-							</a>
-
-							<span class="stext-105 cl3">
-								$29.64
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item light">
-				<!-- Block2 -->
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-						<img src="upload/img_ecommerce19.jpg" alt="IMG-PRODUCT">
-
-						<a href="#"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View
-						</a>
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								Square Neck Back
-							</a>
-
-							<span class="stext-105 cl3">
-								$29.64
-							</span>
-						</div>
-
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-								<img class="icon-heart1 dis-block trans-04" src="img/icons/icon-heart-01.png"
-									alt="ICON">
-								<img class="icon-heart2 dis-block trans-04 ab-t-l" src="img/icons/icon-heart-02.png"
-									alt="ICON">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						<?php } ?>
+					
+						<?php } ?>
+				    </div>
 	</div>
 </section>

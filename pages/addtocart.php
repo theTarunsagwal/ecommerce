@@ -119,12 +119,19 @@ if(isset($_SESSION['name'])) {
     </ul>
 </div>
 
-
+<?php
+if (isset($_POST['sub_rating'])) {
+    echo $product_rating_id = $_POST['product_id'];
+    echo $rating = $_POST['star-radio'];
+   echo $user_email = $_SESSION['email'];
+    $qry_rating = mysqli_query($con_pro, "INSERT INTO ratings (user_email, product_id, rating) VALUES ('$user_email', $product_rating_id, $rating)");
+}
+?>
 <section>
         <div class="item-container" style="position: relative;">
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $id = $_GET['id'];
+                $id = $_GET['id'];
                 if(isset($_POST['btn'])){
                     $item_name = $_POST['item_name'];
                     $item_img = $_POST['item_img'];
@@ -139,19 +146,12 @@ if(isset($_SESSION['name'])) {
                     }
                     ob_end_flush();
                 }
-                // $queries = [];
-
-
-
-    // Second query
-    $queries_re = [];
-    // echo $id;
-    $query_re = mysqli_query($con_pro, "SELECT id,name,price, about, img, img1,img2,img3 FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img WHERE product.name = '$id' ;");
-    while ($row_re = mysqli_fetch_assoc($query_re)) {
-        $queries_re[] = $row_re;
-    }
-
-    foreach ($queries_re as $query) {
+                               $queries_re = [];
+                               $query_re = mysqli_query($con_pro, "SELECT id,name,price, about, img, img1,img2,img3 FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img WHERE product.name = '$id' ;");
+                               while ($row_re = mysqli_fetch_assoc($query_re)) {
+                                   $queries_re[] = $row_re;
+                               }
+                               foreach ($queries_re as $query) {
                         ?>
                         <form method="post">
                             <input type="hidden" name="item_name" value="<?php echo  $query['name']; ?>">
@@ -160,7 +160,7 @@ if(isset($_SESSION['name'])) {
                             <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
 
                             <div class="item-card ">
-                                <div id="carouselDemo" class="carousel slide  w-100" style="height: 100vh" >
+                                <div id="carouselDemo" class="carousel slide  w-100" style="height: 73vh" >
                                     <div class="carousel-inner">
                                         <div class="carousel-item active w-100 h-100" >
                                             <img src="upload/<?php echo $query['img']; ?>" class="d-block h-100 w-100" alt="...">
@@ -172,7 +172,7 @@ if(isset($_SESSION['name'])) {
                                             <img src="upload/<?php echo $query['img2']; ?>" class="d-block h-100 w-100" alt="...">
                                         </div>
                                         <div class="carousel-item w-100 h-100">
-                                            <img src="upload/<?php echo $query['img3']; ?>" class="d-block h-auto w-100" alt="...">
+                                            <img src="upload/<?php echo $query['img3']; ?>" class="d-block h-100 w-100" alt="...">
                                         </div>
                                         
                                     </div>
@@ -216,27 +216,73 @@ if(isset($_SESSION['name'])) {
                                         <a class="text-black" href="">SKU: <span>N/A</span></a>
                                         <a class="text-black" href="">Vendor: <span><?php echo $query['about']; ?></span></a>
                                         <a class="text-black" href="">Categories: <span>Bar Furniture</span></a>
-                                        <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i></a>
+                                        <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i> 
+                                        <div class="fav-item block2-txt-child2 flex-r">
+                            		           <?php
+                            		           $wish_id_product= $query['id'];
+                            		           // $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
+                            		           $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+                            		           if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
+                            		           ?>
+                            		           <button type="submit" style="padding-top: .3rem;" name="heart_del">
+                            		           	<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+                            		           </button>
+                            		           <?php }else{
+                            		           	?>
+                            		           	<button type="submit" style="padding-top: .3rem;" name="heart_submit">
+                            		           		<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
+                            		           	</button>
+                            		           <?php } ?>
+                                        </div> </a>
+                                        <a class="text-black icon-btn" href="">rating:</a>
+                                    <div class="rating ">
+                                        
+                                    </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="fav-item block2-txt-child2 flex-r p-t-3">
-                            		<?php
-                            		$wish_id_product= $query['id'];
-                            		// $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
-                            		$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
-                            		if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
-                            		?>
-                            		<button type="submit" name="heart_del">
-                            			<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            		</button>
-                            		<?php }else{
-                            			?>
-                            			<button type="submit" name="heart_submit">
-                            				<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            			</button>
-                            		<?php } ?>
-                            </div>
+                            <!-- rating box -->
+                            <div class="rating-box">
+                               <div class="rating-pop d-flex align-items-center justify-content-center flex-column gap-3">
+                                   <h1 class="fs-3 text-black fw-bolder text-center">Give a rating</h1>
+                                   <form action="" method="POST">
+                                       <input type="hidden" name="product_id" value="<?php echo $query['id']; ?>">
+                                       <div class="rating">
+                                           <input type="radio" id="star-1" name="star-radio" value="5">
+                                           <label for="star-1">
+                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+                                               </svg>
+                                           </label>
+                                           <input type="radio" id="star-2" name="star-radio" value="4">
+                                           <label for="star-2">
+                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+                                               </svg>
+                                           </label>
+                                           <input type="radio" id="star-3" name="star-radio" value="3">
+                                           <label for="star-3">
+                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+                                               </svg>
+                                           </label>
+                                           <input type="radio" id="star-4" name="star-radio" value="2">
+                                           <label for="star-4">
+                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+                                               </svg>
+                                           </label>
+                                           <input type="radio" id="star-5" name="star-radio" value="1">
+                                           <label for="star-5">
+                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+                                               </svg>
+                                           </label>
+                                       </div>
+                                       <button type="submit" id="btn-rating" name="sub_rating"><span>Rating</span></button>
+                                   </form>
+                               </div>
+                           </div>
                         </form>
                         <?php
                     }
@@ -250,7 +296,7 @@ if(isset($_SESSION['name'])) {
 
 
     <section>
-        <div class="description-container">
+        <div class="description-container" style="margin-top: 10%;">
             <div class="container-main">
                 <div class="container-line"></div>
                 <h2>Description</h2>
