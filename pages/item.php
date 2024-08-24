@@ -296,7 +296,6 @@
 			<?php
 						}
 					}else{
-						echo "no product found";
 					?>
 
 			<?php

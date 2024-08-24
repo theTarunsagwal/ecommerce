@@ -121,10 +121,16 @@ if(isset($_SESSION['name'])) {
 
 <?php
 if (isset($_POST['sub_rating'])) {
-    echo $product_rating_id = $_POST['product_id'];
-    echo $rating = $_POST['star-radio'];
-   echo $user_email = $_SESSION['email'];
-    $qry_rating = mysqli_query($con_pro, "INSERT INTO ratings (user_email, product_id, rating) VALUES ('$user_email', $product_rating_id, $rating)");
+   $product_rating_id = $_POST['product_id'];
+   $rating = $_POST['star-radio'];
+   $user_email = $_SESSION['email'];
+    $qry_rating = "INSERT INTO ratings (user_email, product_id, rating) VALUES ('$user_email', $product_rating_id, $rating)";
+    if($qry_rating){
+        echo"success";
+        mysqli_query($con_pro,$qry_rating);
+    }else{
+        echo "Error";
+    }
 }
 ?>
 <section>
@@ -234,7 +240,14 @@ if (isset($_POST['sub_rating'])) {
                             		           	</button>
                             		           <?php } ?>
                                         </div> </a>
-                                        <a class="text-black icon-btn" href="">rating:</a>
+                                        <?php
+                                            $qry_rating_id = $query['id'];
+                                            $qry_rating_avg="SELECT AVG(rating) AS average_rating FROM ratings WHERE product_id = $qry_rating_id ";
+                                             $result_rating_avg = mysqli_query($con_pro,$qry_rating_avg);
+                                             $row_rating_avg = mysqli_fetch_assoc($result_rating_avg);
+                                            //  if(){}
+                                        ?>
+                                        <h6 class="text-black icon-btn" style="cursor:pointer;" id="rating-inp" href="">rating:<?php echo  isset($row_rating_avg['average_rating']) ? number_format($row_rating_avg['average_rating'], 1) : 'N/A';  ?></h6>
                                     <div class="rating ">
                                         
                                     </div>
@@ -247,7 +260,7 @@ if (isset($_POST['sub_rating'])) {
                                    <h1 class="fs-3 text-black fw-bolder text-center">Give a rating</h1>
                                    <form action="" method="POST">
                                        <input type="hidden" name="product_id" value="<?php echo $query['id']; ?>">
-                                       <div class="rating">
+                                       <div class="rating" id="rating">
                                            <input type="radio" id="star-1" name="star-radio" value="5">
                                            <label for="star-1">
                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -279,7 +292,10 @@ if (isset($_POST['sub_rating'])) {
                                                </svg>
                                            </label>
                                        </div>
-                                       <button type="submit" id="btn-rating" name="sub_rating"><span>Rating</span></button>
+                                       <div class="d-flex gap-2">
+                                           <button type="submit" class="btn-rating" id="btn-rating" name="sub_rating"><span>Rating</span></button>
+                                           <button type="submit" class="back-rating" id="btn-rating"><span>Back</span></button>
+                                       </div>
                                    </form>
                                </div>
                            </div>
@@ -293,6 +309,18 @@ if (isset($_POST['sub_rating'])) {
             ?>
         </div>
 </section>
+            <script>
+                $(document).ready(function(){
+                    $('.btn-rating').hide();
+                    $('.rating-box').hide();
+                    $("#rating-inp").click(function(){
+                        $('.rating-box').show();
+                    })
+                    $("#rating").click(function(){
+                        $('.btn-rating').show();
+                    })
+                })
+            </script>
 
 
     <section>

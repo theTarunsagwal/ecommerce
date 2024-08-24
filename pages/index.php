@@ -91,8 +91,6 @@ if(isset($_SESSION['name'])) {
         }
         ?>
 		<?php
-}else{
-	header("location: ./loging.php");
 }
 ?>
     <ul class="d-flex gap-2" style="flex-direction: column;">
