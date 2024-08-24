@@ -145,6 +145,10 @@ font-size: 1.5rem;
     background-color: #fcb800;
 }
 
+textarea {
+    resize: none !important;
+}
+
 /*----------------- rating btn ----------------------*/
 
 #btn-rating {
@@ -213,8 +217,9 @@ font-size: 1.5rem;
 }
 
 .rating-pop{
-    height: 12rem;
+    height: fit-content;
     width: 30rem;
+    padding: .5rem;
     border-radius: 10px;
     /* text-transform: capitalize; */
     background-color: #f8f9fa;

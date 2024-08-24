@@ -122,9 +122,11 @@ if(isset($_SESSION['name'])) {
 <?php
 if (isset($_POST['sub_rating'])) {
    $product_rating_id = $_POST['product_id'];
+   $product_rating_name = $_POST['product_name'];
    $rating = $_POST['star-radio'];
+   $comment = $_POST['comment-box'];
    $user_email = $_SESSION['email'];
-    $qry_rating = "INSERT INTO ratings (user_email, product_id, rating) VALUES ('$user_email', $product_rating_id, $rating)";
+    $qry_rating = "INSERT INTO ratings (user_email, product_id, rating,comment_box,pr_name) VALUES ('$user_email', $product_rating_id, $rating,'$comment','$product_rating_name')";
     if($qry_rating){
         echo"success";
         mysqli_query($con_pro,$qry_rating);
@@ -245,12 +247,32 @@ if (isset($_POST['sub_rating'])) {
                                             $qry_rating_avg="SELECT AVG(rating) AS average_rating FROM ratings WHERE product_id = $qry_rating_id ";
                                              $result_rating_avg = mysqli_query($con_pro,$qry_rating_avg);
                                              $row_rating_avg = mysqli_fetch_assoc($result_rating_avg);
-                                            //  if(){}
+                                             $averga = isset($row_rating_avg['average_rating']) ? number_format($row_rating_avg['average_rating'], 1) : 'N/A'; 
+                                             if($averga !== "N/A"){
+                                                if($averga == 5){
+                                                    echo "
+                                                       <h6 class='text-black icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:yellow;'> $averga</span></h6>
+                                                    ";
+                                                } else if($averga >= 4 && $averga < 5 ){
+                                                    echo "
+                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:green;'> $averga</span></h6>
+                                                    ";
+                                                } else if($averga >= 3 && $averga < 4 ){
+                                                    echo "
+                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:purple;'> $averga</span></h6>
+                                                    ";
+                                                }else if($averga >= 1 && $averga < 3 ){
+                                                    echo "
+                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
+                                                    ";
+                                                }
+                                             }else{
+                                                echo "
+                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span> $averga</span></h6>
+                                                    ";
+                                             }
                                         ?>
-                                        <h6 class="text-black icon-btn" style="cursor:pointer;" id="rating-inp" href="">rating:<?php echo  isset($row_rating_avg['average_rating']) ? number_format($row_rating_avg['average_rating'], 1) : 'N/A';  ?></h6>
-                                    <div class="rating ">
-                                        
-                                    </div>
+                                        <!-- <h6 class='text-black icon-btn' style='cursor:pointer;' id='rating-inp'>rating:<?php   ?></h6> -->
                                     </div>
                                 </div>
                             </div>
@@ -260,6 +282,7 @@ if (isset($_POST['sub_rating'])) {
                                    <h1 class="fs-3 text-black fw-bolder text-center">Give a rating</h1>
                                    <form action="" method="POST">
                                        <input type="hidden" name="product_id" value="<?php echo $query['id']; ?>">
+                                       <input type="hidden" name="product_name" value="<?php echo $query['name']; ?>">
                                        <div class="rating" id="rating">
                                            <input type="radio" id="star-1" name="star-radio" value="5">
                                            <label for="star-1">
@@ -292,11 +315,15 @@ if (isset($_POST['sub_rating'])) {
                                                </svg>
                                            </label>
                                        </div>
-                                       <div class="d-flex gap-2">
+                                        <div class="d-flex gap-2">
+                                            <label for="comment-box">comment :-</label>
+                                        <textarea name="comment-box" cols="30" placeholder="Enter your thought"></textarea>
+                                        </div>
+                                        <div class="d-flex gap-2">
                                            <button type="submit" class="btn-rating" id="btn-rating" name="sub_rating"><span>Rating</span></button>
                                            <button type="submit" class="back-rating" id="btn-rating"><span>Back</span></button>
-                                       </div>
-                                   </form>
+                                        </form>
+                                        </div>
                                </div>
                            </div>
                         </form>
@@ -318,6 +345,9 @@ if (isset($_POST['sub_rating'])) {
                     })
                     $("#rating").click(function(){
                         $('.btn-rating').show();
+                    })
+                    $(".back-rating").click(function(){
+                        $('.rating-box').hide();
                     })
                 })
             </script>
