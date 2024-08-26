@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2024 at 04:03 PM
+-- Generation Time: Aug 26, 2024 at 11:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,35 +59,39 @@ CREATE TABLE `product` (
   `img` varchar(600) NOT NULL,
   `brand_name` int(11) DEFAULT 0,
   `about` varchar(225) DEFAULT 'product',
-  `category` int(11) DEFAULT 0
+  `category` int(11) DEFAULT 0,
+  `rating` float DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `category`) VALUES
-(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product', 0),
-(3, 'mini lamp', '156', 'img_ecommerce03.jpg', 1, 'product', 0),
-(4, 'product', '201', 'img_ecommerce37.jpg', 5, 'product', 0),
-(5, 'table', '399', 'img_ecommerce12.jpg', 6, 'product', 0),
-(6, 'sofas', '869', 'img_ecommerce13.jpg', 9, 'product', 0),
-(7, 'pilo', '745', 'img_ecommerce14.jpg', 4, 'product', 0),
-(8, 'storm jug', '199', 'img_ecommerce39.jpg', 10, 'product', 0),
-(9, 'storm small jug', '154', 'img_ecommerce38.jpg', 7, 'product', 0),
-(10, 'victo pedant lamp', '321', 'img_ecommerce40.jpg', 2, 'product', 0),
-(19, 'furniture', '741', 'img_ecommerce15.jpg', 2, '441', 3),
-(20, 'men', '200', 'gallery-04.jpg', 5, 'product', 1),
-(21, 'watch', '102', 'img_ecommerce17.jpg', 2, 'product', 0),
-(22, 'women', '100', 'product-04.jpg', 9, 'product', 2),
-(23, 'Classic Trench Coat', '300', 'product-04.jpg', 6, 'product', 2),
-(24, 'blue shrit', '302', 'product-03.jpg', 7, 'men choice', 1),
-(25, 'whit shirt', '520', 'product-01.jpg', 7, 'simple ', 2),
-(26, 'Arctander light', '201', 'img_ecommerce19.jpg', 10, 'table  light', 6),
-(27, 'classic watch', '199', 'img_ecommerce18.jpg', 7, 'one fram watch ', 5),
-(28, 'adidas shoes', '456', 'shoes.jpg', 2, 'this iconic shoes', 4),
-(29, 'Herschel supply', '799', 'product-02.jpg', 4, 'best combination ', 2),
-(34, 'Apple IOS 16', '703', 'apple 2.jpg', 11, 'Vibrant 6.1-inch Super Retina XDR display with OLED technology. Action mode for smooth, steady, handheld videos.', 7);
+INSERT INTO `product` (`id`, `name`, `price`, `img`, `brand_name`, `about`, `category`, `rating`) VALUES
+(2, 'sweeper and funnel', '280', 'img_ecommerce02.jpg', 0, 'product', 0, 0),
+(3, 'mini lamp', '156', 'img_ecommerce03.jpg', 1, 'product', 0, 0),
+(4, 'product', '201', 'img_ecommerce37.jpg', 5, 'product', 0, 0),
+(5, 'table', '399', 'img_ecommerce12.jpg', 6, 'product', 0, 0),
+(6, 'sofas', '869', 'img_ecommerce13.jpg', 9, 'product', 0, 0),
+(7, 'pilo', '745', 'img_ecommerce14.jpg', 4, 'product', 0, 0),
+(8, 'storm jug', '199', 'img_ecommerce39.jpg', 10, 'product', 0, 0),
+(9, 'storm small jug', '154', 'img_ecommerce38.jpg', 7, 'product', 0, 0),
+(10, 'victo pedant lamp', '321', 'img_ecommerce40.jpg', 2, 'product', 0, 0),
+(19, 'furniture', '741', 'img_ecommerce15.jpg', 2, '441', 3, 0),
+(20, 'men', '200', 'gallery-04.jpg', 5, 'product', 1, 0),
+(21, 'watch', '102', 'img_ecommerce17.jpg', 2, 'product', 0, 0),
+(22, 'women', '100', 'product-04.jpg', 9, 'product', 2, 0),
+(23, 'Classic Trench Coat', '300', 'product-04.jpg', 6, 'product', 2, 0),
+(24, 'blue shrit', '302', 'product-03.jpg', 7, 'men choice', 1, 0),
+(25, 'whit shirt', '520', 'product-01.jpg', 7, 'simple ', 2, 0),
+(26, 'Arctander light', '201', 'img_ecommerce19.jpg', 10, 'table  light', 6, 0),
+(27, 'classic watch', '199', 'img_ecommerce18.jpg', 7, 'one fram watch ', 5, 0),
+(28, 'adidas shoes', '456', 'shoes.jpg', 2, 'this iconic shoes', 4, 0),
+(29, 'Herschel supply', '799', 'product-02.jpg', 4, 'best combination ', 2, 0),
+(34, 'Apple IOS 16', '703', 'apple 2.jpg', 11, 'Vibrant 6.1-inch Super Retina XDR display with OLED technology. Action mode for smooth, steady, handheld videos.', 7, 0),
+(35, 'track shot adidas', '305', 'blue-3.jpg', 2, 'Nothing says sporty versatility like adidas track jackets. Bursting with proud 3-Stripes heritage, adidas track coats are the best in the world by a long shot.', 2, 0),
+(36, 'tracksuits', '405', 'gray-4.jpg', 1, 'Gear up for track season with adidas track and field gear for Men and Women. See the latesty adizero track spikes and shoes on adidas.com today.', 2, 0),
+(37, 'MASCOMODA Womens ', '210', 'red-2.jpg', 4, 'Lounge sets for women 2 piece,womens jogger set,two piece loungewear sets for women', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -121,6 +125,33 @@ INSERT INTO `product_brand` (`p_id`, `p_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL CHECK (`rating` between 1 and 5),
+  `user_email` varchar(30) NOT NULL,
+  `pr_name` varchar(30) DEFAULT NULL,
+  `comment_box` text DEFAULT 'this productare give nice Exprince'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `product_id`, `rating`, `user_email`, `pr_name`, `comment_box`) VALUES
+(1, 35, 3, 'ritik@gmail.com', 'track shot adidas', 'this productare give nice Exprince'),
+(5, 36, 3, 'ritik@gmail.com', 'tracksuits', 'this productare give nice Exprince'),
+(31, 35, 4, 'manoj@gmail.com', 'track shot adidas', 'i dont see this type of product'),
+(32, 37, 4, 'manoj@gmail.com', 'MASCOMODA Womens ', 'this is give a fast service'),
+(33, 37, 5, 'ritik@gmail.com', 'MASCOMODA Womens ', 'nice product and comfortable'),
+(34, 37, 5, 'ritik@gmail.com', 'MASCOMODA Womens ', 'nice product and comfortable');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `relative_img`
 --
 
@@ -138,7 +169,10 @@ CREATE TABLE `relative_img` (
 INSERT INTO `relative_img` (`id_img`, `img1`, `img2`, `img3`) VALUES
 (9, 'img_ecommerce02.jpg', 'img_ecommerce02.jpg', 'img_ecommerce07.jpg'),
 (10, 'img1', 'img2', 'img3'),
-(34, 'apple 1.jpg', 'apple 3.jpg', 'apple 4.jpg');
+(34, 'apple 1.jpg', 'apple 3.jpg', 'apple 4.jpg'),
+(35, 'blue-1.jpg', 'blue-2.jpg', 'blue-4.jpg'),
+(36, 'gray-2.jpg', 'gray-1.jpg', 'gray-3.jpg'),
+(37, 'red-1.jpg', 'red-3.jpg', 'red-4.jpg');
 
 --
 -- Indexes for dumped tables
@@ -165,6 +199,13 @@ ALTER TABLE `product_brand`
   ADD PRIMARY KEY (`p_id`);
 
 --
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `relative_img`
 --
 ALTER TABLE `relative_img`
@@ -178,6 +219,12 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
@@ -190,6 +237,12 @@ ALTER TABLE `product`
 ALTER TABLE `product`
   ADD CONSTRAINT `product_brand` FOREIGN KEY (`brand_name`) REFERENCES `product_brand` (`p_id`),
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category`) REFERENCES `category` (`cat_id`);
+
+--
+-- Constraints for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
 -- Constraints for table `relative_img`
