@@ -92,10 +92,20 @@
     <div class="menubar">
         <div class="menu_bar">
             <ul class="menu_ul">
-                <li>home<i class='bx bx-right-arrow-alt'></i></li>
-                <li>collections</li>
+                <li>home</li>
+                <!-- <li>collections<i class='bx bx-right-arrow-alt'></i></li> -->
+                <?php
+                             $row_wood_drop = mysqli_query($con_pro, "SELECT * FROM product WHERE product.id between  19 AND 22;");
+                            while($row_wood= mysqli_fetch_array($row_wood_drop)){
+                            ?>
+                    <a style="color:#666b7f;padding: .6rem 0rem;" href="product.php?id=<?php echo $row_wood['name'] ?>"><?php echo $row_wood['name']; ?></a>
+                        <?php
+                            }
+                        ?>
                 <li>contact us</li>
             </ul>
+               
+        
         </div>
     </div>
     <script>
