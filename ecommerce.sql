@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2024 at 04:06 PM
+-- Generation Time: Aug 26, 2024 at 07:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -106,9 +106,10 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`) VALUES
-(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-22 04:11:40', 2),
+(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-26 16:06:15', 2),
 (51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-08-20 04:22:26', 2),
-(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-20 17:54:42', 2);
+(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-26 15:26:08', 2),
+(53, 'tarun', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-08-26 16:27:50', 2);
 
 --
 -- Indexes for dumped tables
@@ -171,7 +172,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- Constraints for dumped tables

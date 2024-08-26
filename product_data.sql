@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2024 at 11:44 AM
+-- Generation Time: Aug 26, 2024 at 07:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -145,9 +145,9 @@ INSERT INTO `ratings` (`id`, `product_id`, `rating`, `user_email`, `pr_name`, `c
 (1, 35, 3, 'ritik@gmail.com', 'track shot adidas', 'this productare give nice Exprince'),
 (5, 36, 3, 'ritik@gmail.com', 'tracksuits', 'this productare give nice Exprince'),
 (31, 35, 4, 'manoj@gmail.com', 'track shot adidas', 'i dont see this type of product'),
-(32, 37, 4, 'manoj@gmail.com', 'MASCOMODA Womens ', 'this is give a fast service'),
-(33, 37, 5, 'ritik@gmail.com', 'MASCOMODA Womens ', 'nice product and comfortable'),
-(34, 37, 5, 'ritik@gmail.com', 'MASCOMODA Womens ', 'nice product and comfortable');
+(33, 37, 4, 'ritik@gmail.com', 'MASCOMODA Womens ', 'nice product and comfortable'),
+(35, 36, 4, 'manoj@gmail.com', 'tracksuits', 'awossem'),
+(41, 37, 4, 'tarun@gmail.com', 'MASCOMODA Womens ', 'product real good');
 
 -- --------------------------------------------------------
 
@@ -225,7 +225,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Constraints for dumped tables

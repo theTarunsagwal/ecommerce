@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2024 at 04:06 PM
+-- Generation Time: Aug 26, 2024 at 07:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,6 +47,13 @@ CREATE TABLE `user_name_manoj` (
   `price` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `user_name_manoj`
+--
+
+INSERT INTO `user_name_manoj` (`id`, `name`, `image`, `price`) VALUES
+(1, 'tracksuits', 'gray-4.jpg', '405');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,33 @@ CREATE TABLE `user_name_ritik` (
   `image` text NOT NULL,
   `price` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_ritik`
+--
+
+INSERT INTO `user_name_ritik` (`id`, `name`, `image`, `price`) VALUES
+(2, 'MASCOMODA Womens ', 'red-2.jpg', '210');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_tarun`
+--
+
+CREATE TABLE `user_name_tarun` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_tarun`
+--
+
+INSERT INTO `user_name_tarun` (`id`, `name`, `image`, `price`) VALUES
+(1, 'MASCOMODA Womens ', 'red-2.jpg', '210');
 
 --
 -- Indexes for dumped tables
@@ -86,6 +120,13 @@ ALTER TABLE `user_name_ritik`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_tarun`
+--
+ALTER TABLE `user_name_tarun`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -99,12 +140,18 @@ ALTER TABLE `user_name_gaurav`
 -- AUTO_INCREMENT for table `user_name_manoj`
 --
 ALTER TABLE `user_name_manoj`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_name_ritik`
 --
 ALTER TABLE `user_name_ritik`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_name_tarun`
+--
+ALTER TABLE `user_name_tarun`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
