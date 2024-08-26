@@ -140,6 +140,8 @@ if (isset($_POST['sub_rating'])) {
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $id = $_GET['id'];
+                $_SESSION['product_name']= $id;
+                echo $_SESSION['product_name'];
                 if(isset($_POST['btn'])){
                     $item_name = $_POST['item_name'];
                     $item_img = $_POST['item_img'];
@@ -228,7 +230,7 @@ if (isset($_POST['sub_rating'])) {
                                         <div class="fav-item block2-txt-child2 flex-r">
                             		           <?php
                             		           $wish_id_product= $query['id'];
-                            		           // $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
+                            		  
                             		           $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
                             		           if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
                             		           ?>
@@ -253,19 +255,94 @@ if (isset($_POST['sub_rating'])) {
                                                     echo "
                                                        <h6 class='text-black icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:yellow;'> $averga</span></h6>
                                                     ";
-                                                } else if($averga >= 4 && $averga < 5 ){
+                                                    ?>
+                                                    <div class="d-flex gap-1">
+                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                        <i class='bx bx-star' style="color:#FFD700;"></i>
+                                                    </div>
+                                                    <?php
+                                                } else if($averga >= 4.5 && $averga < 5 ){
                                                     echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:green;'> $averga</span></h6>
                                                     ";
-                                                } else if($averga >= 3 && $averga < 4 ){
+                                                    ?>
+                                                    <div class="d-flex gap-1">
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                                                    </div>
+                                                    <?php
+                                                } else if($averga >= 4 && $averga < 4.5 ){
+                                                    echo "
+                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:green;'> $averga</span></h6>
+                                                    ";
+                                                    ?>
+                                                    <div class="d-flex gap-1">
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bx-star' style="color:#000;"></i>
+                                                    </div>
+                                                    <?php
+                                                }else if($averga >= 3.5 && $averga < 4 ){
                                                     echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:purple;'> $averga</span></h6>
                                                     ";
-                                                }else if($averga >= 1 && $averga < 3 ){
-                                                    echo "
-                                                       <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
-                                                    ";
-                                                }
+                                                    ?>
+                                                    <div class="d-flex gap-1">
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                    <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                                                    <i class='bx bx-star' style="color:#000;"></i>
+                                                    </div>
+                                                    <?php
+                                            }else if($averga >= 3 && $averga < 3.5 ){
+                                                echo "
+                                                   <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:purple;'> $averga</span></h6>
+                                                ";
+                                                ?>
+                                                <div class="d-flex gap-1">
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                </div>
+                                                <?php
+                                            }else if($averga >= 2.5 && $averga < 3 ){
+                                                echo "
+                                                   <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
+                                                ";
+                                                ?>
+                                                <div class="d-flex gap-1">
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                </div>
+                                                <?php
+                                            }else if($averga >= 2 && $averga < 2.5 ){
+                                                echo "
+                                                   <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
+                                                ";
+                                                ?>
+                                                <div class="d-flex gap-1">
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                <i class='bx bx-star' style="color:#000;"></i>
+                                                </div>
+                                                <?php
+                                            }
                                              }else{
                                                 echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span> $averga</span></h6>
@@ -384,8 +461,15 @@ if (isset($_POST['sub_rating'])) {
                         (only for indoor use)</p>
                 </div>
             </div>
+            <div class="container-main">
+                <div class="container-line"></div>
+                <h2>reviews</h2>
+                <div class="container-line"></div>
+            </div>
+            <iframe src="./review.php" class="mt-3" frameborder="0" style="height: 50vh; width: 100%;"></iframe>
         </div>
     </section>
+    <?php include "./footer.php" ?>
     <script>
         function add() {
             let input = document.getElementById('numberInput');
