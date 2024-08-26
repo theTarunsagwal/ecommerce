@@ -43,7 +43,13 @@ if (isset($_POST['sub'])) {
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
-    
+
+                $qry_data = "select * from user_data where name='$user' and email='$email'";
+                $result = mysqli_query($con, $qry_data);
+
+                 if (mysqli_num_rows($result) > 0) {
+                    echo "<script>alert('Write UNIQUE name and Email already inserted');</script>";
+                 } else {
                 $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image,created_at) VALUES ('$user', '$email', '$pass', '$upload', now())");
     
                 if ($query) {
@@ -76,7 +82,8 @@ if (isset($_POST['sub'])) {
                     // echo "<script>alert('Thank you for joining');</script>";
                 } else {
                     echo "<script>alert('Write UNIQUE Password and Email already inserted');</script>";
-                }
+                } 
+            }
             } else {
                 echo "<script>alert('Error uploading file.');</script>";
             }
