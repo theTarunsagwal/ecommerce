@@ -121,19 +121,31 @@ if(isset($_SESSION['name'])) {
 
 <?php
 if (isset($_POST['sub_rating'])) {
-   $product_rating_id = $_POST['product_id'];
-   $product_rating_name = $_POST['product_name'];
-   $rating = $_POST['star-radio'];
-   $comment = $_POST['comment-box'];
-   $user_email = $_SESSION['email'];
-    $qry_rating = "INSERT INTO ratings (user_email, product_id, rating,comment_box,pr_name) VALUES ('$user_email', $product_rating_id, $rating,'$comment','$product_rating_name')";
-    if($qry_rating){
-        echo"success";
-        mysqli_query($con_pro,$qry_rating);
-    }else{
-        echo "Error";
+    $product_rating_id = $_POST['product_id'];
+    $product_rating_name = $_POST['product_name'];
+    $rating = $_POST['star-radio'];
+    $comment = $_POST['comment-box'];
+    $user_email = $_SESSION['email'];
+
+    // Check if the user has already rated this product
+    $check_rating = "SELECT * FROM ratings WHERE user_email = '$user_email' AND product_id = $product_rating_id";
+    $result = mysqli_query($con_pro, $check_rating);
+
+    if (mysqli_num_rows($result) > 0) {
+        // Update existing rating and comment
+        $qry_rating = "UPDATE ratings SET rating = $rating, comment_box = '$comment', pr_name = '$product_rating_name' WHERE user_email = '$user_email' AND product_id = $product_rating_id";
+    } else {
+        // Insert new rating and comment
+        $qry_rating = "INSERT INTO ratings (user_email, product_id, rating, comment_box, pr_name) VALUES ('$user_email', $product_rating_id, $rating, '$comment', '$product_rating_name')";
+    }
+
+    if (mysqli_query($con_pro, $qry_rating)) {
+        echo "success";
+    } else {
+        echo "Error: " . mysqli_error($con_pro);
     }
 }
+
 ?>
 <section>
         <div class="item-container" style="position: relative;">
@@ -213,11 +225,11 @@ if (isset($_POST['sub_rating'])) {
                                     <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
                                     <h3>$<?php echo $query['price']; ?>.00</h3>
                                     <div class="add-to-cart">
-                                        <div class="count-btn">
-                                            <button type="button" class="minus" onclick="changeQuantity(this, -1)">-</button>
-                                            <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
-                                            <button type="button" class="plus" onclick="changeQuantity(this, 1)">+</button>
-                                        </div>
+                                    <div class="count-btn">
+                                        <button type="button" class="minus">-</button>
+                                        <input type="text" name="quantity" class="form-control text-center" style="background:none;" value="1" readonly>
+                                        <button type="button" class="plus">+</button>
+                                    </div>
                                         <button class="buy-btn" name="btn">Add to Cart</button>
                                         <button class="buy-btn">Buy it Now</button>
                                     </div>
@@ -436,7 +448,7 @@ if (isset($_POST['sub_rating'])) {
                 <div class="container-line"></div>
                 <h2>Description</h2>
                 <h2>shipping & return</h2>
-                <h2>reviews</h2>
+                <a href="#reviews"><h2>reviews</h2></a>
                 <div class="container-line"></div>
             </div>
             <div class="container-pargraf">
@@ -466,30 +478,29 @@ if (isset($_POST['sub_rating'])) {
                 <h2>reviews</h2>
                 <div class="container-line"></div>
             </div>
-            <iframe src="./review.php" class="mt-3" frameborder="0" style="height: 50vh; width: 100%;"></iframe>
+            <iframe id="reviews" src="./review.php" class="mt-3" frameborder="0" style="height: 50vh; width: 100%;"></iframe>
         </div>
     </section>
     <?php include "./footer.php" ?>
     <script>
-        function add() {
-            let input = document.getElementById('numberInput');
-            let currentValue = parseInt(input.value);
-            currentValue++;
-            input.value = currentValue;
-            if (currentValue == 10) {
-                alert("stock quantity is not greater than")
-                input.value = 0;
-            }
-        }
+     $(document).ready(function() {
+    // Function to increase quantity
+    $('.plus').on('click', function() {
+        var $input = $(this).siblings('input[name="quantity"]');
+        var currentValue = parseInt($input.val());
+        $input.val(currentValue + 1);
+    });
 
-        function subtract() {
-            let input = document.getElementById('numberInput');
-            let currentValue = parseInt(input.value);
-            if (currentValue > 0) {
-                currentValue--;
-                input.value = currentValue;
-            }
+    // Function to decrease quantity
+    $('.minus').on('click', function() {
+        var $input = $(this).siblings('input[name="quantity"]');
+        var currentValue = parseInt($input.val());
+
+        if (currentValue > 1) {
+            $input.val(currentValue - 1);
         }
+    });
+});
     </script>
     <script src="./vendor/slick/slick.js"></script>
     <script src="./vendor/slick/slick.min.js"></script>
