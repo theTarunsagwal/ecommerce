@@ -118,7 +118,7 @@ if(isset($_SESSION['name'])) {
       if(isset($_GET['id']) && !empty($_GET['id'])){
 	?>
 	<section class="product-container bg0  ">
-			<div class="container mt-5 ">
+			<div class="container mt-5 " id='container'>
 				<div class="p-b-10 mb-2">
 					<h3 class=" ltext-100 cl5">
 						New Product & Trending Category <span class=" text-secondary ltext-103 cl5 text-decoration-underline "><?php echo $_GET['id'];?></span>

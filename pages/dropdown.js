@@ -29,32 +29,6 @@ $(document).ready(function(){
     })
 })
 
-
-
-
-
-let drophomes=()=>{
-    let dwon=document.querySelector('.dropdown_reponsive');
-    dwon.style.transform="translateX(0%)"
-}
-
-let droppages=()=>{
-    let dwon=document.querySelector('.dropdown_reponsive_page');
-    dwon.style.transform="translateX(0%)"
-}
-
-let gohome=()=>{
-    let dwon=document.querySelector('.dropdown_reponsive');
-    dwon.style.transform="translateX(100%)"
-}
-
-let gopage=()=>{
-    let dwon=document.querySelector('.dropdown_reponsive_page');
-    dwon.style.transform="translateX(100%)"
-}
-
-
-
 let search=()=>{
     let dwonshop=document.querySelector('.search_container');
     dwonshop.classList.toggle("search_box_active");

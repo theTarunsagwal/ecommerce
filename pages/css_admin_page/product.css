@@ -1,3 +1,27 @@
 .product-container{
     margin-top: 8%;
 }
+
+@media (max-width: 770px) {
+    #container{
+        margin-top: 10%!important;
+    }
+}
+
+@media (max-width: 670px) {
+    #container{
+        margin-top: 15%!important;
+    }
+}
+
+@media (max-width: 435px) {
+    #container{
+        margin-top: 22%!important;
+    }
+    #container h3{
+        font-size: 1rem !important;
+    }
+    #container h3 span{
+        font-size: 1.25rem !important;
+    }
+}
