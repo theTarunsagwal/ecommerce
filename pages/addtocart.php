@@ -152,22 +152,33 @@ if (isset($_POST['sub_rating'])) {
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $id = $_GET['id'];
-                $_SESSION['product_name']= $id;
+                $_SESSION['product_name'] = $id;
                 echo $_SESSION['product_name'];
-                if(isset($_POST['btn'])){
+            
+                if (isset($_POST['btn'])) {
                     $item_name = $_POST['item_name'];
                     $item_img = $_POST['item_img'];
                     $item_price = $_POST['item_price'];
-                    $table_name = 'user_name_' . $user ;
-                    $qury_user= mysqli_query($con_userside, "insert into $table_name (name,image,price) values ('$item_name','$item_img','$item_price') ");
-                    if ($qury_user) {
-                        header("Location: additem.php");
-                        exit(); 
+                    $table_name = 'user_name_' . $user;
+            
+                    $check_query = mysqli_query($con_userside, "SELECT * FROM $table_name WHERE name='$item_name'");
+                    
+                    if (mysqli_num_rows($check_query) > 0) {
+                        echo "<script>
+                        alert('Product is already in the cart.')
+                        </script>";
                     } else {
-                        echo "Error: " . mysqli_error($con_userside);
+                        $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price) VALUES ('$item_name', '$item_img', '$item_price')");
+                        
+                        if ($qury_user) {
+                            header("Location: additem.php");
+                            exit();
+                        } else {
+                            echo "Error: " . mysqli_error($con_userside);
+                        }
                     }
                     ob_end_flush();
-                }
+                }            
                                $queries_re = [];
                                $query_re = mysqli_query($con_pro, "SELECT id,name,price, about, img, img1,img2,img3 FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img WHERE product.name = '$id' ;");
                                while ($row_re = mysqli_fetch_assoc($query_re)) {

@@ -3,60 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        .carousel-indicators img{
-            width: 70px;
-            display:block;
-        }
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
 
-        .carousel-indicators button{
-            width: max-content !important;
-        }
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .carousel-indicators{
-            position: unset;
-        }
+h1 {
+    text-align: center;
+    color: #333;
+}
 
-        .carousel-indicators button.active img{
-            border:2px solid #f9f8fe;
-        }
+.cart-items {
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: scale(1.02);
+}
+
+.cart-item img {
+    width: 100px;
+    border-radius: 8px;
+}
+
+.item-details h2 {
+    margin: 0;
+    color: #444;
+    font-size: 18px;
+}
+
+.item-details p {
+    margin: 5px 0;
+    color: #777;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ff1a1a;
+}
+
+.cart-summary {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cart-summary h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.checkout-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
-    <div id="carouselDemo" class="carousel slide w-25" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="5000">
-                <img src="product/product-01.jpg" class="d-block w-100" alt="...">
+    <?php include "header.php" ?>
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="path-to-your-product-image1.jpg" alt="Product Image">
+                <div class="item-details">
+                    <h2>Product Name</h2>
+                    <p>Price: $99.00</p>
+                    <p>Quantity: 1</p>
+                </div>
+                <div class="item-actions">
+                    <button class="remove-btn">Remove</button>
+                </div>
             </div>
-            <div class="carousel-item" data-bs-interval="5000">
-                <img src="product/product-02.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="5000">
-                <img src="product/product-03.jpg" class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
-                <img src="product/product-01.jpg" >
-            </button>
-            <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="1" aria-label="Slide 2">
-                <img src="product/product-02.jpg" >
-            </button>
-            <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="2" aria-label="Slide 3">
-            <img src="product/product-03.jpg" >
 
-            </button>
+            <!-- Repeat the .cart-item for each product in the cart -->
+        </div>
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="path-to-your-product-image1.jpg" alt="Product Image">
+                <div class="item-details">
+                    <h2>Product Name</h2>
+                    <p>Price: $99.00</p>
+                    <p>Quantity: 1</p>
+                </div>
+                <div class="item-actions">
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+
+            <!-- Repeat the .cart-item for each product in the cart -->
+        </div>
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="path-to-your-product-image1.jpg" alt="Product Image">
+                <div class="item-details">
+                    <h2>Product Name</h2>
+                    <p>Price: $99.00</p>
+                    <p>Quantity: 1</p>
+                </div>
+                <div class="item-actions">
+                    <button class="remove-btn">Remove</button>
+                </div>
+            </div>
+
+            <!-- Repeat the .cart-item for each product in the cart -->
+        </div>
+        <div class="cart-summary">
+            <h2>Total: $198.00</h2>
+            <button class="checkout-btn">Proceed to Checkout</button>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <?php include 'footer.php' ?>
 </body>
 </html>
