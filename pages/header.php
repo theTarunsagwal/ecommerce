@@ -37,7 +37,7 @@
         </div>
         <nav>
             <ul class="nav_ul" style="gap: 1rem;">
-                <li class="home d-flex align-items-center g-2"><i class='bx bx-home-alt'></i><a href="./index.php"><span>home</span></a></li>
+                <li class="home d-flex align-items-center g-2"><i class='bx bx-home-alt'></i><a href="index.php"><span>home</span></a></li>
                 <li class="collect"><i class='bx bxs-collection'></i><span>collections</span></li>
                 <!-- collections dropdown -->
                 <div class="dropdown_coll_active">
@@ -92,7 +92,7 @@
     <div class="menubar">
         <div class="menu_bar">
             <ul class="menu_ul">
-                <li>home</li>
+            <a href="index.php"><li>home</li></a>
                 <!-- <li>collections<i class='bx bx-right-arrow-alt'></i></li> -->
                 <?php
                              $row_wood_drop = mysqli_query($con_pro, "SELECT * FROM product WHERE product.id between  19 AND 22;");
