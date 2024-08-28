@@ -33,7 +33,7 @@ session_start();
 if(isset($_SESSION['name'])) {
 	// echo $_SESSION['name'];
 	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
-	 $wish_face = "wish_name_".$_SESSION['name'];
+	 $wish_face = "wish_name_".$_SESSION['id'];
 	if (isset($_POST['heart_submit'])) {
 		$wish_id = $_POST['wish_id'];
 		$wish_name = $_POST['wish_name'];
@@ -71,7 +71,7 @@ if(isset($_SESSION['name'])) {
 <div class="wishlist wishlist-closed" id="wishlist">
     <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
     <?php 
-	    $wish_face = "wish_name_".$_SESSION['name'];
+	    $wish_face = "wish_name_".$_SESSION['id'];
        
         $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
         ?>

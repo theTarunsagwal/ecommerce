@@ -15,12 +15,12 @@
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 
 if(isset($_SESSION['name'])) {
-    $user = $_SESSION['name'];
+    $user = $_SESSION['id'];
     $table_name = 'user_name_' . $user;
  ?>
  <?php include "header.php" ?>
  <div class="cart-container">
-    <h1>Hello, <?php echo $user; ?></h1>
+
     <?php
     // Handle item deletion
     if (isset($_POST['del'])) {

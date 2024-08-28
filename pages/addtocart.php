@@ -1,14 +1,15 @@
 <?php
 session_start();
+echo $_SESSION['id'];
 ob_start();
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 $con_pro = mysqli_connect('localhost', 'root','','product_data');
 $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 
 if(isset($_SESSION['name'])) {
-    $user = $_SESSION['name'];
+    $user = $_SESSION['id'];
     include "header.php";
-    $wish_face = "wish_name_".$_SESSION['name'];
+    $wish_face = "wish_name_".$_SESSION['id'];
 	if (isset($_POST['heart_submit'])) {
 		$wish_id = $_POST['wish_id'];
 		$wish_name = $_POST['item_name'];
@@ -77,7 +78,7 @@ if(isset($_SESSION['name'])) {
 <div class="wishlist wishlist-closed" id="wishlist">
     <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
     <?php 
-	    $wish_face = "wish_name_".$_SESSION['name'];
+	   echo $wish_face = "wish_name_".$_SESSION['id'];
        
         $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
         ?>
@@ -124,7 +125,7 @@ if (isset($_POST['sub_rating'])) {
     $product_rating_id = $_POST['product_id'];
     $product_rating_name = $_POST['product_name'];
     $rating = $_POST['star-radio'];
-    $comment = $_POST['comment-box'];
+    $comment =  mysqli_real_escape_string($con_pro,$_POST['comment-box']);
     $user_email = $_SESSION['email'];
 
     // Check if the user has already rated this product
@@ -159,7 +160,8 @@ if (isset($_POST['sub_rating'])) {
                     $item_name = $_POST['item_name'];
                     $item_img = $_POST['item_img'];
                     $item_price = $_POST['item_price'];
-                    $table_name = 'user_name_' . $user;
+                    $pro_user = $_SESSION['id'];
+                   echo $table_name = 'user_name_' . $pro_user;
             
                     $check_query = mysqli_query($con_userside, "SELECT * FROM $table_name WHERE name='$item_name'");
                     

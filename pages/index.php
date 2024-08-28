@@ -37,6 +37,7 @@ session_start();
 </head>
 
 <body class="animsition">
+	<?php echo $_SESSION['id'];?>
     <?php include "header.php" ?>
     <?php
      include "profile_user.php"
@@ -49,7 +50,7 @@ session_start();
 if(isset($_SESSION['name'])) {
 	// echo $_SESSION['name'];
 	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
-	 $wish_face = "wish_name_".$_SESSION['name'];
+	 $wish_face = "wish_name_".$_SESSION['id'];
 	if (isset($_POST['heart_submit'])) {
 		$wish_id = $_POST['wish_id'];
 		$wish_name = $_POST['wish_name'];

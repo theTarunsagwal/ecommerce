@@ -53,19 +53,22 @@ if (isset($_POST['sub'])) {
                 $query = mysqli_query($con, "INSERT INTO user_data (name, email, password, image,created_at) VALUES ('$user', '$email', '$pass', '$upload', now())");
     
                 if ($query) {
-                    $table_name = 'user_name_' . mysqli_real_escape_string($con_userside, $user);
+                    $user_od = mysqli_insert_id($con);
+                    $table_name = 'user_name_' . mysqli_real_escape_string($con_userside, $user_od);
                     $create_table_query = "
-                        CREATE TABLE IF NOT EXISTS $table_name (
-                            id INT UNIQUE AUTO_INCREMENT,
-                            name VARCHAR(300) NOT NULL,
-                            image TEXT NOT NULL,
-                            price VARCHAR(30) NOT NULL,
-                            PRIMARY KEY (id)
+                    CREATE TABLE IF NOT EXISTS $table_name (
+                        id INT UNIQUE AUTO_INCREMENT,
+                        name VARCHAR(300) NOT NULL,
+                        image TEXT NOT NULL,
+                        price VARCHAR(30) NOT NULL,
+                        PRIMARY KEY (id)
                         )";
-                    
-                    if (mysqli_query($con_userside, $create_table_query)) {
-                        echo "User registered and table $table_name created successfully.";
-                    $table_wish = 'wish_name_' . mysqli_real_escape_string($con_userside, $user);
+                        
+                        if (mysqli_query($con_userside, $create_table_query)) {
+                            echo "User registered and table $table_name created successfully.";
+                            $user_od = mysqli_insert_id($con);
+                    $table_wish = 'wish_name_' . mysqli_real_escape_string($con_userside, $user_od);
+
                         $create_table_wish = "
                         CREATE TABLE IF NOT EXISTS $table_wish (
                             id INT UNIQUE ,
