@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2024 at 07:49 PM
+-- Generation Time: Aug 28, 2024 at 10:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,23 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_name_gaurav`
+-- Table structure for table `user_name_50`
 --
 
-CREATE TABLE `user_name_gaurav` (
-  `id` int(11) NOT NULL,
-  `name` varchar(300) NOT NULL,
-  `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_name_manoj`
---
-
-CREATE TABLE `user_name_manoj` (
+CREATE TABLE `user_name_50` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
@@ -48,39 +35,32 @@ CREATE TABLE `user_name_manoj` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_name_manoj`
+-- Dumping data for table `user_name_50`
 --
 
-INSERT INTO `user_name_manoj` (`id`, `name`, `image`, `price`) VALUES
-(1, 'tracksuits', 'gray-4.jpg', '405');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_name_ritik`
---
-
-CREATE TABLE `user_name_ritik` (
-  `id` int(11) NOT NULL,
-  `name` varchar(300) NOT NULL,
-  `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_name_ritik`
---
-
-INSERT INTO `user_name_ritik` (`id`, `name`, `image`, `price`) VALUES
+INSERT INTO `user_name_50` (`id`, `name`, `image`, `price`) VALUES
 (2, 'MASCOMODA Womens ', 'red-2.jpg', '210');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_name_tarun`
+-- Table structure for table `user_name_51`
 --
 
-CREATE TABLE `user_name_tarun` (
+CREATE TABLE `user_name_51` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_52`
+--
+
+CREATE TABLE `user_name_52` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
@@ -88,41 +68,82 @@ CREATE TABLE `user_name_tarun` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user_name_tarun`
+-- Dumping data for table `user_name_52`
 --
 
-INSERT INTO `user_name_tarun` (`id`, `name`, `image`, `price`) VALUES
-(1, 'MASCOMODA Womens ', 'red-2.jpg', '210');
+INSERT INTO `user_name_52` (`id`, `name`, `image`, `price`) VALUES
+(1, 'tracksuits', 'gray-4.jpg', '405');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_53`
+--
+
+CREATE TABLE `user_name_53` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_53`
+--
+
+INSERT INTO `user_name_53` (`id`, `name`, `image`, `price`) VALUES
+(1, 'MASCOMODA Womens ', 'red-2.jpg', '210'),
+(2, 'blue shrit', 'product-03.jpg', '302');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_58`
+--
+
+CREATE TABLE `user_name_58` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `user_name_gaurav`
+-- Indexes for table `user_name_50`
 --
-ALTER TABLE `user_name_gaurav`
+ALTER TABLE `user_name_50`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `user_name_manoj`
+-- Indexes for table `user_name_51`
 --
-ALTER TABLE `user_name_manoj`
+ALTER TABLE `user_name_51`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `user_name_ritik`
+-- Indexes for table `user_name_52`
 --
-ALTER TABLE `user_name_ritik`
+ALTER TABLE `user_name_52`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
 --
--- Indexes for table `user_name_tarun`
+-- Indexes for table `user_name_53`
 --
-ALTER TABLE `user_name_tarun`
+ALTER TABLE `user_name_53`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `user_name_58`
+--
+ALTER TABLE `user_name_58`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`);
 
@@ -131,28 +152,34 @@ ALTER TABLE `user_name_tarun`
 --
 
 --
--- AUTO_INCREMENT for table `user_name_gaurav`
+-- AUTO_INCREMENT for table `user_name_50`
 --
-ALTER TABLE `user_name_gaurav`
+ALTER TABLE `user_name_50`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_name_51`
+--
+ALTER TABLE `user_name_51`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user_name_manoj`
+-- AUTO_INCREMENT for table `user_name_52`
 --
-ALTER TABLE `user_name_manoj`
+ALTER TABLE `user_name_52`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user_name_ritik`
+-- AUTO_INCREMENT for table `user_name_53`
 --
-ALTER TABLE `user_name_ritik`
+ALTER TABLE `user_name_53`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `user_name_tarun`
+-- AUTO_INCREMENT for table `user_name_58`
 --
-ALTER TABLE `user_name_tarun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `user_name_58`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
