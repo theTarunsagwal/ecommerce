@@ -50,40 +50,23 @@ if(isset($_SESSION['name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../pages/css_admin_page/addtocart.css">
-	<link rel="stylesheet" href="./css_admin_page/wishlist.css">
+    <link rel="stylesheet" href="./css_admin_page/wishlist.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-        .carousel-indicators img{
-            width: 70px;
-            display:block;
-        }
-
-        .carousel-indicators button{
-            width: max-content !important;
-        }
-
-        .carousel-indicators{
-            position: unset;
-        }
-
-        .carousel-indicators button.active img{
-            border:2px solid #f9f8fe;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-<?php include "profile_user.php" ?>
-<div class="wishlist wishlist-closed" id="wishlist">
-    <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
-    <?php 
+    <?php include "profile_user.php" ?>
+    <div class="wishlist wishlist-closed" id="wishlist">
+        <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
+        <?php 
 	   echo $wish_face = "wish_name_".$_SESSION['id'];
        
         $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
         ?>
-    <ul class="d-flex  gap-2" style="flex-direction: column;">
-        <?php
+        <ul class="d-flex  gap-2" style="flex-direction: column;">
+            <?php
         while($row_add = mysqli_fetch_array($qry_select)){
 			if(mysqli_num_rows($qry_select) == 0){
 				echo "<div>
@@ -93,34 +76,39 @@ if(isset($_SESSION['name'])) {
 			";
 			}else{
         ?>
-        <li class="mt-3" style="cursor:pointer;">
-           <a href="addtocart.php?id=<?php echo $row_add['name'] ?>">
-		        <div class="product-details d-flex gap-3 align-items-center">
-                
-                     <div class="img">
-                         <img src="upload/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
-                     </div>
-                    <div class="wish-product ">
-                        <h3 style="font-size: 1rem; margin:0%;"><?php echo $row_add['name']; ?></h3>
-                        <span class="fw-semibold" style="font-size:.6rem;">price:-</span>
-                        <span class="text-success fw-light" style="font-size:1.1rem;">$<?php echo $row_add['price']; ?></span>
-                        <form action="" method="POST">
-                             <button name="remove" value="<?php echo $row_add['id']; ?>" class="remove-btn" style="border: none; background: transparent;">
-                                 <i class='bx bx-x-circle'></i>
-                             </button>
-                        </form>
+            <li class="mt-3" style="cursor:pointer;">
+                <a href="addtocart.php?id=<?php echo $row_add['name'] ?>">
+                    <div class="product-details d-flex gap-3 align-items-center">
+
+                        <div class="img">
+                            <img src="upload/<?php echo $row_add['product_img']; ?>" alt="Product 1">
+                        </div>
+                        <div class="wish-product ">
+                            <h3 style="font-size: 1rem; margin:0%;">
+                                <?php echo $row_add['name']; ?>
+                            </h3>
+                            <span class="fw-semibold" style="font-size:.6rem;">price:-</span>
+                            <span class="text-success fw-light" style="font-size:1.1rem;">$
+                                <?php echo $row_add['price']; ?>
+                            </span>
+                            <form action="" method="POST">
+                                <button name="remove" value="<?php echo $row_add['id']; ?>" class="remove-btn"
+                                    style="border: none; background: transparent;">
+                                    <i class='bx bx-x-circle'></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                 </div>
-		   </a>
-        </li>
-        <?php
+                </a>
+            </li>
+            <?php
         }
     }
         ?>
-    </ul>
-</div>
+        </ul>
+    </div>
 
-<?php
+    <?php
 if (isset($_POST['sub_rating'])) {
     $product_rating_id = $_POST['product_id'];
     $product_rating_name = $_POST['product_name'];
@@ -148,7 +136,7 @@ if (isset($_POST['sub_rating'])) {
 }
 
 ?>
-<section>
+    <section>
         <div class="item-container" style="position: relative;">
             <?php
             if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -167,7 +155,7 @@ if (isset($_POST['sub_rating'])) {
                     
                     if (mysqli_num_rows($check_query) > 0) {
                         echo "<script>
-                        alert('Product is already in the cart.')
+                            alert('Product is already in the cart.')
                         </script>";
                     } else {
                         $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price) VALUES ('$item_name', '$item_img', '$item_price')");
@@ -182,94 +170,69 @@ if (isset($_POST['sub_rating'])) {
                     ob_end_flush();
                 }            
                                $queries_re = [];
-                               $query_re = mysqli_query($con_pro, "SELECT id,name,price, about, img, img1,img2,img3 FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img WHERE product.name = '$id' ;");
+                               $query_re = mysqli_query($con_pro, "SELECT id,name,price,about,img,img1,img2,img3,cat_name FROM product LEFT JOIN relative_img ON product.id = relative_img.id_img LEFT JOIN category ON product.category = category.cat_id WHERE product.name = '$id';");
                                while ($row_re = mysqli_fetch_assoc($query_re)) {
                                    $queries_re[] = $row_re;
                                }
                                foreach ($queries_re as $query) {
                         ?>
-                        <form method="post">
-                            <input type="hidden" name="item_name" value="<?php echo  $query['name']; ?>">
-                            <input type="hidden" name="item_img" value="<?php echo $query['img']; ?>">
-                            <input type="hidden" name="item_price" value="<?php echo  $query['price']; ?>">
-                            <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
+            <form method="post">
+                <input type="hidden" name="item_name" value="<?php echo  $query['name']; ?>">
+                <input type="hidden" name="item_img" value="<?php echo $query['img']; ?>">
+                <input type="hidden" name="item_price" value="<?php echo  $query['price']; ?>">
+                <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
 
-                            <div class="item-card ">
-                                <div id="carouselDemo" class="carousel slide  w-100" style="height: 73vh" >
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active w-100 h-100" >
-                                            <img src="upload/<?php echo $query['img']; ?>" class="d-block h-100 w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item w-100 h-100" >
-                                            <img src="upload/<?php echo $query['img1']; ?>" class="d-block h-100 w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item w-100 h-100">
-                                            <img src="upload/<?php echo $query['img2']; ?>" class="d-block h-100 w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item w-100 h-100">
-                                            <img src="upload/<?php echo $query['img3']; ?>" class="d-block h-100 w-100" alt="...">
-                                        </div>
-                                        
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <div class="product-container mt-5">
+                    <div class="product-slider">
+                        <div class="thumbnails">
+                            <img src="upload/<?php echo $query['img'] ?>" alt="Thumbnail 1" onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img1'] ?>" alt="Thumbnail 2" onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img2'] ?>" alt="Thumbnail 3" onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img3'] ?>" alt="Thumbnail 4" onmouseover="changeImage(this)">
+                        </div>
+                        <div class="main-image">
+                            <img id="currentImage" src="upload/<?php echo $query['img'] ?>" alt="Main Image">
+                        </div>
+                    </div>
+                    <div class="item-info">
+                        <h1><?php echo  $query['name']; ?></h1>
+                        <p><?php echo  $query['about']; ?></p>
+                        <h3>$<?php echo  $query['price']; ?></h3>
+                        <div class="add-to-cart">
+                            <div class="count-btn">
+                                <button type="button" class="minus">-</button>
+                                <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
+                                <button type="button" class="plus">+</button>
+                            </div>
+                            <button class="buy-btn" name="btn">Add to Cart</button>
+                            <button class="buy-btn">Buy it Now</button>
+                        </div>
+                        <div class="availability-stock">
+                            <a href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
+                            <a href="">SKU: <span>N/A</span></a>
+                            <a href="">Vendor: <span>Nothing Says Sporty Versatility</span></a>
+                            <a href="">Categories: <span><?php echo  $query['cat_name']; ?></span></a>
+                            <a class="text-black d-flex icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i
+                                    class='bx bxl-twitter'></i> <i class='bx bxl-github'></i>
+                                <div class="fav-item block2-txt-child2 flex-r">
+                                    <?php
+                     $wish_id_product= $query['id'];
+                                 $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+                     if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
+                     ?>
+                                    <button type="submit" style="padding-top: .3rem;" name="heart_del">
+                                        <i class='bx bxs-heart' id="heart"
+                                            style="font-size:1.5rem; cursor:pointer;"></i>
                                     </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <?php }else{
+                     	?>
+                                    <button type="submit" style="padding-top: .3rem;" name="heart_submit">
+                                        <i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
                                     </button>
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
-                                            <img src="upload/<?php echo $query['img']; ?>" >
-                                        </button>
-                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="1" aria-label="Slide 2">
-                                            <img src="upload/<?php echo $query['img1']; ?>" >
-                                        </button>
-                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="2" aria-label="Slide 3">
-                                        <img src="upload/<?php echo $query['img2']; ?>" >
-                                        </button>
-                                        <button type="button" data-bs-target="#carouselDemo" data-bs-slide-to="3" class="active" aria-current="true" aria-label="Slide 4">
-                                            <img src="upload/<?php echo $query['img3']; ?>" >
-                                        </button>
-                                    </div>
+                                    <?php } ?>
                                 </div>
-                                                           
-                                <div class="item-info">
-                                    <h1><?php echo  $query['name']; ?></h1>
-                                    <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
-                                    <h3>$<?php echo $query['price']; ?>.00</h3>
-                                    <div class="add-to-cart">
-                                    <div class="count-btn">
-                                        <button type="button" class="minus">-</button>
-                                        <input type="text" name="quantity" class="form-control text-center" style="background:none;" value="1" readonly>
-                                        <button type="button" class="plus">+</button>
-                                    </div>
-                                        <button class="buy-btn" name="btn">Add to Cart</button>
-                                        <button class="buy-btn">Buy it Now</button>
-                                    </div>
-                                    <div class="availability-stock">
-                                        <a class="text-black" href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
-                                        <a class="text-black" href="">SKU: <span>N/A</span></a>
-                                        <a class="text-black" href="">Vendor: <span><?php echo $query['about']; ?></span></a>
-                                        <a class="text-black" href="">Categories: <span>Bar Furniture</span></a>
-                                        <a class="text-black icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i class='bx bxl-twitter'></i> <i class='bx bxl-github'></i> 
-                                        <div class="fav-item block2-txt-child2 flex-r">
-                            		           <?php
-                            		           $wish_id_product= $query['id'];
-                            		  
-                            		           $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
-                            		           if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
-                            		           ?>
-                            		           <button type="submit" style="padding-top: .3rem;" name="heart_del">
-                            		           	<i class='bx bxs-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            		           </button>
-                            		           <?php }else{
-                            		           	?>
-                            		           	<button type="submit" style="padding-top: .3rem;" name="heart_submit">
-                            		           		<i class='bx bx-heart' id="heart" style="font-size:1.5rem; cursor:pointer;"></i>
-                            		           	</button>
-                            		           <?php } ?>
-                                        </div> </a>
-                                        <?php
+                            </a>
+                            <?php
                                             $qry_rating_id = $query['id'];
                                             $qry_rating_avg="SELECT AVG(rating) AS average_rating FROM ratings WHERE product_id = $qry_rating_id ";
                                              $result_rating_avg = mysqli_query($con_pro,$qry_rating_avg);
@@ -281,92 +244,92 @@ if (isset($_POST['sub_rating'])) {
                                                        <h6 class='text-black icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:yellow;'> $averga</span></h6>
                                                     ";
                                                     ?>
-                                                    <div class="d-flex gap-1">
-                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                        <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                        <i class='bx bx-star' style="color:#FFD700;"></i>
-                                                    </div>
-                                                    <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#FFD700;"></i>
+                            </div>
+                            <?php
                                                 } else if($averga >= 4.5 && $averga < 5 ){
                                                     echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:green;'> $averga</span></h6>
                                                     ";
                                                     ?>
-                                                    <div class="d-flex gap-1">
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star-half' style="color:#FFD700;"></i>
-                                                    </div>
-                                                    <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                            </div>
+                            <?php
                                                 } else if($averga >= 4 && $averga < 4.5 ){
                                                     echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:green;'> $averga</span></h6>
                                                     ";
                                                     ?>
-                                                    <div class="d-flex gap-1">
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bx-star' style="color:#000;"></i>
-                                                    </div>
-                                                    <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                            </div>
+                            <?php
                                                 }else if($averga >= 3.5 && $averga < 4 ){
                                                     echo "
                                                        <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:purple;'> $averga</span></h6>
                                                     ";
                                                     ?>
-                                                    <div class="d-flex gap-1">
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                    <i class='bx bxs-star-half' style="color:#FFD700;"></i>
-                                                    <i class='bx bx-star' style="color:#000;"></i>
-                                                    </div>
-                                                    <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                            </div>
+                            <?php
                                             }else if($averga >= 3 && $averga < 3.5 ){
                                                 echo "
                                                    <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:purple;'> $averga</span></h6>
                                                 ";
                                                 ?>
-                                                <div class="d-flex gap-1">
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                </div>
-                                                <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                            </div>
+                            <?php
                                             }else if($averga >= 2.5 && $averga < 3 ){
                                                 echo "
                                                    <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
                                                 ";
                                                 ?>
-                                                <div class="d-flex gap-1">
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bxs-star-half' style="color:#FFD700;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                </div>
-                                                <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star-half' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                            </div>
+                            <?php
                                             }else if($averga >= 2 && $averga < 2.5 ){
                                                 echo "
                                                    <h6 class='text-black  icon-btn' style='cursor:pointer;' id='rating-inp'>rating: <span class='fw-bolder' style='color:red;'> $averga</span></h6>
                                                 ";
                                                 ?>
-                                                <div class="d-flex gap-1">
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bxs-star' style="color:#FFD700;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                <i class='bx bx-star' style="color:#000;"></i>
-                                                </div>
-                                                <?php
+                            <div class="d-flex gap-1">
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bxs-star' style="color:#FFD700;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                                <i class='bx bx-star' style="color:#000;"></i>
+                            </div>
+                            <?php
                                             }
                                              }else{
                                                 echo "
@@ -374,62 +337,72 @@ if (isset($_POST['sub_rating'])) {
                                                     ";
                                              }
                                         ?>
-                                        <!-- <h6 class='text-black icon-btn' style='cursor:pointer;' id='rating-inp'>rating:<?php   ?></h6> -->
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- rating box -->
+                <div class="rating-box">
+                    <div class="rating-pop d-flex align-items-center justify-content-center flex-column gap-3">
+                        <h1 class="fs-3 text-black fw-bolder text-center">Give a rating</h1>
+                        <form action="" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo $query['id']; ?>">
+                            <input type="hidden" name="product_name" value="<?php echo $query['name']; ?>">
+                            <div class="rating" id="rating">
+                                <input type="radio" id="star-1" name="star-radio" value="5">
+                                <label for="star-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-2" name="star-radio" value="4">
+                                <label for="star-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-3" name="star-radio" value="3">
+                                <label for="star-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-4" name="star-radio" value="2">
+                                <label for="star-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-5" name="star-radio" value="1">
+                                <label for="star-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
                             </div>
-                            <!-- rating box -->
-                            <div class="rating-box">
-                               <div class="rating-pop d-flex align-items-center justify-content-center flex-column gap-3">
-                                   <h1 class="fs-3 text-black fw-bolder text-center">Give a rating</h1>
-                                   <form action="" method="POST">
-                                       <input type="hidden" name="product_id" value="<?php echo $query['id']; ?>">
-                                       <input type="hidden" name="product_name" value="<?php echo $query['name']; ?>">
-                                       <div class="rating" id="rating">
-                                           <input type="radio" id="star-1" name="star-radio" value="5">
-                                           <label for="star-1">
-                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
-                                               </svg>
-                                           </label>
-                                           <input type="radio" id="star-2" name="star-radio" value="4">
-                                           <label for="star-2">
-                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
-                                               </svg>
-                                           </label>
-                                           <input type="radio" id="star-3" name="star-radio" value="3">
-                                           <label for="star-3">
-                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
-                                               </svg>
-                                           </label>
-                                           <input type="radio" id="star-4" name="star-radio" value="2">
-                                           <label for="star-4">
-                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
-                                               </svg>
-                                           </label>
-                                           <input type="radio" id="star-5" name="star-radio" value="1">
-                                           <label for="star-5">
-                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                   <path pathLength="360" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
-                                               </svg>
-                                           </label>
-                                       </div>
-                                        <div class="d-flex gap-2">
-                                            <label for="comment-box">comment :-</label>
-                                        <textarea name="comment-box" cols="30" placeholder="Enter your thought"></textarea>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                           <button type="submit" class="btn-rating" id="btn-rating" name="sub_rating"><span>Rating</span></button>
-                                           <button type="submit" class="back-rating" id="btn-rating"><span>Back</span></button>
-                                        </form>
-                                        </div>
-                               </div>
-                           </div>
+                            <div class="d-flex gap-2">
+                                <label for="comment-box">comment :-</label>
+                                <textarea name="comment-box" cols="30" placeholder="Enter your thought"></textarea>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn-rating" id="btn-rating"
+                                    name="sub_rating"><span>Rating</span></button>
+                                <button type="submit" class="back-rating" id="btn-rating"><span>Back</span></button>
                         </form>
-                        <?php
+                    </div>
+                </div>
+        </div>
+        </form>
+        <?php
                     }
                 // }
             } else {
@@ -437,23 +410,45 @@ if (isset($_POST['sub_rating'])) {
             }
             ?>
         </div>
-</section>
-            <script>
-                $(document).ready(function(){
-                    $('.btn-rating').hide();
-                    $('.rating-box').hide();
-                    $("#rating-inp").click(function(){
-                        $('.rating-box').show();
-                    })
-                    $("#rating").click(function(){
-                        $('.btn-rating').show();
-                    })
-                    $(".back-rating").click(function(){
-                        $('.rating-box').hide();
-                    })
-                })
-            </script>
+    </section>
+    <script>
+        $(document).ready(function () {
+            $('.btn-rating').hide();
+            $('.rating-box').hide();
+            $("#rating-inp").click(function () {
+                $('.rating-box').show();
+            })
+            $("#rating").click(function () {
+                $('.btn-rating').show();
+            })
+            $(".back-rating").click(function () {
+                $('.rating-box').hide();
+            })
+        })
+    </script>
+    <script>
+        function changeImage(element) {
+            const newSrc = element.src;
+            const currentImage = document.getElementById('currentImage');
 
+            // Update the main image source
+            currentImage.src = newSrc;
+
+            // Remove 'active' class from all thumbnails
+            document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
+
+            // Add 'active' class to the hovered thumbnail
+            element.classList.add('active');
+        }
+
+        // Initialize the thumbnails
+        const initialSrc = document.getElementById('currentImage').src;
+        document.querySelectorAll('.thumbnails img').forEach(img => {
+            if (img.src === initialSrc) {
+                img.classList.add('active');
+            }
+        });
+    </script>
 
     <section>
         <div class="description-container" style="margin-top: 10%;">
@@ -461,7 +456,9 @@ if (isset($_POST['sub_rating'])) {
                 <div class="container-line"></div>
                 <h2>Description</h2>
                 <h2>shipping & return</h2>
-                <a href="#reviews"><h2>reviews</h2></a>
+                <a href="#reviews">
+                    <h2>reviews</h2>
+                </a>
                 <div class="container-line"></div>
             </div>
             <div class="container-pargraf">
@@ -491,34 +488,38 @@ if (isset($_POST['sub_rating'])) {
                 <h2>reviews</h2>
                 <div class="container-line"></div>
             </div>
-            <iframe id="reviews" src="./review.php" class="mt-3" frameborder="0" style="height: 50vh; width: 100%;"></iframe>
+            <iframe id="reviews" src="./review.php" class="mt-3" frameborder="0"
+                style="height: 50vh; width: 100%;"></iframe>
         </div>
     </section>
     <?php include "./footer.php" ?>
     <script>
-     $(document).ready(function() {
-    // Function to increase quantity
-    $('.plus').on('click', function() {
-        var $input = $(this).siblings('input[name="quantity"]');
-        var currentValue = parseInt($input.val());
-        $input.val(currentValue + 1);
-    });
+        $(document).ready(function () {
+            // Function to increase quantity
+            $('.plus').on('click', function () {
+                var $input = $(this).siblings('input[name="quantity"]');
+                var currentValue = parseInt($input.val());
+                $input.val(currentValue + 1);
+            });
 
-    // Function to decrease quantity
-    $('.minus').on('click', function() {
-        var $input = $(this).siblings('input[name="quantity"]');
-        var currentValue = parseInt($input.val());
+            // Function to decrease quantity
+            $('.minus').on('click', function () {
+                var $input = $(this).siblings('input[name="quantity"]');
+                var currentValue = parseInt($input.val());
 
-        if (currentValue > 1) {
-            $input.val(currentValue - 1);
-        }
-    });
-});
+                if (currentValue > 1) {
+                    $input.val(currentValue - 1);
+                }
+            });
+        });
     </script>
     <script src="./vendor/slick/slick.js"></script>
     <script src="./vendor/slick/slick.min.js"></script>
 </body>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
 </html>
 
 <?php
