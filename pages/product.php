@@ -156,27 +156,56 @@ if(isset($_SESSION['name'])) {
 					    				</div>
     
 					    				<div class="block2-txt-child2 flex-r p-t-3">
-                                            <form method="POST" class="wish_form">
-                                                <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id">
-                                                <input type="hidden" value="<?php echo $row['name']; ?>" name="wish_name">
-                                                <input type="hidden" value="<?php echo $row['img']; ?>" name="wish_img">
-												<input type="hidden" value="<?php echo $row['price']; ?>" name="wish_price">
-												<?php
-												$wish_id_product= $row['id'];
-												// $qry_match_product = mysqli_query($con_pro,"select * from wish_product where wish_id = $wish_id_product ");
-												$qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
-												if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
-												?>
-												<button type="submit" name="heart_del">
-													<i class='bx bxs-heart heart'  style="font-size:1.5rem; cursor:pointer;"></i>
-												</button>
-												<?php }else{
-													?>
-													<button type="submit" name="heart_submit">
-														<i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-													</button>
-												<?php } ?>
-                                            </form>
+										<form method="POST" action="./wishlistsql.php" class="wish_form">
+    <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id" class="wish_id">
+    <input type="hidden" value="<?php echo $row['name']; ?>" name="wish_name" class="wish_name">
+    <input type="hidden" value="<?php echo $row['img']; ?>" name="wish_img" class="wish_img">
+    <input type="hidden" value="<?php echo $row['price']; ?>" name="wish_price" class="wish_price">
+    <button type="button" class="heart-btn">
+        <?php
+        $wish_id_product = $row['id'];
+        $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
+        if (mysqli_num_rows($qry_user_product) > 0) {
+        ?>
+            <i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+        <?php } else { ?>
+            <i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+        <?php } ?>
+    </button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.heart-btn').on('click', function() {
+        var $form = $(this).closest('form');
+        var wish_id = $form.find('.wish_id').val();
+        var wish_name = $form.find('.wish_name').val();
+        var wish_img = $form.find('.wish_img').val();
+        var wish_price = $form.find('.wish_price').val();
+
+        $.ajax({
+            url: './wishlistsql.php',
+            type: 'POST',
+            data: {
+                wish_id: wish_id,
+                wish_name: wish_name,
+                wish_img: wish_img,
+                wish_price: wish_price
+            },
+            success: function(response) {
+                if(response.trim() == 'added') {
+                    $form.find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+                } else if(response.trim() == 'removed') {
+                    $form.find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+                }
+            }
+        });
+    });
+});
+</script>
+
+
                                         </div>
 					    			</div>
 					    		</div>
@@ -194,7 +223,30 @@ if(isset($_SESSION['name'])) {
     $(".heart").hover(function(){
         $(this).toggleClass("bx-heart bxs-heart");
     });
+	// $(".wish_form").on("submit", function(e) {
+    // e.preventDefault(); // Prevent form submission
+
+    // let form = $(this);
+    // let formData = form.serialize(); // Serialize form data
+
+    // $.ajax({
+    //     url: "wishlistsql.php", // Change to the actual PHP script handling the request
+    //     type: "POST",
+    //     data: formData,
+    //     success: function(response) {
+    //         if (response == "added") {
+    //             form.find('i.heart').removeClass('bx-heart').addClass('bxs-heart');
+    //             alert('Product added to wishlist!');
+    //         } else if (response == "removed") {
+    //             form.find('i.heart').removeClass('bxs-heart').addClass('bx-heart');
+    //             alert('Product removed from wishlist!');
+    //         }
+    //     }
+    // });
+// });
 });
+
+
 
 	</script>
 <section class="bg0 p-t-23 p-b-140">
