@@ -156,12 +156,12 @@ if(isset($_SESSION['name'])) {
 					    				</div>
     
 					    				<div class="block2-txt-child2 flex-r p-t-3">
-										<form method="POST" action="./wishlistsql.php" class="wish_form">
+										<form method="POST" id="wish_form_<?php echo $row['id']; ?>" class="wish_form">
     <input type="hidden" value="<?php echo $row['id']; ?>" name="wish_id" class="wish_id">
     <input type="hidden" value="<?php echo $row['name']; ?>" name="wish_name" class="wish_name">
     <input type="hidden" value="<?php echo $row['img']; ?>" name="wish_img" class="wish_img">
     <input type="hidden" value="<?php echo $row['price']; ?>" name="wish_price" class="wish_price">
-    <button type="button" class="heart-btn">
+    <button type="button" name="heart_sub" class="heart-btn" data-id="<?php echo $row['id']; ?>">
         <?php
         $wish_id_product = $row['id'];
         $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
@@ -174,36 +174,7 @@ if(isset($_SESSION['name'])) {
     </button>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.heart-btn').on('click', function() {
-        var $form = $(this).closest('form');
-        var wish_id = $form.find('.wish_id').val();
-        var wish_name = $form.find('.wish_name').val();
-        var wish_img = $form.find('.wish_img').val();
-        var wish_price = $form.find('.wish_price').val();
 
-        $.ajax({
-            url: './wishlistsql.php',
-            type: 'POST',
-            data: {
-                wish_id: wish_id,
-                wish_name: wish_name,
-                wish_img: wish_img,
-                wish_price: wish_price
-            },
-            success: function(response) {
-                if(response.trim() == 'added') {
-                    $form.find('.heart').removeClass('bx-heart').addClass('bxs-heart');
-                } else if(response.trim() == 'removed') {
-                    $form.find('.heart').removeClass('bxs-heart').addClass('bx-heart');
-                }
-            }
-        });
-    });
-});
-</script>
 
 
                                         </div>
@@ -218,37 +189,46 @@ $(document).ready(function() {
 				    </div>
 			</div>
 	</section>
-	<script>
+	<!-- <script>
 		$(document).ready(function(){
     $(".heart").hover(function(){
         $(this).toggleClass("bx-heart bxs-heart");
     });
-	// $(".wish_form").on("submit", function(e) {
-    // e.preventDefault(); // Prevent form submission
-
-    // let form = $(this);
-    // let formData = form.serialize(); // Serialize form data
-
-    // $.ajax({
-    //     url: "wishlistsql.php", // Change to the actual PHP script handling the request
-    //     type: "POST",
-    //     data: formData,
-    //     success: function(response) {
-    //         if (response == "added") {
-    //             form.find('i.heart').removeClass('bx-heart').addClass('bxs-heart');
-    //             alert('Product added to wishlist!');
-    //         } else if (response == "removed") {
-    //             form.find('i.heart').removeClass('bxs-heart').addClass('bx-heart');
-    //             alert('Product removed from wishlist!');
-    //         }
-    //     }
-    // });
-// });
 });
+	</script> -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.heart-btn').on('click', function(e) {
+        e.preventDefault(); // Prevent the default form submission
 
+        var formId = $(this).data('id');
+        var formData = $('#wish_form_' + formId).serialize();
 
+        console.log(formData); // Debugging: check if data is being serialized correctly
 
-	</script>
+        $.ajax({
+            url: './wishlistsql.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response); // Debugging: check the response from the server
+                if (response.trim() === "added") {
+                    $('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+                    alert('Item added to wishlist');
+                } else if (response.trim() === "removed") {
+                    $('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+                    alert('Item removed from wishlist');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText); // Debugging: check for errors in the response
+            }
+        });
+    });
+});
+</script>
+
 <section class="bg0 p-t-23 p-b-140">
 			<div class="container mt-5">
 				<div class="p-b-10">
