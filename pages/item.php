@@ -354,11 +354,11 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response); // Debugging: check the response from the server
                 if (response.trim() === "added") {
-                    $('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
-                    alert('Item added to wishlist');
+					$('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+                    swal("Add successful", "Thankyou for add me", "success");
                 } else if (response.trim() === "removed") {
-                    $('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
-                    alert('Item removed from wishlist');
+					$('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+                    swal("remove successful", "why are remove me", "success");
                 }
             },
             error: function(xhr, status, error) {

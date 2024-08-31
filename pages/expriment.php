@@ -7,161 +7,226 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
 
-.cart-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-h1 {
-    text-align: center;
-    color: #333;
-}
+        .product-slider {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
 
-.cart-items {
-    margin-top: 20px;
-}
+        .main-image {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
 
-.cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
+        .main-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
 
-.cart-item:hover {
-    transform: scale(1.02);
-}
+        .thumbnails {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            max-width: 100px;
+        }
 
-.cart-item img {
-    width: 100px;
-    border-radius: 8px;
-}
+        .thumbnails img {
+            width: 80px;
+            height: auto;
+            cursor: pointer;
+            object-fit: contain;
+            border: 2px solid transparent;
+            transition: border 0.3s ease;
+        }
 
-.item-details h2 {
-    margin: 0;
-    color: #444;
-    font-size: 18px;
-}
+        .thumbnails img.active {
+            border-color: #ca0a0a; /* Border color for the active thumbnail */
+        }
 
-.item-details p {
-    margin: 5px 0;
-    color: #777;
-}
+        .navigation {
+            display: none; /* Hide navigation buttons */
+        }
 
-.item-actions {
-    display: flex;
-    align-items: center;
-}
+        .item-info {
+            flex: 1;
+            max-width: 500px;
+        }
 
-.remove-btn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .item-info h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-.remove-btn:hover {
-    background-color: #ff1a1a;
-}
+        .item-info p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
 
-.cart-summary {
-    text-align: right;
-    margin-top: 20px;
-}
+        .item-info h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
 
-.cart-summary h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
+        .add-to-cart {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.checkout-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .count-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.checkout-btn:hover {
-    background-color: #0056b3;
-}
+        .count-btn button {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            background: none;
+            cursor: pointer;
+        }
 
+        .count-btn input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        .buy-btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background-color: #ca0a0a;
+        }
+
+        .availability-stock a {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .thumbnails img {
+                width: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .thumbnails img {
+                width: 50px;
+            }
+
+            .item-info {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <?php include "header.php" ?>
-    <div class="cart-container">
-        <h1>Your Shopping Cart</h1>
-        <div class="cart-items">
-            <div class="cart-item">
-                <img src="path-to-your-product-image1.jpg" alt="Product Image">
-                <div class="item-details">
-                    <h2>Product Name</h2>
-                    <p>Price: $99.00</p>
-                    <p>Quantity: 1</p>
-                </div>
-                <div class="item-actions">
-                    <button class="remove-btn">Remove</button>
-                </div>
-            </div>
 
-            <!-- Repeat the .cart-item for each product in the cart -->
+<div class="product-container">
+    <div class="product-slider">
+        <div class="thumbnails">
+            <img src="upload/apple 1.jpg" alt="Thumbnail 1" onmouseover="changeImage(this)">
+            <img src="upload/apple 2.jpg" alt="Thumbnail 2" onmouseover="changeImage(this)">
+            <img src="upload/apple 3.jpg" alt="Thumbnail 3" onmouseover="changeImage(this)">
+            <img src="upload/apple 4.jpg" alt="Thumbnail 4" onmouseover="changeImage(this)">
         </div>
-        <div class="cart-items">
-            <div class="cart-item">
-                <img src="path-to-your-product-image1.jpg" alt="Product Image">
-                <div class="item-details">
-                    <h2>Product Name</h2>
-                    <p>Price: $99.00</p>
-                    <p>Quantity: 1</p>
-                </div>
-                <div class="item-actions">
-                    <button class="remove-btn">Remove</button>
-                </div>
-            </div>
-
-            <!-- Repeat the .cart-item for each product in the cart -->
+        <div class="main-image">
+            <img id="currentImage" src="upload/apple 4.jpg" alt="Main Image">
         </div>
-        <div class="cart-items">
-            <div class="cart-item">
-                <img src="path-to-your-product-image1.jpg" alt="Product Image">
-                <div class="item-details">
-                    <h2>Product Name</h2>
-                    <p>Price: $99.00</p>
-                    <p>Quantity: 1</p>
-                </div>
-                <div class="item-actions">
-                    <button class="remove-btn">Remove</button>
-                </div>
-            </div>
-
-            <!-- Repeat the .cart-item for each product in the cart -->
-        </div>
-        <div class="cart-summary">
-            <h2>Total: $198.00</h2>
-            <button class="checkout-btn">Proceed to Checkout</button>
+        <div class="navigation">
+            <button id="prevBtn">❮</button>
+            <button id="nextBtn">❯</button>
         </div>
     </div>
-    <?php include 'footer.php' ?>
+    <div class="item-info">
+        <h1>Track Shot Adidas</h1>
+        <p>Most of us are familiar with the iconic design of the egg-shaped chair floating in the air. The Hanging Egg Chair is a critically acclaimed design that has enjoyed praise worldwide ever since the distinctive.</p>
+        <h3>$305.00</h3>
+        <div class="add-to-cart">
+            <div class="count-btn">
+                <button type="button" class="minus">-</button>
+                <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
+                <button type="button" class="plus">+</button>
+            </div>
+            <button class="buy-btn" name="btn">Add to Cart</button>
+            <button class="buy-btn">Buy it Now</button>
+        </div>
+        <div class="availability-stock">
+            <a href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
+            <a href="">SKU: <span>N/A</span></a>
+            <a href="">Vendor: <span>Nothing Says Sporty Versatility</span></a>
+            <a href="">Categories: <span>Bar Furniture</span></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeImage(element) {
+        const newSrc = element.src;
+        const currentImage = document.getElementById('currentImage');
+        
+        // Update the main image source
+        currentImage.src = newSrc;
+
+        // Remove 'active' class from all thumbnails
+        document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
+
+        // Add 'active' class to the hovered thumbnail
+        element.classList.add('active');
+    }
+
+    // Initialize the thumbnails
+    const initialSrc = document.getElementById('currentImage').src;
+    document.querySelectorAll('.thumbnails img').forEach(img => {
+        if (img.src === initialSrc) {
+            img.classList.add('active');
+        }
+    });
+</script>
+
 </body>
 </html>
