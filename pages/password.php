@@ -10,15 +10,15 @@
 <?php
  session_start();
  $con = mysqli_connect('localhost','root','','ecommerce');
- if(isset($_SESSION['name'])) {
+ if(isset($_SESSION['email'])) {
 //   echo $_SESSION['name'];
 if(isset($_POST['sub'])){
     $checkpswd=$_POST['pswd'];
     $check_pswd=$_POST['c_pswd'];
     if($checkpswd==$check_pswd){
-        $username= $_SESSION['name'];
+        $username= $_SESSION['email'];
         $pswd=$_POST['pswd'];
-        $update_qury=mysqli_query($con,"update user_data  SET password='$pswd' WHERE user_data.name='$username'");
+        $update_qury=mysqli_query($con,"update user_data  SET password='$pswd' WHERE user_data.email='$username'");
         echo "
         <script>
         alert('successfully updated $username your password');
