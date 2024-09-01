@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 10:45 AM
+-- Generation Time: Sep 01, 2024 at 08:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,8 +109,9 @@ INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at
 (50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-26 16:06:15', 2),
 (51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-08-20 04:22:26', 2),
 (52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-26 15:26:08', 2),
-(53, 'tarun', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-08-28 08:19:56', 2),
-(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-08-28 07:30:54', 2);
+(53, 'tarun', 'tarunsagwal38@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-09-01 15:49:51', 2),
+(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-08-28 07:30:54', 2),
+(59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-09-01 16:58:15', 2);
 
 --
 -- Indexes for dumped tables
@@ -173,7 +174,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Constraints for dumped tables

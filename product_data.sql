@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 10:45 AM
+-- Generation Time: Sep 01, 2024 at 08:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -113,8 +113,8 @@ INSERT INTO `product_brand` (`p_id`, `p_name`) VALUES
 (1, 'nike'),
 (2, 'Adidas'),
 (3, 'Gucci'),
-(4, 'H&M'),
-(5, 'Louis Vuitton'),
+(4, 'HM'),
+(5, 'LouisVuitton'),
 (6, 'Zara'),
 (7, 'uniqlo'),
 (8, 'Levis'),

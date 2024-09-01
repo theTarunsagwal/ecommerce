@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 10:42 AM
+-- Generation Time: Sep 01, 2024 at 08:09 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -108,6 +108,19 @@ CREATE TABLE `user_name_58` (
   `price` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_59`
+--
+
+CREATE TABLE `user_name_59` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -148,6 +161,13 @@ ALTER TABLE `user_name_58`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_59`
+--
+ALTER TABLE `user_name_59`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -179,6 +199,12 @@ ALTER TABLE `user_name_53`
 -- AUTO_INCREMENT for table `user_name_58`
 --
 ALTER TABLE `user_name_58`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_name_59`
+--
+ALTER TABLE `user_name_59`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
