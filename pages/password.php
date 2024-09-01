@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="./css_admin_page/loging.css">
 </head>
 <body>
@@ -19,18 +20,18 @@ if(isset($_POST['sub'])){
         $username= $_SESSION['email'];
         $pswd=$_POST['pswd'];
         $update_qury=mysqli_query($con,"update user_data  SET password='$pswd' WHERE user_data.email='$username'");
-        echo "
+        ?>
         <script>
-        alert('successfully updated $username your password');
+            swal("success", "successfully updated $username your password", "success");
         </script>
-        ";
+        <?php
         header('location:loging.php');
     }else{
-        echo "
+        ?>
         <script>
-        alert('Passwords do not match');
+            swal("Password", "Passwords do not match", "error");
         </script>
-        ";
+        <?php
     }
 }
    ?>

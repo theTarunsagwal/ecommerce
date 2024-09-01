@@ -75,8 +75,6 @@ if (isset($_POST['verify'])) {
                 echo "<script>alert('User registered successfully!');</script>";
                 header("Location: loging.php");
                 exit();
-            } else {
-                echo "Error creating user-side tables: " . mysqli_error($con_userside);
             }
         } else {
             echo "<script>alert('Error registering user.');</script>";

@@ -1,4 +1,34 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Username</title>
+    <link rel="stylesheet" href="./css_admin_page/loging.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="logo">
+        <a href="loging.php"><img src="./img/logo_black.png" alt=""></a>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <p class="title">Check Email</p>
+            <form class="form" method="POST">
+                <div class="input-group">
+                    <label for="username">Email</label>
+                    <input type="text" name="user" id="username" placeholder="">
+                </div>
+                <button class="sign" name='sub'>Submit</button>
+            </form>
+            <p class="signup">
+                Do you have an account?
+                <a href="loging.php">Login</a> or
+                <a href="signup.php">Sign up</a>
+            </p>
+        </div>
+    </div>
+    <?php
 session_start();
 $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
 use PHPMailer\PHPMailer\PHPMailer;
@@ -44,40 +74,14 @@ if (isset($_POST['sub'])) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     } else {
-        echo "<script>alert('Please Enter a Valid username or email');</script>";
+        ?>
+        <script>
+               swal("Email not Match", "Please Enter a Valid Email", "error");
+           </script>
+           <?php
+        // echo "<script>alert('Please Enter a Valid username or email');</script>";
     }
 }
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check Username</title>
-    <link rel="stylesheet" href="./css_admin_page/loging.css">
-</head>
-<body>
-    <div class="logo">
-        <a href="loging.php"><img src="./img/logo_black.png" alt=""></a>
-    </div>
-    <div class="container">
-        <div class="form-container">
-            <p class="title">Check Email</p>
-            <form class="form" method="POST">
-                <div class="input-group">
-                    <label for="username">Email</label>
-                    <input type="text" name="user" id="username" placeholder="">
-                </div>
-                <button class="sign" name='sub'>Submit</button>
-            </form>
-            <p class="signup">
-                Do you have an account?
-                <a href="loging.php">Login</a> or
-                <a href="signup.php">Sign up</a>
-            </p>
-        </div>
-    </div>
 </body>
 </html>
