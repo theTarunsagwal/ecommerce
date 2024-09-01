@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megumi Shoplift</title>
     <link rel="stylesheet" href="./css_admin_page/loging.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <div class="logo">
@@ -15,23 +16,23 @@
         <p class="title">Sign Up</p>
         <form class="form" method="POST" enctype="multipart/form-data">
             <div class="input-group">
-                <label for="username">Username</label>
+                <label for="username">Username*</label>
                 <input type="text" name="user" id="username" placeholder="" required>
             </div>
             <div class="input-group">
-                <label for="email">Email</label>
+                <label for="email">Email*</label>
                 <input type="email" name="email" id="email" placeholder="" required>
             </div>
             <div class="input-group">
-                <label for="password">Password</label>
+                <label for="password">Password*</label>
                 <input type="password" name="pswd" id="password" placeholder="" required>
             </div>
             <div class="input-group">
-                <label for="cpassword">Confirm Password</label>
+                <label for="cpassword">Confirm Password*</label>
                 <input type="password" name="cpswd" id="cpassword" placeholder="" required>
             </div>
             <div class="input-group">
-                <label for="pfile">Upload Image</label>
+                <label for="pfile">Upload Image*</label>
                 <input type="file" name="pfile" id="pfile" required>
             </div>
             <button class="sign" name="sub">Submit</button>
@@ -75,7 +76,12 @@ if (isset($_POST['sub'])) {
                 $result = mysqli_query($con, $qry_data);
 
                 if (mysqli_num_rows($result) > 0) {
-                    echo "<script>alert('Username or Email already exists');</script>";
+                    ?>
+                      <script>
+                swal(" Username or Email  already", " exists ", "error");
+            </script>
+                    <?php
+                    // echo "<script>alert('Username or Email already exists');</script>";
                 } else {
                     // Generate OTP
                     $otp = rand(100000, 999999);
@@ -111,14 +117,14 @@ if (isset($_POST['sub'])) {
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
                 }
-            } else {
-                echo "<script>alert('Error uploading file.');</script>";
             }
-        } else {
-            echo "<script>alert('No file selected.');</script>";
-        }
+        } 
     } else {
-        echo "<script>alert('Passwords do not match');</script>";
+        ?>
+         <script>
+                swal("Password not match", "pls enter write  password  ", "error");
+            </script>
+            <?php
     }
 }
 mysqli_close($con);
