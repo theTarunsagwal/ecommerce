@@ -20,7 +20,7 @@
         <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
         <?php 
 	        $con_wish = mysqli_connect("localhost","root","","wishlist_user");
-	        $wish_face = "wish_name_".$_SESSION['name'];
+	        $wish_face = "wish_name_".$_SESSION['id'];
 			if(isset($_POST['remove'])){
 				$remove = $_POST['remove'];
 				$qry_remove = mysqli_query($con_wish,"DELETE FROM $wish_face WHERE id=$remove");
@@ -42,7 +42,7 @@
             <li class="mt-3">
                 <div class="product-details d-flex gap-3 align-items-center">
                     <div class="img">
-                        <img src="product/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
+                        <img src="upload/<?php echo $row_add['product_img']; ?>"  alt="Product 1">
                     </div>
                    <div class="wish-product ">
                        <h3 style="font-size: 1rem; margin:0%;"><?php echo $row_add['name']; ?></h3>
