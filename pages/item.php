@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="flex-w flex-sb-m p-b-52">
-			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+			<div class="flex-w flex-l-m filter-tope-group btn-filter m-tb-10">
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 					All Products
 				</button>
@@ -30,6 +30,9 @@
 
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watch">
 					Watches
+				</button>
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".nike">
+					Nike
 				</button>
 			</div>
 
@@ -141,6 +144,9 @@
 		<div class="row isotope-grid">
 
 			<?php
+    $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+
 					if(isset($_POST['price_range'])){
 						$price_select = $_POST['price_range'];
 						switch ($price_select) {
@@ -166,10 +172,11 @@
 							?>
 
 			<?php
-										  $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
+										  $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name , p_name FROM product LEFT JOIN category ON product.category = category.cat_id LEFT JOIN product_brand ON product.brand_name = product_brand.p_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
 										  while($row_product = mysqli_fetch_assoc($qury_product)){
 									  ?>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+			<div
+				class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item filter-container <?php echo $row_product['p_name'] ?> <?php echo $row_product['cat_name']; ?>">
 				<!-- Block2 -->
 				<a href="addtocart.php?id=<?php echo $row_product['name']?>">
 
@@ -192,23 +199,28 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-							<form method="POST" id="wish_form_<?php echo $row_product['id']; ?>" class="wish_form">
-    <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id" class="wish_id">
-    <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name" class="wish_name">
-    <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img" class="wish_img">
-    <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price" class="wish_price">
-    <button type="button" name="heart_sub" class="heart-btn" data-id="<?php echo $row_product['id']; ?>">
-        <?php
-        $wish_id_product = $row_product['id'];
-        $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
-        if (mysqli_num_rows($qry_user_product) > 0) {
-        ?>
-            <i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } else { ?>
-            <i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } ?>
-    </button>
-</form>
+								<form method="POST" id="wish_form_<?php echo $row_product['id']; ?>" class="wish_form">
+									<input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id"
+										class="wish_id">
+									<input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name"
+										class="wish_name">
+									<input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img"
+										class="wish_img">
+									<input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price"
+										class="wish_price">
+									<button type="button" name="heart_sub" class="heart-btn"
+										data-id="<?php echo $row_product['id']; ?>">
+										<?php
+											$wish_id_product = $row_product['id'];
+											$qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
+											if (mysqli_num_rows($qry_user_product) > 0) {
+										?>
+										<i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+										<?php } else { ?>
+										<i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+										<?php } ?>
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -223,12 +235,13 @@
 								break;
 						}
 						// echo $qury;
-						$qry_merg = "SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id $qury ";
+						$qry_merg = "SELECT id, name, price, img, cat_name , p_name FROM product LEFT JOIN category ON product.category = category.cat_id LEFT JOIN product_brand ON product.brand_name = product_brand.p_id $qury ";
 						// echo $qry_merg;
 						$qry_all_filter= mysqli_query($con_pro,$qry_merg);
 						while($row_filter = mysqli_fetch_array($qry_all_filter)){
 							?>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_filter['cat_name']?>">
+			<div
+				class="col-sm-6 col-md-4 col-lg-3 p-b-35 filter-container isotope-item <?php echo $row_filter['p_name'] ?> <?php echo $row_filter['cat_name']?>">
 				<!-- Block2 -->
 				<a href="addtocart.php?id=<?php echo $row_filter['name']?>">
 
@@ -251,29 +264,33 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-							<form method="POST" id="wish_form_<?php echo $row_filter['id']; ?>" class="wish_form">
-    <input type="hidden" value="<?php echo $row_filter['id']; ?>" name="wish_id" class="wish_id">
-    <input type="hidden" value="<?php echo $row_filter['name']; ?>" name="wish_name" class="wish_name">
-    <input type="hidden" value="<?php echo $row_filter['img']; ?>" name="wish_img" class="wish_img">
-    <input type="hidden" value="<?php echo $row_filter['price']; ?>" name="wish_price" class="wish_price">
-    <button type="button" name="heart_sub" class="heart-btn" data-id="<?php echo $row_filter['id']; ?>">
-        <?php
-        $wish_id_product = $row_filter['id'];
-        $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
-        if (mysqli_num_rows($qry_user_product) > 0) {
-        ?>
-            <i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } else { ?>
-            <i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } ?>
-    </button>
-</form>
+								<form method="POST" id="wish_form_<?php echo $row_filter['id']; ?>" class="wish_form">
+									<input type="hidden" value="<?php echo $row_filter['id']; ?>" name="wish_id"
+										class="wish_id">
+									<input type="hidden" value="<?php echo $row_filter['name']; ?>" name="wish_name"
+										class="wish_name">
+									<input type="hidden" value="<?php echo $row_filter['img']; ?>" name="wish_img"
+										class="wish_img">
+									<input type="hidden" value="<?php echo $row_filter['price']; ?>" name="wish_price"
+										class="wish_price">
+									<button type="button" name="heart_sub" class="heart-btn"
+										data-id="<?php echo $row_filter['id']; ?>">
+										<?php
+												$wish_id_product = $row_filter['id'];
+												$qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
+												if (mysqli_num_rows($qry_user_product) > 0) {
+										?>
+										<i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+										<?php } else { ?>
+										<i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+										<?php } ?>
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>
 				</a>
 			</div>
-
 
 			<?php
 						}
@@ -281,10 +298,11 @@
 					?>
 
 			<?php
-							$qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name FROM product LEFT JOIN category ON product.category = category.cat_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
+							$qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name , p_name FROM product LEFT JOIN category ON product.category = category.cat_id LEFT JOIN product_brand ON product.brand_name = product_brand.p_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
 							while($row_product = mysqli_fetch_assoc($qury_product)){
 						?>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $row_product['cat_name']?>">
+			<div
+				class="col-sm-6 col-md-4 col-lg-3 p-b-35 filter-container isotope-item <?php echo $row_product['p_name'] ?> <?php echo $row_product['cat_name']?>">
 				<!-- Block2 -->
 				<a href="addtocart.php?id=<?php echo $row_product['name']?>">
 
@@ -307,23 +325,31 @@
 							</div>
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-							<form method="POST" id="wish_form_<?php echo $row_product['id']; ?>" class="wish_form">
-    <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id" class="wish_id">
-    <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name" class="wish_name">
-    <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img" class="wish_img">
-    <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price" class="wish_price">
-    <button type="button" name="heart_sub" class="heart-btn" data-id="<?php echo $row_product['id']; ?>">
-        <?php
-        $wish_id_product = $row_product['id'];
-        $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
-        if (mysqli_num_rows($qry_user_product) > 0) {
-        ?>
-            <i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } else { ?>
-            <i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
-        <?php } ?>
-    </button>
-</form>
+							<?php
+							if(isset($wish_face)){
+							?>
+                            <form method="POST" id="wish_form_<?php echo $row_product['id']; ?>" class="wish_form">
+                                <input type="hidden" value="<?php echo $row_product['id']; ?>" name="wish_id" class="wish_id">
+                                <input type="hidden" value="<?php echo $row_product['name']; ?>" name="wish_name" class="wish_name">
+                                <input type="hidden" value="<?php echo $row_product['img']; ?>" name="wish_img" class="wish_img">
+                                <input type="hidden" value="<?php echo $row_product['price']; ?>" name="wish_price" class="wish_price">
+                                <button type="button" name="heart_sub" class="heart-btn" data-id="<?php echo $row_product['id']; ?>">
+                                    <?php
+                                    $wish_id_product = $row_product['id'];
+                                    $qry_user_product = mysqli_query($con_wish, "SELECT * FROM $wish_face WHERE id = $wish_id_product");
+                                    if (mysqli_num_rows($qry_user_product) > 0) {
+                                    ?>
+                                        <i class='bx bxs-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+                                    <?php } else { ?>
+                                        <i class='bx bx-heart heart' style="font-size:1.5rem; cursor:pointer;"></i>
+                                    <?php } ?>
+                                </button>
+                            </form>
+							<?php 
+							}else{
+								    echo "<a href='login.php'><i class='bx bx-heart heart' style='font-size:1.5rem; cursor:pointer;'></i></a>";
+                                }
+                                ?>
 							</div>
 						</div>
 					</div>
@@ -336,35 +362,44 @@
 	</div>
 </section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('.heart-btn').on('click', function(e) {
-        e.preventDefault(); // Prevent the default form submission
+var	$btn_filter = $('.btn-filter');
+var $filter_container = $(".filter-container");
+$btn_filter.each(function(){
+	$btn_filter.on('click','button' , function(){
+		$filter_store = $(this).attr('data-filter');
+		$filter_container.isotope({filter:$filter_store})
+	})
+})
+</script>
+<script>
+	$(document).ready(function () {
+		$('.heart-btn').on('click', function (e) {
+			e.preventDefault(); // Prevent the default form submission
 
-        var formId = $(this).data('id');
-        var formData = $('#wish_form_' + formId).serialize();
+			var formId = $(this).data('id');
+			var formData = $('#wish_form_' + formId).serialize();
 
-        console.log(formData); // Debugging: check if data is being serialized correctly
+			console.log(formData); // Debugging: check if data is being serialized correctly
 
-        $.ajax({
-            url: './wishlistsql.php',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log(response); // Debugging: check the response from the server
-                if (response.trim() === "added") {
-					$('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
-                    swal("Add successful", "Thankyou for add me", "success");
-                } else if (response.trim() === "removed") {
-					$('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
-                    swal("remove successful", "why are remove me", "success");
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText); // Debugging: check for errors in the response
-            }
-        });
-    });
-});
+			$.ajax({
+				url: './wishlistsql.php',
+				type: 'POST',
+				data: formData,
+				success: function (response) {
+					console.log(response); // Debugging: check the response from the server
+					if (response.trim() === "added") {
+						$('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+						swal("Add successful", "Thankyou for add me", "success");
+					} else if (response.trim() === "removed") {
+						$('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+						swal("remove successful", "why are remove me", "success");
+					}
+				},
+				error: function (xhr, status, error) {
+					console.error(xhr.responseText); // Debugging: check for errors in the response
+				}
+			});
+		});
+	});
 </script>

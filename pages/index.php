@@ -14,6 +14,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megumi shoplift</title>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+	<script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -37,7 +40,6 @@ session_start();
 </head>
 
 <body class="animsition">
-	<?php echo $_SESSION['id'];?>
     <?php include "header.php" ?>
     <?php
      include "profile_user.php"
@@ -321,14 +323,11 @@ if(isset($_SESSION['name'])) {
             </div>
         </div>
     </section>
-
-
-	<?php include "item.php" ?>
+    <?php include "item.php"; ?>
     <?php include "footer.php" ?>
 
     <script src="dropdown.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="./vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="./vendor/animsition/js/animsition.min.js"></script>
 	<script src="./vendor/bootstrap/js/popper.js"></script>
 	<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
