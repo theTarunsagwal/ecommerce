@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
 <body>
-    <?php include "header.php" ?>
+    <?php session_start();  include "header.php" ?>
 
     <div class="serach-container" style="margin-top: 10%;">
         <h2 class="text-black fs-3 fw-bold text-center" >Search results</h2>
