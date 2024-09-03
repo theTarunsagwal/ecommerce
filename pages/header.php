@@ -32,7 +32,7 @@
         <div class="logo" onclick="change()">
             <i id="x" class="bx bx-menu" onclick="chg()"></i>
             <a href="index.php">
-            <img src="./img/logo_black.png" alt="">
+            <img src="./img/shop.png" alt="">
             </a>
         </div>
         <nav>
@@ -85,7 +85,9 @@
             </a>
             <div class="shoping_bag">
                 <a href="additem.php">shoping cart</a>
-                <a href="additem.php">$0.00</a>
+                <a href="additem.php">$<?php 
+                  echo $_SESSION['total_price'].".00";
+                 ?></a>
             </div>
         </div>
     </header>
