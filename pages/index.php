@@ -41,9 +41,6 @@ session_start();
 
 <body class="animsition">
     <?php include "header.php" ?>
-    <?php
-     include "profile_user.php"
-      ?>
     <!-- wishlist -->
 	<div class="wishlist wishlist-closed" id="wishlist">
         <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
