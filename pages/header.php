@@ -83,13 +83,11 @@
             <a href="additem.php">
               <i class='bx bxs-shopping-bags'></i>
             </a>
-            <div class="shoping_bag">
-                <a href="additem.php">shoping cart</a>
-                <a href="additem.php">$<?php 
-                  echo $_SESSION['total_price'].".00";
-                 ?></a>
-            </div>
-        </div>
+            
+            <?php
+     include "profile_user.php"
+     ?>
+     </div>
     </header>
     <div class="menubar">
         <div class="menu_bar">

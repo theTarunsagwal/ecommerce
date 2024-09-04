@@ -19,9 +19,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
                     <div class="profile-data">
                         <div class="profile_user">
                             <img src="./upload/<?php echo $row['image']; ?>" alt="loading...">
-                            <div class="profile_name">
-                                <h1 class="fs-5 mt-3 text-black"><?php echo $row['name']; ?></h1>
-                            </div>
+                    
                         </div>
                     </div>
                     <div class="profile_data">
