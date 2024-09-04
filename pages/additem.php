@@ -63,8 +63,6 @@ if(isset($_SESSION['name'])) {
             </div>
             <?php
         }
-        $_SESSION['total_price'] = $total_price;
-        echo $_SESSION['total_price'];
         echo '</div>';
     }
     ?>

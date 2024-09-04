@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo $_SESSION['id'];
+// echo $_SESSION['id'];
 ob_start();
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 $con_pro = mysqli_connect('localhost', 'root','','product_data');
@@ -142,7 +142,7 @@ if (isset($_POST['sub_rating'])) {
             if (isset($_GET['id']) && !empty($_GET['id'])) {
                 $id = $_GET['id'];
                 $_SESSION['product_name'] = $id;
-                echo $_SESSION['product_name'];
+                // echo $_SESSION['product_name'];
             
                 if (isset($_POST['btn'])) {
                     $item_name = $_POST['item_name'];
