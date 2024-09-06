@@ -48,11 +48,6 @@
 }
 
 #login{
-    position: fixed;
-    right: 2%;
-    bottom: 3%;
-    z-index: 105;
-    box-shadow: 1px 1px 10px #666b7f;
     font-size: 1.5rem;
     padding:.5rem;
     border-radius: 50%;
