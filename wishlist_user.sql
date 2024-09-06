@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2024 at 08:09 PM
+-- Generation Time: Sep 06, 2024 at 07:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,7 +109,7 @@ CREATE TABLE `wish_name_53` (
 INSERT INTO `wish_name_53` (`id`, `name`, `product_img`, `price`) VALUES
 (35, 'track shot adidas', 'blue-3.jpg', 305),
 (37, 'MASCOMODA Womens ', 'red-2.jpg', 210),
-(36, 'tracksuits', 'gray-4.jpg', 405);
+(23, 'Classic Trench Coat', 'product-04.jpg', 300);
 
 -- --------------------------------------------------------
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2024 at 08:09 PM
+-- Generation Time: Sep 06, 2024 at 07:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -92,7 +92,6 @@ CREATE TABLE `user_name_53` (
 --
 
 INSERT INTO `user_name_53` (`id`, `name`, `image`, `price`) VALUES
-(1, 'MASCOMODA Womens ', 'red-2.jpg', '210'),
 (2, 'blue shrit', 'product-03.jpg', '302');
 
 -- --------------------------------------------------------
@@ -193,7 +192,7 @@ ALTER TABLE `user_name_52`
 -- AUTO_INCREMENT for table `user_name_53`
 --
 ALTER TABLE `user_name_53`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_name_58`

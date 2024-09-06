@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2024 at 08:08 PM
+-- Generation Time: Sep 06, 2024 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -98,20 +98,23 @@ CREATE TABLE `user_data` (
   `image` varchar(300) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `last_login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `roll` int(11) DEFAULT 2
+  `roll` int(11) DEFAULT 2,
+  `address` text DEFAULT NULL,
+  `gender` varchar(25) DEFAULT NULL,
+  `phone` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_data`
 --
 
-INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`) VALUES
-(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-08-26 16:06:15', 2),
-(51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-08-20 04:22:26', 2),
-(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-26 15:26:08', 2),
-(53, 'tarun', 'tarunsagwal38@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-09-01 15:49:51', 2),
-(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-08-28 07:30:54', 2),
-(59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-09-01 16:58:15', 2);
+INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`, `address`, `gender`, `phone`) VALUES
+(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-09-03 06:42:10', 2, NULL, NULL, NULL),
+(51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-08-20 04:22:26', 2, NULL, NULL, NULL),
+(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-08-26 15:26:08', 2, NULL, NULL, NULL),
+(53, 'tarun s', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-09-06 17:05:21', 2, NULL, 'Male', 121245484),
+(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-08-28 07:30:54', 2, NULL, NULL, NULL),
+(59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-09-01 16:58:15', 2, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
