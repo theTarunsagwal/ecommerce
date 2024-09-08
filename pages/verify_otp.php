@@ -58,6 +58,7 @@ if (isset($_POST['verify'])) {
                 name VARCHAR(300) NOT NULL,
                 image TEXT NOT NULL,
                 price VARCHAR(30) NOT NULL,
+                qty INT default 1,
                 PRIMARY KEY (id)
             )";
             
