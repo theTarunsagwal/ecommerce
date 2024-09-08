@@ -61,7 +61,7 @@ if(isset($_SESSION['name'])) {
     <div class="wishlist wishlist-closed" id="wishlist">
         <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
         <?php 
-	   echo $wish_face = "wish_name_".$_SESSION['id'];
+	    $wish_face = "wish_name_".$_SESSION['id'];
        
         $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
         ?>
@@ -149,6 +149,7 @@ if (isset($_POST['sub_rating'])) {
                     $item_img = $_POST['item_img'];
                     $item_price = $_POST['item_price'];
                     $pro_user = $_SESSION['id'];
+                    $qty = $_POST['quantity'];
                    echo $table_name = 'user_name_' . $pro_user;
             
                     $check_query = mysqli_query($con_userside, "SELECT * FROM $table_name WHERE name='$item_name'");
@@ -158,7 +159,7 @@ if (isset($_POST['sub_rating'])) {
                             alert('Product is already in the cart.')
                         </script>";
                     } else {
-                        $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price) VALUES ('$item_name', '$item_img', '$item_price')");
+                        $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price,qty) VALUES ('$item_name', '$item_img', '$item_price','$qty')");
                         
                         if ($qury_user) {
                             header("Location: additem.php");
