@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2024 at 07:23 PM
+-- Generation Time: Sep 08, 2024 at 06:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,15 +31,17 @@ CREATE TABLE `user_name_50` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_name_50`
 --
 
-INSERT INTO `user_name_50` (`id`, `name`, `image`, `price`) VALUES
-(2, 'MASCOMODA Womens ', 'red-2.jpg', '210');
+INSERT INTO `user_name_50` (`id`, `name`, `image`, `price`, `qty`) VALUES
+(3, 'tracksuits', 'gray-4.jpg', '405', 1),
+(4, 'MASCOMODA Womens ', 'red-2.jpg', '210', 5);
 
 -- --------------------------------------------------------
 
@@ -51,7 +53,8 @@ CREATE TABLE `user_name_51` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,15 +67,16 @@ CREATE TABLE `user_name_52` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_name_52`
 --
 
-INSERT INTO `user_name_52` (`id`, `name`, `image`, `price`) VALUES
-(1, 'tracksuits', 'gray-4.jpg', '405');
+INSERT INTO `user_name_52` (`id`, `name`, `image`, `price`, `qty`) VALUES
+(1, 'tracksuits', 'gray-4.jpg', '405', 1);
 
 -- --------------------------------------------------------
 
@@ -84,15 +88,16 @@ CREATE TABLE `user_name_53` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_name_53`
 --
 
-INSERT INTO `user_name_53` (`id`, `name`, `image`, `price`) VALUES
-(2, 'blue shrit', 'product-03.jpg', '302');
+INSERT INTO `user_name_53` (`id`, `name`, `image`, `price`, `qty`) VALUES
+(2, 'blue shrit', 'product-03.jpg', '302', 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +109,8 @@ CREATE TABLE `user_name_58` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -117,8 +123,31 @@ CREATE TABLE `user_name_59` (
   `id` int(11) NOT NULL,
   `name` varchar(300) NOT NULL,
   `image` text NOT NULL,
-  `price` varchar(30) NOT NULL
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_60`
+--
+
+CREATE TABLE `user_name_60` (
+  `id` int(11) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_name_60`
+--
+
+INSERT INTO `user_name_60` (`id`, `name`, `image`, `price`, `qty`) VALUES
+(3, 'MASCOMODA Womens ', 'red-2.jpg', '210', 5),
+(4, 'track shot adidas', 'blue-3.jpg', '305', 3);
 
 --
 -- Indexes for dumped tables
@@ -167,6 +196,13 @@ ALTER TABLE `user_name_59`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_60`
+--
+ALTER TABLE `user_name_60`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -174,7 +210,7 @@ ALTER TABLE `user_name_59`
 -- AUTO_INCREMENT for table `user_name_50`
 --
 ALTER TABLE `user_name_50`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_name_51`
@@ -205,6 +241,12 @@ ALTER TABLE `user_name_58`
 --
 ALTER TABLE `user_name_59`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_name_60`
+--
+ALTER TABLE `user_name_60`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

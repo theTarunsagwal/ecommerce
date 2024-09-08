@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2024 at 07:23 PM
+-- Generation Time: Sep 08, 2024 at 06:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -137,6 +137,27 @@ CREATE TABLE `wish_name_59` (
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_name_60`
+--
+
+CREATE TABLE `wish_name_60` (
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(300) NOT NULL,
+  `product_img` text NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wish_name_60`
+--
+
+INSERT INTO `wish_name_60` (`id`, `name`, `product_img`, `price`) VALUES
+(37, 'MASCOMODA Womens ', 'red-2.jpg', 210),
+(36, 'tracksuits', 'gray-4.jpg', 405);
+
 --
 -- Indexes for dumped tables
 --
@@ -175,6 +196,12 @@ ALTER TABLE `wish_name_58`
 -- Indexes for table `wish_name_59`
 --
 ALTER TABLE `wish_name_59`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `wish_name_60`
+--
+ALTER TABLE `wish_name_60`
   ADD UNIQUE KEY `id` (`id`);
 COMMIT;
 
