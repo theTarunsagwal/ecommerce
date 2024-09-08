@@ -37,7 +37,7 @@
              $user_email = $_SESSION['email'];
              $qury_user = mysqli_query($con, "SELECT * FROM user_data WHERE name = '$user' OR email = '$user_email'");
          ?>
-        <div class="bg-white shadow-md w-full md:w-64 p-6 mt-6">
+        <div class="bg-white w-full md:w-64 p-6 mt-6">
         <?php
             if ($qury_user) {
                if (mysqli_num_rows($qury_user) > 0) {
@@ -45,7 +45,7 @@
                        ?>
             <div class="flex gap-2 items-center mb-8">
                 <img class="img" src="./upload/<?php echo $row['image']; ?>" alt="loading...">
-                <h2 class="text-xl font-light text-black"><?php echo $_SESSION['name']?></h2>
+                <h2 class="text-xl font-light text-black"><?php echo $row['name']?></h2>
             <div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <nav>
                 <ul class="space-y-4">
                     <li>
-                        <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
+                        <a href="OrderDetails.php" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
                             <i class='bx bx-home'></i>
                             <span>My Orders</span>
                         </a>
@@ -82,11 +82,11 @@
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <label class="block text-gray-700">First Name</label>
-                            <input name="name" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Puneet">
+                            <input name="name" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter FirstName">
                         </div>
                         <div>
                             <label class="block text-gray-700">Last Name</label>
-                            <input name="lname" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Kumar">
+                            <input name="lname" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter LastName">
                         </div>
                         <div>
                             <label class="block text-gray-700">Your Gender</label>
@@ -103,11 +103,11 @@
                         </div>
                         <div>
                             <label class="block text-gray-700">Email Address</label>
-                            <input name="email" type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="kumar.puneet@example.com">
+                            <input name="email" type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Email@example.com">
                         </div>
                         <div>
                             <label class="block text-gray-700">Mobile Number</label>
-                            <input name="mobile" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+918376905677">
+                            <input name="mobile" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter Number">
                         </div>
                     </div>
                     <button type="button" id="saveButton" class="mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
