@@ -57,7 +57,6 @@ if(isset($_SESSION['name'])) {
 </head>
 
 <body>
-    <?php include "profile_user.php" ?>
     <div class="wishlist wishlist-closed" id="wishlist">
         <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
         <?php 
@@ -200,13 +199,18 @@ if (isset($_POST['sub_rating'])) {
                         <p><?php echo  $query['about']; ?></p>
                         <h3>$<?php echo  $query['price']; ?></h3>
                         <div class="add-to-cart">
+                            <!-- <a href="PaymentOrder.php">Link</a> -->
                             <div class="count-btn">
                                 <button type="button" class="minus">-</button>
                                 <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
                                 <button type="button" class="plus">+</button>
                             </div>
                             <button class="buy-btn" name="btn">Add to Cart</button>
-                            <button class="buy-btn">Buy it Now</button>
+                            <button id="bttn" class="buy-btn">
+                                <a class="buy-btn" href="PaymentOrder.php">
+                                Buy it Now
+                            </a>
+                            </button>
                         </div>
                         <div class="availability-stock">
                             <a href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
@@ -494,6 +498,7 @@ if (isset($_POST['sub_rating'])) {
         </div>
     </section>
     <?php include "./footer.php" ?>
+    
     <script>
         $(document).ready(function () {
             // Function to increase quantity
@@ -521,8 +526,9 @@ if (isset($_POST['sub_rating'])) {
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
-</html>
 
+
+</html>
 <?php
 } else {
     echo "

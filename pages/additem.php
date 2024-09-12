@@ -55,12 +55,14 @@ if(isset($_SESSION['name'])) {
             $total_price += $item_total_price;
             ?>
             <div class="cart-item">
-                <img src="./upload/<?php echo $row['image']; ?>" alt="">
+            <a href="PaymentOrder.php"><img src="./upload/<?php echo $row['image']; ?>" alt=""></a>
                 <div class="item-details">
+                    <a href="PaymentOrder.php">
                     <h2><?php echo $row['name']; ?></h2>
                     <p>Price: $<?php echo $item_price; ?></p>
                     <p>Quantity: <?php echo $qty ?></p>
                     <p>Item Total: $<?php echo number_format($item_total_price, 2); ?></p> <!-- Display total price for this item -->
+                </a>
                 </div>
                 <form method="post">
                     <div class="item-actions">
@@ -75,9 +77,10 @@ if(isset($_SESSION['name'])) {
         ?>
         </div>
         <!-- Cart Summary Section -->
+
         <div class="cart-summary">
             <h2>Total: $<?php echo number_format($total_price, 2); ?></h2> <!-- Display the total price of all items -->
-            <button class="checkout-btn">Proceed to Checkout</button>
+            <a href="PaymentOrder.php"> <button class="checkout-btn">Proceed to Checkout</button></a>
         </div>
         
     <?php include 'footer.php' ?>
