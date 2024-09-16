@@ -37,31 +37,18 @@
         </div>
         <nav>
             <ul class="nav_ul" style="gap: 1rem;">
-                <li class="home d-flex align-items-center g-2"><i class='bx bx-home-alt'></i><a href="index.php"><span>home</span></a></li>
-                <li class="collect"><i class='bx bxs-collection'></i><span>collections</span></li>
-                <!-- collections dropdown -->
-                <div class="dropdown_coll_active">
-                    <div class="dropdown_content_box">
-                        <?php
+                <li class="home d-flex align-items-center g-2"><a href="index.php"><span>home</span></a></li>
+                <?php
                              $row_wood_drop = mysqli_query($con_pro, "SELECT * FROM product WHERE product.id between  19 AND 22;");
-                            while($row_wood= mysqli_fetch_array($row_wood_drop)){
-                            ?>
-                        <a href="product.php?id=<?php echo $row_wood['name'] ?>">
-                        <div class="dropdown_box_item">
-                            <div class="dropdown_box_img"  >
-                                <img src="./upload/<?php echo $row_wood['img']?>" alt="">
-                            </div>
-                            <h1>
-                                <?php echo $row_wood['name']?>
-                            </h1>
-                        </div>
-                            </a>
-                        
-                        <?php } ?>
-
-                    </div>
-                </div>               
-                <li><i class='bx bxs-contact'></i><a href="contact_us.php">contact us</a></li>
+                             while($row_wood= mysqli_fetch_array($row_wood_drop)){
+                                 ?>
+                                 <li>
+                                     <a style="color:#666b7f;padding: .6rem 0rem;" href="product.php?id=<?php echo $row_wood['name'] ?>"><span><?php echo $row_wood['name']; ?></span></a>
+                                    </li>  
+                        <?php
+                            }
+                        ?>             
+                <li><a href="contact_us.php">contact us</a></li>
             </ul>
         </nav>
         <div class="search_shop">

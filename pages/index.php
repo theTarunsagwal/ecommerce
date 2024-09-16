@@ -241,7 +241,7 @@ if(isset($_SESSION['name'])) {
         <div class="multi_card">
             <div class="chair_card">
                 <?php
-            $img=mysqli_query($con_pro,"select * from product where id in (19)");
+            $img=mysqli_query($con_pro,"select * from product where id in (4)");
             while ($row=mysqli_fetch_assoc($img)){
             ?>
              <?php
