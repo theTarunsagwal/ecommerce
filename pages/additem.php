@@ -35,7 +35,7 @@ if(isset($_SESSION['name'])) {
     $total_price = 0;
 
     if (mysqli_num_rows($qury_user) == 0) {
-        echo "<div class='empty-set'>
+        echo "<div class='empty-set' style='text-align: center;'>
         <img class='img_error' src='./img_ecommerce/img_ecommerce43.jpg'>
         <p>Please add items to the cart</p>
         </div>";
@@ -77,14 +77,19 @@ if(isset($_SESSION['name'])) {
         ?>
         </div>
         <!-- Cart Summary Section -->
-
+         <?php
+         if (mysqli_num_rows($qury_user) == 0) {
+            echo "";
+         }else{
+         ?>
         <div class="cart-summary">
             <h2>Total: $<?php echo number_format($total_price, 2); ?></h2> <!-- Display the total price of all items -->
             <a href="PaymentOrder.php"> <button class="checkout-btn">Proceed to Checkout</button></a>
         </div>
         
-    <?php include 'footer.php' ?>
+    <?php } include 'footer.php' ?>
     <?php
+
 }else{
   header('location:loging.php');
 }

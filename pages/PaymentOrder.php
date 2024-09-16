@@ -1,144 +1,203 @@
 <?php
-  // session_start();
+session_start();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Payment Processing</title>
-    <style>
-        /* Slide-in animation for the price details section */
-        @keyframes slideIn {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Checkout</title>
+	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<script src="https://code.jquery.com/jquery-3.7.1.js"
+		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		.order_summary::-webkit-scrollbar {
+			visibility: hidden;
 
-        .animate-slide-in {
-            animation: slideIn 0.6s ease-out forwards;
-        }
-
-        /* Radio button animation */
-        input[type="radio"]:checked + label::before {
-            transform: scale(1.2);
-            background-color: #2563eb; /* Blue-600 */
-        }
-
-        /* Pay button hover effect */
-        .pay-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-        }
-    </style>
+		}
+	</style>
 </head>
-<body class="bg-gray-50">
-  <div class="fixed w-full ">
-  <?php include 'header.php '?>
-  </div>
-    <div class="container mx-auto p-4 py-[120px]">
-        <!-- Order Summary -->
-        <div class="border-b pb-4 mb-4">
-          <h2 class="text-xl font-semibold">Order Summary</h2>
-          <div class="flex items-center justify-between mt-4">
-            <div class="flex items-center">
-              <!-- Product Image -->
-              <img src="./Images/Product_images/61bqww99XnL._SY741_.jpg" alt="Product Image" class="w-24 h-24 mr-4 rounded-md">
-              <div>
-                <p class="font-semibold">YIXTY Resistance Bands Set for Exercise</p>
-                <p class="text-sm text-gray-500">1 item</p>
-              </div>
-            </div>
-            <p class="font-semibold">₹334</p>
-          </div>
-        </div>
-      
-        <!-- Delivery Address -->
-        <div class="border-b pb-4 mb-4">
-          <h2 class="text-xl font-semibold">Delivery Address</h2>
-          <div class="mt-2">
-            <p>Kunal</p>
-            <p>Gali no.8, house no.18, first floor...</p>
-            <p>New Delhi - 110044</p>
-            <p>Phone number: 8376905677</p>
-          </div>
-        </div>
-      
-        <!-- Payment Options -->
-        <div class="border-b pb-4 mb-4">
-          <h2 class="text-xl font-semibold">Payment Options</h2>
-          <p class="text-sm text-red-500 mb-4">Complete payment in <span id="timer">00:13:55</span></p>
-          
-          <div class="space-y-4">
-            <!-- UPI Payment Option -->
-            <div class="flex items-center">
-              <input id="upi" type="radio" name="payment" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
-              <label for="upi" class="ml-3 block text-sm font-medium text-gray-700">UPI</label>
-            </div>
-            <div class="ml-7">
-              <select class="w-full p-2 border border-gray-300 rounded-md">
-                <option>PhonePe</option>
-                <option>Your UPI ID</option>
-              </select>
-            </div>
-            
-            <!-- Wallets -->
-            <div class="flex items-center">
-              <input id="wallets" type="radio" name="payment" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
-              <label for="wallets" class="ml-3 block text-sm font-medium text-gray-700">Wallets</label>
-            </div>
-      
-            <!-- Credit/Debit Card -->
-            <div class="flex items-center">
-              <input id="card" type="radio" name="payment" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
-              <label for="card" class="ml-3 block text-sm font-medium text-gray-700">Credit / Debit / ATM Card</label>
-            </div>
-      
-            <!-- Net Banking -->
-            <div class="flex items-center">
-              <input id="net-banking" type="radio" name="payment" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
-              <label for="net-banking" class="ml-3 block text-sm font-medium text-gray-700">Net Banking</label>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Price Details -->
-        <div class="p-4 bg-gray-100 rounded-md animate-slide-in">
-          <h2 class="text-xl font-semibold mb-4">Price Details</h2>
-          <div class="flex justify-between">
-            <p>Price (1 item)</p>
-            <p>₹1,599</p>
-          </div>
-          <div class="flex justify-between">
-            <p>Delivery Charges</p>
-            <p class="text-green-500">FREE</p>
-          </div>
-          <div class="flex justify-between">
-            <p>Platform Fee</p>
-            <p>₹3</p>
-          </div>
-          <hr class="my-4">
-          <div class="flex justify-between text-lg font-semibold">
-            <p>Amount Payable</p>
-            <p>₹1,602</p>
-          </div>
-          <div class="text-xs text-gray-500 mt-2">
-            <p>Safe and Secure Payments. Easy returns. 100% Authentic products.</p>
-          </div>
-        </div>
-      
-        <!-- Pay Button -->
-        <div class="mt-6">
-          <button class="w-full bg-blue-600 text-white p-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition duration-200 pay-button">
-            Pay ₹1,602
-          </button>
-        </div>
-      </div>
+
+<body>
+	<div class="fixed w-full z-50">
+		<?php include './header.php' ?>
+	</div>
+	<div class="grid sm:px-10 lg:grid-cols-2 gap-5 lg:px-20 xl:px-32 py-16">
+		<div>
+			<?php
+			$user_id = $_SESSION['id'];
+			$query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
+			$row = mysqli_fetch_array($query);
+			$user_address = json_decode($row['address'], true);
+			?>
+			<div class="p-4 pt-8 mt-5 rounded-lg border bg-white">
+				<p class="text-xl font-medium">Address</p>
+				<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6">
+					<div class="flex flex-col sm:flex-row">
+						<div class="flex w-full flex-col px-4 py-2">
+							<span class="font-semibold text-lg">
+								<?php echo $user_address['fname'] . " " . $user_address['lname']; ?>
+							</span>
+							<p class="text-gray-600">
+								<?php echo $user_address['address'] . ", " . $user_address['address2']; ?>
+							</p>
+							<p class="text-gray-600">
+								<?php echo $user_address['city'] . ", " . $user_address['state'] . " " . $user_address['zip_code']; ?>
+							</p>
+							<p class="text-gray-600">
+								<?php echo $user_address['country']; ?>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class=" px-4 pt-8 border mt-5">
+				<p class="text-xl font-medium">Order Summary</p>
+				<p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
+				<div class="mt-8 order_summary space-y-3  bg-white px-2 py-4 sm:px-6 max-h-[30rem] overflow-y-auto">
+					<?php
+					 $table_name = 'user_name_'.$_SESSION['id'];
+					$query = "SELECT * FROM $table_name  ";
+					if(isset ($_SESSION['product_name'])){
+			            $buy_product = $_SESSION['product_name'];
+						$buy_now = mysqli_query($con_pro,"select * from product where name = '$buy_product'");
+						while ($row = mysqli_fetch_assoc($buy_now)){
+							$buy_price = $row['price'];
+							$buy_qty = $row['qty'];
+						}
+					}else{
+						echo "error";
+					}
+					$total_price= 0;
+					$result = mysqli_query($con_userside, $query);
+					while($item = mysqli_fetch_array($result)) {
+						$total_price += $item['price'] * $item['qty'];
+					?>
+					<div class="flex flex-col rounded-lg bg-white sm:flex-row border ">
+						<img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+							src="./upload/<?php echo $item['image'] ?>" alt="" />
+						<div class="flex w-full flex-col px-4 py-4">
+							<span class="font-semibold">
+								<?php echo $item['name'] ?>
+							</span>
+							<span class="float-right text-gray-400"> Quantity :</span>
+							<?php echo $item['qty'] ?></span>
+							<p class="text-lg font-bold">$
+								<?php echo $item['price'] ?>.00
+							</p>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+		<div class=" bg-gray-50 px-4 pt-1 mt-5 lg:mt-5 rounded-lg border h-fit ">
+			<p class="mt-8 text-lg font-bolder">Payment Details </p>
+			<div class="mt-10 ">
+				<div class="mt-6 border-t  border-b py-2">
+					<div class="flex items-center justify-between">
+						<p class="text-sm font-medium text-gray-900">Subtotal</p>
+						<p class="font-semibold text-gray-900">
+							<?php echo $total_price ?>.00
+						</p>
+					</div>
+					<div class="flex mt-1 items-center justify-between">
+						<p class="text-sm font-medium text-gray-900">Shipping</p>
+						<?php $shiping  = 8 + $total_price;
+						$_SESSION['shiping'] = $shiping; 
+						?>
+						<p class="font-semibold text-gray-900">$8.00</p>
+					</div>
+				</div>
+				<div class="mt-2 flex items-center justify-between">
+					<p class="text-sm font-medium text-gray-900">Total</p>
+					<p class="text-2xl font-semibold text-gray-900">$
+						<?php echo $shiping ?>.00
+					</p>
+				</div>
+				<button id="button"
+					class="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place
+					Order</button>
+			</div>
+		</div>
+	</div>
+
+	<?php
+	// session_start();
+	// include('config.php');
+	require_once '../razorpay/Razorpay.php';
+
+	use Razorpay\Api\Api;
+
+	 echo $user_id = $_SESSION['id'];
+
+	$totalPriceWithTax = $_SESSION['shiping'];
+
+	
+	$keyId = 'rzp_test_kBREEooxYkKLPo'; 
+	$keySecret = 'P5NsdNUNPas0c0C74oCjkk1Y';  
+
+	$api = new Api($keyId, $keySecret);
+
+	$order = $api->order->create(array(
+		'amount' => $totalPriceWithTax * 100, 
+		'currency' => 'INR',
+		'receipt' => 'order_rcptid_' . $user_id,
+		'payment_capture' => 1,
+		
+	));
+
+
+	$orderId = $order['id'];
+	?>
+
+	<script>
+		const but = document.querySelector('#button').addEventListener('click', () => {
+			alert('Form submitted successfully!');
+		});
+	</script>
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script>
+		document.getElementById('button').onclick = function (e) {
+			var options = {
+				"key": "<?php echo $keyId; ?>", // Your Razorpay Key ID
+				"amount": "<?php echo $totalPriceWithTax * 100; ?>", // Amount in paise (from PHP server-side)
+				"currency": "INR",
+				"name": "Your Website Name",
+				"description": "Purchase Description",
+				"image": "https://yourwebsite.com/logo.png", // Replace with your logo
+				"order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
+				"handler": function (response) {
+					alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+					// Optionally send the payment ID to your server for verification
+					$.ajax({
+						url: "verify_payment.php",
+						type: "POST",
+						data: {
+							payment_id: response.razorpay_payment_id,
+							order_id: response.razorpay_order_id,
+							signature: response.razorpay_signature
+						},
+						success: function (data) {
+							alert('Payment verified successfully!');
+							// Redirect to a success page or update UI accordingly
+						}
+					});
+				},
+				"theme": {
+					"color": "#3399cc"
+				}
+			};
+			var rzp = new Razorpay(options);
+			rzp.open();
+			e.preventDefault();
+		}
+	</script>
 </body>
+
 </html>

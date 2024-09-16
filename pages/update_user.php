@@ -14,6 +14,7 @@ if (isset($_POST['name']) && isset($_POST['lname']) && isset($_POST['email']) &&
 
     if ($query) {
         echo "Data Updated Successfully";
+        header('location: loging.php');
     } else {
         echo "Error: " . mysqli_error($con);
     }

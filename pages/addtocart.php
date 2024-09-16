@@ -149,7 +149,7 @@ if (isset($_POST['sub_rating'])) {
                     $item_price = $_POST['item_price'];
                     $pro_user = $_SESSION['id'];
                     $qty = $_POST['quantity'];
-                   echo $table_name = 'user_name_' . $pro_user;
+                    $table_name = 'user_name_' . $pro_user;
             
                     $check_query = mysqli_query($con_userside, "SELECT * FROM $table_name WHERE name='$item_name'");
                     
@@ -182,7 +182,7 @@ if (isset($_POST['sub_rating'])) {
                 <input type="hidden" name="item_price" value="<?php echo  $query['price']; ?>">
                 <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
 
-                <div class="product-container mt-5">
+                <div class="product-container " style="margin-top: 5rem;">
                     <div class="product-slider">
                         <div class="thumbnails">
                             <img src="upload/<?php echo $query['img'] ?>" alt="Thumbnail 1" onmouseover="changeImage(this)">
