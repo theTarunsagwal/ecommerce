@@ -2,7 +2,7 @@
 session_start();
 $con = mysqli_connect('localhost','root','','ecommerce');
 $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-
+//Checking
 if(isset($_POST['sub'])){
 	$user = $_POST['user'];
 	$pswd= $_POST['pswd'];
