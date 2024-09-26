@@ -143,9 +143,9 @@
 		</div>
 		<div class="row isotope-grid">
 
-			<?php
-    $con_pro = mysqli_connect("localhost", "root", "", "product_data");
-	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+			    <?php
+                     $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+	                 $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 
 					if(isset($_POST['price_range'])){
 						$price_select = $_POST['price_range'];
@@ -169,9 +169,9 @@
 								$qury = "ORDER BY price DESC";
 								break;	
 							case"all":
-							?>
+				?>
 
-			<?php
+			                      <?php
 										  $qury_product = mysqli_query($con_pro,"SELECT id, name, price, img, cat_name , p_name FROM product LEFT JOIN category ON product.category = category.cat_id LEFT JOIN product_brand ON product.brand_name = product_brand.p_id WHERE product.id BETWEEN 23 AND 500 ORDER BY product.id DESC;");
 										  while($row_product = mysqli_fetch_assoc($qury_product)){
 									  ?>
@@ -364,7 +364,7 @@
 
 <script>
 var	$btn_filter = $('.btn-filter');
-var $filter_container = $(".filter-container");
+var $filter_container = $(".isotope-grid");
 $btn_filter.each(function(){
 	$btn_filter.on('click','button' , function(){
 		$filter_store = $(this).attr('data-filter');
