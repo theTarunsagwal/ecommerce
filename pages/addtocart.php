@@ -185,46 +185,59 @@ if (isset($_POST['sub_rating'])) {
                 <div class="product-container " style="margin-top: 5rem;">
                     <div class="product-slider">
                         <div class="thumbnails">
-                            <img src="upload/<?php echo $query['img'] ?>" alt="Thumbnail 1" onmouseover="changeImage(this)">
-                            <img src="upload/<?php echo $query['img1'] ?>" alt="Thumbnail 2" onmouseover="changeImage(this)">
-                            <img src="upload/<?php echo $query['img2'] ?>" alt="Thumbnail 3" onmouseover="changeImage(this)">
-                            <img src="upload/<?php echo $query['img3'] ?>" alt="Thumbnail 4" onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img'] ?>" alt="Thumbnail 1"
+                                onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img1'] ?>" alt="Thumbnail 2"
+                                onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img2'] ?>" alt="Thumbnail 3"
+                                onmouseover="changeImage(this)">
+                            <img src="upload/<?php echo $query['img3'] ?>" alt="Thumbnail 4"
+                                onmouseover="changeImage(this)">
                         </div>
                         <div class="main-image">
                             <img id="currentImage" src="upload/<?php echo $query['img'] ?>" alt="Main Image">
                         </div>
                     </div>
                     <div class="item-info">
-                        <h1><?php echo  $query['name']; ?></h1>
-                        <p><?php echo  $query['about']; ?></p>
-                        <h3>$<?php echo  $query['price']; ?></h3>
+                        <h1>
+                            <?php echo  $query['name']; ?>
+                        </h1>
+                        <p>
+                            <?php echo  $query['about']; ?>
+                        </p>
+                        <h3>$
+                            <?php echo  $query['price']; ?>
+                        </h3>
                         <div class="add-to-cart">
-                            <!-- <a href="PaymentOrder.php">Link</a> -->
                             <div class="count-btn">
                                 <button type="button" class="minus">-</button>
                                 <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
                                 <button type="button" class="plus">+</button>
                             </div>
                             <button class="buy-btn" name="btn">Add to Cart</button>
+                            <?php $id_vr = $query['id']; ?>
+                            <input type="hidden" name="id_vr" value="<?php echo $id_vr; ?>">
                             <button id="bttn" class="buy-btn">
-                                <a class="buy-btn" href="PaymentOrder.php">
-                                Buy it Now
-                            </a>
+                                <a class="text-white" href="PaymentOrder.php?id=<?php echo $id_vr; ?>">
+                                    Buy it Now
+                                </a>
                             </button>
                         </div>
                         <div class="availability-stock">
                             <a href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
                             <a href="">SKU: <span>N/A</span></a>
                             <a href="">Vendor: <span>Nothing Says Sporty Versatility</span></a>
-                            <a href="">Categories: <span><?php echo  $query['cat_name']; ?></span></a>
+                            <a href="">Categories: <span>
+                                    <?php echo  $query['cat_name']; ?>
+                                </span></a>
                             <a class="text-black d-flex icon-btn" href="">Share: <i class='bx bxl-instagram'></i> <i
                                     class='bx bxl-twitter'></i> <i class='bx bxl-github'></i>
                                 <div class="fav-item block2-txt-child2 flex-r">
                                     <?php
-                     $wish_id_product= $query['id'];
-                                 $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
-                     if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
-                     ?>
+                                        $wish_id_product= $query['id'];
+                                        $qry_user_product = mysqli_query($con_wish,"select * from $wish_face where id = $wish_id_product ");
+                                        if($is_wishlist = mysqli_num_rows($qry_user_product) > 0 ){
+                                     ?>
                                     <button type="submit" style="padding-top: .3rem;" name="heart_del">
                                         <i class='bx bxs-heart' id="heart"
                                             style="font-size:1.5rem; cursor:pointer;"></i>
@@ -498,7 +511,7 @@ if (isset($_POST['sub_rating'])) {
         </div>
     </section>
     <?php include "./footer.php" ?>
-    
+
     <script>
         $(document).ready(function () {
             // Function to increase quantity
