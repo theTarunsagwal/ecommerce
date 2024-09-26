@@ -36,7 +36,7 @@
             </a>
         </div>
         <nav>
-            <ul class="nav_ul" style="gap: 1rem;">
+            <ul class="nav_ul" style="gap: 1.5rem;">
                 <li class="home d-flex align-items-center g-2"><a href="index.php"><span>home</span></a></li>
                 <?php
                              $row_wood_drop = mysqli_query($con_pro, "SELECT * FROM product WHERE product.id between  19 AND 22;");
