@@ -178,6 +178,6 @@
     });
 </script>
     </div>
-    <?php }  ?>
+    <?php } ?>
 </body>
 </html>
