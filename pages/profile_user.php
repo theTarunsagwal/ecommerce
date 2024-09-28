@@ -35,12 +35,24 @@ if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
 
                         <div class="content_profile d-flex flex-column mt-3 ">
                             
-                            <a href="user_info.php"><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            <a href="user_info.php">
+                                <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">profile</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
                             </h3></a>
-                            <a href="additem.php"><h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                            <a href="additem.php">
+                                <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
                                 <span class="product_item">cart item</span>
+                                <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
+                            </h3></a>
+                            <a href="User_Address.php">
+                                <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                                <span class="product_item">manage addresses</span>
+                                <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
+                            </h3></a>
+                            <a href="OrderDetails.php">
+                                <h3 class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
+                                <span class="product_item">My Order</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
                             </h3></a>
                             <h3 id="favorate" class="d-flex shop_listing fs-5 fw-light justify-content-between align-items-center p-2">
@@ -58,7 +70,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
                                 <span class="product_item">forgate password</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-right'></i></span>
                             </h3></a>
-                            <a href=""><h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2">
+                            <a href="contact_us.php"><h3 class="d-flex shop_listing fs-5 fw-light gap-1 align-items-center p-2">
                                 <span class="product_item">contact</span>
                                 <span class="fw-bolder fs-2"><i class='bx bx-chevron-down'></i></span>
                             </h3></a>

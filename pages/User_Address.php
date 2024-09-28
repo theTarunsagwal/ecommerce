@@ -8,7 +8,7 @@
     }
     
     $user_id = $_SESSION['id'];
-    echo $user_id;  
+     $user_id;  
     if (isset($_POST['submit'])) {
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -32,20 +32,16 @@
             'country' => $country,
             'phone' => $phone
         ];
-    
-        // Convert array to JSON string
+        
         $customerJson = json_encode($customerData);
-        // echo $customerJson;
-        // Use a prepared statement to avoid SQL injection
         $stmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
         $stmt->bind_param("si", $customerJson, $user_id);
-    
-        // Execute the query
-        if ($stmt->execute()) {
-            echo "User address updated successfully.";
-        } else {
-            echo "Error updating record: " . $stmt->error;
-        }
+
+        // if ($stmt->execute()) {
+        //     echo "User address updated successfully.";
+        // } else {
+        //     echo "Error updating record: " . $stmt->error;
+        // }
     
         $stmt->close();
     }
@@ -73,46 +69,17 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        .img{
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans antialiased">
+<body class=" font-sans antialiased">
     <?php include 'header.php'; ?>
-    <div class="min-h-screen flex flex-col md:flex-row">
-        <!-- Sidebar -->
-        <div class="bg-white shadow-md w-full mt-6 md:w-64 p-6">
-            <div class="flex items-center shadow-xl space-x-4 mb-8">
-            <div class="w-14 h-14 bg-gray-300 rounded-full overflow-hidden flex items-center justify-center">
-                            <?php
-                                
-                            ?>
-                        </div>
-                <div>
-                    <h2 class="text-xl font-semibold">Puneet Kumar</h2>
-                </div>
-            </div>
-            <nav>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="./MyOrders.php" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                            <i class='bx bx-home'></i>
-                            <span>My Orders</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./User_info.php" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                            <i class='bx bx-user'></i>
-                            <span>Profile Information</span>
-                        </a>
-                    </li>
-                    <li class="text-blue-600">
-                        <a href="#" class="flex items-center space-x-2">
-                            <i class='bx bx-map'></i>
-                            <span>Manage Addresses</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+    <div class="min-h-screen pt-2 flex flex-col mb-2 md:flex-row" style="margin-top: 3rem;">
         <!-- Main Content -->
         <form class="flex-1 lg:p-6 md:p-4 p-2" method="POST">
             <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md lg:p-6 md:p-4 p-2">
@@ -177,5 +144,6 @@
         </form>
     </form>
     </div>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

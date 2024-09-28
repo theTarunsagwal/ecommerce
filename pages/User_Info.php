@@ -12,13 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <style>
-        .img{
-            height: 3rem;
-            width: 3rem;
-            border-radius: 50%;
-        }
-    </style>
 </head>
 <body class="bg-gray-100 font-sans antialiased">
     <div>
@@ -26,54 +19,6 @@
     </div>
 
     <div class="min-h-screen flex flex-col md:flex-row" style="margin-top:3rem">
-        <!-- Sidebar -->
-         <?php
-         ob_start();
-
-         $con = mysqli_connect("localhost", "root", "", "ecommerce");
-         
-         if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
-             $user = $_SESSION['name'];
-             $user_email = $_SESSION['email'];
-             $qury_user = mysqli_query($con, "SELECT * FROM user_data WHERE name = '$user' OR email = '$user_email'");
-         ?>
-        <div class="bg-white w-full md:w-64 p-6 mt-6">
-        <?php
-            if ($qury_user) {
-               if (mysqli_num_rows($qury_user) > 0) {
-                   while ($row = mysqli_fetch_array($qury_user)) {
-                       ?>
-            <div class="flex gap-2 items-center mb-8">
-                <img class="img" src="./upload/<?php echo $row['image']; ?>" alt="loading...">
-                <h2 class="text-xl font-light text-black"><?php echo $row['name']?></h2>
-            <div>
-                </div>
-            </div>
-            <?php } } } ?>
-            <nav>
-                <ul class="space-y-4">
-                    <li>
-                        <a href="OrderDetails.php" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                            <i class='bx bx-home'></i>
-                            <span>My Orders</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                            <i class='bx bx-user'></i>
-                            <span class="text-blue-600">Profile Information</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./User_Address.php" class="flex items-center space-x-2 text-gray-700 hover:text-blue-600">
-                            <i class='bx bx-map'></i>
-                            <span>Manage Addresses</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
         <!-- Main Content -->
         <div class="flex-1 p-6">
     <?php
@@ -178,6 +123,5 @@
     });
 </script>
     </div>
-    <?php } ?>
 </body>
 </html>
