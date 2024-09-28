@@ -209,20 +209,21 @@ if (isset($_POST['sub_rating'])) {
                             <?php echo  $query['price']; ?>
                         </h3>
                         <div class="add-to-cart">
-                            <div class="count-btn">
-                                <button type="button" class="minus">-</button>
-                                <input type="text" name="quantity" class="form-control text-center" value="1" readonly>
-                                <button type="button" class="plus">+</button>
-                            </div>
-                            <button class="buy-btn" name="btn">Add to Cart</button>
-                            <?php $id_vr = $query['id']; ?>
-                            <input type="hidden" name="id_vr" value="<?php echo $id_vr; ?>">
-                            <button id="bttn" class="buy-btn">
-                                <a class="text-white" href="PaymentOrder.php?id=<?php echo $id_vr; ?>">
-                                    Buy it Now
-                                </a>
-                            </button>
-                        </div>
+    <div class="count-btn">
+        <button type="button" class="minus">-</button>
+        <input id="quantity-input" type="text" name="quantity" class="form-control text-center" value="1" readonly>
+        <button type="button" class="plus">+</button>
+    </div>
+    <button class="buy-btn" name="btn">Add to Cart</button>
+    <?php $id_vr = $query['id']; ?>
+    <input type="hidden" name="id_vr" value="<?php echo $id_vr; ?>">
+
+    <button id="bttn" class="buy-btn">
+        <a id="buy-now-link" class="text-white" href="PaymentOrder.php?id=<?php echo $id_vr; ?>&quantity=1">
+            Buy it Now
+        </a>
+    </button>
+</div>
                         <div class="availability-stock">
                             <a href="">Availability: <span class="text-success fw-bolder">In Stock</span></a>
                             <a href="">SKU: <span>N/A</span></a>
@@ -512,7 +513,7 @@ if (isset($_POST['sub_rating'])) {
     </section>
     <?php include "./footer.php" ?>
 
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             // Function to increase quantity
             $('.plus').on('click', function () {
@@ -531,7 +532,30 @@ if (isset($_POST['sub_rating'])) {
                 }
             });
         });
-    </script>
+    </script> -->
+    <script>
+// Update the "Buy it Now" link with the selected quantity
+document.querySelector('.plus').addEventListener('click', function() {
+    var quantityInput = document.getElementById('quantity-input');
+    var quantity = parseInt(quantityInput.value);
+    quantityInput.value = quantity + 1;
+    updateBuyNowLink(quantity + 1);
+});
+
+document.querySelector('.minus').addEventListener('click', function() {
+    var quantityInput = document.getElementById('quantity-input');
+    var quantity = parseInt(quantityInput.value);
+    if (quantity > 1) {
+        quantityInput.value = quantity - 1;
+        updateBuyNowLink(quantity - 1);
+    }
+});
+
+function updateBuyNowLink(quantity) {
+    var buyNowLink = document.getElementById('buy-now-link');
+    buyNowLink.href = "PaymentOrder.php?id=<?php echo $id_vr; ?>&quantity=" + quantity;
+}
+</script>
     <script src="./vendor/slick/slick.js"></script>
     <script src="./vendor/slick/slick.min.js"></script>
 </body>
