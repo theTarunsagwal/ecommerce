@@ -21,6 +21,13 @@ session_start();
 		}
 	</style>
 </head>
+<?php
+if(isset($_GET['id']) && !empty($_GET['id'])){
+    $pr_name = $_GET['id'];
+}
+echo $_SESSION['product_id'] = $pr_name;
+echo $_SESSION['qty_num'] = $_GET['quantity'];
+?>
 
 <body>
 	<div class="fixed w-full z-50">
@@ -63,21 +70,42 @@ session_start();
 					<?php
 					 $table_name = 'user_name_'.$_SESSION['id'];
 					$query = "SELECT * FROM $table_name  ";
-					if(isset ($_SESSION['product_name'])){
-			            $buy_product = $_SESSION['product_name'];
-						$buy_now = mysqli_query($con_pro,"select * from product where name = '$buy_product'");
-						while ($row = mysqli_fetch_assoc($buy_now)){
-							$buy_price = $row['price'];
-							$buy_qty = $row['qty'];
-						}
-					}else{
-						echo "error";
-					}
 					$total_price= 0;
+					if(isset($pr_name)){
+			           $buy_product = $pr_name;
+						// echo $buy_qty = $_SESSION['qty_price'];
+						$buy_now = mysqli_query($con_pro,"select * from product where id = '$buy_product'");
+						while ($row = mysqli_fetch_assoc($buy_now)){
+							// echo $buy_price = $row['price'];
+							// echo $buy_price = $row['name'];
+							// echo  $_GET['quantity'];
+						    $total_price += $row['price'] * $_GET['quantity'];
+							?>
+							<div class="flex flex-col rounded-lg bg-white sm:flex-row border ">
+								<img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+									src="./upload/<?php echo $row['img'] ?>" alt="" />
+								<div class="flex w-full flex-col px-4 py-4">
+									<span class="font-semibold">
+										<?php echo $row['name'] ?>
+									</span>
+									<span class="float-right text-gray-400"> Quantity :</span>
+									<?php echo $_GET['quantity']; ?></span>
+									<p class="text-lg font-bold">$
+										<?php echo $row['price'] ?>.00
+									</p>
+								</div>
+							</div>
+							<?php } 
+						
+					}else{
 					$result = mysqli_query($con_userside, $query);
+					$product_id_cart = []; 
+					$product_qty_cart = []; 
 					while($item = mysqli_fetch_array($result)) {
 						$total_price += $item['price'] * $item['qty'];
-					?>
+						$product_id_cart[] = $item['pr_id'];
+						$product_qty_cart[] =  $item['qty'];
+						?>
 					<div class="flex flex-col rounded-lg bg-white sm:flex-row border ">
 						<img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
 							src="./upload/<?php echo $item['image'] ?>" alt="" />
@@ -92,7 +120,15 @@ session_start();
 							</p>
 						</div>
 					</div>
-					<?php } ?>
+					<?php } 
+					?>
+					<input type="hidden" name="qty_cart" value='<?php echo json_encode($product_qty_cart); ?>'>
+					<input type="hidden" name="productid_cart" value='<?php echo json_encode($product_id_cart); ?>'>
+					<?php
+					 $_SESSION['productid_cart_id'] = $product_id_cart;
+					 $_SESSION['productid_cart_qty'] = $product_qty_cart;
+					
+					} ?>
 				</div>
 			</div>
 		</div>
@@ -145,7 +181,7 @@ session_start();
 	$api = new Api($keyId, $keySecret);
 
 	$order = $api->order->create(array(
-		'amount' => $totalPriceWithTax * 100, 
+		'amount' => $totalPriceWithTax * 100,
 		'currency' => 'INR',
 		'receipt' => 'order_rcptid_' . $user_id,
 		'payment_capture' => 1,
@@ -164,40 +200,45 @@ session_start();
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
 		document.getElementById('button').onclick = function (e) {
-			var options = {
-				"key": "<?php echo $keyId; ?>", // Your Razorpay Key ID
-				"amount": "<?php echo $totalPriceWithTax * 100; ?>", // Amount in paise (from PHP server-side)
-				"currency": "INR",
-				"name": "Your Website Name",
-				"description": "Purchase Description",
-				"image": "https://yourwebsite.com/logo.png", // Replace with your logo
-				"order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
-				"handler": function (response) {
-					alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
-					// Optionally send the payment ID to your server for verification
-					$.ajax({
-						url: "verify_payment.php",
-						type: "POST",
-						data: {
-							payment_id: response.razorpay_payment_id,
-							order_id: response.razorpay_order_id,
-							signature: response.razorpay_signature
-						},
-						success: function (data) {
-							alert('Payment verified successfully!');
-							// Redirect to a success page or update UI accordingly
-						}
-					});
-				},
-				"theme": {
-					"color": "#3399cc"
-				}
-			};
-			var rzp = new Razorpay(options);
-			rzp.open();
-			e.preventDefault();
-		}
-	</script>
-</body>
+    var options = {
+        "key": "<?php echo $keyId; ?>", // Your Razorpay Key ID
+        "amount": "<?php echo $totalPriceWithTax * 100; ?>", // Amount in paise (from PHP server-side)
+        "currency": "INR",
+        "name": "megumi shoplif",
+        "description": "Purchase Description",
+        "image": "https://yourwebsite.com/logo.png", // Replace with your logo
+        "order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
+        "handler": function (response) {
+            console.log(response);  // Log Razorpay response to verify data
 
+            // Optionally send the payment ID to your server for verification
+            $.ajax({
+                url: "order.php",
+                type: "POST",
+                data: {
+                    payment_id: response.razorpay_payment_id,
+                    order_id: response.razorpay_order_id,
+                    signature: response.razorpay_signature
+                },
+                success: function (data) {
+                    alert('Payment verified successfully!');
+                    // You can redirect the user to a success page
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error in AJAX request: ", error);
+                }
+            });
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+    e.preventDefault();
+};
+
+	</script>
+	<?php echo $orderId; ?>
+</body>
 </html>
