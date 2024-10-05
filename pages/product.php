@@ -147,16 +147,12 @@ if(isset($_SESSION['name'])) {
 						Nike
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						women
-					</button>
-
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Zara">
 						Zara
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".HM">
-						H&M
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
+						Men
 					</button>
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".LouisVuitton">
@@ -192,7 +188,7 @@ if(isset($_SESSION['name'])) {
 					}
 					?>
 				</div>
-			<div class="row isotope-grid filter-section mt-3">
+			<div class="row isotope-grid mt-3">
 				<?php
                               $id = $_GET['id'];
                               $qury = mysqli_query($con_pro,"SELECT id,name,price,about,img,cat_name,p_name FROM product LEFT JOIN product_brand ON product.brand_name = product_brand.p_id LEFT JOIN category ON product.category = category.cat_id WHERE  category.cat_name = '$id'");
@@ -262,7 +258,7 @@ if(isset($_SESSION['name'])) {
 	<script>
 		$(document).ready(function(){
 		var	$btn_filter = $(".brand-filter");
-		var $section_filter = $(".filter-section");
+		var $section_filter = $(".isotope-grid");
 		 $btn_filter.each(function (){
 			$btn_filter.on('click', 'button', function() {
 				var filter_work = $(this).attr('data-filter');
