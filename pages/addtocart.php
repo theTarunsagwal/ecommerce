@@ -145,6 +145,7 @@ if (isset($_POST['sub_rating'])) {
             
                 if (isset($_POST['btn'])) {
                     $item_name = $_POST['item_name'];
+                    $item_id = $_POST['item_id'];
                     $item_img = $_POST['item_img'];
                     $item_price = $_POST['item_price'];
                     $pro_user = $_SESSION['id'];
@@ -158,7 +159,7 @@ if (isset($_POST['sub_rating'])) {
                             alert('Product is already in the cart.')
                         </script>";
                     } else {
-                        $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price,qty) VALUES ('$item_name', '$item_img', '$item_price','$qty')");
+                        $qury_user = mysqli_query($con_userside, "INSERT INTO $table_name (name, image, price,qty,pr_id) VALUES ('$item_name', '$item_img', '$item_price','$qty',$item_id)");
                         
                         if ($qury_user) {
                             header("Location: additem.php");
@@ -178,6 +179,7 @@ if (isset($_POST['sub_rating'])) {
                         ?>
             <form method="post">
                 <input type="hidden" name="item_name" value="<?php echo  $query['name']; ?>">
+                <input type="hidden" name="item_id" value="<?php echo  $query['id']; ?>">
                 <input type="hidden" name="item_img" value="<?php echo $query['img']; ?>">
                 <input type="hidden" name="item_price" value="<?php echo  $query['price']; ?>">
                 <input type="hidden" value="<?php echo $query['id']; ?>" name="wish_id">
