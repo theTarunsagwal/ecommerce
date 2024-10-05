@@ -55,6 +55,7 @@ if (isset($_POST['verify'])) {
             $create_table_query = "
             CREATE TABLE IF NOT EXISTS $table_name (
                 id INT UNIQUE AUTO_INCREMENT,
+                pr_id INT,
                 name VARCHAR(300) NOT NULL,
                 image TEXT NOT NULL,
                 price VARCHAR(30) NOT NULL,
