@@ -9,11 +9,12 @@ session_start();
         <title>Order Details</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
+    <?php
+     ?>
 <body>
     <?php include 'header.php'; ?>
   <div class="container " style="margin-top: 6rem;  margin-bottom: 5rem;">
     <h1 class="mb-4">Order Details</h1>
-    
     <!-- Order Summary -->
     <div class="card mb-4">
       <div class="card-header">

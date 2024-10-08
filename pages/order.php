@@ -20,12 +20,9 @@ $product_id_cart = $_SESSION['productid_cart_id'];
 $product_qty_cart = $_SESSION['productid_cart_qty'];
 echo json_encode($product_id_cart);
 echo json_encode($product_qty_cart);
-// Check if POST data is received
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
     var_dump($_POST);  // Check if the data is received
     $product_idd = $_SESSION['product_id'];
 	$user_id = $_SESSION['id'];
-	$price_path = $_SESSION['shiping'];
 	$product_id = isset($product_idd) ? $product_idd : json_encode($product_id_cart);
 	$qty = isset($_SESSION['qty_num']) ? $_SESSION['qty_num'] : json_encode($product_qty_cart) ;
     $payment_id = isset($_POST['payment_id']) ? $_POST['payment_id'] : '';
@@ -33,12 +30,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($payment_id) && !empty($order_id)) {
         // Insert data into the database
-        $sql = "INSERT INTO order_product (payment_id, order_id,pr_price,user_id,product_id,qty) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO order_product (payment_id, order_id,user_id,product_id,qty) VALUES (?,?,?,?,?)";
         $stmt = $conn->prepare($sql);
-
         if ($stmt) {
-            $stmt->bind_param("ssiiss", $payment_id, $order_id,$price_path,$user_id,$product_id,$qty);
+            $stmt->bind_param("ssiss", $payment_id, $order_id,$user_id,$product_id,$qty);
             if ($stmt->execute()) {
+                unset($_SESSION['product_id']);
+                unset($_SESSION['qty_num']);
+                unset($_SESSION['product_cart_id']);
+                unset($_SESSION['product_cart_qty']);
                 echo "Payment recorded successfully!";
 				header("location:OrderDetails.php");
             } else {
@@ -51,9 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "Payment ID or Order ID missing!";
     }
-} else {
-    echo "Invalid request method!";
-}
+
 
 $conn->close();
 ?> 

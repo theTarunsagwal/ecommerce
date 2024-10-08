@@ -24,9 +24,9 @@ session_start();
 <?php
 if(isset($_GET['id']) && !empty($_GET['id'])){
     $pr_name = $_GET['id'];
+	 $_SESSION['product_id'] = $pr_name;
+	$_SESSION['qty_num'] = $_GET['quantity'];
 }
-echo $_SESSION['product_id'] = $pr_name;
-echo $_SESSION['qty_num'] = $_GET['quantity'];
 ?>
 
 <body>
@@ -62,15 +62,16 @@ echo $_SESSION['qty_num'] = $_GET['quantity'];
 					</div>
 				</div>
 			</div>
-
 			<div class=" px-4 pt-8 border mt-5">
 				<p class="text-xl font-medium">Order Summary</p>
 				<p class="text-gray-400">Check your items. And select a suitable shipping method.</p>
 				<div class="mt-8 order_summary space-y-3  bg-white px-2 py-4 sm:px-6 max-h-[30rem] overflow-y-auto">
+					<form action="" method="POST">
 					<?php
 					 $table_name = 'user_name_'.$_SESSION['id'];
 					$query = "SELECT * FROM $table_name  ";
 					$total_price= 0;
+					//  $_SESSION['product_id'];
 					if(isset($pr_name)){
 			           $buy_product = $pr_name;
 						// echo $buy_qty = $_SESSION['qty_price'];
@@ -81,6 +82,8 @@ echo $_SESSION['qty_num'] = $_GET['quantity'];
 							// echo  $_GET['quantity'];
 						    $total_price += $row['price'] * $_GET['quantity'];
 							?>
+							<input type="text" name="qty_cart" value="<?php echo  $_GET['quantity'];  ?>">
+							<input type="text" name="cart_id" value="<?php echo   $_GET['id']; ?>">
 							<div class="flex flex-col rounded-lg bg-white sm:flex-row border ">
 								<img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
 									src="./upload/<?php echo $row['img'] ?>" alt="" />
@@ -120,15 +123,16 @@ echo $_SESSION['qty_num'] = $_GET['quantity'];
 							</p>
 						</div>
 					</div>
+					<input type="text" name="qty_cart" value='<?php echo json_encode($product_qty_cart); ?>'>
+					<input type="text" name="productid_cart" value='<?php echo json_encode($product_id_cart); ?>'>
 					<?php } 
-					?>
-					<input type="hidden" name="qty_cart" value='<?php echo json_encode($product_qty_cart); ?>'>
-					<input type="hidden" name="productid_cart" value='<?php echo json_encode($product_id_cart); ?>'>
-					<?php
 					 $_SESSION['productid_cart_id'] = $product_id_cart;
 					 $_SESSION['productid_cart_qty'] = $product_qty_cart;
+					?>
+					<?php
 					
 					} ?>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -210,7 +214,7 @@ echo $_SESSION['qty_num'] = $_GET['quantity'];
         "order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
         "handler": function (response) {
             console.log(response);  // Log Razorpay response to verify data
-
+			window.location.href = "order.php";
             // Optionally send the payment ID to your server for verification
             $.ajax({
                 url: "order.php",
@@ -221,7 +225,7 @@ echo $_SESSION['qty_num'] = $_GET['quantity'];
                     signature: response.razorpay_signature
                 },
                 success: function (data) {
-                    alert('Payment verified successfully!');
+                    alert('Payment verified successfully!' + data);
                     // You can redirect the user to a success page
                 },
                 error: function (xhr, status, error) {
