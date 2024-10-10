@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2024 at 06:31 PM
+-- Generation Time: Oct 10, 2024 at 11:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,6 +45,22 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (5, 'watch'),
 (6, 'light'),
 (7, 'Phone');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_product`
+--
+
+CREATE TABLE `order_product` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` text DEFAULT NULL,
+  `payment_id` varchar(255) DEFAULT NULL,
+  `order_id` varchar(255) DEFAULT NULL,
+  `qty` text DEFAULT NULL,
+  `order_date` date DEFAULT curdate()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -186,6 +202,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`cat_id`);
 
 --
+-- Indexes for table `order_product`
+--
+ALTER TABLE `order_product`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -215,6 +237,12 @@ ALTER TABLE `relative_img`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `order_product`
+--
+ALTER TABLE `order_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product`
