@@ -1,149 +1,205 @@
 <?php
-    session_start();
-    $con = mysqli_connect("localhost","root","","ecommerce");
-    if (isset($_SESSION['name'])) {
-        $user_id = $_SESSION['name'];
-    } else {
-        die("Error: User ID not found in session.");
-    }
-    
+session_start();
+$con = mysqli_connect("localhost", "root", "", "ecommerce");
+
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Fetch the current user's ID from the session
+if (isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
-     $user_id;  
-    if (isset($_POST['submit'])) {
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $address1 = $_POST['addressLine1'];
-        $address2 = $_POST['addressLine2'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $zipCode = $_POST['zipCode'];
-        $country = $_POST['country'];
-        $phone = $_POST['phoneNumber'];
-    
-        // $fullAddress = $address1 . ' ' . $address2;
-        $customerData = [
-            'fname' => $firstName,
-            'lname' => $lastName,
-            'address' => $address1,
-            'address2' => $address2,
-            'city' => $city,
-            'state' => $state,
-            'zip_code' => $zipCode,
-            'country' => $country,
-            'phone' => $phone
-        ];
-        
-        $customerJson = json_encode($customerData);
-        $stmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
-        $stmt->bind_param("si", $customerJson, $user_id);
+} else {
+    die("Error: User ID not found in session.");
+}
 
-        // if ($stmt->execute()) {
-        //     echo "User address updated successfully.";
-        // } else {
-        //     echo "Error updating record: " . $stmt->error;
-        // }
+// Handle adding a new address
+if (isset($_POST['submit'])) {
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $address1 = $_POST['addressLine1'];
+    $address2 = $_POST['addressLine2'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zipCode = $_POST['zipCode'];
+    $country = $_POST['country'];
+    $phone = $_POST['phoneNumber'];
+
+    // Create the new address array
+    $newAddress = [
+        'fname' => $firstName,
+        'lname' => $lastName,
+        'address' => $address1,
+        'address2' => $address2,
+        'city' => $city,
+        'state' => $state,
+        'zip_code' => $zipCode,
+        'country' => $country,
+        'phone' => $phone
+    ];
+
+    // Fetch existing addresses
+    $query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
+    $row = mysqli_fetch_assoc($query);
+    $existingAddresses = $row['address'];
+
+    // Decode the existing addresses JSON and handle invalid JSON or empty string
+    $addresses = json_decode($existingAddresses, true);
     
-        $stmt->close();
+    if (!is_array($addresses)) {
+        $addresses = [];  // Initialize as empty array if not valid
     }
-    
-    // Close the database connection
 
+    // Append the new address
+    $addresses[] = $newAddress;
 
-   echo $id_user = $_SESSION['id'];
-    $query = mysqli_query($con,"SELECT address FROM user_data where id = $id_user ");
-    $row = mysqli_fetch_array($query);
-    $user_address = json_decode($row['address'], true);
-    // print_r($user_address);
+    // Re-encode the address array as JSON
+    $updatedAddressesJson = json_encode($addresses);
 
-    
-    $con->close();
+    // Update the database
+    $stmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
+    $stmt->bind_param("si", $updatedAddressesJson, $user_id);
 
+    if ($stmt->execute()) {
+        echo "<div class='alert alert-success'>Address added successfully!</div>";
+    } else {
+        echo "<div class='alert alert-danger'>Error adding address: " . $stmt->error . "</div>";
+    }
+
+    $stmt->close();
+}
+
+// Retrieve addresses for display
+// $query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
+// $row = mysqli_fetch_assoc($query);
+// $user_addresses = json_decode($row['address'], true);
+// echo $row['address'];
+// $user_addresses = [];
+// var_dump($user_addresses);
+// // Handle case where decoding fails or no addresses exist
+// if (!is_array($user_addresses)) {
+//     echo "found it addresses";
+// }else{
+//     echo "no addresses";
+// }
+
+$con->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Addresses</title>
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Boxicons -->
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <style>
-        .img{
-            height: 3rem;
-            width: 3rem;
-            border-radius: 50%;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class=" font-sans antialiased">
-    <?php include 'header.php'; ?>
-    <div class="min-h-screen pt-2 flex flex-col mb-2 md:flex-row" style="margin-top: 3rem;">
-        <!-- Main Content -->
-        <form class="flex-1 lg:p-6 md:p-4 p-2" method="POST">
-            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md lg:p-6 md:p-4 p-2">
-                <h2 class="text-2xl font-semibold mb-4">Manage Addresses</h2>
-                <button class="mb-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                    + Add a New Address
-                </button>
+<body>
+<?php include "header.php" ?>
+<div class="container " style="margin-top: 6rem;">
+    <h2 class="mb-4">Manage Your Addresses</h2>
 
-                <div class="bg-blue-50 p-6 rounded-lg shadow-inner">
-                    <h3 class="text-xl font-semibold mb-4">Edit Address</h3>
-                    <button class="px-4 py-2 mb-6 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                        Use my current location
-                    </button>
-
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                         <div>
-                             <label class="block text-gray-700">First Name</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="firstName" placeholder="<?php echo isset($user_address['fname']) ? $user_address['fname'] : 'Enter your first name'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">Last Name</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="lastName" placeholder="<?php echo isset($user_address['lname']) ? $user_address['lname'] : 'Enter your last name'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">10-digit mobile number</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="phoneNumber" placeholder="<?php echo isset($user_address['phone']) ? $user_address['phone'] : 'Enter your mobile number'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">Pincode</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="zipCode" placeholder="<?php echo isset($user_address['zip_code']) ? $user_address['zip_code'] : 'Enter your pincode'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">Locality</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="country" placeholder="<?php echo isset($user_address['country']) ? $user_address['country'] : 'Enter your locality'; ?>">
-                         </div>
-                         <div class="md:col-span-2">
-                             <label class="block text-gray-700">Address1 (Area and Street)</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="addressLine1" placeholder="<?php echo isset($user_address['address']) ? $user_address['address'] : 'Enter your address'; ?>">
-                         </div>
-                         <div class="md:col-span-2">
-                             <label class="block text-gray-700">Address2 (Area and Street)</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="addressLine2" placeholder="<?php echo isset($user_address['address2']) ? $user_address['address2'] : 'Enter your address (optional)'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">City/District/Town</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="city" placeholder="<?php echo isset($user_address['city']) ? $user_address['city'] : 'Enter your city'; ?>">
-                         </div>
-                         <div>
-                             <label class="block text-gray-700">State</label>
-                             <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" name="state" placeholder="<?php echo isset($user_address['state']) ? $user_address['state'] : 'Enter your state'; ?>">
-                         </div>
+    <!-- Form to add a new address -->
+    <form method="POST" class="mb-5">
+        <div class="card">
+            <div class="card-header">
+                <h5>Add New Address</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" required>
                     </div>
-
-                    <!-- Save Button -->
-                    <div class="mt-6 flex justify-end">
-                        <button name="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                            Save
-                        </button>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="addressLine1" class="form-label">Address Line 1</label>
+                        <input type="text" class="form-control" name="addressLine1" id="addressLine1" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="addressLine2" class="form-label">Address Line 2</label>
+                        <input type="text" class="form-control" name="addressLine2">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" name="city" id="city" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" name="state" id="state" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="zipCode" class="form-label">Zip Code</label>
+                        <input type="text" class="form-control" name="zipCode" id="zipCode" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" class="form-control" name="country" id="country" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phoneNumber" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="card-footer text-end">
+                <button type="submit" name="submit" class="btn btn-primary">Add Address</button>
+            </div>
+        </div>
     </form>
+
+    <!-- Display existing addresses -->
+    <h3>Your Saved Addresses</h3>
+    
+    <div class="row">
+    <?php  
+$query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
+$row = mysqli_fetch_assoc($query);
+$user_addresses = json_decode($row['address'], true);
+
+// Check if $user_addresses is a valid array
+if (is_array($user_addresses)) {
+    // Loop through each item in the array
+    foreach ($user_addresses as $key => $address) {
+        // Skip any key that isn't a number (like 'fname', 'lname', etc.)
+        if (is_numeric($key)) {
+?>
+                <div class="col-md-6 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                              <?php
+                               echo $address['fname'] . " " . $address['lname'] . "<br>";
+                              ?>
+                             </h5>
+                            <p class="card-text">
+                               <?php  
+                                echo "Address: " . $address['address'] . "<br>";
+                                echo "City: " . $address['city'] . "<br>";
+                                echo "State: " . $address['state'] . "<br>";
+                                echo "Country: " . $address['country'] . "<br>";
+                                ?>
+                                <strong>Phone:</strong> <?php
+                                echo $address['phone'] . "<br><br>";
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+    }
+} else {
+    echo "No addresses found.";
+}
+?>
+            <!-- <p>No addresses found. Please add one using the form above.</p> -->
     </div>
-    <?php include 'footer.php'; ?>
+</div>
+<?php include "footer.php" ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
