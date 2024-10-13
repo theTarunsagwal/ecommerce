@@ -215,7 +215,6 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         "handler": function (response) {
             console.log(response);  // Log Razorpay response to verify data
 			window.location.href = "OrderDetails.php";
-            // Optionally send the payment ID to your server for verification
             $.ajax({
                 url: "order.php",
                 type: "POST",
