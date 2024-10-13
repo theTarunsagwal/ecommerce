@@ -71,15 +71,11 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 					 $table_name = 'user_name_'.$_SESSION['id'];
 					$query = "SELECT * FROM $table_name  ";
 					$total_price= 0;
-					//  $_SESSION['product_id'];
 					if(isset($pr_name)){
 			           $buy_product = $pr_name;
-						// echo $buy_qty = $_SESSION['qty_price'];
 						$buy_now = mysqli_query($con_pro,"select * from product where id = '$buy_product'");
 						while ($row = mysqli_fetch_assoc($buy_now)){
-							// echo $buy_price = $row['price'];
-							// echo $buy_price = $row['name'];
-							// echo  $_GET['quantity'];
+							
 						    $total_price += $row['price'] * $_GET['quantity'];
 							?>
 							<input type="text" name="qty_cart" value="<?php echo  $_GET['quantity'];  ?>">
