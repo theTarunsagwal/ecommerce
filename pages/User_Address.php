@@ -3,87 +3,122 @@ session_start();
 $con = mysqli_connect("localhost", "root", "", "ecommerce");
 
 if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("Connection failed: Please try again later.");
 }
 
-// Fetch the current user's ID from the session
 if (isset($_SESSION['id'])) {
-    $user_id = $_SESSION['id'];
+    $user_id = intval($_SESSION['id']);
 } else {
     die("Error: User ID not found in session.");
 }
 
+// Function to sanitize inputs
+function sanitize_input($data) {
+    return htmlspecialchars(trim($data));
+}
+
 // Handle adding a new address
 if (isset($_POST['submit'])) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $address1 = $_POST['addressLine1'];
-    $address2 = $_POST['addressLine2'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zipCode = $_POST['zipCode'];
-    $country = $_POST['country'];
-    $phone = $_POST['phoneNumber'];
+    $firstName = sanitize_input($_POST['firstName']);
+    $lastName = sanitize_input($_POST['lastName']);
+    $address1 = sanitize_input($_POST['addressLine1']);
+    $address2 = sanitize_input($_POST['addressLine2']);
+    $city = sanitize_input($_POST['city']);
+    $state = sanitize_input($_POST['state']);
+    $zipCode = sanitize_input($_POST['zipCode']);
+    $country = sanitize_input($_POST['country']);
+    $phone = sanitize_input($_POST['phoneNumber']);
 
-    // Create the new address array
-    $newAddress = [
-        'fname' => $firstName,
-        'lname' => $lastName,
-        'address' => $address1,
-        'address2' => $address2,
-        'city' => $city,
-        'state' => $state,
-        'zip_code' => $zipCode,
-        'country' => $country,
-        'phone' => $phone
-    ];
+    $stmt = $con->prepare("SELECT address FROM user_data WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
 
-    // Fetch existing addresses
-    $query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
-    $row = mysqli_fetch_assoc($query);
     $existingAddresses = $row['address'];
-
-    // Decode the existing addresses JSON and handle invalid JSON or empty string
     $addresses = json_decode($existingAddresses, true);
-    
     if (!is_array($addresses)) {
-        $addresses = [];  // Initialize as empty array if not valid
+        $addresses = [];
     }
 
-    // Append the new address
-    $addresses[] = $newAddress;
-
-    // Re-encode the address array as JSON
-    $updatedAddressesJson = json_encode($addresses);
-
-    // Update the database
-    $stmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
-    $stmt->bind_param("si", $updatedAddressesJson, $user_id);
-
-    if ($stmt->execute()) {
-        echo "<div class='alert alert-success'>Address added successfully!</div>";
+    // Check if the user has 3 addresses
+    if (count($addresses) >= 3) {
+        echo "<div class='alert alert-danger'>You can only have a maximum of 3 addresses.</div>";
     } else {
-        echo "<div class='alert alert-danger'>Error adding address: " . $stmt->error . "</div>";
+        // Add the new address
+        $newAddress = [
+            'fname' => $firstName,
+            'lname' => $lastName,
+            'address' => $address1,
+            'address2' => $address2,
+            'city' => $city,
+            'state' => $state,
+            'zip_code' => $zipCode,
+            'country' => $country,
+            'phone' => $phone
+        ];
+
+        $addresses[] = $newAddress;
+        $updatedAddressesJson = json_encode($addresses);
+
+        $updateStmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
+        $updateStmt->bind_param("si", $updatedAddressesJson, $user_id);
+
+        if ($updateStmt->execute()) {
+            echo "<div class='alert alert-success'>Address added successfully!</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Error adding address: " . $updateStmt->error . "</div>";
+        }
+
+        $updateStmt->close();
     }
 
     $stmt->close();
 }
 
-// Retrieve addresses for display
-// $query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
-// $row = mysqli_fetch_assoc($query);
-// $user_addresses = json_decode($row['address'], true);
-// echo $row['address'];
-// $user_addresses = [];
-// var_dump($user_addresses);
-// // Handle case where decoding fails or no addresses exist
-// if (!is_array($user_addresses)) {
-//     echo "found it addresses";
-// }else{
-//     echo "no addresses";
-// }
+// Handle address deletion
+if (isset($_POST['delete'])) {
+    $delete_index = intval($_POST['delete']);
 
-$con->close();
+    $stmt = $con->prepare("SELECT address FROM user_data WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $addresses = json_decode($row['address'], true);
+    if (is_array($addresses) && isset($addresses[$delete_index])) {
+        // Remove the address from the array
+        unset($addresses[$delete_index]);
+        $addresses = array_values($addresses); // Re-index the array
+
+        // Update the addresses in the database
+        $updatedAddressesJson = json_encode($addresses);
+
+        $updateStmt = $con->prepare("UPDATE user_data SET address = ? WHERE id = ?");
+        $updateStmt->bind_param("si", $updatedAddressesJson, $user_id);
+
+        if ($updateStmt->execute()) {
+            echo "<div class='alert alert-success'>Address deleted successfully!</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Error deleting address: " . $updateStmt->error . "</div>";
+        }
+
+        $updateStmt->close();
+    }
+
+    $stmt->close();
+}
+
+function get_user_addresses($con, $user_id) {
+    $stmt = $con->prepare("SELECT address FROM user_data WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return json_decode($row['address'], true);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -95,8 +130,8 @@ $con->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<?php include "header.php" ?>
-<div class="container " style="margin-top: 6rem;">
+<?php include "header.php"; ?>
+<div class="container" style="margin-top: 6rem;">
     <h2 class="mb-4">Manage Your Addresses</h2>
 
     <!-- Form to add a new address -->
@@ -107,6 +142,8 @@ $con->close();
             </div>
             <div class="card-body">
                 <div class="row g-3">
+                    <!-- Form fields here (as in your original code) -->
+                  
                     <div class="col-md-6">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" name="firstName" id="firstName" required>
@@ -144,7 +181,7 @@ $con->close();
                         <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required>
                     </div>
                 </div>
-            </div>
+                </div>
             <div class="card-footer text-end">
                 <button type="submit" name="submit" class="btn btn-primary">Add Address</button>
             </div>
@@ -153,53 +190,43 @@ $con->close();
 
     <!-- Display existing addresses -->
     <h3>Your Saved Addresses</h3>
-    
     <div class="row">
     <?php  
-$query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
-$row = mysqli_fetch_assoc($query);
-$user_addresses = json_decode($row['address'], true);
+    $user_addresses = get_user_addresses($con, $user_id);
 
-// Check if $user_addresses is a valid array
-if (is_array($user_addresses)) {
-    // Loop through each item in the array
-    foreach ($user_addresses as $key => $address) {
-        // Skip any key that isn't a number (like 'fname', 'lname', etc.)
-        if (is_numeric($key)) {
-?>
-                <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                              <?php
-                               echo $address['fname'] . " " . $address['lname'] . "<br>";
-                              ?>
-                             </h5>
-                            <p class="card-text">
-                               <?php  
-                                echo "Address: " . $address['address'] . "<br>";
-                                echo "City: " . $address['city'] . "<br>";
-                                echo "State: " . $address['state'] . "<br>";
-                                echo "Country: " . $address['country'] . "<br>";
-                                ?>
-                                <strong>Phone:</strong> <?php
-                                echo $address['phone'] . "<br><br>";
-                                ?>
-                            </p>
-                        </div>
+    // Check if $user_addresses is a valid array
+    if (is_array($user_addresses) && !empty($user_addresses)) {
+        foreach ($user_addresses as $key => $address) {
+            ?>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= htmlspecialchars($address['fname']) . " " . htmlspecialchars($address['lname']) ?></h5>
+                        <p class="card-text">
+                            <?= "Address: " . htmlspecialchars($address['address']) ?><br>
+                            <?= "City: " . htmlspecialchars($address['city']) ?><br>
+                            <?= "State: " . htmlspecialchars($address['state']) ?><br>
+                            <?= "Country: " . htmlspecialchars($address['country']) ?><br>
+                            <strong>Phone:</strong> <?= htmlspecialchars($address['phone']) ?><br>
+                        </p>
+                        <!-- Delete button -->
+                        <form method="POST" class="text-end">
+                            <input type="hidden" name="delete" value="<?= $key ?>">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
-                <?php
-            }
+            </div>
+            <?php
+        }
+    } else {
+        echo "<p>No addresses found.</p>";
     }
-} else {
-    echo "No addresses found.";
-}
-?>
-            <!-- <p>No addresses found. Please add one using the form above.</p> -->
+    ?>
     </div>
 </div>
-<?php include "footer.php" ?>
+
+<?php include "footer.php"; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
