@@ -43,24 +43,53 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 			?>
 			<div class="p-4 pt-8 mt-5 rounded-lg border bg-white">
 				<p class="text-xl font-medium">Address</p>
-				<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6">
-					<div class="flex flex-col sm:flex-row">
-						<div class="flex w-full flex-col px-4 py-2">
-							<span class="font-semibold text-lg">
-								<?php echo $user_address['fname'] . " " . $user_address['lname']; ?>
+<?php 
+// Check if the user_address is set and not empty
+if (isset($user_address) && !empty($user_address)) {
+	?>
+		<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6">
+			<?php
+			// Iterate over multiple addresses
+			foreach($user_address as $key => $address) {
+				?>
+				 <form id="address-form" action="order.php" method="POST">
+				<div class="flex flex-col sm:flex-row items-start border-b pb-4 mb-4">
+					<div class="flex w-full flex-col px-4 py-2">
+						<label class="inline-flex items-center">
+							<input type="radio" name="selected_address" value="<?php echo $key; ?>" class="form-radio text-blue-600">
+							<span class="ml-2 font-semibold text-lg">
+								<?php echo $address['fname'] . " " . $address['lname']; ?>
 							</span>
-							<p class="text-gray-600">
-								<?php echo $user_address['address'] . ", " . $user_address['address2']; ?>
-							</p>
-							<p class="text-gray-600">
-								<?php echo $user_address['city'] . ", " . $user_address['state'] . " " . $user_address['zip_code']; ?>
-							</p>
-							<p class="text-gray-600">
-								<?php echo $user_address['country']; ?>
-							</p>
-						</div>
+						</label>
+						<p class="text-gray-600">
+							<?php echo $address['address'] . ", " . $address['address2']; ?>
+						</p>
+						<p class="text-gray-600">
+							<?php echo $address['city'] . ", " . $address['state'] . " " . $address['zip_code']; ?>
+						</p>
+						<p class="text-gray-600">
+							<?php echo $address['country']; ?>
+						</p>
 					</div>
 				</div>
+				 </form>
+				<?php
+			}
+			?>
+		</div>
+	<?php
+} else {
+	// Display message if no addresses are available
+	?>
+	<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6 text-center">
+		<p class="text-gray-600">You haven't added an address yet.</p>
+		<a href="add_address.php" class="text-blue-500">Add your address</a>
+	</div>
+	<?php
+}
+?>
+
+
 			</div>
 			<div class=" px-4 pt-8 border mt-5">
 				<p class="text-xl font-medium">Order Summary</p>
@@ -191,15 +220,19 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 
 	$orderId = $order['id'];
 	?>
-
-	<script>
-		const but = document.querySelector('#button').addEventListener('click', () => {
-			alert('Form submitted successfully!');
-		});
-	</script>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
-		document.getElementById('button').onclick = function (e) {
+document.getElementById('button').onclick = function (e) {
+    // Get the selected address from the radio button
+    var selectedAddress = document.querySelector('input[name="selected_address"]:checked');
+
+    if (!selectedAddress) {
+        alert("Please select an address before placing the order.");
+        return;
+    }
+
+    var addressId = selectedAddress.value; // Get the selected address ID
+
     var options = {
         "key": "<?php echo $keyId; ?>", // Your Razorpay Key ID
         "amount": "<?php echo $totalPriceWithTax * 100; ?>", // Amount in paise (from PHP server-side)
@@ -210,17 +243,18 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         "order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
         "handler": function (response) {
             console.log(response);  // Log Razorpay response to verify data
-			window.location.href = "OrderDetails.php";
+			window.location.href = "order.php";
             $.ajax({
                 url: "order.php",
                 type: "POST",
                 data: {
                     payment_id: response.razorpay_payment_id,
                     order_id: response.razorpay_order_id,
+                    address_id: addressId, // Include the selected address ID
                     signature: response.razorpay_signature
                 },
                 success: function (data) {
-                    alert('Payment verified successfully!' + data);
+                    alert('Payment verified successfully! ' + data);
                     // You can redirect the user to a success page
                 },
                 error: function (xhr, status, error) {
@@ -236,8 +270,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     rzp.open();
     e.preventDefault();
 };
+</script>
 
-	</script>
 	<?php echo $orderId; ?>
 </body>
 </html>
