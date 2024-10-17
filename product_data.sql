@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 11:55 AM
+-- Generation Time: Oct 17, 2024 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,7 +59,8 @@ CREATE TABLE `order_product` (
   `payment_id` varchar(255) DEFAULT NULL,
   `order_id` varchar(255) DEFAULT NULL,
   `qty` text DEFAULT NULL,
-  `order_date` date DEFAULT curdate()
+  `order_date` date DEFAULT curdate(),
+  `address` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -205,7 +206,7 @@ ALTER TABLE `category`
 -- Indexes for table `order_product`
 --
 ALTER TABLE `order_product`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `product`
@@ -242,7 +243,7 @@ ALTER TABLE `relative_img`
 -- AUTO_INCREMENT for table `order_product`
 --
 ALTER TABLE `order_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `product`

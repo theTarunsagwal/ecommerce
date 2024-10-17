@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2024 at 06:30 PM
+-- Generation Time: Oct 17, 2024 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `department`, `last_login`) VALUES
-(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-08-22 14:02:05');
+(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-10-14 06:04:05');
 
 -- --------------------------------------------------------
 
@@ -110,12 +110,13 @@ CREATE TABLE `user_data` (
 
 INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`, `address`, `gender`, `phone`) VALUES
 (50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-09-07 08:04:35', 2, NULL, NULL, NULL),
-(51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-09-07 08:00:41', 2, '{\"fname\":\"hfehjfv\",\"lname\":\"jewhfbcfi\",\"address\":\"nknkf\",\"address2\":\"ndkfngjg\",\"city\":\"nsdkfndsvn\",\"state\":\"jbfrc\",\"zip_code\":\"3578275\",\"country\":\"ojopfdm\",\"phone\":\"84545485245\"}', NULL, NULL),
-(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-09-07 08:00:41', 2, '{\"fname\":\"hfehjfv\",\"lname\":\"jewhfbcfi\",\"address\":\"nknkf\",\"address2\":\"ndkfngjg\",\"city\":\"nsdkfndsvn\",\"state\":\"jbfrc\",\"zip_code\":\"3578275\",\"country\":\"ojopfdm\",\"phone\":\"84545485245\"}', NULL, NULL),
-(53, 'tarun', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-09-08 16:03:43', 2, '{\"fname\":\"Jon\",\"lname\":\"Doe\",\"address\":\"1600 Fake Street\",\"address2\":\"Apartment 1\",\"city\":\"Mountain View\",\"state\":\"CA\",\"zip_code\":\"94043\",\"country\":\"United States\",\"phone\":\"6019521325\"}', 'Male', 2147483647),
-(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-09-07 08:00:41', 2, '{\"fname\":\"hfehjfv\",\"lname\":\"jewhfbcfi\",\"address\":\"nknkf\",\"address2\":\"ndkfngjg\",\"city\":\"nsdkfndsvn\",\"state\":\"jbfrc\",\"zip_code\":\"3578275\",\"country\":\"ojopfdm\",\"phone\":\"84545485245\"}', NULL, NULL),
-(59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-09-07 08:00:41', 2, '{\"fname\":\"hfehjfv\",\"lname\":\"jewhfbcfi\",\"address\":\"nknkf\",\"address2\":\"ndkfngjg\",\"city\":\"nsdkfndsvn\",\"state\":\"jbfrc\",\"zip_code\":\"3578275\",\"country\":\"ojopfdm\",\"phone\":\"84545485245\"}', NULL, NULL),
-(60, 'tarunsagwal', 'tarunsagwal38@gmail.com', '123698', 'face2.jpg', '2024-09-08 16:15:25', '2024-09-08 16:15:39', 2, NULL, NULL, NULL);
+(51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-10-14 16:37:59', 2, NULL, NULL, NULL),
+(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-10-17 15:40:17', 2, '[{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"Mountain View\",\"state\":\"melbon\",\"zip_code\":\"96969\",\"country\":\"haryana\",\"phone\":\"989568200\"},{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"palla\",\"state\":\"fbd\",\"zip_code\":\"110012\",\"country\":\"england\",\"phone\":\"9891125996\"}]', NULL, NULL),
+(53, 'tarun', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-10-14 16:38:02', 2, NULL, 'Male', 2147483647),
+(58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-10-14 16:37:54', 2, NULL, NULL, NULL),
+(59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-10-14 16:18:31', 2, NULL, NULL, NULL),
+(60, 'tarunsagwal', 'tarunsagwal38@gmail.com', '123698', 'face2.jpg', '2024-09-08 16:15:25', '2024-09-08 16:15:39', 2, NULL, NULL, NULL),
+(61, 'uzair', 'arduwaan@gmail.com', '12304', '789.jpeg', '2024-10-14 05:59:13', '2024-10-14 05:59:25', 2, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -178,7 +179,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables

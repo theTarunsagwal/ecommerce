@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 11:56 AM
+-- Generation Time: Oct 17, 2024 at 07:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -134,6 +134,21 @@ CREATE TABLE `user_name_60` (
   `pr_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_61`
+--
+
+CREATE TABLE `user_name_61` (
+  `id` int(11) NOT NULL,
+  `pr_id` int(11) DEFAULT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -188,6 +203,13 @@ ALTER TABLE `user_name_60`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_61`
+--
+ALTER TABLE `user_name_61`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -232,6 +254,12 @@ ALTER TABLE `user_name_59`
 --
 ALTER TABLE `user_name_60`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `user_name_61`
+--
+ALTER TABLE `user_name_61`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2024 at 06:30 PM
+-- Generation Time: Oct 17, 2024 at 07:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,8 +86,7 @@ CREATE TABLE `wish_name_52` (
 INSERT INTO `wish_name_52` (`id`, `name`, `product_img`, `price`) VALUES
 (28, 'adidas shoes', 'shoes.jpg', 456),
 (23, 'Classic Trench Coat', 'product-04.jpg', 300),
-(29, 'Herschel supply', 'product-02.jpg', 799),
-(36, 'tracksuits', 'gray-4.jpg', 405);
+(29, 'Herschel supply', 'product-02.jpg', 799);
 
 -- --------------------------------------------------------
 
@@ -158,6 +157,19 @@ INSERT INTO `wish_name_60` (`id`, `name`, `product_img`, `price`) VALUES
 (37, 'MASCOMODA Womens ', 'red-2.jpg', 210),
 (36, 'tracksuits', 'gray-4.jpg', 405);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_name_61`
+--
+
+CREATE TABLE `wish_name_61` (
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(300) NOT NULL,
+  `product_img` text NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -202,6 +214,12 @@ ALTER TABLE `wish_name_59`
 -- Indexes for table `wish_name_60`
 --
 ALTER TABLE `wish_name_60`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `wish_name_61`
+--
+ALTER TABLE `wish_name_61`
   ADD UNIQUE KEY `id` (`id`);
 COMMIT;
 
