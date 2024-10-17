@@ -40,43 +40,52 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 			$query = mysqli_query($con, "SELECT address FROM user_data WHERE id = $user_id");
 			$row = mysqli_fetch_array($query);
 			$user_address = json_decode($row['address'], true);
-			?>
+			$_SESSION['address_order'] = $row['address'];    
+ 			?>
 			<div class="p-4 pt-8 mt-5 rounded-lg border bg-white">
 				<p class="text-xl font-medium">Address</p>
 <?php 
 // Check if the user_address is set and not empty
 if (isset($user_address) && !empty($user_address)) {
 	?>
-		<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6">
+
+<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6">
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+        // Store selected address in the session
+        $selected_address = $_POST['selected_address'];
+        $_SESSION['selected_address'] = $selected_address;
+    }
+    ?>
+	<form id="address-form" method="POST">
+	<?php
+    foreach($user_address as $key => $address) {
+        ?>
+            <div class="flex flex-col sm:flex-row items-start border-b pb-4 mb-4">
+                <div class="flex w-full flex-col px-4 py-2">
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="selected_address" name="selected_address" value="<?php echo $key; ?>" <?php echo isset($_SESSION['selected_address']) && $_SESSION['selected_address'] == $key ? 'checked' : ''; ?>>
+                        <span class="ml-2 font-semibold text-lg">
+                            <?php echo $address['fname'] . " " . $address['lname']; ?>
+                        </span>
+                    </label>
+                    <p class="text-gray-600">
+                        <?php echo $address['address'] . ", " . $address['address2']; ?>
+                    </p>
+                    <p class="text-gray-600">
+                        <?php echo $address['city'] . ", " . $address['state'] . " " . $address['zip_code']; ?>
+                    </p>
+                    <p class="text-gray-600">
+                        <?php echo $address['country']; ?>
+                    </p>
+                </div>
+            </div>
 			<?php
-			// Iterate over multiple addresses
-			foreach($user_address as $key => $address) {
-				?>
-				 <form id="address-form" action="order.php" method="POST">
-				<div class="flex flex-col sm:flex-row items-start border-b pb-4 mb-4">
-					<div class="flex w-full flex-col px-4 py-2">
-						<label class="inline-flex items-center">
-							<input type="radio" name="selected_address" value="<?php echo $key; ?>" class="form-radio text-blue-600">
-							<span class="ml-2 font-semibold text-lg">
-								<?php echo $address['fname'] . " " . $address['lname']; ?>
-							</span>
-						</label>
-						<p class="text-gray-600">
-							<?php echo $address['address'] . ", " . $address['address2']; ?>
-						</p>
-						<p class="text-gray-600">
-							<?php echo $address['city'] . ", " . $address['state'] . " " . $address['zip_code']; ?>
-						</p>
-						<p class="text-gray-600">
-							<?php echo $address['country']; ?>
-						</p>
-					</div>
-				</div>
-				 </form>
-				<?php
-			}
-			?>
-		</div>
+    }
+    ?>
+	</form>
+</div>
+
 	<?php
 } else {
 	// Display message if no addresses are available
@@ -222,6 +231,22 @@ if (isset($user_address) && !empty($user_address)) {
 	?>
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	<script>
+	$('.selected_address').on('click', function(){
+    let form = $(this).closest('form');
+    
+    // Send form data via AJAX
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize(),  // Serialize form data
+        success: function(data) {
+            // alert('Address updated successfully!');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error in AJAX request: ", error);
+        }
+    });
+});
 document.getElementById('button').onclick = function (e) {
     // Get the selected address from the radio button
     var selectedAddress = document.querySelector('input[name="selected_address"]:checked');
