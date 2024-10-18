@@ -20,13 +20,8 @@ $user_id = $_SESSION['id'];
 
 $payment_id = isset($_POST['payment_id']) ? $_POST['payment_id'] : '';
 $address_array =json_decode( $_SESSION['address_order'],true);
-// $selected_address_index = json_decode($_SESSION['selected_address'],true);
-// Debug address data
-print_r($address_array);
-// var_dump($selected_address_index);
-// Debug selected address
+
 $selected_address = $address_array[$_SESSION['selected_address']];
-var_dump($selected_address); // Check if it's an associative array with correct data
 $address_id_json = json_encode($selected_address);
 $order_id = isset($_POST['order_id']) ? $_POST['order_id'] : '';
 
@@ -65,7 +60,7 @@ if (!empty($payment_id) && !empty($order_id)) {
         echo "Error preparing statement: " . $conn->error;
     }
 } else {
-    // echo "Payment ID or Order ID missing!";
+    echo "Payment ID or Order ID missing!";
 }
 
 $conn->close();

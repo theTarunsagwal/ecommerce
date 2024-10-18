@@ -157,8 +157,8 @@ if (isset($user_address) && !empty($user_address)) {
 							</p>
 						</div>
 					</div>
-					<input type="text" name="qty_cart" value='<?php echo json_encode($product_qty_cart); ?>'>
-					<input type="text" name="productid_cart" value='<?php echo json_encode($product_id_cart); ?>'>
+					<input type="hidden" name="qty_cart" value='<?php echo json_encode($product_qty_cart); ?>'>
+					<input type="hidden" name="productid_cart" value='<?php echo json_encode($product_id_cart); ?>'>
 					<?php } 
 					 $_SESSION['productid_cart_id'] = $product_id_cart;
 					 $_SESSION['productid_cart_qty'] = $product_qty_cart;
@@ -208,7 +208,7 @@ if (isset($user_address) && !empty($user_address)) {
 
 	use Razorpay\Api\Api;
 
-	 echo $user_id = $_SESSION['id'];
+	$user_id = $_SESSION['id'];
 
 	$totalPriceWithTax = $_SESSION['shiping'];
 
@@ -268,7 +268,7 @@ document.getElementById('button').onclick = function (e) {
         "order_id": "<?php echo $orderId; ?>", // Razorpay Order ID from server-side
         "handler": function (response) {
             console.log(response);  // Log Razorpay response to verify data
-			window.location.href = "order.php";
+			window.location.href = "OrderDetails.php";
             $.ajax({
                 url: "order.php",
                 type: "POST",
@@ -297,6 +297,5 @@ document.getElementById('button').onclick = function (e) {
 };
 </script>
 
-	<?php echo $orderId; ?>
 </body>
 </html>
