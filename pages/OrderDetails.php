@@ -15,10 +15,13 @@ session_start();
     <h1 class="mb-4">Order Details</h1>
     <?php
     $user_id =  $_SESSION['id'];
-    $qury = mysqli_query($con,"select * from user_data where id='$user_id'");
-    $row = mysqli_fetch_array($qury);
-    $adress = json_decode($row['address'],true); 
-    echo $adress['address'];
+    $qury = mysqli_query($con_pro, "SELECT * FROM order_product WHERE user_id= $user_id");
+    while($row = mysqli_fetch_array($qury)){
+    // $arry_find = json_decode($row['address'],true);
+    $arry_find = json_decode($row['address'], true);
+
+    // Check if it's an array or a single object
+    
     ?>
     <!-- Shipping Information -->
     <div class="card mb-4">
@@ -26,12 +29,21 @@ session_start();
         Shipping Information
       </div>
       <div class="card-body">
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Address:</strong> 123 Main St, Springfield, IL</p>
-        <p><strong>Phone:</strong> (555) 123-4567</p>
+        <p><strong>Name:</strong> <?php echo $arry_find['fname']." ".$arry_find['lname']; ?> </p>
+        <p><strong>Address:</strong> <?php echo $arry_find['address']." ".$arry_find['address2']." ".$arry_find['city']." ".$arry_find['state']." ".$arry_find['zip_code']." ".$arry_find['country']; ?></p>
+        <p><strong>Phone:</strong> <?php echo $arry_find['phone'] ?></p>
       </div>
     </div>
-
+<?php
+    $product_find = json_decode($row['product_id'], true);
+    foreach ($product_find as $index => $product_id) {
+      // Increment the index by 1 to start from 1 instead of 0
+      echo "Product " . ($index + 1) . ": " . $product_id . "<br>";
+      $match_arr = mysqli_query($con_pro, "SELECT * FROM product WHERE id= $product_id");
+      $row_match = mysqli_fetch_assoc($match_arr);
+      $qty_find = json_decode($row['qty'], true);
+    foreach ($qty_find as $index_qty => $qty_id) {
+?>
     <!-- Products Table -->
     <div class="card mb-4">
       <div class="card-header">
@@ -49,17 +61,12 @@ session_start();
           </thead>
           <tbody>
             <tr>
-              <td>Product 1</td>
-              <td>2</td>
+              <td><?php echo $row_match['name']; ?></td>
+              <td><?php echo $qty_id; ?></td>
               <td>$30.00</td>
               <td>$60.00</td>
             </tr>
-            <tr>
-              <td>Product 2</td>
-              <td>1</td>
-              <td>$60.00</td>
-              <td>$60.00</td>
-            </tr>
+            
           </tbody>
           <tfoot>
             <tr>
@@ -70,7 +77,11 @@ session_start();
         </table>
       </div>
     </div>
-
+<?php
+    }
+  }
+}
+?>
      <!-- Order Summary -->
      <div class="card mb-4">
       <div class="card-header">
