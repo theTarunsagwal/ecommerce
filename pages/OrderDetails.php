@@ -7,6 +7,7 @@ session_start();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Order Details</title>
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
 <body>
@@ -24,7 +25,7 @@ session_start();
     
     ?>
     <!-- Shipping Information -->
-    <div class="card mb-4">
+    <div class="card mb-4 mt-4">
       <div class="card-header">
         Shipping Information
       </div>
@@ -34,16 +35,7 @@ session_start();
         <p><strong>Phone:</strong> <?php echo $arry_find['phone'] ?></p>
       </div>
     </div>
-<?php
-    $product_find = json_decode($row['product_id'], true);
-    foreach ($product_find as $index => $product_id) {
-      // Increment the index by 1 to start from 1 instead of 0
-      echo "Product " . ($index + 1) . ": " . $product_id . "<br>";
-      $match_arr = mysqli_query($con_pro, "SELECT * FROM product WHERE id= $product_id");
-      $row_match = mysqli_fetch_assoc($match_arr);
-      $qty_find = json_decode($row['qty'], true);
-    foreach ($qty_find as $index_qty => $qty_id) {
-?>
+
     <!-- Products Table -->
     <div class="card mb-4">
       <div class="card-header">
@@ -59,38 +51,49 @@ session_start();
               <th scope="col">Total</th>
             </tr>
           </thead>
+   
           <tbody>
+          <?php
+    $product_find = json_decode($row['product_id'], true);
+    $qty_find = json_decode($row['qty'], true);
+    $total_price = 0;
+    foreach ($product_find as $index => $product_id) {
+      $match_arr = mysqli_query($con_pro, "SELECT * FROM product WHERE id = $product_id");
+      $row_match = mysqli_fetch_assoc($match_arr);
+      $qty_id = $qty_find[$index];
+      $total = $qty_id * $row_match['price'];
+?>
             <tr>
               <td><?php echo $row_match['name']; ?></td>
               <td><?php echo $qty_id; ?></td>
-              <td>$30.00</td>
-              <td>$60.00</td>
+              <td>₹<?php echo $row_match['price'] ; ?></td>
+              <td>₹<?php echo $total;?></td>
             </tr>
             
           </tbody>
+          <?php
+   $total_price += $total;
+    }
+
+?>
           <tfoot>
             <tr>
               <th colspan="3" class="text-end">Total</th>
-              <th>$120.00</th>
+              <th>₹<?php echo $total_price ?></th>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
-<?php
-    }
-  }
-}
-?>
-     <!-- Order Summary -->
-     <div class="card mb-4">
+    <!-- Order Summary -->
+    <div class="card mb-4">
       <div class="card-header">
         Order Status
       </div>
       <div class="card-body">
-        <p><strong>Order Date:</strong> October 3, 2024</p>
+        <p><strong>Order Date:</strong> <?php echo $row['order_date']; ?></p>
         <p><strong>Status:</strong> Shipped</p>
-        <p><strong>Total Amount:</strong> $120.00</p>
+        <p><strong>Total Amount:</strong> ₹<?php echo $total_price ?></p>
       </div>
     </div>
 
@@ -98,7 +101,11 @@ session_start();
     <div class="d-flex justify-content-end">
       <a href="#" class="btn btn-secondary me-2">Print Invoice</a>
       <a href="#" class="btn btn-primary">Track Order</a>
-    </div>
+    </div>  
+<?php 
+  }
+ ?>
+     
   </div>
 
   <?php include 'footer.php'; ?> 

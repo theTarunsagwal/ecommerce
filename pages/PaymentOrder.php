@@ -11,6 +11,7 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Checkout</title>
 	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.js"
 		integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -92,7 +93,7 @@ if (isset($user_address) && !empty($user_address)) {
 	?>
 	<div class="mt-8 space-y-4 rounded-lg border bg-white px-4 py-6 sm:px-6 text-center">
 		<p class="text-gray-600">You haven't added an address yet.</p>
-		<a href="add_address.php" class="text-blue-500">Add your address</a>
+		<a href="User_Address.php" class="text-blue-500">Add your address</a>
 	</div>
 	<?php
 }
@@ -116,8 +117,8 @@ if (isset($user_address) && !empty($user_address)) {
 							
 						    $total_price += $row['price'] * $_GET['quantity'];
 							?>
-							<input type="text" name="qty_cart" value="<?php echo  $_GET['quantity'];  ?>">
-							<input type="text" name="cart_id" value="<?php echo   $_GET['id']; ?>">
+							<input type="hidden" name="qty_cart" value="<?php echo  $_GET['quantity'];  ?>">
+							<input type="hidden" name="cart_id" value="<?php echo   $_GET['id']; ?>">
 							<div class="flex flex-col rounded-lg bg-white sm:flex-row border ">
 								<img class="m-2 h-24 w-28 rounded-md border object-cover object-center"
 									src="./upload/<?php echo $row['img'] ?>" alt="" />
@@ -243,6 +244,7 @@ if (isset($user_address) && !empty($user_address)) {
             // alert('Address updated successfully!');
         },
         error: function (xhr, status, error) {
+		
             console.error("Error in AJAX request: ", error);
         }
     });
@@ -252,7 +254,12 @@ document.getElementById('button').onclick = function (e) {
     var selectedAddress = document.querySelector('input[name="selected_address"]:checked');
 
     if (!selectedAddress) {
-        alert("Please select an address before placing the order.");
+		swal({
+  title: "Address?",
+  text: "please select  address and add address",
+  icon: "error",
+  button: "okay",
+});
         return;
     }
 
