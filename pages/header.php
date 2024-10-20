@@ -1,11 +1,8 @@
 <?php
-// session_start();
-// if(isset($_SESSION['name'])){
     $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
     $con_pro = mysqli_connect("localhost","root","","product_data");
     $con = mysqli_connect("localhost","root","","ecommerce");
 	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
-
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +77,6 @@
         <div class="menu_bar">
             <ul class="menu_ul">
             <a href="index.php"><li>home</li></a>
-                <!-- <li>collections<i class='bx bx-right-arrow-alt'></i></li> -->
                 <?php
                              $row_wood_drop = mysqli_query($con_pro, "SELECT * FROM product WHERE product.id between  19 AND 22;");
                             while($row_wood= mysqli_fetch_array($row_wood_drop)){
@@ -103,6 +99,7 @@
     });
  
     </script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="dropdown.js"></script>
 </body>

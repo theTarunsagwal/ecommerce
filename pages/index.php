@@ -43,7 +43,7 @@ session_start();
     <?php include "header.php" ?>
     <!-- wishlist -->
 	<div class="wishlist wishlist-closed" id="wishlist">
-        <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
+    <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
         <?php
 // session_start();
 if(isset($_SESSION['name'])) {
@@ -135,8 +135,8 @@ if(isset($_SESSION['name'])) {
               </div>";
     }
     ?>
-</ul>
-</div>
+    </ul>
+    </div>
 
     <section class="section-slide">
 		<div class="wrap-slick1">
@@ -255,7 +255,7 @@ if(isset($_SESSION['name'])) {
         }
         ?>
         <a href="product.php?id=<?php echo $row['name'] ?>">
-            <img src="./upload/<?php echo $row['img'];?>" alt="">
+            <img src="./upload/styl.jpeg" alt="">
             <h3>
                 <?php echo $row['name'];}?>
             </h3>
@@ -338,82 +338,8 @@ if(isset($_SESSION['name'])) {
 	<script src="./vendor/slick/slick.min.js"></script>
 	<script src="./js/slick-custom.js"></script>
 	<script src="./vendor/parallax100/parallax100.js"></script>
-	<script>
-		$(".js-select2").each(function () {
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
-	<script>
-		$('.parallax100').parallax100();
-		</script>
-	<script>
-		$('.gallery-lb').each(function () { // the containers for all your galleries
-			$(this).magnificPopup({
-				delegate: 'a', // the selector for gallery item
-				type: 'image',
-				gallery: {
-					enabled: true
-				},
-				mainClass: 'mfp-fade'
-			});
-		});
-		</script>
-	<script>
-		$('.js-addwish-b2').on('click', function (e) {
-			e.preventDefault();
-		});
 
-		$('.js-addwish-b2').each(function () {
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
 
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
-
-		/*---------------------------------------------*/
-
-		$('.js-addcart-detail').each(function () {
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-	</script>
-	<!--===============================================================================================-->
-	<script>
-		$('.js-pscroll').each(function () {
-			$(this).css('position', 'relative');
-			$(this).css('overflow', 'hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function () {
-				ps.update();
-			})
-		});
-	</script>
-	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
 </body>

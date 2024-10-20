@@ -347,7 +347,7 @@
                             </form>
 							<?php 
 							}else{
-								    echo "<a href='login.php'><i class='bx bx-heart heart' style='font-size:1.5rem; cursor:pointer;'></i></a>";
+								    echo "<a href='loging.php'><i class='bx bx-heart heart' style='font-size:1.5rem; cursor:pointer;'></i></a>";
                                 }
                                 ?>
 							</div>
