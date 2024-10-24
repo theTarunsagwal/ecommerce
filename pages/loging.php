@@ -70,6 +70,7 @@ if(isset($_POST['sub'])){
 						<a rel="noopener noreferrer" href="forgat.php">Forgot Password ?</a>
 					</div>
 				</div>
+				<a href="google-auth.php">google</a>
 				<button class="sign" name='sub'>Sign in</button>
 			</form>
 

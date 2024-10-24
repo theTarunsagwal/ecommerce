@@ -3,6 +3,7 @@
     $con_pro = mysqli_connect("localhost","root","","product_data");
     $con = mysqli_connect("localhost","root","","ecommerce");
 	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+    echo $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -63,9 +64,29 @@
                     </button>
                 </div>
             </form>
-            <a href="additem.php">
-              <i class='bx bxs-shopping-bags'></i>
-            </a>
+            <a href="additem.php" class="position-relative">
+    <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> -->
+        <?php
+    //     // Step 1: Generate dynamic table name
+    //     $wish_face = "wish_name_" . $_SESSION['id'];
+
+    //     // Step 2: Prepare the query to count rows in the dynamic table
+    //     $qry_count = mysqli_query($con_wish, "
+    //         SELECT COUNT(*) AS total_rows FROM `$wish_face`
+    //     ");
+
+    //     // Step 3: Fetch the result and display the count
+    //     if ($qry_count) {
+    //         $row = mysqli_fetch_assoc($qry_count);
+    //         echo $row['total_rows'];
+    //     } else {
+    //         echo "0"; // Display zero if there is an error
+    //     }
+        ?>
+     <!-- </span> -->
+    <i class='bx bxs-shopping-bags fs-3 text-dark'></i>
+</a>
+
             
             <?php
      include "profile_user.php"
