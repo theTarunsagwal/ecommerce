@@ -4,7 +4,8 @@ session_start();
 $google_oauth_client_id = 'id';  
 // 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
 $google_oauth_client_secret = 'secret';
-$google_oauth_redirect_uri = 'http://localhost/ecommerce/pages/google-auth.php';
+// http://localhost/ecommerce/pages/google-auth.php
+$google_oauth_redirect_uri = 'link';
 $google_oauth_version = 'v3';
 
 if (isset($_GET['code']) && !empty($_GET['code'])) {
