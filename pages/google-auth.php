@@ -1,7 +1,9 @@
 <?php
 session_start();
-$google_oauth_client_id = '939264482794-4rqu9il5k9qg701odem13knqnr735dhr.apps.googleusercontent.com';
-$google_oauth_client_secret = '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';
+// 939264482794-4rqu9il5k9qg701odem13knqnr735dhr.apps.googleusercontent.com
+$google_oauth_client_id = 'id';  
+// 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
+$google_oauth_client_secret = 'secret';
 $google_oauth_redirect_uri = 'http://localhost/ecommerce/pages/google-auth.php';
 $google_oauth_version = 'v3';
 
