@@ -81,16 +81,7 @@ if(isset($_SESSION['name'])) {
            }
        }
             $qry_select = mysqli_query($con_wish,"SELECT * from $wish_face");
-        if(isset($_GET['name'])){
-            $titel = $_GET['name'];
-            $head_titel = mysqli_query($con_pro, "SELECT * FROM product WHERE name = '$titel'");
-            $row_jump = mysqli_fetch_assoc($head_titel);
-            if($row_jump){
-                $_SESSION['id'] = $row_jump['name'];
-            }
-        }
-        ?>
-		<?php
+
 }
 ?>
     <ul class="d-flex gap-2" style="flex-direction: column;">
