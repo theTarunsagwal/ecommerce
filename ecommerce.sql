@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 07:22 PM
+-- Generation Time: Oct 24, 2024 at 07:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `department`, `last_login`) VALUES
-(1, 'Tarun sagwal', 'tarunsagwal38@gmail.com', 'Tarun@123', 1, '2024-10-14 06:04:05');
+(1, 'Tarun sagwal', 'tarunsagwal39@gmail.com', 'Tarun@123', 1, '2024-10-14 06:04:05');
 
 -- --------------------------------------------------------
 
@@ -87,6 +87,30 @@ INSERT INTO `department` (`dep_id`, `dep_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `google_user`
+--
+
+CREATE TABLE `google_user` (
+  `id` int(11) NOT NULL,
+  `sub` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `given_name` varchar(255) NOT NULL,
+  `picture` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verify` enum('0','1') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `google_user`
+--
+
+INSERT INTO `google_user` (`id`, `sub`, `name`, `given_name`, `picture`, `email`, `email_verify`, `created_at`) VALUES
+(7, '118361250346220852202', 'Shahid', 'Shahid', 'https://lh3.googleusercontent.com/a/ACg8ocLJ2_TvORTNthfeB6qDFMxIfMxgf9pl4F6a2Ga9r4WPuExWuw=s96-c', 'shahid.convegenius@gmail.com', '1', '2024-10-24 16:01:49');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_data`
 --
 
@@ -109,14 +133,15 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`id`, `name`, `email`, `password`, `image`, `created_at`, `last_login`, `roll`, `address`, `gender`, `phone`) VALUES
-(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-09-07 08:04:35', 2, NULL, NULL, NULL),
+(50, 'ritik', 'ritik@gmail.com', '159874', 'banner-02.jpg', '2024-08-17 07:47:15', '2024-10-24 16:18:34', 2, '[{\"fname\":\"sidhu\",\"lname\":\"moosa\",\"address\":\"ludiyana\",\"address2\":\"Apartment 1\",\"city\":\"chandigar\",\"state\":\"punjab\",\"zip_code\":\"10123\",\"country\":\"india\",\"phone\":\"8451259230\"},{\"fname\":\"aman\",\"lname\":\"sagwal\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"chandigar\",\"state\":\"punjab\",\"zip_code\":\"6846554\",\"country\":\"United States\",\"phone\":\"989568200\"},{\"fname\":\"ritik\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"chandigar\",\"state\":\"punjab\",\"zip_code\":\"101230\",\"country\":\"haryana\",\"phone\":\"989568200\"}]', NULL, NULL),
 (51, 'gaurav', 'gaurav@gmail.com', '125896', 'avatar-01.jpg', '2024-08-19 16:07:35', '2024-10-14 16:37:59', 2, NULL, NULL, NULL),
-(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-10-17 15:40:17', 2, '[{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"Mountain View\",\"state\":\"melbon\",\"zip_code\":\"96969\",\"country\":\"haryana\",\"phone\":\"989568200\"},{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"palla\",\"state\":\"fbd\",\"zip_code\":\"110012\",\"country\":\"england\",\"phone\":\"9891125996\"}]', NULL, NULL),
+(52, 'manoj', 'manoj@gmail.com', '000000', 'banner-06.jpg', '2024-08-20 04:18:33', '2024-10-24 16:14:51', 2, '[{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"Mountain View\",\"state\":\"melbon\",\"zip_code\":\"96969\",\"country\":\"haryana\",\"phone\":\"989568200\"},{\"fname\":\"manoj\",\"lname\":\"tiwari\",\"address\":\"palla no 1 vedram colony\",\"address2\":\"Apartment 1\",\"city\":\"palla\",\"state\":\"fbd\",\"zip_code\":\"110012\",\"country\":\"england\",\"phone\":\"9891125996\"}]', NULL, NULL),
 (53, 'tarun', 'tarun@gmail.com', '125478', 'face1.jpg', '2024-08-26 16:09:33', '2024-10-14 16:38:02', 2, NULL, 'Male', 2147483647),
 (58, 'shail', 'shail@gmail.com', '1236985', 'product-11.jpg', '2024-08-28 07:30:54', '2024-10-14 16:37:54', 2, NULL, NULL, NULL),
 (59, 'aman', 'megumi35guro@gmail.com', '123000', '01.jpg', '2024-09-01 16:58:15', '2024-10-14 16:18:31', 2, NULL, NULL, NULL),
-(60, 'tarunsagwal', 'tarunsagwal38@gmail.com', '123698', 'face2.jpg', '2024-09-08 16:15:25', '2024-09-08 16:15:39', 2, NULL, NULL, NULL),
-(61, 'uzair', 'arduwaan@gmail.com', '12304', '789.jpeg', '2024-10-14 05:59:13', '2024-10-14 05:59:25', 2, NULL, NULL, NULL);
+(60, 'tarunsagwal', 'tarunsagwal39@gmail.com', '123698', 'face2.jpg', '2024-09-08 16:15:25', '2024-10-24 10:56:44', 2, NULL, NULL, NULL),
+(61, 'uzair', 'arduwaan@gmail.com', '12304', '789.jpeg', '2024-10-14 05:59:13', '2024-10-14 05:59:25', 2, NULL, NULL, NULL),
+(68, 'Shahid', 'shahid.convegenius@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocLJ2_TvORTNthfeB6qDFMxIfMxgf9pl4F6a2Ga9r4WPuExWuw=s96-c', '2024-10-24 16:01:49', '2024-10-24 16:01:49', 2, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -144,13 +169,19 @@ ALTER TABLE `department`
   ADD PRIMARY KEY (`dep_id`) USING BTREE;
 
 --
+-- Indexes for table `google_user`
+--
+ALTER TABLE `google_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `user_data`
 --
 ALTER TABLE `user_data`
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `password` (`password`),
-  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `fk_roll` (`roll`);
 
 --
@@ -176,10 +207,16 @@ ALTER TABLE `department`
   MODIFY `dep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `google_user`
+--
+ALTER TABLE `google_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- Constraints for dumped tables

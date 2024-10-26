@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 07:23 PM
+-- Generation Time: Oct 24, 2024 at 07:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,11 +39,13 @@ CREATE TABLE `wish_name_50` (
 --
 
 INSERT INTO `wish_name_50` (`id`, `name`, `product_img`, `price`) VALUES
+(23, 'Classic Trench Coat', '', 0),
 (24, 'blue shrit', 'product-03.jpg', 302),
 (25, 'whit shirt', 'product-01.jpg', 520),
-(28, 'adidas shoes', 'shoes.jpg', 456),
-(29, 'Herschel supply', 'product-02.jpg', 799),
-(37, 'MASCOMODA Womens ', 'red-2.jpg', 210);
+(26, 'Arctander light', 'img_ecommerce19.jpg', 201),
+(27, 'classic watch', '', 0),
+(28, 'adidas shoes', '', 0),
+(29, 'Herschel supply', 'product-02.jpg', 799);
 
 -- --------------------------------------------------------
 
@@ -84,9 +86,9 @@ CREATE TABLE `wish_name_52` (
 --
 
 INSERT INTO `wish_name_52` (`id`, `name`, `product_img`, `price`) VALUES
+(24, 'blue shrit', 'product-03.jpg', 302),
 (28, 'adidas shoes', 'shoes.jpg', 456),
-(23, 'Classic Trench Coat', 'product-04.jpg', 300),
-(29, 'Herschel supply', 'product-02.jpg', 799);
+(23, 'Classic Trench Coat', 'product-04.jpg', 300);
 
 -- --------------------------------------------------------
 
@@ -170,6 +172,26 @@ CREATE TABLE `wish_name_61` (
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_name_68`
+--
+
+CREATE TABLE `wish_name_68` (
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(300) NOT NULL,
+  `product_img` text NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wish_name_68`
+--
+
+INSERT INTO `wish_name_68` (`id`, `name`, `product_img`, `price`) VALUES
+(23, 'Classic Trench Coat', 'product-04.jpg', 300);
+
 --
 -- Indexes for dumped tables
 --
@@ -220,6 +242,12 @@ ALTER TABLE `wish_name_60`
 -- Indexes for table `wish_name_61`
 --
 ALTER TABLE `wish_name_61`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `wish_name_68`
+--
+ALTER TABLE `wish_name_68`
   ADD UNIQUE KEY `id` (`id`);
 COMMIT;
 

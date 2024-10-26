@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 07:22 PM
+-- Generation Time: Oct 24, 2024 at 07:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,7 +72,8 @@ CREATE TABLE `user_name_52` (
 
 INSERT INTO `user_name_52` (`id`, `name`, `image`, `price`, `qty`, `pr_id`) VALUES
 (3, 'tracksuits', 'gray-4.jpg', '405', 1, 36),
-(4, 'track shot adidas', 'blue-3.jpg', '305', 1, 35);
+(4, 'track shot adidas', 'blue-3.jpg', '305', 1, 35),
+(5, 'whit shirt', 'product-01.jpg', '520', 1, 25);
 
 -- --------------------------------------------------------
 
@@ -149,6 +150,21 @@ CREATE TABLE `user_name_61` (
   `qty` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_name_68`
+--
+
+CREATE TABLE `user_name_68` (
+  `id` int(11) NOT NULL,
+  `pr_id` int(11) DEFAULT NULL,
+  `name` varchar(300) NOT NULL,
+  `image` text NOT NULL,
+  `price` varchar(30) NOT NULL,
+  `qty` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -210,6 +226,13 @@ ALTER TABLE `user_name_61`
   ADD UNIQUE KEY `id` (`id`);
 
 --
+-- Indexes for table `user_name_68`
+--
+ALTER TABLE `user_name_68`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -229,7 +252,7 @@ ALTER TABLE `user_name_51`
 -- AUTO_INCREMENT for table `user_name_52`
 --
 ALTER TABLE `user_name_52`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_name_53`
@@ -259,6 +282,12 @@ ALTER TABLE `user_name_60`
 -- AUTO_INCREMENT for table `user_name_61`
 --
 ALTER TABLE `user_name_61`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_name_68`
+--
+ALTER TABLE `user_name_68`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
