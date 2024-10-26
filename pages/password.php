@@ -10,7 +10,8 @@
 <body>
 <?php
  session_start();
- $con = mysqli_connect('localhost','root','','ecommerce');
+include 'connect.php';
+ 
  if(isset($_SESSION['email'])) {
 //   echo $_SESSION['name'];
 if(isset($_POST['sub'])){

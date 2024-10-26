@@ -144,8 +144,8 @@
 		<div class="row isotope-grid">
 
 			    <?php
-                     $con_pro = mysqli_connect("localhost", "root", "", "product_data");
-	                 $con_wish = mysqli_connect("localhost","root","","wishlist_user");
+                    //  $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+	                //  $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 
 					if(isset($_POST['price_range'])){
 						$price_select = $_POST['price_range'];

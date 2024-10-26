@@ -19,7 +19,8 @@
 	<div class="wishlist wishlist-closed" id="wishlist">
         <h2 class="text-black fw-bolder fs-6">My Favorites</h2>
         <?php 
-	        $con_wish = mysqli_connect("localhost","root","","wishlist_user");
+        include 'connect.php';
+	        // $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 	        $wish_face = "wish_name_".$_SESSION['id'];
 			if(isset($_POST['remove'])){
 				$remove = $_POST['remove'];

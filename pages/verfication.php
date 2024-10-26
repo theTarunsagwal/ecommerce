@@ -34,7 +34,9 @@ session_start();
 if (isset($_SESSION['email'])) {
     $otp = $_SESSION['otp'];
     $user_ver = $_SESSION['email'];
-    $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+include 'connect.php';
+
+    // $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
     $qurys = mysqli_query($con, "SELECT * FROM user_data WHERE name='$user_ver'");
     $user_data = mysqli_fetch_assoc($qurys);
       if (isset($_POST['sub'])) {

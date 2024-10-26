@@ -11,8 +11,9 @@
     <?php
   session_start();
   ob_start();
-     $con = mysqli_connect("localhost","root","","ecommerce");
-$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+  include 'connect.php';
+//      $con = mysqli_connect("localhost","root","","ecommerce");
+// $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
 
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['id'];

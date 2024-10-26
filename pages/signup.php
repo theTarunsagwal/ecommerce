@@ -46,10 +46,11 @@
 session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+include 'connect.php';
 
-$con = mysqli_connect('localhost', 'root', '', 'ecommerce');
-$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-$con_wish = mysqli_connect('localhost', 'root', '', 'wishlist_user');
+// $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+// $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+// $con_wish = mysqli_connect('localhost', 'root', '', 'wishlist_user');
 
 require "PHPMailer/src/PHPMailer.php";
 require "PHPMailer/src/Exception.php";

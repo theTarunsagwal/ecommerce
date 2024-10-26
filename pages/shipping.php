@@ -1,5 +1,7 @@
 <?php
-$con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
+// $con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
+include 'connect.php';
+
 
 session_start();
 $wish_face = "wish_name_" . $_SESSION['id'];

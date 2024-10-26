@@ -1,6 +1,8 @@
 <?php
+include 'connect.php';
+
 // Assuming connection to the database is already established in $con_wish
-$con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
+// $con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
 
 session_start();
 $wish_face = "wish_name_" . $_SESSION['id'];

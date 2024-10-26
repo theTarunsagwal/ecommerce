@@ -30,7 +30,8 @@
     </div>
     <?php
 session_start();
-$con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+include 'connect.php';
+// $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 

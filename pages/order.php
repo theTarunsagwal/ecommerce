@@ -3,12 +3,12 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "product_data";
+// $host = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "product_data";
 
-$conn = new mysqli($host, $username, $password, $dbname);
+include 'connect.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

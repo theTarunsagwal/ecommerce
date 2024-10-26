@@ -1,9 +1,6 @@
 <?php
-    $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-    $con_pro = mysqli_connect("localhost","root","","product_data");
-    $con = mysqli_connect("localhost","root","","ecommerce");
-	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
-    echo $_SESSION['id'];
+    include 'connect.php';
+    //  $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>

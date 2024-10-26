@@ -2,9 +2,10 @@
 session_start();
 // echo $_SESSION['id'];
 ob_start();
-$con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-$con_pro = mysqli_connect('localhost', 'root','','product_data');
-$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+include 'connect.php';
+// $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+// $con_pro = mysqli_connect('localhost', 'root','','product_data');
+// $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 
 if(isset($_SESSION['name'])) {
     $user = $_SESSION['id'];

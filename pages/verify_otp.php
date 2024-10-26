@@ -35,9 +35,11 @@ if (isset($_POST['verify'])) {
 
     
     if ($entered_otp == $_SESSION['otp']) {
-        $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
-        $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
-        $con_wish = mysqli_connect('localhost', 'root', '', 'wishlist_user');
+include 'connect.php';
+
+        // $con = mysqli_connect('localhost', 'root', '', 'ecommerce');
+        // $con_userside = mysqli_connect('localhost', 'root', '', 'user_side');
+        // $con_wish = mysqli_connect('localhost', 'root', '', 'wishlist_user');
 
         $user_data = $_SESSION['user_data'];
         $user = $user_data['user'];

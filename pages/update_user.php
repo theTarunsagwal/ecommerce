@@ -1,6 +1,8 @@
 <?php
 session_start();
-         $con = mysqli_connect("localhost", "root", "", "ecommerce");
+include 'connect.php';
+
+        //  $con = mysqli_connect("localhost", "root", "", "ecommerce");
 if (isset($_POST['name']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['gender']) && isset($_POST['mobile'])) {
     $name = $_POST['name'] . " " . $_POST['lname'];
     $email = $_POST['email'];

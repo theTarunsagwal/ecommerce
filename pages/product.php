@@ -38,18 +38,18 @@
 session_start();
 if(isset($_SESSION['name'])) {
 	// echo $_SESSION['name'];
-	$con_wish = mysqli_connect("localhost","root","","wishlist_user");
+	include 'connect.php';
+	// $con_wish = mysqli_connect("localhost","root","","wishlist_user");
 	$wish_face = "wish_name_".$_SESSION['id'];
-	$qry_count = mysqli_query($con_wish,"
-	 SELECT COUNT(*) AS total_rows FROM $wish_face
-");
-if ($qry_count) {
-    $row = mysqli_fetch_assoc($qry_count);
-    echo $row['total_rows'];
-} else {
-    echo "Error: " . mysqli_error($con_wish);
-}
-
+// 	
+// $qry_count = mysqli_query($con_wish,"
+//  	 SELECT COUNT(*) AS total_rows FROM $wish_face ");
+// if ($qry_count) {
+//     $row = mysqli_fetch_assoc($qry_count);
+//     echo $row['total_rows'];
+// } else {
+//     echo "Error: " . mysqli_error($con_wish);
+// }
 	 include "header.php";
 	 ?>
 	<div class="wishlist wishlist-closed" id="wishlist">
@@ -58,7 +58,7 @@ if ($qry_count) {
     </div>
 
 	<?php
-     $con_pro = mysqli_connect("localhost", "root", "", "product_data");
+    //  $con_pro = mysqli_connect("localhost", "root", "", "product_data");
 	 
       if(isset($_GET['id']) && !empty($_GET['id'])){
 	?>
@@ -206,35 +206,62 @@ if ($qry_count) {
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-		$(document).ready(function () {
-			$('.heart-btn').on('click', function (e) {
-				e.preventDefault(); // Prevent the default form submission
+$(document).ready(function () {
+    // Handle the button click
+    $('.heart-btn').on('click', function (e) {
+        e.preventDefault(); // Prevent the default form submission
 
-				var formId = $(this).data('id');
-				var formData = $('#wish_form_' + formId).serialize();
+        var formId = $(this).data('id');
+        var formData = $('#wish_form_' + formId).serialize();
 
-				console.log(formData); // Debugging: check if data is being serialized correctly
+        $.ajax({
+            url: './wishlistsql.php',
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                console.log('Clicked Response:', response.trim()); // Log the response to see what is being returned
+                if (response.trim() === "added") {
+                    $('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+                    swal("Add successful", "Thank you for adding me", "success");
+                } else if (response.trim() === "removed") {
+                    $('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+                    swal("Remove successful", "Why did you remove me?", "success");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Click Error:', xhr.responseText); // Log errors
+            }
+        });
+    });
 
-				$.ajax({
-					url: './wishlistsql.php',
-					type: 'POST',
-					data: formData,
-					success: function (response) {
-						console.log(response); // Debugging: check the response from the server
-						if (response.trim() === "added") {
-							$('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
-							swal("Add successful", "Thankyou for add me", "success");
-						} else if (response.trim() === "removed") {
-							$('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
-							swal("remove successful", "why are remove me", "success");
-						}
-					},
-					error: function (xhr, status, error) {
-						console.error(xhr.responseText); // Debugging: check for errors in the response
-					}
-				});
-			});
-		});
+    // Periodic check every 2 seconds
+    setInterval(function () {
+        $('.heart-btn').each(function () {
+            var formId = $(this).data('id');
+            var formData = $('#wish_form_' + formId).serialize();
+
+            // Check the current status of the item in the wishlist
+            $.ajax({
+                url: './wishliststatus.php', // A separate PHP script for checking status
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    console.log('Periodic Check Response:', response.trim()); // Log periodic check responses
+                    if (response.trim() === "added") {
+                        $('#wish_form_' + formId).find('.heart').removeClass('bx-heart').addClass('bxs-heart');
+                    } else if (response.trim() === "removed") {
+                        $('#wish_form_' + formId).find('.heart').removeClass('bxs-heart').addClass('bx-heart');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Periodic Check Error:', xhr.responseText); // Log errors during periodic check
+                }
+            });
+        });
+    }, 2000); // 2 seconds interval
+});
+
+
        $(document).ready(function () {
     // Fetch wishlist items when the page loads
     fetchWishlist();

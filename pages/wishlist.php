@@ -2,7 +2,8 @@
 session_start();
 
 if (isset($_SESSION['name'])) {
-    $con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
+include 'connect.php';
+    // $con_wish = mysqli_connect("localhost", "root", "", "wishlist_user");
     $wish_face = "wish_name_" . $_SESSION['id'];
 
     // Fetch wishlist data

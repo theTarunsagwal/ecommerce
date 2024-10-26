@@ -2,7 +2,7 @@
 <?php
 ob_start();
 
-$con = mysqli_connect("localhost", "root", "", "ecommerce");
+// $con = mysqli_connect("localhost", "root", "", "ecommerce");
 
 if (isset($_SESSION['name']) && isset($_SESSION['email'])) {
     $user = $_SESSION['name'];
