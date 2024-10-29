@@ -1,110 +1,145 @@
-body{
-    background-color: #f8f9fa;
-    color: #000;
-}
 
-.container{
+/* From Uiverse.io by akshat-patel28 */ 
+
+.body{
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding-top: 5rem;
+    align-items: center;
+    padding:5rem ;
 }
-.form-container {
-    width: 320px;
-    border-radius: 0.75rem;
-    background-color: #f8f9fa;
-    border: 3px solid #000;
-    padding: 2rem 4rem 2rem 2rem;
-    color: #000;
-  }
-
-  .form-container:hover{
-    box-shadow: 1px 1px 10px #edededd9;
-    border: none;
-  }
-  
 .logo img{
-  width:15rem;
+    width:15rem;
+  }
+.form-container {
+width: 350px;
+height: 500px;
+background-color: #fff;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+border-radius: 10px;
+box-sizing: border-box;
+padding: 20px 30px;
 }
-  .title {
-    text-align: center;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-  }
-  
-  .form {
-    margin-top: 1.5rem;
-  }
-  
-  .input-group {
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-  
-  .input-group label {
-    display: block;
-    color: #000;
-    margin-bottom: 4px;
-  }
-  
-  .input-group input {
-    width: 100%;
-    border-radius: 0.375rem;
-    border: 1px solid rgba(55, 65, 81, 1);
-    outline: 0;
-    background-color: #f8f9fa;
-    padding: 0.75rem 1rem;
-    color: #000;
-  }
-  
-  .input-group input:focus {
-    border-color: rgba(167, 139, 250);
-  }
-  
-  .forgot {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: rgba(156, 163, 175,1);
-    margin: 8px 0 14px 0;
-  }
-  
-  .forgot a,.signup a {
-    color: #000;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .forgot a:hover, .signup a:hover {
-    text-decoration: underline rgba(167, 139, 250, 1);
-  }
-  
-  .sign {
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    background-color: #000;
-    padding: 0.75rem;
-    text-align: center;
-    color: #fff;
-    border: none;
-    border-radius: 0.375rem;
-    font-weight: 600;
-  }
-  
-  .sign:hover{
-    background-color: #fcb800;
-  }
-  
-  .signup {
-    text-align: center;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: rgba(156, 163, 175, 1);
-  }
-  
+
+.title {
+text-align: center;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+margin: 10px 0 30px 0;
+font-size: 28px;
+font-weight: 800;
+}
+
+.form {
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: 18px;
+margin-bottom: 15px;
+}
+
+.input {
+border-radius: 20px;
+border: 1px solid #c0c0c0;
+outline: 0 !important;
+box-sizing: border-box;
+padding: 12px 15px;
+}
+
+.page-link {
+text-decoration: underline;
+margin: 0;
+text-align: end;
+color: #747474;
+text-decoration-color: #747474;
+}
+
+.page-link-label {
+cursor: pointer;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+font-size: 9px;
+font-weight: 700;
+}
+
+.page-link-label:hover {
+color: #000;
+}
+
+.form-btn {
+padding: 10px 15px;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+border-radius: 20px;
+border: 0 !important;
+outline: 0 !important;
+background: teal;
+color: white;
+cursor: pointer;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.form-btn:active {
+box-shadow: none;
+}
+
+.sign-up-label {
+margin: 0;
+font-size: 10px;
+color: #747474;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.sign-up-link {
+margin-left: 1px;
+font-size: 11px;
+text-decoration: underline;
+text-decoration-color: teal;
+color: teal;
+cursor: pointer;
+font-weight: 800;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.buttons-container {
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+margin-top: 20px;
+gap: 15px;
+}
+
+.apple-login-button,
+.google-login-button {
+border-radius: 20px;
+box-sizing: border-box;
+padding: 10px 15px;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+font-size: 11px;
+gap: 5px;
+}
+
+.apple-login-button {
+background-color: #000;
+color: #fff;
+border: 2px solid #000;
+}
+
+.google-login-button {
+border: 2px solid #747474;
+}
+
+.apple-icon,
+.google-icon {
+font-size: 18px;
+margin-bottom: 1px;
+}

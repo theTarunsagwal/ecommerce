@@ -1,11 +1,12 @@
 <?php
 session_start();
-// 939264482794-4rqu9il5k9qg701odem13knqnr735dhr.apps.googleusercontent.com
-$google_oauth_client_id = 'id';  
-// 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
+
+$google_oauth_client_id = 'id';
+// 939264482794-4rqu9il5k9qg701odem13knqnr735dhr.apps.googleusercontent.com  
 $google_oauth_client_secret = 'secret';
-// http://localhost/ecommerce/pages/google-auth.php
+// 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
 $google_oauth_redirect_uri = 'link';
+// http://localhost/ecommerce/pages/google-auth.php
 $google_oauth_version = 'v3';
 
 if (isset($_GET['code']) && !empty($_GET['code'])) {
@@ -58,10 +59,10 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
             header('Location: success_page.php');
             exit;
         } else {
-            exit('Could not retrieve profile information! Please try again later!');
+            exit('Could not retrieve profile information! Please try again later.');
         }
     } else {
-        exit('Invalid access token! Please try again later!');
+        exit('Invalid access token! Please try again later.');
     }
 } else {
     $params = [
