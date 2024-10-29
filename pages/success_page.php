@@ -2,9 +2,6 @@
 session_start();
 include 'connect.php';
 
-// $con = new mysqli("localhost", "root", "", "ecommerce");
-// $con_userside = new mysqli('localhost', 'root', '', 'user_side');
-// $con_wish = new mysqli('localhost', 'root', '', 'wishlist_user');
 
 if (!isset($_SESSION['google_loggedin'])) {
     header('Location: signup.php');

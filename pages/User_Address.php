@@ -9,7 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
-<?php include "header.php"; ?>
+<?php 
+session_start();
+include "header.php"; ?>
 <div class="container" style="margin-top: 6rem;">
     <h2 class="mb-4">Manage Your Addresses</h2>
 
