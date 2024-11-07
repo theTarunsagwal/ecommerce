@@ -138,6 +138,11 @@ border: 2px solid #000;
 border: 2px solid #747474;
 }
 
+.google-login-button a{
+  color: #000;
+  text-decoration: none;
+}
+
 .apple-icon,
 .google-icon {
 font-size: 18px;

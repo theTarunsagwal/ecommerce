@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Megumi Shoplift</title>
-    <link rel="stylesheet" href="./css_admin_page/loging.css">
+    <link rel="stylesheet" href="./css_admin_page/singup.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
